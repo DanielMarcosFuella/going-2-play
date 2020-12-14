@@ -5,13 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TorneosComponent } from './pages/torneos/torneos.component';
 import { DetalleTorneoComponent } from './pages/detalle-torneo/detalle-torneo.component';
+import { FooterComponent } from './pages/footer/footer.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TorneosComponent,
-    DetalleTorneoComponent
-    
+    DetalleTorneoComponent,    
+    FooterComponent,
+    HeaderComponent,
+    AdminUsersComponent
   ],
   imports: [
     BrowserModule,
