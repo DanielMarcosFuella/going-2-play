@@ -193,10 +193,30 @@ input:focus, textarea:focus, select:focus {
     line-height: 48px;
     color:#fff;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #171627; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ff09d6; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff09d6; 
+  }
 .section-headline p {
     max-width: 560px;
     font-size: 17px;
     margin: 0 auto;
+    color: #fff;
 }
 .white-headline h3{
    color:#fff; 
@@ -1102,7 +1122,7 @@ input:focus, textarea:focus, select:focus {
 /*  8.Payment History area
 /*----------------------------------------*/
 .payment-history-area {
-    background: url(assets/img/background/bg1.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -1126,6 +1146,8 @@ input:focus, textarea:focus, select:focus {
 .deposite-content table {
   border-collapse: collapse;
   width: 100%;
+  box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.5);
+
 }
 .deposite-content th {
     text-align: left;
@@ -1139,12 +1161,51 @@ input:focus, textarea:focus, select:focus {
     height: 80px;
 }
 .deposite-content tr:nth-child(even) {
-  background-color: #171627;
+  background-color: #171c3e;
 }
+.deposite-content i{
+    color: #ff09d6;
+}
+
+.edit-user, .delete-user{
+    cursor: pointer;
+}
+select option {
+    margin: 40px;
+    background: #171c3e;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+select option:checked,
+select option:hover {
+    background-color: #ff09d6;
+}
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    cursor:pointer;
+    display:block;
+    width:8px;
+    color: #333;
+    text-align:center;
+    position:relative;
+}
+
+input[type=number]:hover::-webkit-inner-spin-button { 
+    background: transparent url('assets/images/arrows.png') no-repeat 50% 50%;  
+    width: 14px;
+    height: 14px;
+    padding: 4px;
+    position: relative;
+    right: 4px;
+    border-radius: 28px;
+}
+
+
 .diposite-box {
     width: 100%;
     margin: 0 auto;
-    background: #26253f;
+    background: #0d112c;
     position: relative;
 }
 .diposite-box h4 {
