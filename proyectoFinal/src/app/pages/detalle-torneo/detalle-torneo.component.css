@@ -1,0 +1,15 @@
+.secondary1{
+    background-color: #171c3e;
+}
+.secondary2{
+    background-color: #0f112c;
+}
+.fx{
+    display: flex;
+}
+h2, h3{
+    color: white;
+}
+.pk{
+    color: #ff09d6;
+}

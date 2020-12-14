@@ -1,0 +1,148 @@
+<body>
+  <div class="position-relative overflow-hidden">
+    <div class="row">
+      <div class="col-xl-8 secondary1">
+        <div class="flex">
+          <div class="card card1" style="width: 18rem;">
+            <img [src]="imageAshe" class="card-img-top" alt="...">
+            <div class="card-body secondary1">
+              <h5 class="wt card-title">League of legends </h5>
+              <p class="wt card-text">Modo 5vs5</p>
+              <p class="wt card-text">Región: EUW</p>
+              <p class="wt card-text">Grieta del invocador</p>
+              <p class="wt card-text">Fecha: 1, feb, 2021</p>
+              <p class="wt card-text">Hora: 18:00</p>
+              <button type="button" class="btn but1" data-toggle="modal" data-target="#modalLol">Apúntate</button>
+            </div>
+          </div>
+          <div class="card card1" style="width: 18rem;">
+            <img [src]="imageJhin" class="card-img-top" alt="...">
+            <div class="card-body secondary1">
+              <h5 class="wt card-title">League of legens</h5>
+              <p class="wt card-text">Modo 1vs1</p>
+              <p class="wt card-text">Región: EUW</p>
+              <p class="wt card-text">Abismo de los lamentos</p>
+              <p class="wt card-text">Fecha: 2, feb, 2021</p>
+              <p class="wt card-text">Hora: 18:00</p>
+              <a href="#" class="btn but1">Apúntate</a>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+          <div class="card card1" style="width: 18rem;">
+            <img [src]="fifa1vs1" class="card-img-top " alt="...">
+            <div class="card-body secondary1">
+              <h5 class="wt card-title">Fifa 21</h5>
+              <p class="wt card-text">Modo 1vs1</p>
+              <p class="wt card-text">Región: Europa</p>
+              <p class="wt card-text">Fecha: 1, feb, 2021</p>
+              <p class="wt card-text">Hora: 18:00</p>
+              <a href="#" class="btn but1">Apúntate</a>
+            </div>
+          </div>
+          <div class="card card1" style="width: 18rem;">
+            <img [src]="fifa11vs11" class="card-img-top " alt="...">
+            <div class="card-body secondary1">
+              <h5 class="wt card-title">Fifa 21</h5>
+              <p class="wt card-text">Modo 11vs11</p>
+              <p class="wt card-text">Región: Europa</p>
+              <p class="wt card-text">Fecha: 1, feb, 2021</p>
+              <p class="wt card-text">Hora: 18:00</p>
+              <button type="button" class="btn but1" data-toggle="modal" data-target="#modalFifa">Apúntate</button>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <div class="col-xl-4 secondary2 ">
+        <div class="secondary2">
+          <div class="flex">
+            <h1 class="text-center wt display-4 font-weight-normal">RANKING</h1>
+            <img class="trofeo" [src]="trofeo">
+          </div>
+          <div class="center">
+            <img type="button" class="trofeo1" (click)="fifa=false" (click)="lol=true" [src]="lolLogo">
+            <img type="button" class="logoFifa" (click)="fifa=true" (click)="lol=false" [src]="fifaLogo">
+          </div>
+        </div>
+        <div class="secondary1">
+          <div *ngIf="lol==true" class="text-center wt display-4 font-weight-normal">
+            <h1>LoL</h1>
+            <ol>
+              <li>Faker (500pts)</li>
+              <li>Caps (450pts)</li>
+              <li>Mosquit0 (350pts)</li>
+              <li>Drk (300pts)</li>
+              <li>Toky0dragon (280pts)</li>
+              <li>Shendo (250pts)</li>
+            </ol>
+          </div>
+          <div *ngIf="fifa==true" class="text-center wt display-4 font-weight-normal">
+            <h1>Fifa</h1>
+            <ol>
+              <li>Luiso (500pts)</li>
+              <li>Surikato (450pts)</li>
+              <li>Paquito (350pts)</li>
+              <li>Drk (300pts)</li>
+              <li>Toky0dragon (280pts)</li>
+              <li>Shendo (250pts)</li>
+            </ol>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modalFifa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Selecciona un equipo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Tus equipos</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>Equipo 1</option>
+              <option>Equipo 2</option>
+              <option>Equipo 3</option>
+              <option>Equipo 4</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Apuntar equipo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modalLol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Selecciona un equipo de lol</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Tus equipos</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>Equipo 1</option>
+              <option>Equipo 2</option>
+              <option>Equipo 3</option>
+              <option>Equipo 4</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Apuntar equipo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
