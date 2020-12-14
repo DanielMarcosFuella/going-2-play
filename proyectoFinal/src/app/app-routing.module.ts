@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { HeaderComponent } from './pages/header/header.component';
 
 const routes: Routes = [
   {path: 'header', component:HeaderComponent},
-  {path: 'footer', component:FooterComponent}
+  {path: 'footer', component:FooterComponent},
+  {path: 'admin-users', component:AdminUsersComponent}
 ];
 
 @NgModule({

@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  imageSrc = 'assets/images/logo.png'  
-  imageAlt = 'iPhone'
-  constructor() { }
+  imageSrc = 'assets/images/logo.png';
+  imageAlt = 'iPhone';
+  show:boolean;
+  constructor() {
+    this.show = true
+   }
 
   ngOnInit(): void {
   }

@@ -17,17 +17,18 @@
                     <!-- logo end -->
                 </div>
                 <div class="col-md-9 col-sm-9">
-                    <!-- <div class="header-right-link">
-                        
-                        <a class="login-user" href="login.html">
-                            <i class="fa fa-user fa-lg"></i> <span class="entrar">ENTRAR</span>
-                        </a>
-                    </div>
-                    <div class="header-right-link" >
-                        <a class="s-menu" href="login.html">REGISTRATE</a>
-                    </div> -->
+                    <div *ngIf="show" class="loggin-logged-pc">
+                        <div class="header-right-link">
 
-                    <div class="login-logged">
+                            <a class="login-user" data-toggle="modal" data-target="#loginModal">
+                                <i class="fa fa-user fa-lg"></i> <span class="entrar">ENTRAR</span>
+                            </a>
+                        </div>
+                        <div class="header-right-link">
+                            <a class="s-menu" data-toggle="modal" data-target="#registerModal">REGISTRATE</a>
+                        </div>
+                    </div>
+                    <div *ngIf="show==false" class="login-logged">
                         <a class="login-user" href="login.html">
                             <img [src]="imageSrc">
                             <div class="ag">
@@ -85,20 +86,21 @@
 
                                 <li><a href="contact.html">contacts</a></li>
                                 <div class="mobile-log">
+                                    <div *ngIf="show" class="login-logged-pc">
 
+                                        <a class="s-menu-mobile" data-toggle="modal" data-target="#registerModal" >REGISTRATE</a>
+                                        <a class="login-user" data-toggle="modal" data-target="#loginModal">
 
-                                    <!-- <a class="s-menu-mobile" href="login.html">REGISTRATE</a>
-                            <a class="login-user" href="login.html">
+                                            <i class="fa fa-user fa-lg"></i> <span class="entrar">ENTRAR</span>
 
-                                <i class="fa fa-user fa-lg"></i> <span class="entrar">ENTRAR</span>
-
-                            </a> -->
-                                    <div class="login-logged">
+                                        </a>
+                                    </div>
+                                    <div *ngIf="show==false" class="login-logged">
                                         <a class="login-user" href="login.html">
                                             <img [src]="imageSrc">
                                             <a class="name">Luis Fernandez</a>
                                             <div class="ag">
-                                                
+
                                                 <div class="bajo">
                                                     <a class="editprofile">Editar Perfil</a>
                                                     <a class="logout">Salir</a>
@@ -117,7 +119,80 @@
     </div>
     <!-- mobile-menu-area end -->
 </header>
+<!-- MODAL REGISTER -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModalLabel">REGISTRATE</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <div class="form-group">
+                  <input type="text" class="form-control" id="recipient-name" placeholder="G2P ID (Nombre de Usuario)">
+                </div>
+              <input type="text" class="form-control" id="recipient-name" placeholder="Nombre">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="recipient-name" placeholder="Apellido">
+            </div>
+            <div class="form-group">
+              <input type="date" class="form-control" id="recipient-name" placeholder="Fecha de Nacimiento">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="recipient-name" placeholder="Direccion de Correo">
+            </div>         
+            <div class="form-group">
+              <select name="country" class="form-control"><option value="0">País de residencia</option><option value="1">Panama</option><option value="2">Colombia</option><option value="3">Costa Rica</option><option value="4">Honduras</option><option value="5">Brazil</option><option value="6">Argentina</option><option value="7">Bolivia</option><option value="8">Cuba</option><option value="9">El Salvador</option><option value="10">Ecuador</option><option value="11">Guatemala</option><option value="12">Jamaica</option><option value="13">Mexico</option><option value="14">Nicaragua</option><option value="15">Paraguay</option><option value="16">Peru</option><option value="17">Puerto Rico</option><option value="18">Espana</option><option value="19">Estados Unidos</option><option value="20">Uruguay</option><option value="21">Venezuela</option><option value="22">Portugal</option><option value="23">China</option><option value="24">Chile</option><option value="25">Republica Dominicana</option></select>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="recipient-name" placeholder="Crear ontraseña">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="recipient-name" placeholder="Confirmar contraseña">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <a class="s-menu-mobile-cancel">CANCELAR</a>
+          <a class="s-menu-mobile-register">REGISTRATE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- FIN MODAL REGISTER -->
 
+<!-- MODAL LOGIN -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">INGRESAR</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+                  <input type="text" class="form-control" id="recipient-name" placeholder="G2P ID (Nombre de Usuario)">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="recipient-name" placeholder="Contraseña">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <a class="s-menu-mobile-register">ENTRAR</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- FIN MODAL LOGIN -->
 
 <p>ajjasjdajsd</p>
 <p>ajjasjdajsd</p>
@@ -128,6 +203,7 @@
 <p>ajjasjdajsd</p>
 <p>ajjasjdajsd</p>
 <p>ajjasjdajsd</p>
+
 <p>ajjasjdajsd</p>
 <p>ajjasjdajsd</p>
 <p>ajjasjdajsd</p>

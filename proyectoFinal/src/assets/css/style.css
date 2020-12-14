@@ -1,7 +1,61 @@
-/* You can add global styles to this file, and also import other style files */
+/*-----------------------------------------------------------------------------------
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+    Template Name: Playdo - Online Gaiming HTML Template
+    Template URI: http://rockstheme.com
+    Description: This is html5 template
+    Author: Rocks_theme
+    Author URI: http://rockstheme.com
+    Version: 1.0
+
+-----------------------------------------------------------------------------------*/
+
+    /*-----------------------------------------------------------------------------------  
+     CSS INDEX
+    ===================
+
+    1. Theme Default CSS (body, link color, section etc)
+    2. Header Top Area
+    2.1 Header Bottom Area 
+    2.2. Sticky Header Area
+    2.3. Mobile Menu Area
+    3. Intro Area
+    4. Achivement Area Css
+    5.About Area
+    6. Games Area
+    7 .Games play Area
+    8.Payment History area
+    9. Affiliate area
+    10.overview Area
+    11. Blog Area
+    12. Payments card
+    `13. Footer Area
+    14. Home 02 Css
+    15.How to Area
+    `16. Home 03  CSS
+    17. Chips Area Css
+    18. Breadcumbs Area
+    19. Blog Sidebar Area
+    20. Blog Details
+    21.	Contact area css
+    22. Team Area
+    23. Faq page Area
+    24. Game Details
+    25. Lottery area
+    26. Pricing area css
+    27. Error area css
+    28. Login & signup area
+    29. terms & Contion area
+    30. Animation area
+
+   
+    
+-----------------------------------------------------------------------------------*/
+/*----------------------------------------*/
+/*  Google Fonts
+/*----------------------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&display=swap');
+
+
 /*----------------------------------------*/
 /*  1.  Theme default CSS
 /*----------------------------------------*/
@@ -31,7 +85,7 @@ html, body {
 a:focus {
 	outline:0px solid;
 }
-img {
+img {max-width:100%;
 	height:auto;
 }
 .fix {
@@ -42,7 +96,7 @@ p {
     color: #c4d5f6;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Nunito', sans-serif;
 	margin: 0 0 15px;
 	color: #fff;
     font-weight: 700;
@@ -82,7 +136,7 @@ a {
 	text-decoration:none;
 }
 a:hover {
-  color: #ff09d6;
+  color: #d5057f;
   text-decoration: none;
 }
 a:active, a:hover {
@@ -93,9 +147,8 @@ a:hover, a:focus {
     text-decoration: none;
 }
 body {
-    color: #fff;
-    background-color: #171c3e;
-    font-family: 'Poppins', sans-serif;
+	color: #c4d5f6;
+    font-family: 'Nunito', sans-serif;
 	font-size: 16px;
 	text-align: left;
 	overflow-x: hidden;
@@ -116,15 +169,15 @@ body {
     transition-duration: 500ms;
 }
 #scrollUp:hover {
-    border:1px solid #ff09d6;
-    background-color: #ff09d6;
+    border:1px solid #d5057f;
+    background-color: #d5057f;
     transition-duration: 500ms;
 }
 .clear{
 	clear:both;
 }
 .color{
-    color: #ff09d6;
+    color: #d5057f;
 }
 ul{
 	list-style: outside none none;
@@ -138,7 +191,7 @@ input, select, textarea, input[type="text"], input[type="date"], input[type="url
 input:focus, textarea:focus, select:focus {
     outline: none;
 }
-/* div#preloader { 
+div#preloader { 
 	position: fixed;
 	left: 0; 
 	top: 0; 
@@ -146,17 +199,17 @@ input:focus, textarea:focus, select:focus {
 	width: 100%;
 	height: 100%;
 	overflow: visible;
-	background: #131222 url('assets/img/logo/preloader.gif') no-repeat center center;
-} */
+	background: #131222 url('img/logo/preloader.gif') no-repeat center center;
+}
 .navbar-collapse {
     padding-left: 0px;
 }
 ::-moz-selection {
-    background: #ff09d6;
+    background: #d5057f;
     text-shadow: none;
 }
 ::selection {
-    background: #ff09d6;
+    background: #d5057f;
     text-shadow: none;
 }
 .bg-color{
@@ -202,7 +255,7 @@ input:focus, textarea:focus, select:focus {
    color:#fff; 
 }
 .section-headline h4 .color {
-    color: #ff09d6;
+    color: #d5057f;
     font-weight: 600;
 }
 .mar-row{
@@ -212,7 +265,7 @@ input:focus, textarea:focus, select:focus {
     font-weight: 400;
 }
 .color-text{
-    color: #ff09d6
+    color: #d5057f
 }
 /*--------------------------------*/
 /*  2. Header top Area
@@ -307,95 +360,15 @@ input:focus, textarea:focus, select:focus {
     z-index: 999;
 }
 .header-area{
-	background:#0d112c;
-}
-.logo:hover{
-    opacity: 0.8;
-    transition: 0.5s;
-}
-.mobile-log{
-    text-align: center;
-    justify-content: center;
-}
-
-
-.login-logged img{
-    border-radius: 50%;
-    width: 50px;
-    border: 1px solid #ff09d6;
-
-}
-.bajo{
-    text-align: center;
-}
-.editprofile{
-    font-size: 10px;
-    text-transform: uppercase;
-    vertical-align:middle;
-    margin-right: 20px;
-    color: #fff;
-    font-weight: 600;
-}
-
-.bajo a:hover{
-    color: #fff;
-}
-
-.logout{
-    vertical-align:middle;
-    font-size: 10px;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: 600;
-
-}
-
-.ag{
-    display: inline-grid;
-    margin-right: 20px;
-    margin-left: 20px;
-    vertical-align:middle;
-}
-.mobile-log .login-logged .name{
-    display: block;
-    margin-top: 10px;
-}
-.mobile-log .login-logged .login-user{
-    display: inline;
-}
-.login-logged{
-    float: right;
-    padding: 37px 0px;
-    margin-left: 0px;
-    text-align: right;
-    height: 70px;
-}
-.mobile-log .login-logged{
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-    margin-bottom: 30px;
-
-
-}
-
-.mobile-log .ag{
-    display: contents;
-}
-.login-logged .name{
-    color: #ff09d6;
-    display:table-cell;
-    text-transform: uppercase;
-    font-weight: 700;
+	background:#1E1D32;
 }
 .logo {
     display: block;
-    width: 80px;
 }
 .logo a {
     display: inline-block;
     height: auto;
-    padding: 15px 0;
+    padding: 25px 0;
 }
 .main-menu ul.navbar-nav li {
     float: left;
@@ -414,7 +387,7 @@ input:focus, textarea:focus, select:focus {
     content: "";
     left: 16px;
     bottom: 34px;
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     width:0;
     transition: 0.4s;
     opacity: 0;
@@ -429,15 +402,14 @@ input:focus, textarea:focus, select:focus {
     opacity: 1;
 }
 .main-menu ul.navbar-nav li a:hover{
-	color: #ff09d6;
+	color: #d5057f;
 }
-
 .main-menu ul.navbar-nav li.active a:focus {
     color: #fff;
 }
 .main-menu ul.navbar-nav li.active a {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    color: #ff09d6;
+    color: #d5057f;
     position: relative;
     z-index: 9999999;
 }
@@ -477,7 +449,7 @@ input:focus, textarea:focus, select:focus {
     position: relative;
 }
 .navbar.navbar-default {
-    float: left;
+    float: right;
 }
 .main-menu ul.nav li ul.sub-menu li {
     padding: 0;
@@ -489,7 +461,7 @@ input:focus, textarea:focus, select:focus {
     opacity:1;
     z-index:999;
     visibility:visible;
-    background: #0d112c;
+    background: #26253f;
 }
 .main-menu ul.nav li ul.sub-menu li a {
     color: #fff;
@@ -498,16 +470,16 @@ input:focus, textarea:focus, select:focus {
     padding: 5px 20px;
 }
 .main-menu ul.nav li ul.sub-menu li a span{
-    color: #ff09d6;
+    color: #d5057f;
 }
 .main-menu ul.nav li:hover ul.sub-menu li a:hover{
-    color:#ff09d6;
+    color:#d5057f;
 }
 .header-right-link {
     float: right;
-    width: 150px;
+    width: 180px;
     padding: 37px 0px;
-    margin-left: 0px;
+    margin-left: 40px;
     text-align: right;
 }
 .slice-btn {
@@ -522,114 +494,35 @@ input:focus, textarea:focus, select:focus {
     line-height: 28px;
 }
 .s-menu {
-    padding: 10px 30px;
-    cursor: pointer;
-    border: 1px solid #ff09d6;
-    background: #ff09d6;
+    padding: 10px 20px;
+    border: 1px solid #d5057f;
+    background: #d5057f;
     color: #fff;
     transition: 0.4s;
-    font-size: 16px;
-    box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.5);
+    font-size: 15px;
     font-weight: 700;
     border-radius: 2px;
-    /* letter-spacing: 1.1px; */
     text-transform: uppercase;
 }
-
 .s-menu:hover {
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     background: transparent;
-	color:#ff09d6;
+	color:#d5057f;
     transition: 0.4s;
 }
-
-.s-menu-mobile{
-    margin-top: 10px;
-    padding: 10px 30px;
-    cursor: pointer;
-    border: 1px solid #ff09d6;
-    background: #ff09d6;
-    color: #fff;
-    transition: 0.4s;
-    font-size: 16px;
-    font-weight: 700;
-    margin-right: 50px;
-    border-radius: 2px;
-    /* letter-spacing: 1.1px; */
-    text-transform: uppercase;
-
-}
-
-.s-menu-mobile:hover {
-    border: 1px solid #ff09d6;
-    background: transparent;
-	color:#ff09d6;
-    transition: 0.4s;
-}
-.s-menu-mobile-register{
-    margin-top: 10px;
-    padding: 10px 30px;
-    cursor: pointer;
-    border: 1px solid #ff09d6;
-    background: #ff09d6;
-    color: #fff;
-    transition: 0.4s;
-    font-size: 16px;
-    font-weight: 700;
-    float: right;
-    box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.8);
-
-    border-radius: 2px;
-    /* letter-spacing: 1.1px; */
-    text-transform: uppercase;
-
-}
-
-.s-menu-mobile-register:hover {
-    border: 1px solid #ff09d6;
-    background: transparent;
-    color:#ff09d6;
-    transition: 0.4s;
-}
-.s-menu-mobile-cancel{
-    margin-top: 10px;
-    padding: 10px 30px;
-    cursor: pointer;
-    box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.8);
-    float: left;
-    border: 1px solid #171c3e;
-    background:#171c3e;
-    color: #fff;
-    transition: 0.4s;
-    font-size: 16px;
-    font-weight: 700;
-    border-radius: 2px;
-    /* letter-spacing: 1.1px; */
-    text-transform: uppercase;
-
-}
-
-.s-menu-mobile-cancel:hover {
-    border: 1px solid #171c3e;
-    background: transparent;
-	color:#fff;
-    transition: 0.4s;
-}
-
 .header-area.stick  .header-right-link {
     padding: 27px 0px;
 }
 /*--------------------------------*/
 /* 2.2. Sticky Header Area
 /*--------------------------------*/
-
 .header-area.stick {
     left: 0;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 999999;
-    background: #0d112c;
+    background: #1E1D32;
 }
 .header-area.stick .logo a {
     display: inline-block;
@@ -646,7 +539,7 @@ input:focus, textarea:focus, select:focus {
     padding: 5px 15px;
 }
 .header-area.stick .main-menu ul.nav li ul.sub-menu li a:hover{
-    color: #ff09d6;
+    color: #d5057f;
 }
 /*----------------------------------------*/
 /*  2.3. Mobile Menu Area
@@ -654,13 +547,6 @@ input:focus, textarea:focus, select:focus {
 .mobile-menu-area {
     background: #26253f none repeat scroll 0 0;
     padding: 10px 0px ;
-}
-
-.mobile-menu img{
-    width: 70px;
-    margin-left: 10px;
-    text-align: center;
-    justify-content: center;
 }
 .mean-container .mean-bar::after {
     content: "";
@@ -672,23 +558,16 @@ input:focus, textarea:focus, select:focus {
     font-weight: 500;
 }
 .mean-container a.meanmenu-reveal:hover {
-    color:#ff09d6
-}
-.mobile-menu .mean-nav {
-    margin-top: 10px;
+    color:#d5057f
 }
 .mean-container .mean-nav ul {
     list-style-type: none;
     margin: 20px 0px;
     padding: 0;
     width: 100%;
-    margin-top: 40px;
-}
-
-.mean-container .logo{
-    width: 10px;
 }
 .mean-container .mean-nav ul li a {
+    background: #26253f none repeat scroll 0 0;
     color: #fff;
     display: block;
     float: left;
@@ -760,8 +639,8 @@ input:focus, textarea:focus, select:focus {
     font-size: 18px;
 }
 .ready-btn {
-    border: 1px solid #ff09d6;
-    background: #ff09d6;
+    border: 1px solid #d5057f;
+    background: #d5057f;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -775,7 +654,7 @@ input:focus, textarea:focus, select:focus {
     border-radius: 2px;
 }
 .ready-btn:hover{
-    color: #ff09d6;
+    color: #d5057f;
     background: transparent;
     transition: all 0.4s ease 0s;
 }
@@ -814,7 +693,7 @@ input:focus, textarea:focus, select:focus {
     position: absolute;
     left: 0;
     top: 8px;
-    background: #ff09d6;
+    background: #d5057f;
     width: 9px;
     height: 9px;
     content: "";
@@ -851,7 +730,7 @@ input:focus, textarea:focus, select:focus {
     text-decoration: underline;
 }
 .about-content span a:hover{
-    color:#ff09d6;
+    color:#d5057f;
 }
 .support-all {
     margin-left: 40px;
@@ -910,8 +789,8 @@ input:focus, textarea:focus, select:focus {
     margin: 20px auto;
 }
 .games-btn {
-    border: 1px solid #ff09d6;
-    background: #ff09d6;
+    border: 1px solid #d5057f;
+    background: #d5057f;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -925,9 +804,9 @@ input:focus, textarea:focus, select:focus {
     border-radius: 2px;
 }
 .games-btn:hover{
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     background: transparent;
-    color: #ff09d6;
+    color: #d5057f;
     transition: all 0.4s ease 0s;
 }
 .games-carousel.owl-carousel.owl-theme .owl-controls .owl-nav div.owl-prev, 
@@ -945,14 +824,14 @@ input:focus, textarea:focus, select:focus {
     height: 40px;
 	border-radius: 50%;
 }
-/* .games-carousel.owl-carousel.owl-theme .owl-controls .owl-nav div.owl-prev{
+.games-carousel.owl-carousel.owl-theme .owl-controls .owl-nav div.owl-prev{
     left: 10%;
     -webkit-transition: 0.4s;
     -moz-transition: 0.4s;
     -o-transition: 0.4s;
     -ms-transition: 0.4s;
-} */
-/* .games-carousel.owl-carousel.owl-theme .owl-controls .owl-nav div.owl-next {
+}
+.games-carousel.owl-carousel.owl-theme .owl-controls .owl-nav div.owl-next {
     right: 10%;
     -webkit-transition: 0.4s;
     -moz-transition: 0.4s;
@@ -974,12 +853,12 @@ input:focus, textarea:focus, select:focus {
     -o-transition: 0.4s;
     -ms-transition: 0.4s;
     opacity: 1;
-} */
+}
 .games-carousel.owl-carousel.owl-theme:hover .owl-controls .owl-nav div.owl-next:hover,
 .games-carousel.owl-carousel.owl-theme:hover .owl-controls .owl-nav div.owl-prev:hover{
     color:#fff;
-    background: #ff09d6;
-    border: 1px solid #ff09d6;
+    background: #d5057f;
+    border: 1px solid #d5057f;
 }
 /*--------------------------------*/
 /* 7 .Games play Area
@@ -1015,8 +894,8 @@ input:focus, textarea:focus, select:focus {
 	border-bottom: none;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
-  background-color: #ff09d6 !important;
-  border-color: #ff09d6;
+  background-color: #d5057f !important;
+  border-color: #d5057f;
   border-image: none;
   border-style: solid;
   border-width: 1px;
@@ -1083,7 +962,7 @@ input:focus, textarea:focus, select:focus {
     text-align: center;
     top: 50%;
     margin-top: -20px;
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     width: 150px;
     color: #fff;
     background: rgba(213,5,127,0.90);
@@ -1094,7 +973,7 @@ input:focus, textarea:focus, select:focus {
     font-weight: 600;
 }
 .play-btn:hover{
-    background: #ff09d6;
+    background: #d5057f;
     transition: 0.4s;
     color:#fff;
 }
@@ -1102,7 +981,7 @@ input:focus, textarea:focus, select:focus {
 /*  8.Payment History area
 /*----------------------------------------*/
 .payment-history-area {
-    background: url(assets/img/background/bg1.jpg);
+    background: url(img/background/bg1.jpg);
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -1150,7 +1029,7 @@ input:focus, textarea:focus, select:focus {
 .diposite-box h4 {
     display: inline-block;
     font-size: 26px;
-    background: #ff09d6;
+    background: #d5057f;
     padding: 10px 30px;
     margin-bottom: 25px;
     border-radius: 3px;
@@ -1160,7 +1039,7 @@ input:focus, textarea:focus, select:focus {
     float: right;
     font-size: 28px;
     color: #fff;
-    background: #ff09d6;
+    background: #d5057f;
     padding: 10px 20px;
     border-radius: 3px;
     line-height: 32px;
@@ -1273,12 +1152,12 @@ input:focus, textarea:focus, select:focus {
     border-radius: 50px;
     font-size: 12px;
     color: #fff;
-    background: #ff09d6;
+    background: #d5057f;
 }
 .overview-btn {
     padding: 10px 20px;
-    border: 1px solid #ff09d6;
-    background: #ff09d6;
+    border: 1px solid #d5057f;
+    background: #d5057f;
     color: #fff;
     transition: 0.4s;
     font-size: 16px;
@@ -1289,9 +1168,9 @@ input:focus, textarea:focus, select:focus {
     text-transform: capitalize;
 }
 .overview-btn:hover{
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     background:transparent;
-    color: #ff09d6;
+    color: #d5057f;
     transition: 0.4s;
 }
 /*----------------------------------------*/
@@ -1317,7 +1196,7 @@ input:focus, textarea:focus, select:focus {
 .admin-type i,
 .date-type i,
 .comments-type i{
-    color: #ff09d6;
+    color: #d5057f;
     margin-right: 5px;
 }
 .single-blog:hover .blog-content::after {
@@ -1330,7 +1209,7 @@ input:focus, textarea:focus, select:focus {
      transition: 0.4s;
 }
 .blog-content a h4:hover{
-    color:#ff09d6;
+    color:#d5057f;
     transition: 0.4s;
 }
 .blog-meta span {
@@ -1343,7 +1222,7 @@ input:focus, textarea:focus, select:focus {
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    border: 2px solid #ff09d6;
+    border: 2px solid #d5057f;
     margin-right: 10px;
 }
 .single-blog {
@@ -1360,14 +1239,14 @@ input:focus, textarea:focus, select:focus {
     font-size: 16px;
     font-weight: 400;
     transition: all 0.4s ease 0s;
-    border: 1px solid #ff09d6;
-    background: #ff09d6;
+    border: 1px solid #d5057f;
+    background: #d5057f;
     padding: 7px 24px;
     margin-top: 10px;
     border-radius: 3px;
 }
 .blog-btn:hover{
-    color: #ff09d6;
+    color: #d5057f;
     background: transparent;
     transition: all 0.4s ease 0s;
 }
@@ -1397,17 +1276,12 @@ input:focus, textarea:focus, select:focus {
 /*  13. Footer Area
 /*----------------------------------------*/
 .footer-1 {
-    background:#0d112c;
+    background:#12111e;
 }
 .footer-area{
-    padding: 90px 0px 90px;
-}
-.footer-content{
-    margin-right: 50px;
+    padding: 290px 0px 90px;
 }
 .footer-logo {
-    display: grid;
-    text-align: center;
     margin-bottom: 20px;
 }
 .footer-head h4 {
@@ -1437,7 +1311,7 @@ input:focus, textarea:focus, select:focus {
     border-right:none;
 }
 .suscribe-input button {
-    background: #ff09d6;
+    background: #d5057f;
     border: none;
     color: #fff;
     font-size: 15px;
@@ -1445,21 +1319,21 @@ input:focus, textarea:focus, select:focus {
     width: 36%;
     font-weight: 600;
     height: 46px;
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     transition: 0.4s;
 }
 .suscribe-input button:hover {
-    color: #ff09d6;
+    color: #d5057f;
     background:transparent;
     transition: 0.4s;
 }
 .footer-tags li a:hover{
-    color:#ff09d6;
+    color:#d5057f;
 }
 .footer-icons ul li a:hover{
     color:#fff;
-    background:#ff09d6; 
-    border: 1px solid #ff09d6;
+    background:#d5057f; 
+    border: 1px solid #d5057f;
     transition: 0.4s;
 }
 .footer-tags {
@@ -1479,7 +1353,7 @@ input:focus, textarea:focus, select:focus {
     margin-top: 20px;
 }
 .footer-contacts p span {
-    color: #ff09d6;
+    color: #d5057f;
     font-weight: 700;
 }
 .footer-list li a {
@@ -1503,36 +1377,34 @@ input:focus, textarea:focus, select:focus {
 }
 .footer-list li a:hover,
 .footer-list li a:hover::after{
-    color: #ff09d6;
+    color: #d5057f;
 }
 .footer-list li a:hover::after{
-    color: #ff09d6;
+    color: #d5057f;
 }
 .footer-area-bottom {
     padding: 25px 0;
-    background:#0d112c;
-    border-top: solid 1px #171c3e;
-
+    background:#1E1D32;
 }
 .copyright-text a:hover{
 	text-decoration: underline;
-	color:#ff09d6;
+	color:#d5057f;
 }
 .copyright-text a {
-    color: #ff09d6;
+    color: #d5057f;
 }
 .copyright > p {
     margin-bottom: 0;
     color: #c4d5f6;
 }
 .copyright a {
-    color: #ff09d6;
+    color: #d5057f;
 }
 /*--------------------------------*/
 /*  14. Home 02 Css
 /*--------------------------------*/
 .intro-area-2{
-    background: url(assets/img/background/slide1.jpg);
+    background: url(img/background/slide1.jpg);
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1612,13 +1484,13 @@ input:focus, textarea:focus, select:focus {
     position: absolute;
     left: -10px;
     top: -10px;
-    background:#ff09d6; 
+    background:#d5057f; 
 }
 /*----------------------------------------*/
 /*  16. Home 03  CSS
 /*----------------------------------------*/
 .intro-area-3{
-    background: url(assets/img/background/slide2.jpg);
+    background: url(img/background/slide2.jpg);
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1736,7 +1608,7 @@ input:focus, textarea:focus, select:focus {
 }
 .chips-btn {
     text-align: center;
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     color: #fff;
     background: rgba(213,5,127,0.8);
     padding: 6px 15px;
@@ -1748,7 +1620,7 @@ input:focus, textarea:focus, select:focus {
 .chips-btn:hover{
     background:transparent;
     transition: 0.4s;
-    color:#ff09d6;
+    color:#d5057f;
 }
 .chips-price {
     position: absolute;
@@ -1769,7 +1641,7 @@ input:focus, textarea:focus, select:focus {
     position: relative;
 }
 .page-area {
-    background: url(assets/img/background/bread-bg.jpg);
+    background: url(img/background/bread-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -1867,7 +1739,7 @@ input:focus, textarea:focus, select:focus {
     padding: 0px 10px;
 }
 .blog-search-option button i:hover {
-    color: #ff09d6;
+    color: #d5057f;
 }
 .left-blog h4 {
     position: relative;
@@ -1885,7 +1757,7 @@ input:focus, textarea:focus, select:focus {
     bottom: 0;
     width: 70px;
     height: 1px;
-    background: #ff09d6;
+    background: #d5057f;
 }
 .blog-left-content .blog-content::after{
     display: none;
@@ -1950,11 +1822,11 @@ input:focus, textarea:focus, select:focus {
 .recent-single-post:last-child {
     border-bottom: none;
 }
-/* .post-img {
+.post-img {
     display: inline-block;
     float: left;
     padding-right:10px;
-} */
+}
 .left-blog .post-img a {
     display: block; 
 }
@@ -1968,7 +1840,7 @@ input:focus, textarea:focus, select:focus {
 	margin-bottom: 0px;
 }
 .pst-content p a:hover,.left-blog ul li a:hover {
-    color: #ff09d6;
+    color: #d5057f;
 }
 .blog-page-area .blog-content {
     background: #f9f9f9;
@@ -2011,8 +1883,8 @@ input:focus, textarea:focus, select:focus {
 }
 .left-tags .left-side-tags ul li a:hover {
 	color:#fff;
-	background:#ff09d6;
-    border: 1px solid #ff09d6;
+	background:#d5057f;
+    border: 1px solid #d5057f;
     transition: 0.4s;
 }
 .left-side-tags h4 {
@@ -2052,15 +1924,15 @@ input:focus, textarea:focus, select:focus {
 .pagination>.active>span:focus{
     z-index: 3;
     color: #fff;
-    background-color: #ff09d6;
+    background-color: #d5057f;
     cursor: default;
     border-radius: 2px;
 }
 .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {
     z-index: 2;
     color: #fff;
-    background-color: #ff09d6;
-    border-color: #ff09d6;
+    background-color: #d5057f;
+    border-color: #d5057f;
     border-radius: 2px;
 }
 .adver-img {
@@ -2119,13 +1991,13 @@ blockquote p {
     font-size: 16px !important;
     line-height: 28px;
 }
-/* .author-avatar {
+.author-avatar {
     display: inline-block;
     float: left;
     width: 10%;
-} */
+}
 .comments-content-wrap span b{margin-right:5px}
-/* .comments-content-wrap span a:hover{} */
+.comments-content-wrap span a:hover{}
 span.post-time{margin-right:5px}
 .comments-content-wrap p {
     color: #c4d5f6;
@@ -2167,13 +2039,13 @@ span.email-notes{
 	background: transparent;
 }
 .comments-content-wrap span a {
-    color: #ff09d6;
+    color: #d5057f;
 }
 .comments-content-wrap span a:hover {
-    color: #ff09d6;
+    color: #d5057f;
 }
 .comment-respond .add-btn.contact-btn {
-    background: #ff09d6;
+    background: #d5057f;
     color: #fff;
     display: block;
     font-size: 16px;
@@ -2183,15 +2055,15 @@ span.email-notes{
     border-radius: 2px;
     width: auto !important;
     margin-top: 20px;
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     text-transform: capitalize;
     font-weight: 700;
     transition: 0.4s;
 }
 .comment-respond .add-btn.contact-btn:hover{
     background:transparent;
-	color: #ff09d6;
-    border:1px solid #ff09d6;
+	color: #d5057f;
+    border:1px solid #d5057f;
     transition: 0.4s;
 }
 .blog-page-details .left-blog-page {
@@ -2272,7 +2144,7 @@ span.email-notes{
     top: 0;
     width: 50%;
     height: 2px;
-    background: #ff09d6;
+    background: #d5057f;
     right: 0;
     margin: auto;
 }
@@ -2294,7 +2166,7 @@ span.email-notes{
     background: transparent;
 }
 .contact-btn {
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     color: #ddd;
     padding: 9px 40px;
     display: inline-block;
@@ -2302,14 +2174,14 @@ span.email-notes{
     border-radius: 2px;
     text-transform: uppercase;
     font-size: 15px;
-    background: #ff09d6;
+    background: #d5057f;
     font-weight: 700;
 }
 .contact-btn:hover{
-    color: #ff09d6;
+    color: #d5057f;
     transition: 0.5s;
     background: transparent;
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
 }
 /*----------------------------------------*/
 /*  22. Team Area
@@ -2340,7 +2212,7 @@ span.email-notes{
     margin: 0px 5px;
 }
 .team-hover li a:hover {
-    color: #ff09d6;
+    color: #d5057f;
 }
 .team-hover {
     padding: 15px 0px 0px;
@@ -2456,7 +2328,7 @@ span.email-notes{
     top: -10px;
 }
 .faq-details a.active span.acc-icons::before {
-    color: #ff09d6;
+    color: #d5057f;
     content: "\e622";
     font-family: themify;
     font-size: 16px;
@@ -2467,7 +2339,7 @@ span.email-notes{
     top: -10px;
 }
 .faq-details .panel-heading h4 a.active {
-    color: #ff09d6;
+    color: #d5057f;
 }
 .panel-group {
     margin-bottom: 0px;
@@ -2487,22 +2359,22 @@ span.email-notes{
 	padding-right: 20px;
 }
 .g-control-btn {
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     display: inline-block;
     font-weight: 700;
     padding: 12px 30px;
     text-align: center;
     transition: all 0.4s ease 0s;
     border-radius: 3px;
-    background: #ff09d6;
+    background: #d5057f;
     color: #fff;
     font-size: 18px;
     margin-top: 10px;
 }
 .g-control-btn:hover{
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     background: transparent;
-    color:#ff09d6;
+    color:#d5057f;
     transition: all 0.4s ease 0s;
 }
 .single-game {
@@ -2527,7 +2399,7 @@ span.email-notes{
     left: 0;
     top: 3px;
     font-family: themify;
-    color: #ff09d6;
+    color: #d5057f;
     font-weight: 700;
 }
 .game-icon {
@@ -2537,12 +2409,12 @@ span.email-notes{
     height: 50px;
     color: #fff;
     font-size: 24px;
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     text-align: center;
     line-height: 48px;
     border-radius: 50%;
     margin-right: 15px;
-    background: #ff09d6;
+    background: #d5057f;
     font-weight: 700;
 }
 .game-text {
@@ -2664,7 +2536,7 @@ span.email-notes{
 }
 .ticket-btn {
     text-align: center;
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     color: #fff;
     background: rgba(213,5,127,0.8);
     padding: 8px 15px;
@@ -2678,7 +2550,7 @@ span.email-notes{
 .ticket-btn:hover{
     background:transparent;
     transition: 0.4s;
-    color:#ff09d6;
+    color:#d5057f;
 }
 .buy-ticket-btn {
     margin-top: 20px;
@@ -2762,8 +2634,8 @@ span.email-notes{
 .self-ticket li a {
     display: block;
     color: #fff;
-    background: #ff09d6;
-    border: 1px solid #ff09d6;
+    background: #d5057f;
+    border: 1px solid #d5057f;
     border-radius: 50%;
     font-size: 13px;
     font-weight: 700;
@@ -2874,8 +2746,8 @@ span.dolar {
     font-weight: 700;
     font-size: 14px;
     padding: 12px 34px;
-    background: #ff09d6;
-    border: 1px solid #ff09d6;
+    background: #d5057f;
+    border: 1px solid #d5057f;
 }
 .table-list ol {
     list-style: outside none none;
@@ -2884,7 +2756,7 @@ span.dolar {
 }
 .price-btn a:hover {
     background:transparent;
-    color: #ff09d6;
+    color: #d5057f;
     transition: all 0.4s ease 0s;
 }
 .table-list ol {
@@ -2910,7 +2782,7 @@ span.dolar {
  27. Login And Register page
 ----------------------------------------*/
 .login-area{
-    background:url(assets/img/background/slide2.jpg) no-repeat scroll center center / cover;
+    background:url(img/background/slide2.jpg) no-repeat scroll center center / cover;
     position: relative;
 }
 .login-overlay {
@@ -2952,7 +2824,7 @@ span.dolar {
     margin-bottom: 20px;
 }
 .slide-btn.login-btn {
-    border: 1px solid #ff09d6;
+    border: 1px solid #d5057f;
     display: inline-block;
     font-weight: 600;
     margin: 0px;
@@ -2962,14 +2834,14 @@ span.dolar {
     transition: all 0.4s ease 0s;
     width: 100%;
     border-radius: 0px;
-    background: #ff09d6;
+    background: #d5057f;
     color: #fff;
     height: 50px;
     font-size: 16px;
 }
 .slide-btn.login-btn:hover{
     background: transparent;
-    color:#ff09d6;
+    color:#d5057f;
     transition: all 0.4s ease 0s;
 }
 .flex-box{
@@ -3084,8 +2956,8 @@ span.dolar {
     color: #ccc;
 }
 .error-btn {
-    background: #ff09d6;
-    border: 1px solid #ff09d6;
+    background: #d5057f;
+    border: 1px solid #d5057f;
     color: #fff;
     font-size: 15px;
     padding: 12px 20px;
@@ -3099,7 +2971,7 @@ span.dolar {
 }
 .error-btn:hover{
     background: transparent;
-    color: #ff09d6;
+    color: #d5057f;
      transition: all 0.3s ease 0s;
 }
 /*----------------------------------------*/
@@ -3123,7 +2995,7 @@ span.dolar {
     padding-left: 40px;
 }
 .single-terms .number {
-    color: #ff09d6;
+    color: #d5057f;
     font-weight: 600;
     padding-right: 10px;
     float: left;
@@ -3146,7 +3018,7 @@ span.terms-text {
     margin-bottom: 30px;
 }
 .pro-rating a{
-    color:#ff09d6;
+    color:#d5057f;
 }
 .no-rating a:last-child {
     color: #cecde9;
@@ -3197,7 +3069,7 @@ span.terms-text {
   }
 }
 
-/* @-webkit-keyframes popcircle {
+@-webkit-keyframes popcircle {
   0% {
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -3209,39 +3081,10 @@ span.terms-text {
   100% {
     opacity: 0;
   }
-} */
+}
 
 
 
 /*--------------------------------*/
 /* .End CSS
 /*--------------------------------*/
-
-
-/* ADICIONALES PROPIOS */
-.fa-user{
-    color: #ff09d6;
-
-}
-.login-user{
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-}
-.entrar{
-    margin-left: 10px;
-}
-
-.entrar:hover{
-    color: #ff09d6;
-    bottom: 34px;
-    border-bottom: 2px solid #ff09d6;
-    width: 0;
-    transition: 0.4s;
-}
-.login-user:hover{
-    color: #ff09d6;
-    bottom: 34px;
-    width: 0;
-    transition: 0.4s;
-}
