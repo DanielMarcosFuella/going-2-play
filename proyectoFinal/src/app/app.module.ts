@@ -8,6 +8,7 @@ import { DetalleTorneoComponent } from './pages/detalle-torneo/detalle-torneo.co
 import { FooterComponent } from './pages/footer/footer.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
     DetalleTorneoComponent,    
     FooterComponent,
     HeaderComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
