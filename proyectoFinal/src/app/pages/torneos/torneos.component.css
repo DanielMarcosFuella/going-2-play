@@ -97,3 +97,13 @@ ol{
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.but2{
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
+    background-color: #ff09d6;
+    margin-left: 20px;
+    /* background-color: #ff09d6; */
+}

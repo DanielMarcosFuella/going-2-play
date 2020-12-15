@@ -10,6 +10,7 @@ import { HeaderComponent } from './pages/header/header.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
+import { EquiposComponent } from './pages/equipos/equipos.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
     HeaderComponent,
     AdminUsersComponent,
     LandingComponent,
-    AdminTeamsComponent
+    AdminTeamsComponent,
+    EquiposComponent
   ],
   imports: [
     BrowserModule,
