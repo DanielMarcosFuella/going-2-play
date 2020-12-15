@@ -5,20 +5,22 @@
         <div class="flex">
           <div class="card card1" style="width: 18rem;">
             <img [src]="imageAshe" class="card-img-top" alt="...">
+            <h5 class="title-card">League of legends </h5>
+
             <div class="card-body secondary1">
-              <h5 class="wt card-title">League of legends </h5>
               <p class="wt card-text">Modo 5vs5</p>
               <p class="wt card-text">Región: EUW</p>
               <p class="wt card-text">Grieta del invocador</p>
               <p class="wt card-text">Fecha: 1, feb, 2021</p>
               <p class="wt card-text">Hora: 18:00</p>
-              <button type="button" class="btn but1" data-toggle="modal" data-target="#modalLol">Apúntate</button>
+              <a class="btn but1" data-toggle="modal" data-target="#modalLol">Apúntate</a>
             </div>
           </div>
           <div class="card card1" style="width: 18rem;">
             <img [src]="imageJhin" class="card-img-top" alt="...">
+            <h5 class="title-card">League of legens</h5>
             <div class="card-body secondary1">
-              <h5 class="wt card-title">League of legens</h5>
+             
               <p class="wt card-text">Modo 1vs1</p>
               <p class="wt card-text">Región: EUW</p>
               <p class="wt card-text">Abismo de los lamentos</p>
@@ -31,8 +33,9 @@
         <div class="flex">
           <div class="card card1" style="width: 18rem;">
             <img [src]="fifa1vs1" class="card-img-top " alt="...">
+            <h5 class="title-card">Fifa 21</h5>
+
             <div class="card-body secondary1">
-              <h5 class="wt card-title">Fifa 21</h5>
               <p class="wt card-text">Modo 1vs1</p>
               <p class="wt card-text">Región: Europa</p>
               <p class="wt card-text">Fecha: 1, feb, 2021</p>
@@ -42,21 +45,22 @@
           </div>
           <div class="card card1" style="width: 18rem;">
             <img [src]="fifa11vs11" class="card-img-top " alt="...">
+            <h5 class="title-card">Fifa 21</h5>
+
             <div class="card-body secondary1">
-              <h5 class="wt card-title">Fifa 21</h5>
               <p class="wt card-text">Modo 11vs11</p>
               <p class="wt card-text">Región: Europa</p>
               <p class="wt card-text">Fecha: 1, feb, 2021</p>
               <p class="wt card-text">Hora: 18:00</p>
-              <button type="button" class="btn but1" data-toggle="modal" data-target="#modalFifa">Apúntate</button>
+              <a class="btn but1" data-toggle="modal" data-target="#modalFifa">Apúntate</a>
             </div>
           </div>
         </div>
       </div> 
       <div class="col-xl-4 secondary2 ">
         <div class="secondary2">
-          <div class="flex">
-            <h1 class="text-center wt display-4 font-weight-normal">RANKING</h1>
+          <div class="ranking-torneo">
+            <h1 class="text-center title-ranking">RANKING</h1>
             <img class="trofeo" [src]="trofeo">
           </div>
           <div class="center">
@@ -65,8 +69,8 @@
           </div>
         </div>
         <div class="secondary1">
-          <div *ngIf="lol==true" class="text-center wt display-4 font-weight-normal">
-            <h1>LoL</h1>
+          <div *ngIf="lol==true" class="text-center wt-torneo display-4 font-weight-normal">
+            <h1 class="title-torneo">LoL</h1>
             <ol>
               <li>Faker (500pts)</li>
               <li>Caps (450pts)</li>
@@ -76,8 +80,8 @@
               <li>Shendo (250pts)</li>
             </ol>
           </div>
-          <div *ngIf="fifa==true" class="text-center wt display-4 font-weight-normal">
-            <h1>Fifa</h1>
+          <div *ngIf="fifa==true" class="text-center wt-torneo display-4 font-weight-normal">
+            <h1 class="title-torneo">Fifa</h1>
             <ol>
               <li>Luiso (500pts)</li>
               <li>Surikato (450pts)</li>
@@ -112,7 +116,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary">Apuntar equipo</button>
         </div>
       </div>
@@ -139,7 +143,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary">Apuntar equipo</button>
         </div>
       </div>

@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
   imageAlt = 'iPhone';
   show:boolean;
   constructor() {
-    this.show = true
+    this.show = false
    }
 
   ngOnInit(): void {

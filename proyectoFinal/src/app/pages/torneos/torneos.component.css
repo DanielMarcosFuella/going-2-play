@@ -2,7 +2,15 @@
     background-color: #171c3e;
 }
 .secondary2{
-    background-color: #0d153d;
+    background-color: #0d112c;
+    text-align: center;
+}
+.ranking-torneo{
+    display: inline-flex;
+    margin-top: 30px;
+}
+.title-ranking{
+    font-weight: 700;
 }
 .flex {
     display: flex;
@@ -13,15 +21,27 @@
 }
 .but1{
     color: white;
-    background-color: #ff09d6;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
+    background-color: #0d112c;
+
+    /* background-color: #ff09d6; */
 }
 .card1{
     margin-top: 40px;
-    border:white 4px solid;
     margin-left: 125px;
+    margin-bottom: 40px;
+    box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.5);
+
 }
-p{
-    font: oblique bold 120% cursive;
+.title-card{
+    color: #fff;
+    background: #0d112c;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 ol{
     font-size: x-large;
@@ -39,8 +59,8 @@ ol{
 }
 .trofeo{
     margin-left: 30px;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
 }
 .logoFifa{
     margin-top: 50px;
@@ -66,4 +86,14 @@ ol{
 }
 .wt{
     color: white;
+}
+
+.wt-torneo{
+    padding: 20px;
+    color:#fff;
+}
+
+.title-torneo{
+    text-transform: uppercase;
+    font-weight: bold;
 }

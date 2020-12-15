@@ -93,13 +93,8 @@ a:hover, a:focus {
     text-decoration: none;
 }
 body {
-    color: #fff;
-    background-color: #171c3e;
-    font-family: 'Poppins', sans-serif;
-	font-size: 16px;
-	text-align: left;
+    
 	overflow-x: hidden;
-	line-height: 26px;
 }
 #scrollUp {
     bottom: 40px;
@@ -174,6 +169,16 @@ input:focus, textarea:focus, select:focus {
 .area-padding{
 	padding: 100px 0px;
 }
+
+.area-padding-landing {
+    padding: 10px 0px;
+
+}
+
+.section-headline-landing {
+    padding-bottom: 10px;
+    position: relative;
+}
 .area-padding-2{
     padding: 100px 0px 70px;
 }
@@ -189,9 +194,10 @@ input:focus, textarea:focus, select:focus {
 }
 .section-headline h3 {
     font-size: 40px;
-    text-transform: capitalize;
+    text-transform: uppercase;
     line-height: 48px;
-    color:#fff;
+    color: #fff;
+    font-weight: bold;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -385,10 +391,7 @@ input:focus, textarea:focus, select:focus {
 }
 .login-logged{
     float: right;
-    padding: 37px 0px;
-    margin-left: 0px;
-    text-align: right;
-    height: 70px;
+    
 }
 .mobile-log .login-logged{
     width: 100%;
@@ -525,9 +528,8 @@ input:focus, textarea:focus, select:focus {
 }
 .header-right-link {
     float: right;
-    width: 150px;
-    padding: 37px 0px;
-    margin-left: 0px;
+    width: 100%;
+    margin-right: 50px;
     text-align: right;
 }
 .slice-btn {
@@ -548,9 +550,9 @@ input:focus, textarea:focus, select:focus {
     background: #ff09d6;
     color: #fff;
     transition: 0.4s;
-    font-size: 16px;
     box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.5);
     font-weight: 700;
+    margin-right: 50px;
     border-radius: 2px;
     /* letter-spacing: 1.1px; */
     text-transform: uppercase;
@@ -560,6 +562,37 @@ input:focus, textarea:focus, select:focus {
     border: 1px solid #ff09d6;
     background: transparent;
 	color:#ff09d6;
+    transition: 0.4s;
+}
+
+.mando{
+    width: 40px;
+    margin-left: 20px;
+}
+
+.landing-logo{
+    opacity: 0.8;
+    width: 260px;
+}
+.s-menu-landing-jugar {
+    padding: 10px 30px;
+    cursor: pointer;
+    border: 1px solid #0d112c;
+    background: #0d112c;
+    color: #fff;
+    transition: 0.4s;
+    box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.5);
+    font-weight: 700;
+    margin-right: 50px;
+    border-radius: 2px;
+    /* letter-spacing: 1.1px; */
+    text-transform: uppercase;
+}
+
+.s-menu-landing-jugar:hover {
+    border: 1px solid #0d112c;
+    opacity: 0.9;
+	color:#fff;
     transition: 0.4s;
 }
 
@@ -594,7 +627,7 @@ input:focus, textarea:focus, select:focus {
     background: #ff09d6;
     color: #fff;
     transition: 0.4s;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
     float: right;
     box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.8);
@@ -621,7 +654,7 @@ input:focus, textarea:focus, select:focus {
     background:#171c3e;
     color: #fff;
     transition: 0.4s;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
     border-radius: 2px;
     /* letter-spacing: 1.1px; */
@@ -1124,6 +1157,37 @@ input:focus, textarea:focus, select:focus {
 .payment-history-area {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80);
     background-repeat: no-repeat;
+    /* height: 100%; */
+    background-position: top center;
+    background-size: cover;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-slogan{
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    letter-spacing: 1.3px;
+}
+
+.rosita{
+    color: #ff09d6;
+}
+
+.landing-buttons{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.landing-area{
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80);
+    background-repeat: no-repeat;
+    height: 100%;
     background-position: top center;
     background-size: cover;
     z-index: 1;
@@ -1150,13 +1214,13 @@ input:focus, textarea:focus, select:focus {
 
 }
 .deposite-content th {
-    text-align: left;
+    text-align: center;
     padding: 8px 10px 8px 30px;
     height: 80px;
     text-transform: uppercase;
 }
 .deposite-content td{
-    text-align: left;
+    text-align: center;
     padding: 8px 10px 8px 30px;
     height: 80px;
 }
@@ -3296,13 +3360,8 @@ span.terms-text {
 .entrar:hover{
     color: #ff09d6;
     bottom: 34px;
-    border-bottom: 2px solid #ff09d6;
-    width: 0;
-    transition: 0.4s;
 }
 .login-user:hover{
     color: #ff09d6;
     bottom: 34px;
-    width: 0;
-    transition: 0.4s;
 }

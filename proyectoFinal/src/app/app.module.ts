@@ -9,6 +9,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { LandingComponent } from './pages/landing/landing.component';
+import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LandingComponent } from './pages/landing/landing.component';
     FooterComponent,
     HeaderComponent,
     AdminUsersComponent,
-    LandingComponent
+    LandingComponent,
+    AdminTeamsComponent
   ],
   imports: [
     BrowserModule,
