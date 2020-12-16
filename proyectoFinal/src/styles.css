@@ -1157,12 +1157,12 @@ input:focus, textarea:focus, select:focus {
 .payment-history-area {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80);
     background-repeat: no-repeat;
-    /* height: 100%; */
+    height: 100%;
     background-position: top center;
     background-size: cover;
     z-index: 1;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .landing-slogan{
@@ -1292,6 +1292,7 @@ input[type=number]:hover::-webkit-inner-spin-button {
 }
 .deposite-table td img {
     margin-right: 15px;
+    margin-left: 15px;
     border-radius: 50%;
 }
 /*----------------------------------------*/
@@ -3364,4 +3365,132 @@ span.terms-text {
 .login-user:hover{
     color: #ff09d6;
     bottom: 34px;
+}
+.background{
+  clear: both;
+  height: 100%
+}
+
+.detalle-partido{
+    padding: 120px 0px 0px;
+    text-align: center;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.detalle-partido-chat{
+    padding: 20px 0px 0px;
+    text-align: center;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.first{
+    font-weight: bold;
+}
+.second{
+    font-weight: bold;
+}
+
+.foro-chat{
+    /* /* position: fixed;
+   left: 0;
+   padding: 50px;
+   height: 30%;
+   font-weight: bold;
+   font-size: 50px;
+   bottom: 0;*/
+    width: 100%; 
+    margin: 20px 0px;
+   padding: 5px 10px 5px 10px;
+   background-color: #0d112c;
+   color: white;
+   margin-top: 20px;
+   text-align: center;
+}
+
+.detalle-equipo{
+    margin-top: 20px;
+}
+.detalle-resultado{
+    text-align: center;
+    /* margin: 0; */
+    width: 120px;
+    background-color: #0d112c;
+    white-space: nowrap;
+    margin: 0 auto;
+    /* list-style: none; */
+    /* align-items: center; */
+}
+.separator{
+    margin: 20px 20px 20px 20px;
+    margin-top: 20px;
+}
+
+.vs{
+    font-weight: bold;
+    font-size: 30px;
+    color: #fff;
+    padding: 0px 80px 0px 80px;
+}
+
+.full-height {
+    height: 100%;
+    background: #0d112c;
+    margin-top: 40px;
+  }
+.protesta{
+    float: right;
+    position: absolute;
+    right: -20px;
+    font-size: 18px;
+    background-color: #0d112c;
+    padding: 5px 30px 5px 30px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.detalle-perfil{
+    background-color: #0d112c;
+    padding: 20px;
+    margin-top: 20px;
+}
+.image-detalle{
+    width: 100px;
+}
+
+.detalle-partido-resultado{
+    align-items: center;
+    text-align: center;
+    background-color: #0d112c;
+    justify-content: center;
+    font-weight: bold;
+    padding: 5px 20px 5px 20px;
+    width: 50%;
+    display: inline-block;
+}
+
+.title-equipo{
+    background-color: #0d112c;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+
+}
+
+.detalle-vs{
+    margin-top: 50px;
+    margin-bottom: 0px;
+}
+
+.vs-admin{
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }

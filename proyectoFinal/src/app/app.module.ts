@@ -10,6 +10,9 @@ import { HeaderComponent } from './pages/header/header.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
+import { DetallePartidoComponent } from './pages/detalle-partido/detalle-partido.component';
+import { AdminPartidosComponent } from './pages/admin-partidos/admin-partidos.component';
+import { TeamComponent } from './pages/team/team.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
     HeaderComponent,
     AdminUsersComponent,
     LandingComponent,
-    AdminTeamsComponent
+    AdminTeamsComponent,
+    DetallePartidoComponent,
+    AdminPartidosComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
