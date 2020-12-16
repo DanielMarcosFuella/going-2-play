@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
+import { AdminTorneosComponent } from './pages/admin-torneos/admin-torneos.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { DetalleTorneoComponent } from './pages/detalle-torneo/detalle-torneo.component';
 import { EquiposComponent } from './pages/equipos/equipos.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'footer', component:FooterComponent},
   {path: 'admin-users', component:AdminUsersComponent},
   {path: 'admin-teams', component:AdminTeamsComponent},
-  {path: 'equipos', component:EquiposComponent}
+  {path: 'equipos', component:EquiposComponent},
+  {path: 'admin-torneos', component: AdminTorneosComponent}
 ];
 
 @NgModule({

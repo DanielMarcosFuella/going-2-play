@@ -1,0 +1,224 @@
+<!--Start payment-history area -->
+<div class="payment-history-area bg-color area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>Torneos</h3>
+                    <p>Lista de Torneos de G2P</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="deposite-content">
+                    <div class="diposite-box">
+                        <div class="deposite-table">
+                            <table>
+                                <tr>
+                                    <th>Torneo</th>
+                                    <th>Juego</th>
+                                    <th>Participantes</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Premio</th>
+                                    <th>Reglas</th>
+                                    <th>Modificar</th>
+                                </tr>
+                                <tr>
+                                    <td>Fifa open Cup #1</td>
+                                    <td>Fifa</td>
+                                    <td>luisfrpe (3+)</td>
+                                    <td>27/2/21</td>
+                                    <td>17:00</td>
+                                    <td>100/50/30</td>
+                                    <td>Fifa 1 vs 1</td>
+                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
+                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
+                                            data-target="#deleteModal" class="delete-user"><i
+                                                class="fa fa-trash fa-lg"></i></a></td>
+                                </tr>
+                               
+                                <tr>
+                                    <td>Jonia Cup #2</td>
+                                    <td>LOL</td>
+                                    <td>Dragons (3+)</td>
+                                    <td>2/3/21</td>
+                                    <td>12:30</td>
+                                    <td>50/25/10</td>
+                                    <td>Lol 5 vs 5</td>
+                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
+                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
+                                            data-target="#deleteModal" class="delete-user"><i
+                                                class="fa fa-trash fa-lg"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Copa Danone</td>
+                                    <td>Fifa</td>
+                                    <td>overGame (17+)</td>
+                                    <td>10/3/21</td>
+                                    <td>19:00</td>
+                                    <td>200/100/50</td>
+                                    <td>Fifa 11 vs 11</td>
+                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
+                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
+                                            data-target="#deleteModal" class="delete-user"><i
+                                                class="fa fa-trash fa-lg"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Everybody hate teemo Cup</td>
+                                    <td>LOL</td>
+                                    <td> - </td>
+                                    <td>11/3/21</td>
+                                    <td>15:00</td>
+                                    <td>100/50/30</td>
+                                    <td>Lol 1 vs 1</td>
+                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
+                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
+                                            data-target="#deleteModal" class="delete-user"><i
+                                                class="fa fa-trash fa-lg"></i></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <a class="btn but2 " data-toggle="modal" data-target="#nuevoTorneo"><h1>Crear torneo</h1></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End payment-history area -->
+<!-- MODAL EDIT -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="margin-top: 0px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">EDITAR Torneo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Nombre del torneo">
+                    </div>
+                    <div class="form-group">
+                        <select name="country" class="form-control selectpicker">
+                            <option value="0">Seleccionar juego</option>
+                            <option value="1">LOL</option>
+                            <option value="2">FIFA</option>
+
+                        </select>
+                    </div>
+                   
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Participantes" aria-label="Jugadores" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2">+</span>
+                      </div>
+                    
+                      <div class="form-group">
+                        <input type="date" class="form-control" id="recipient-name" placeholder="Fecha">
+                      </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Hora">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Premios">
+                    </div>
+                    <div class="form-group">
+                        <select name="country" class="form-control selectpicker">
+                            <option value="0">Reglas</option>
+                            <option value="1">LOL 1vs1</option>
+                            <option value="2">FIFA 1vs1</option>
+                            <option value="3">LOL 5vs5</option>
+                            <option value="4">FIFA 11vs11</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="s-menu-mobile-register">EDITAR</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MODAL EDIT -->
+<!-- MODAL DELETE -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="margin-top: 0px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">ELIMINAR</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <p>¿Desea eliminar el torneo?</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="s-menu-mobile-register">ELIMINAR</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FIN MODAL DELETE -->
+<!--  MODAL CREAR TORNEO -->
+<div class="modal fade" id="nuevoTorneo" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="margin-top: 0px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Crear Torneo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Nombre del torneo">
+                    </div>
+                    <div class="form-group">
+                        <select name="country" class="form-control selectpicker">
+                            <option value="0">Seleccionar juego</option>
+                            <option value="1">LOL</option>
+                            <option value="2">FIFA</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="recipient-name" placeholder="Fecha">
+                      </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Hora">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Premios">
+                    </div>
+                    <div class="form-group">
+                        <select name="country" class="form-control selectpicker">
+                            <option value="0">Reglas</option>
+                            <option value="1">LOL 1vs1</option>
+                            <option value="2">FIFA 1vs1</option>
+                            <option value="3">LOL 5vs5</option>
+                            <option value="4">FIFA 11vs11</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a class="s-menu-mobile-register" data-dismiss="modal">CREAR</a>
+            </div>
+        </div>
+    </div>
+</div>
