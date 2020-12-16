@@ -2,7 +2,7 @@
     background-color: #171c3e;
 }
 .secondary2{
-    background-color: #0d112c;
+    background-color: #0b0f2c;
     text-align: center;
 }
 .ranking-torneo{
@@ -24,7 +24,7 @@
     font-weight: bold;
     text-transform: uppercase;
     box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
-    background-color: #0d112c;
+    background-color: #0b0f2c;
 
     /* background-color: #ff09d6; */
 }
@@ -37,7 +37,7 @@
 }
 .title-card{
     color: #fff;
-    background: #0d112c;
+    background: #0b0f2c;
     padding: 10px;
     text-align: center;
     font-weight: 700;

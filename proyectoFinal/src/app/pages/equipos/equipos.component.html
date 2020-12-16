@@ -1,207 +1,288 @@
-<body>
-    <div class="secondary2">
-        <div class="col-xl-12 secondary2 fx">
-            <p class="pt">.</p>
-        </div>
-        <div class="wt center d-flex justify-content-center">
-            <h1>EQUIPOS</h1>
-        </div>
-        <div class="col-xl-12 secondary2 fx">
-            <p class="pt">.</p>
-        </div>
-
-        <div class="flex">
-            <a routerLink="">
-                <div class="card secondary1 wt mg justify-content-center" style="width: 18rem;">
-                    <img [src]="logoOg" class="card-img-top logo" alt="...">
-                    <div class="card-body">
-                        <h1 class="card-title">overGame</h1>
-                    </div>
+<div class="top-margin"></div>
+<div class="container " id="page_effect" style="display: none;">
+    <div class="row center-all">
+        <div class="col-lg-4">
+            <div class="custom-column">
+                <div class="custom-column-content">
+                    <img class="image-equipo" [src]="logoOg">
                 </div>
-            </a>
-            <a routerLink="">
-                <div class="card secondary1 wt mg" style="width: 18rem;">
-                    <img [src]="logoX6" class="card-img-top logo" alt="...">
-                    <div class="card-body">
-                        <h1 class="card-title">x6tence</h1>
-                    </div>
+                <div class="custom-column-footer">
+                    overGame
                 </div>
-            </a>
-            <a routerLink="">
-                <div class="card secondary1 wt mg" style="width: 18rem;">
-                    <img [src]="logoGiants" class="card-img-top logo" alt="...">
-                    <div class="card-body">
-                        <h1 class="card-title">Giants</h1>
-                    </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="custom-column">
+                <div class="custom-column-content">
+                    <img class="image-equipo" [src]="logoX6">
                 </div>
-            </a>
-        </div>
-
-        <div class="flex">
-            <a routerLink="">
-                <div class="card secondary1 wt mg" style="width: 18rem;">
-                    <img [src]="logoG2" class="card-img-top logo" alt="...">
-                    <div class="card-body">
-                        <h1 class="card-title">Gamers 2</h1>
-                    </div>
+                <div class="custom-column-footer">
+                    x6tence
                 </div>
-            </a>
+            </div>
         </div>
-        <div class="col-xl-12 secondary2 fx">
-            <p class="pt">.</p>
-        </div>
-        <div class="col-xl-12 secondary2 fx">
-            <p class="pt">.</p>
-        </div>
-        <div class="col-xl-12 secondary2 fx">
-            <p class="pt">.</p>
-        </div>
-        <div class="wt center d-flex justify-content-center">
-            <button type="button" class="btn but1" data-toggle="modal" data-target="#modalNewTeam">Apúntate</button>
-        </div>
-        <div class="col-xl-12 secondary2 fx">
-            <p class="pt">.</p>
-        </div>
-        <div class="col-xl-12 secondary2 fx">
-            <p class="pt">.</p>
-        </div>
-    </div>
-    <div class="modal fade" id="modalNewTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Equipo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <div class="col-lg-4">
+            <div class="custom-column">
+                <div class="custom-column-content">
+                     <img class="image-equipo" [src]="logoGiants">
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="text">Nombre del equipo</label>
-                        <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="Nombre del equipo">
-                        <small id="emailHelp" class="form-text text-muted">Se podrá cambiar proximaménte.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Imagen del equipo</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                    <div class="form-group">
-                        <label for="text">Pais</label>
-                        <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="Pais">
-                    </div>
-                    <div class="form-group">
-                        <label for="text">Jugador 1</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button" (click)="jugadores1=jugadores1+1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=2" class="form-group">
-                        <label for="text">Jugador 2</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button" (click)="jugadores1=jugadores1+1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=3" class="form-group">
-                        <label for="text">Jugador 3</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button" (click)="jugadores1=jugadores1+1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=4" class="form-group">
-                        <label for="text">Jugador 4</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button" (click)="jugadores1=jugadores1+1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=5" class="form-group">
-                        <label for="text">Jugador 5</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button" (click)="jugadores1=jugadores1+1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=6" class="form-group">
-                        <label for="text">Jugador 6</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button" (click)="jugadores1=jugadores1+1">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=7" class="form-group">
-                        <label for="text">Jugador 7</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=8" class="form-group">
-                        <label for="text">Jugador 8</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=9" class="form-group">
-                        <label for="text">Jugador 9</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=10" class="form-group">
-                        <label for="text">Jugador 10</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="jugadores1>=11" class="form-group">
-                        <label for="text">Jugador 11</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Id del Jugador" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="">Juego</label>
-                        <select class="form-control" id="">
-                            <option>League of legends</option>
-                            <option>Fifa 21</option>
-                        </select>
-                    </div>
+                <div class="custom-column-footer">
+                    Giants
                 </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
-                    <button type="button" class="btn btn-primary">Apuntar equipo</button>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="custom-column">
+                <div class="custom-column-content">
+                     <img class="image-equipo" [src]="logoG2">
+                </div>
+                <div class="custom-column-footer">
+                    G2
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="custom-column">
+                <div class="custom-column-content">
+                     <img class="image-equipo" src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png">
+                </div>
+                <div class="custom-column-footer">
+                    Dragons
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="custom-column">
+                <div class="custom-column-content">
+                     <img class="image-equipo" src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-3.png">
+                </div>
+                <div class="custom-column-footer">
+                    Raccoons
                 </div>
             </div>
         </div>
     </div>
-</body>
+</div>
+
+<!-- <div class="container" id="page_effect" style="display: none;">
+    <div class="row">
+        <div class="secondary2">
+            <div class="col-xl-12 secondary2 fx">
+                <p class="pt">.</p>
+            </div>
+            <div class="wt center d-flex justify-content-center">
+                <h1>EQUIPOS</h1>
+            </div>
+            <div class="col-xl-12 secondary2 fx">
+                <p class="pt">.</p>
+            </div>
+
+            <div class="flex">
+                <a routerLink="">
+                    <div class="card secondary1 wt mg justify-content-center" style="width: 18rem;">
+                        <img [src]="logoOg" class="card-img-top logo" alt="...">
+                        <div class="card-body">
+                            <h1 class="card-title">overGame</h1>
+                        </div>
+                    </div>
+                </a>
+                <a routerLink="">
+                    <div class="card secondary1 wt mg" style="width: 18rem;">
+                        <img [src]="logoX6" class="card-img-top logo" alt="...">
+                        <div class="card-body">
+                            <h1 class="card-title">x6tence</h1>
+                        </div>
+                    </div>
+                </a>
+                <a routerLink="">
+                    <div class="card secondary1 wt mg" style="width: 18rem;">
+                        <img [src]="logoGiants" class="card-img-top logo" alt="...">
+                        <div class="card-body">
+                            <h1 class="card-title">Giants</h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="flex">
+                <a routerLink="">
+                    <div class="card secondary1 wt mg" style="width: 18rem;">
+                        <img [src]="logoG2" class="card-img-top logo" alt="...">
+                        <div class="card-body">
+                            <h1 class="card-title">Gamers 2</h1>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wt center d-flex justify-content-center">
+        <button type="button" class="btn but1" data-toggle="modal" data-target="#modalNewTeam">Apúntate</button>
+    </div>
+
+</div> -->
+
+
+
+
+
+
+
+
+<div class="modal fade" id="modalNewTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo Equipo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="text">Nombre del equipo</label>
+                    <input type="text" class="form-control" id="" aria-describedby="emailHelp"
+                        placeholder="Nombre del equipo">
+                    <small id="emailHelp" class="form-text text-muted">Se podrá cambiar proximaménte.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Imagen del equipo</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+                <div class="form-group">
+                    <label for="text">Pais</label>
+                    <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="Pais">
+                </div>
+                <div class="form-group">
+                    <label for="text">Jugador 1</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                (click)="jugadores1=jugadores1+1">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=2" class="form-group">
+                    <label for="text">Jugador 2</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                (click)="jugadores1=jugadores1+1">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=3" class="form-group">
+                    <label for="text">Jugador 3</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                (click)="jugadores1=jugadores1+1">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=4" class="form-group">
+                    <label for="text">Jugador 4</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                (click)="jugadores1=jugadores1+1">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=5" class="form-group">
+                    <label for="text">Jugador 5</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                (click)="jugadores1=jugadores1+1">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=6" class="form-group">
+                    <label for="text">Jugador 6</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button"
+                                (click)="jugadores1=jugadores1+1">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=7" class="form-group">
+                    <label for="text">Jugador 7</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=8" class="form-group">
+                    <label for="text">Jugador 8</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=9" class="form-group">
+                    <label for="text">Jugador 9</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=10" class="form-group">
+                    <label for="text">Jugador 10</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="jugadores1>=11" class="form-group">
+                    <label for="text">Jugador 11</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Id del Jugador"
+                            aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Juego</label>
+                    <select class="form-control" id="">
+                        <option>League of legends</option>
+                        <option>Fifa 21</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
+                <button type="button" class="btn btn-primary">Apuntar equipo</button>
+            </div>
+        </div>
+    </div>
+</div>

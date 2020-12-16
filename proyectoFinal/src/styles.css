@@ -6,7 +6,9 @@
 /*  1.  Theme default CSS
 /*----------------------------------------*/
 html, body {
-	height: 100%;
+    /* height: 100%; */
+    height: 100%;
+ /* position: relative; */
 }
 .floatleft {
 	float:left;
@@ -559,6 +561,27 @@ input:focus, textarea:focus, select:focus {
 }
 
 .s-menu:hover {
+    border: 1px solid #ff09d6;
+    background: transparent;
+	color:#ff09d6;
+    transition: 0.4s;
+}
+.s-menu-crear {
+    padding: 10px 30px;
+    cursor: pointer;
+    border: 1px solid #ff09d6;
+    background: #ff09d6;
+    color: #fff;
+    transition: 0.4s;
+    box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.5);
+    font-weight: 700;
+    margin-right: 50px;
+    border-radius: 2px;
+    /* letter-spacing: 1.1px; */
+    text-transform: uppercase;
+}
+
+.s-menu-crear:hover {
     border: 1px solid #ff09d6;
     background: transparent;
 	color:#ff09d6;
@@ -1157,7 +1180,7 @@ input:focus, textarea:focus, select:focus {
 .payment-history-area {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80);
     background-repeat: no-repeat;
-    height: 100%;
+    /* height: 100%; */
     background-position: top center;
     background-size: cover;
     z-index: 1;
@@ -1523,7 +1546,22 @@ input[type=number]:hover::-webkit-inner-spin-button {
 /*  13. Footer Area
 /*----------------------------------------*/
 .footer-1 {
-    background:#0d112c;
+    /* background:#0d112c; */
+    background: #0b0f2c;
+    /* position: absolute; */
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+    /* position: absolute; */
+    /* right: 0;
+    bottom: 0;
+    left: 0; */
+    /* padding: 1rem; */
+    /* background-color: #efefef; */
+    /* text-align: center; */
+}
+.top-margin{
+    margin-top: 70px;
 }
 .footer-area{
     padding: 90px 0px 90px;
@@ -3493,4 +3531,97 @@ span.terms-text {
     font-weight: bold;
     margin-bottom: 5px;
     margin-top: 5px;
+}
+
+.center-all{
+    padding: 100px 0px 100px;
+    text-align: center;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-equipo{
+    background-color: #0d112c;
+    /* padding: 20px; */
+    -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0 0 5px 2px rgba(0,0,0,0.7);
+    box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.7);
+}
+
+.equipo-image{
+    margin-bottom: 30px;
+
+}
+
+.image-equipo{
+    width: 200px;
+    height: 200px;
+    margin: 60px;
+}
+
+.equipo-titulo{
+    color: #fff;
+    background: #0b0f2c;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+
+
+.ribbon {
+  height: 100px;
+  width: 30px;
+  background-color: #0b0f2c;
+  position: absolute;
+  right:30px;
+  top:15px;
+  writing-mode: tb-rl;
+  z-index: 999;
+}
+
+.ribbon span {
+  padding: 20px
+}
+
+.ribbon::after {
+  height: 10px;
+  margin-left: 10px solid #000;
+}
+
+.custom-column {  
+    /* background-color: #0d112c; */
+    /* padding: 20px; */
+    margin-bottom: 30px;
+    -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0 0 5px 2px rgba(0,0,0,0.7);
+    box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.7);
+  box-sizing: border-box;  
+}
+
+/* .custom-column-header {
+  font-size: 24px;
+  background-color: #007bff;  
+  color: white;
+  padding: 15px;  
+  text-align: center;
+} */
+
+.custom-column-content {
+    background-color: #0b0f2c;
+  /* border: 2px solid wçhite;   */
+  padding: 20px;  
+}
+
+.custom-column-footer {
+  background-color: rgb(255,8,214,0.7);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
 }
