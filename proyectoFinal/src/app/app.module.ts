@@ -15,6 +15,8 @@ import { AdminTorneosComponent } from './pages/admin-torneos/admin-torneos.compo
 import { DetallePartidoComponent } from './pages/detalle-partido/detalle-partido.component';
 import { AdminPartidosComponent } from './pages/admin-partidos/admin-partidos.component';
 import { TeamComponent } from './pages/team/team.component';
+import { PerfilUserComponent } from './pages/perfil-user/perfil-user.component';
+import { PerfilTeamsComponent } from './pages/perfil-teams/perfil-teams.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { TeamComponent } from './pages/team/team.component';
     AdminTorneosComponent,
     DetallePartidoComponent,
     AdminPartidosComponent,
-    TeamComponent
+    TeamComponent,
+    PerfilUserComponent,
+    PerfilTeamsComponent
   ],
   imports: [
     BrowserModule,
