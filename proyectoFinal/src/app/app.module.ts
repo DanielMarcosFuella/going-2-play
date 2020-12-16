@@ -12,6 +12,9 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
 import { EquiposComponent } from './pages/equipos/equipos.component';
 import { AdminTorneosComponent } from './pages/admin-torneos/admin-torneos.component';
+import { DetallePartidoComponent } from './pages/detalle-partido/detalle-partido.component';
+import { AdminPartidosComponent } from './pages/admin-partidos/admin-partidos.component';
+import { TeamComponent } from './pages/team/team.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { AdminTorneosComponent } from './pages/admin-torneos/admin-torneos.compo
     LandingComponent,
     AdminTeamsComponent,
     EquiposComponent,
-    AdminTorneosComponent
+    AdminTorneosComponent,
+    DetallePartidoComponent,
+    AdminPartidosComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
