@@ -11,6 +11,8 @@ import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
 import { EquiposComponent } from './pages/equipos/equipos.component';
+import { PerfilUserComponent } from './pages/perfil-user/perfil-user.component';
+import { PerfilTeamsComponent } from './pages/perfil-teams/perfil-teams.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { EquiposComponent } from './pages/equipos/equipos.component';
     AdminUsersComponent,
     LandingComponent,
     AdminTeamsComponent,
-    EquiposComponent
+    EquiposComponent,
+    PerfilUserComponent,
+    PerfilTeamsComponent
   ],
   imports: [
     BrowserModule,
