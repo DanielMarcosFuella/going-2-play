@@ -27,7 +27,8 @@ const routes: Routes = [
   {path: 'admin-torneos', component: AdminTorneosComponent},
   {path: 'detalle-partido', component:DetallePartidoComponent},
   {path: 'admin-partidos', component:AdminPartidosComponent},
-  {path: 'team', component:TeamComponent}
+  {path: 'team', component:TeamComponent},
+  {path: '**', component: LandingComponent}
 ];
 
 @NgModule({
