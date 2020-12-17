@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perfil-teams.component.css']
 })
 export class PerfilTeamsComponent implements OnInit {
+  imgSrc = 'assets/images/logo.png'
 
   constructor() { }
 
