@@ -94,10 +94,10 @@ a:hover, a:focus {
     color: #2a354e;
     text-decoration: none;
 }
-body {
+/* body {
     
 	overflow-x: hidden;
-}
+} */
 #scrollUp {
     bottom: 40px;
     font-size: 20px;
@@ -1180,7 +1180,7 @@ input:focus, textarea:focus, select:focus {
 .payment-history-area {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80);
     background-repeat: no-repeat;
-    /* height: 100%; */
+    height: auto;
     background-position: top center;
     background-size: cover;
     z-index: 1;
@@ -3625,3 +3625,137 @@ span.terms-text {
   padding: 20px;
   text-align: center;
 }
+
+.container-torneos{
+    margin-bottom: 30px;
+}
+
+.padding-detalle{
+    padding: 0px 0 200px 0;
+}
+
+.title-perfil-user{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.contenedor-perfil{
+    margin: 30px 0 30px 0;
+}
+
+.title-description-user{
+    margin-top: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+.image-perfil-user{
+    width: 100px;
+}
+
+.equipo-pertenece-imagen{
+    width: 70px;
+    vertical-align: middle;
+}
+
+.equipo-usuario{
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    margin-top: 50px;
+}
+.title-stadics{
+    text-transform: uppercase;
+    font-weight: bold;
+    float: left;
+    font-size: 20px;
+    margin: 10px;
+}
+.bold-transform{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.container-type{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.container-data {
+    margin: 10px;
+}
+
+.titulo-equipo-pertenece{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+.button-editar-perfil{
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #171c3e;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 13px;
+    /* width: 10%; */
+    border-radius: 4px 4px 4px 4px;
+    justify-content: center;
+    border: 2px solid #171c3e;
+    margin: 10px 60px 10px 60px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+.button-editar-perfil:hover{
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: transparent;
+    border: 2px solid #171c3e;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    padding: 10px;
+    font-size: 13px;
+    /* width: 10%; */
+    justify-content: center;
+    margin: 10px 60px 10px 60px;
+    text-align: center;
+}
+
+/* EFECTOS LUIS */
+.fade-in {
+    animation: fadeIn ease 7s;
+    -webkit-animation: fadeIn ease 7s;
+    -moz-animation: fadeIn ease 7s;
+    -o-animation: fadeIn ease 7s;
+    -ms-animation: fadeIn ease 7s;
+    }
+    @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }
+    
+    @-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+    }

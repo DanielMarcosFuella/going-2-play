@@ -30,7 +30,8 @@ const routes: Routes = [
   {path: 'admin-partidos', component:AdminPartidosComponent},
   {path: 'perfil-user', component:PerfilUserComponent},
   {path: 'perfil-teams', component:PerfilTeamsComponent},
-  {path: '**', component: LandingComponent}
+  {path: '**', component: LandingComponent},
+  {path: 'perfil-equipo', component:PerfilTeamsComponent}
 ];
 
 @NgModule({
