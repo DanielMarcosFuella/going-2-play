@@ -11,7 +11,8 @@ import { EquiposComponent } from './pages/equipos/equipos.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { LandingComponent } from './pages/landing/landing.component';
-import { TeamComponent } from './pages/team/team.component';
+import { PerfilTeamsComponent } from './pages/perfil-teams/perfil-teams.component';
+import { PerfilUserComponent } from './pages/perfil-user/perfil-user.component';
 import { TorneosComponent } from './pages/torneos/torneos.component';
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'admin-torneos', component: AdminTorneosComponent},
   {path: 'detalle-partido', component:DetallePartidoComponent},
   {path: 'admin-partidos', component:AdminPartidosComponent},
-  {path: 'team', component:TeamComponent},
+  {path: 'perfil-user', component:PerfilUserComponent},
+  {path: 'perfil-teams', component:PerfilTeamsComponent},
   {path: '**', component: LandingComponent}
 ];
 

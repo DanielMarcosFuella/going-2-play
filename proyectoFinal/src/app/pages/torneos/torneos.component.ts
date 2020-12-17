@@ -17,7 +17,7 @@ export class TorneosComponent implements OnInit {
   fifa:boolean
   constructor() {
     this.fifa=false
-    this.lol=false
+    this.lol=true
    }
   
   ngOnInit(): void {
