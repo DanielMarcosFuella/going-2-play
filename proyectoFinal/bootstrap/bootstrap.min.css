@@ -2287,6 +2287,7 @@ pre code {
     }
     .navbar-nav {
         text-align: center;
+        display: flex;
     }
     li{
         border-bottom: 1px solid #171c3e;
@@ -2924,7 +2925,7 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #ff09d6;
     border-color: #ff09d6;
-    box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5)
+    box-shadow: 0 0 0 .2rem rgba(0, 0, 0, .8)
 }
 
 .btn-primary.disabled,
@@ -2945,7 +2946,7 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .5)
+    box-shadow: 0 0 0 .2rem rgba(0, 0, 0, .8)
 }
 
 .btn-secondary {
@@ -3840,7 +3841,7 @@ input[type=submit].btn-block {
 .dropdown-item:hover {
     color: #fff;
     text-decoration: none;
-    background-color: #0b0f2c
+    background-color: #ff09d6
 }
 
 .dropdown-item.active,
@@ -4776,6 +4777,7 @@ input[type=submit].btn-block {
 .navbar {
     position: relative;
     display: -ms-flexbox;
+    height: 70px;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -4861,6 +4863,7 @@ input[type=submit].btn-block {
 .navbar-toggler {
     padding: .25rem .75rem;
     font-size: 1.25rem;
+    margin: 8px;
     line-height: 1;
     background-color: transparent;
     border: 1px solid transparent;
@@ -5051,6 +5054,10 @@ input[type=submit].btn-block {
 
     .navbar-expand-lg .navbar-toggler {
         display: none
+    }
+
+    .navbar-nav{
+        display: -webkit-inline-box;
     }
     
 }
