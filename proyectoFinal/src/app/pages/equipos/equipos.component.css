@@ -29,3 +29,11 @@
 .pt{
     color:  #0d153d;
 }
+
+h5:hover{
+    animation: bounce 1s;
+}
+
+img:hover{
+    animation: pulse 1s;
+}

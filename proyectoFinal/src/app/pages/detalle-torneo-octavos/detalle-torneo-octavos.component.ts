@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-detalle-torneo',
-  templateUrl: './detalle-torneo.component.html',
-  styleUrls: ['./detalle-torneo.component.css']
+  selector: 'app-detalle-torneo-octavos',
+  templateUrl: './detalle-torneo-octavos.component.html',
+  styleUrls: ['./detalle-torneo-octavos.component.css']
 })
-export class DetalleTorneoComponent implements OnInit {
-  
-  title = 'Detalle Torneo Cuartos - G2P'
+export class DetalleTorneoOctavosComponent implements OnInit {
+
+  title = 'Detalle Torneo Octavos - G2P'
   imglogo = 'assets/images/logo.png'
 
   constructor(private serviceTitle:Title) { }

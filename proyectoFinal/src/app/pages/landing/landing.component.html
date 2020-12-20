@@ -1,20 +1,26 @@
 <!--Start payment-history area -->
+
 <div class="landing-area bg-color fix area-padding-landing">
+    <div class="top-margin"></div>
     <div class="container">
-        <div class="row">
+        <div class="row ">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="section-headline-landing text-center">
-                    <img class="landing-logo" src="https://jardineriajofeva.es/wp-content/uploads/2020/12/logo.png">
+                    <img class="landing-logo animate__animated animate__fadeInDownBig" [src]="imageSrc">
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="top-margin"></div>
+        <div class="row animate__bounceInLeft">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <h3 class="landing-slogan">G2P <br> <span class="rosita">PASIÓN</span> POR LOS VIDEOJUEGOS</h3>
+                <h3 class="landing-slogan animate__animated animate__bounceInLeft">G2P <br> <span
+                        class="rosita">PASIÓN</span> POR LOS VIDEOJUEGOS</h3>
+                        <div class="top-margin"></div>
                 <div class="landing-buttons">
                     <!-- <a class="s-menu-landing-jugar" data-toggle="modal" data-target="#tutorialModal">JUGAR <img class="mando" [src]="imageMando"></a>
                     <a class="s-menu" data-toggle="modal" data-target="#tutorialModal">¿COMO JUGAR?</a> -->
-                    <div class="btn-grupo"><button routerLink="/torneos" class="btn btn-dark">JUGAR <img class="mando"
+                    <div class="btn-grupo animate__animated animate__bounce animate__repeat-3 3"><button
+                            routerLink="/torneos" class="btn btn-dark btn-landing">JUGAR <img class="mando"
                                 [src]="imageMando"></button>
                     </div>
                     <div class="btn-grupo"><button type="button" data-toggle="modal" data-target="#tutorialModal"
@@ -49,13 +55,15 @@
                 seguirlas y comentarlas en directo desde el chat. <br>
                 <br>
                 Gana Premios! <br>
-                <br>    
-                Acumula puntos de victoria que serán adjudicados a cada uno de los equipos tras finalizarse los torneos y
+                <br>
+                Acumula puntos de victoria que serán adjudicados a cada uno de los equipos tras finalizarse los torneos
+                y
                 en función de la posición lograda por participante en dicho evento.
-                
+
             </div>
             <div class="modal-footer">
-                <a class="s-menu-mobile-register" data-dismiss="modal" routerLink="/torneos">JUGAR &nbsp;&nbsp;<i class="fa fa-gamepad fa-lg"></i></a>
+                <a class="s-menu-mobile-register" data-dismiss="modal" routerLink="/torneos">JUGAR &nbsp;&nbsp;<i
+                        class="fa fa-gamepad fa-lg"></i></a>
             </div>
         </div>
     </div>

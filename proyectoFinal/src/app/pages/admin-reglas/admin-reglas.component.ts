@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-admin-partidos',
-  templateUrl: './admin-partidos.component.html',
-  styleUrls: ['./admin-partidos.component.css']
+  selector: 'app-admin-reglas',
+  templateUrl: './admin-reglas.component.html',
+  styleUrls: ['./admin-reglas.component.css']
 })
-export class AdminPartidosComponent implements OnInit {
-  title = 'ADM - PARTIDOS'
+export class AdminReglasComponent implements OnInit {
+  title = 'ADM - REGLAS'
 
   constructor(private serviceTitle:Title) { }
 

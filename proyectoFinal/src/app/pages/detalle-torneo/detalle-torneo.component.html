@@ -1,636 +1,290 @@
-    <div class="top-margin"></div>
-    <div *ngIf="!isMobileLayout" class="position-relative overflow-hidden">
-        <div class="row">
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
+<div class="top-margin"></div>
+<div class="container-bracket">
+
+    <div class="tournament-bracket tournament-bracket--rounded">
+    
+        <div class="tournament-bracket__round tournament-bracket__round--quarterjorgeRals">
+            <div class="tournament-title">
+                <span class="tournament-bracket__round-title">CUARTOS</span>
             </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <h2>CUARTOS</h2>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <h2>SEMIFINAL</h2>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <h2>FINAL</h2>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <h2>CAMPEÓN</h2>
-                </div>
-            </div>
-                <div class="col-xl-12 secondary1 fx">
-                    <p class="pt">.</p>
-                </div>
-                <div class="col-xl-12 secondary1 fx">
-                    <p class="pt">.</p>
-                </div>
-                <div class="col-xl-12 secondary1 fx">
-                    <p class="pt">.</p>
-                </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo A</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-9 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 3-0</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo A</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-6 secondary1 fx">
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo B</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-9 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 1-3</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo D</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo C</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-9 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 2-3</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo D</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-6 secondary1 fx">
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo D</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-9 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 3-2</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo D</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo E</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-9 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 1-3</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo F</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-6 secondary1 fx">
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo F</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-9 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 3-2</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo F</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo G</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-9 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary1">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 0-3</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo H</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-6 secondary1 fx">
-            </div>
-            <div class="col-xl-3 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-9 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo H</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-9 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
+            <ul class="tournament-bracket__list">
+                <li class="tournament-bracket__item">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-18">18 February 1998</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">4</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">1</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+
+                <li class="tournament-bracket__item">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-18">18 February 1998</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">4</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code"
+                                            title="Unitede states of America">mosquit0p</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">1</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li class="tournament-bracket__item">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-18">18 February 1998</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="jorgeRland">jorgeR</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">2</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="Sweden">joseH</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">1</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+
+                <li class="tournament-bracket__item">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-18">18 February 1998</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="ventuKsia">ventuK</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">4</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="BelaventuK">BEL</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">1</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
-    <div *ngIf="isMobileLayout" class="position-relative overflow-hidden">
-        <div class="row">
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
+        <div class="tournament-bracket__round tournament-bracket__round--semijorgeRals">
+            <div class="tournament-title">
+
+                <span class="tournament-bracket__round-title">SEMIFINAL</span>
             </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-6 secondary2">
-                    <h2>CUARTOS</h2>
-                </div>
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo A</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-2 secondary2">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 3-0</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo B</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo C</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-2 secondary2">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 2-3</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo D</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo E</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-2 secondary2">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 1-3</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo F</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo G</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-2 secondary2">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 0-3</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo H</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-6 secondary2">
-                    <h2>SEMIFINAL</h2>
-                </div>
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo A</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-2 secondary2">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 1-3</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo D</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo F</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-2 secondary2">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 3-2</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo H</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-6 secondary2">
-                    <h2>FINAL</h2>
-                </div>
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo D</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-2 secondary2">
-                    <a routerLink="/detalle-partido">
-                        <h3 class="pk"> 3-2</h3>
-                    </a>
-                </div>
-                <div class="col-xl-1 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-4 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3>Equipo F</h3>
-                    </a>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-6 secondary2">
-                    <h2>CAMPEÓN</h2>
-                </div>
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-                <div class="col-xl-6 secondary2">
-                    <a routerLink="/perfil-teams">
-                        <h3 class="pk">Equipo D</h3>
-                    </a>
-                </div>
-                <div class="col-xl-3 secondary1">
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
-            <div class="col-xl-12 secondary1 fx">
-                <p class="pt">.</p>
-            </div>
+            <ul class="tournament-bracket__list">
+                <li class="tournament-bracket__item">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-20">20 February 1998</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">1</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">2</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+
+                <li class="tournament-bracket__item">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-20">20 February 1998</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="jorgeRland">jorgeR</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">4</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="ventuKsia">ventuK</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">7</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
+        <div class="tournament-bracket__round tournament-bracket__round--semijorgeRals">
+            <div class="tournament-title">
+
+                <span class="tournament-bracket__round-title">FINAL</span>
+            </div>
+
+            <ul class="tournament-bracket__list">
+                <li class="tournament-bracket__item">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-20">20 February 1998</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">1</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">2</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
 
 
-<!-- <div class="col-xl-3 secondary1 fx">
-    <div class="col-xl-3 secondary1">
-        <p></p>
-    </div>
-    <div class="col-xl-9 secondary2">
-        <h3>Equipo A</h3>
+            </ul>
+        </div>
+
     </div>
 </div>
-<div class="col-xl-9 secondary1 fx">
-    <p>.</p>
-</div> -->
 
-<!-- <a routerLink="">
-    <h3>Equipo H</h3>
-</a> -->
+<div class="top-margin"></div>
+<div class="top-margin"></div>
+<div class="top-margin"></div>
+<div class="top-margin"></div>
+<div class="top-margin"></div>
+<div class="top-margin"></div>

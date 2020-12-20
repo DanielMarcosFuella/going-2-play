@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-torneos',
@@ -13,14 +14,18 @@ export class TorneosComponent implements OnInit {
   trofeo = 'assets/trofeo.png'
   lolLogo= 'assets/lolLogo.png'
   fifaLogo= 'assets/fifaLogo.png'
+  imgSrc = 'assets/images/logo.png'
   lol:boolean
   fifa:boolean
-  constructor() {
+  title = 'Torneos - G2P'
+  constructor(private serviceTitle:Title) {
     this.fifa=false
-    this.lol=true
+    this.lol=false
    }
   
   ngOnInit(): void {
+  this.serviceTitle.setTitle(this.title)
+
   }
 
 }

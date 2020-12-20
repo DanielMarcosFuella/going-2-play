@@ -3,54 +3,57 @@
 
 <head>
   <meta charset="utf-8">
-  <title>ProyectoFinal</title>
+  <title>G2P</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!-- bootstrap v3.3.6 css -->
-  <!-- <link rel="stylesheet" href="assets/css/bootstrap.min.css"> -->
-
-  <!-- owl.carousel css -->
+  <!-- ESTILOS CSS -->
   <link rel="stylesheet" href="assets/css/owl.carousel.css">
   <link rel="stylesheet" href="assets/css/owl.transitions.css">
-  <!-- Animate css -->
-  <link rel="stylesheet" href="assets/css/animate.css">
-  <!-- meanmenu css -->
-  <link rel="stylesheet" href="assets/css/meanmenu.min.css">
-  <!-- font-awesome css -->
   <link rel="stylesheet" href="assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/themify-icons.css">
-  <!-- magnific css -->
-  <link rel="stylesheet" href="assets/css/magnific.min.css">
-<!-- google-font css -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <!-- style css -->
-  <!-- responsive css -->
   <link rel="stylesheet" href="assets/css/responsive.css">
- <!-- modernizr css -->
+  <link rel="stylesheet" href="assets/css/magnific.min.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css">
+
+  <!-- FIN ESTILOS -->
+
+  <!-- FUENTE URIK -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!-- FIN FUENTE URIK -->
+
+  <!-- SCRIPTS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
- </head>
- <script type="text/javascript">
-  
-  $(window).load(function() {
-    console.log( "Todos los elementos de la página se han cargado" );
-    $('#page_effect').fadeIn(2000);
-    
-	});
-  
-  </script>
+  <!-- FIN SCRIPTS -->
+
+</head>
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    let x = document.querySelector('.putita');
+    $("#1vs1").click(function () {
+      x.classList.add('animate__animated', 'animate__shakeX')
+    });
+
+  });
+
+</script>
+
 <body>
   <app-root></app-root>
 
 
-  <!-- all js here -->
-
-  <!-- jquery latest version -->
-  
-
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+<!-- JQUERY MODALS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<!-- FIN JQUERY MODAL -->
+
 </html>

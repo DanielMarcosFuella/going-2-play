@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-perfil-user',
-  templateUrl: './perfil-user.component.html',
-  styleUrls: ['./perfil-user.component.css']
+  selector: 'app-mis-torneos',
+  templateUrl: './mis-torneos.component.html',
+  styleUrls: ['./mis-torneos.component.css']
 })
-export class PerfilUserComponent implements OnInit {
-  imgSrc = 'assets/images/logo.png'
-  title = 'Perfil - G2P'
+export class MisTorneosComponent implements OnInit {
+  title = 'Mis Torneos - G2P'
 
   constructor(private serviceTitle:Title) { }
 

@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,12 +16,22 @@ import { DetallePartidoComponent } from './pages/detalle-partido/detalle-partido
 import { AdminPartidosComponent } from './pages/admin-partidos/admin-partidos.component';
 import { PerfilUserComponent } from './pages/perfil-user/perfil-user.component';
 import { PerfilTeamsComponent } from './pages/perfil-teams/perfil-teams.component';
+import { AdminReglasComponent } from './pages/admin-reglas/admin-reglas.component';
+import { MisTorneosComponent } from './pages/mis-torneos/mis-torneos.component';
+import { DetalleTorneoSemiComponent } from './pages/detalle-torneo-semi/detalle-torneo-semi.component';
+import { DetalleTorneoFinalComponent } from './pages/detalle-torneo-final/detalle-torneo-final.component';
+import { DetalleTorneoOctavosComponent } from './pages/detalle-torneo-octavos/detalle-torneo-octavos.component';
+import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-dieciseisavos/detalle-torneo-dieciseisavos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TorneosComponent,
     DetalleTorneoComponent,    
+    DetalleTorneoSemiComponent,
+    DetalleTorneoFinalComponent,
+    DetalleTorneoOctavosComponent,
+    DetalleTorneoDieciseisavosComponent,
     FooterComponent,
     HeaderComponent,
     AdminUsersComponent,
@@ -32,13 +42,18 @@ import { PerfilTeamsComponent } from './pages/perfil-teams/perfil-teams.componen
     DetallePartidoComponent,
     AdminPartidosComponent,
     PerfilUserComponent,
-    PerfilTeamsComponent
+    PerfilTeamsComponent,
+    AdminReglasComponent,
+    MisTorneosComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    Title
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-teams',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-teams.component.css']
 })
 export class AdminTeamsComponent implements OnInit {
+  title = 'ADM - EQUIPOS'
 
-  constructor() { }
+  constructor(private serviceTitle:Title) { }
 
   ngOnInit(): void {
+    this.serviceTitle.setTitle(this.title)
   }
-
 }
