@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-perfil-teams',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilTeamsComponent implements OnInit {
   imgSrc = 'assets/images/logo.png'
-
-  constructor() { }
+  title = 'Equipo - G2P'
+  constructor(private serviceTitle:Title) { }
 
   ngOnInit(): void {
+  this.serviceTitle.setTitle(this.title)
+
   }
 
 }

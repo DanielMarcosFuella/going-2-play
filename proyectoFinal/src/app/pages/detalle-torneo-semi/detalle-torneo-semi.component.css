@@ -106,7 +106,8 @@ h2 {
     .tournament-bracket__list {
         /* margin-bottom: 0; */
         color: #fff;
-    padding: 120px 0;
+    padding: 120px 0px 240px 0;
+    
 
         /* padding-bottom: 0; */
         /* border-right: 1px dashed #0b0f2c; */

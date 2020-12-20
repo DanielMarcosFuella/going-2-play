@@ -2,15 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AdminPartidosComponent } from './pages/admin-partidos/admin-partidos.component';
+import { AdminReglasComponent } from './pages/admin-reglas/admin-reglas.component';
 import { AdminTeamsComponent } from './pages/admin-teams/admin-teams.component';
 import { AdminTorneosComponent } from './pages/admin-torneos/admin-torneos.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { DetallePartidoComponent } from './pages/detalle-partido/detalle-partido.component';
+import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-dieciseisavos/detalle-torneo-dieciseisavos.component';
+import { DetalleTorneoFinalComponent } from './pages/detalle-torneo-final/detalle-torneo-final.component';
+import { DetalleTorneoOctavosComponent } from './pages/detalle-torneo-octavos/detalle-torneo-octavos.component';
+import { DetalleTorneoSemiComponent } from './pages/detalle-torneo-semi/detalle-torneo-semi.component';
 import { DetalleTorneoComponent } from './pages/detalle-torneo/detalle-torneo.component';
 import { EquiposComponent } from './pages/equipos/equipos.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { LandingComponent } from './pages/landing/landing.component';
+import { MisTorneosComponent } from './pages/mis-torneos/mis-torneos.component';
 import { PerfilTeamsComponent } from './pages/perfil-teams/perfil-teams.component';
 import { PerfilUserComponent } from './pages/perfil-user/perfil-user.component';
 import { TorneosComponent } from './pages/torneos/torneos.component';
@@ -18,7 +24,7 @@ import { TorneosComponent } from './pages/torneos/torneos.component';
 const routes: Routes = [
   {path: '', component:LandingComponent},
   {path: 'main', component:AppComponent},
-  {path: 'detalle-torneo', component:DetalleTorneoComponent},
+  {path: 'detalle-partido', component:DetallePartidoComponent},
   {path: 'torneos', component:TorneosComponent},
   {path: 'header', component:HeaderComponent},
   {path: 'footer', component:FooterComponent},
@@ -26,11 +32,17 @@ const routes: Routes = [
   {path: 'admin-teams', component:AdminTeamsComponent},
   {path: 'equipos', component:EquiposComponent},
   {path: 'admin-torneos', component: AdminTorneosComponent},
-  {path: 'detalle-partido', component:DetallePartidoComponent},
+  {path: 'detalle-dieciseisavos', component:DetalleTorneoDieciseisavosComponent},
+  {path: 'detalle-octavos', component:DetalleTorneoOctavosComponent},
+  {path: 'detalle-cuartos', component:DetalleTorneoComponent},
+  {path: 'detalle-semifinal', component:DetalleTorneoSemiComponent},
+  {path: 'detalle-final', component:DetalleTorneoFinalComponent},
   {path: 'admin-partidos', component:AdminPartidosComponent},
   {path: 'perfil-user', component:PerfilUserComponent},
   {path: 'perfil-teams', component:PerfilTeamsComponent},
   {path: 'perfil-equipo', component:PerfilTeamsComponent},
+  {path: 'admin-reglas', component:AdminReglasComponent},
+  {path: 'mis-torneos', component:MisTorneosComponent},
   {path: '**', component: LandingComponent}
 
 ];
