@@ -22,6 +22,8 @@ import { DetalleTorneoSemiComponent } from './pages/detalle-torneo-semi/detalle-
 import { DetalleTorneoFinalComponent } from './pages/detalle-torneo-final/detalle-torneo-final.component';
 import { DetalleTorneoOctavosComponent } from './pages/detalle-torneo-octavos/detalle-torneo-octavos.component';
 import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-dieciseisavos/detalle-torneo-dieciseisavos.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -46,10 +48,14 @@ import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-diec
     AdminReglasComponent,
     MisTorneosComponent
     
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     Title

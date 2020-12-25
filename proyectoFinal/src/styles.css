@@ -204,6 +204,7 @@ input:focus, textarea:focus, select:focus {
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
   }
   
   /* Track */
@@ -220,6 +221,7 @@ input:focus, textarea:focus, select:focus {
   ::-webkit-scrollbar-thumb:hover {
     background: #ff09d6; 
   }
+  
 .section-headline p {
     max-width: 560px;
     font-size: 17px;
@@ -3832,6 +3834,8 @@ span.terms-text {
 	   -moz-box-shadow: 0 8px 6px -6px black;
 	        box-shadow: 0 8px 6px -6px black;
 }
+
+
 
 /* EFECTOS LUIS */
 :root {

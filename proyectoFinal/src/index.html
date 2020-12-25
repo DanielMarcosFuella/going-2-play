@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/css/animate.css">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.3.1/css/flag-icon.min.css">
 
   <!-- FIN ESTILOS -->
 
@@ -38,6 +38,18 @@
     $("#1vs1").click(function () {
       x.classList.add('animate__animated', 'animate__shakeX')
     });
+
+  });
+
+  $('.selector ul li').click(function () {
+    $('.selector ul li').removeClass('selected');
+    $(this).addClass('selected');
+  });
+  $(document).ready(function () {
+    document.getElementById('outer').addEventListener('mousewheel', function (e) {
+      this.scrollLeft -= (e.wheelDelta);
+      e.preventDefault();
+    }, false);
 
   });
 
