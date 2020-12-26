@@ -162,7 +162,7 @@ app.put("/usuarios", function (req, response) {
 });      
 
 app.delete("/usuarios", function (req, res) {
-    let sql4 = `DELETE FROM usuarios WHERE id=${req.body.usuario_id}`
+    let sql4 = `DELETE FROM usuarios WHERE usuario_id=${req.body.usuario_id}`
     connection.query(sql4, function (err, result) {
         if (err) {
             console.log(err);

@@ -9,6 +9,7 @@ export class User {
     public nacionalidad:string;
     public contrasena:any;
     public biografia:string;
+    public admin: string;
 
     constructor(usuario_id:number, 
         nickname:string, 
@@ -19,7 +20,8 @@ export class User {
         correo:string, 
         nacionalidad:string, 
         contrasena:any, 
-        biografia:string){
+        biografia:string,
+        admin:string){
             this.usuario_id = usuario_id;
             this.nickname = nickname;
             this.nombre = nombre;
@@ -30,5 +32,6 @@ export class User {
             this.nacionalidad = nacionalidad;
             this.contrasena = contrasena;
             this.biografia = biografia;
+            this.admin = admin;
         }
 }
