@@ -148,7 +148,6 @@ export class PerfilUserComponent implements OnInit {
   getall(){
     this.userService.getUserAll().subscribe((data:User[])=>{
       this.userall = data
-      console.log(this.userall);
       
     })
     
@@ -158,12 +157,21 @@ export class PerfilUserComponent implements OnInit {
     if(this.isLoggedIn() && this.g2pUserPerfil != null){
       return true
     }else if(!this.isLoggedIn() && this.g2pUserPerfil === null){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'No tienes permiso para entrar aqui',
+        showConfirmButton: false,
+        timer: 2000
+      })
       this.router.navigateByUrl('/');
     } else {
       return true
       
     }
   }
+
+
   ngOnInit(): void {
     this.serviceTitle.setTitle(this.title)
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
@@ -171,7 +179,7 @@ export class PerfilUserComponent implements OnInit {
     // this.isAdminIn();
     this.getall();
     this.access();
-    // console.log(this.getall());
+    console.log(this.userall);
     
     this.g2pUserPerfil = this.userService.usuarios;
     this.usercito = this.userService.usuarios;
@@ -179,7 +187,7 @@ export class PerfilUserComponent implements OnInit {
     // console.log(this.isLoggedIn());
     // console.log(this.userService.usuarios);
     console.log(this.g2pUserPerfil);
-    // console.log(this.usercito);
+    console.log(this.usercito);
 
     // Obteniendo valores del localstorage para la sesion del objeto
   }

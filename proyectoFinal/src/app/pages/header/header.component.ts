@@ -182,11 +182,11 @@ export class HeaderComponent implements OnInit {
 
   isUserIn() {
     if (this.isLoggedIn() && this.g2pUser.admin === "user") {
-      this.adminlogin = true;
-      return this.adminlogin;
+      this.userinlogin = true;
+      return this.userinlogin;
     } else if (this.g2pUser === null) {
-      this.adminlogin = false;
-      return this.adminlogin
+      this.userinlogin = false;
+      return this.userinlogin
     } else {
       return false
     }

@@ -9,6 +9,7 @@ export class UserService {
 
   private url = "http://localhost:8000/usuarios"
   public usuarios:User;
+  public collection: User[]
   public receptor:User;
   constructor(private http: HttpClient) { }
 

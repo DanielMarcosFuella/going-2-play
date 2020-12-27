@@ -13,8 +13,9 @@
                 <div class="deposite-content">
                     <div class="diposite-box">
                         <div class="deposite-table">
-                            <table>
+                            <table *ngIf="userall != null">
                                 <tr>
+                                    <th>#</th>
                                     <th>Nombre</th>
                                     <th>G2P ID</th>
                                     <th>Juegos</th>
@@ -22,103 +23,24 @@
                                     <th>Puntos</th>
                                     <th>Modificar</th>
                                 </tr>
-                                <tr>
-                                    <td><a routerLink="/perfil-user"><img src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/rooster-img-6.jpg"
-                                            width="40px" heigth="40px" alt="">Luis Fernández</a></td>
-                                    <td>luisfrpe</td>
+                                <tr *ngFor="let userall of userall; let i = index">
+                                    <td id="getid" value="{{i}}">{{i+1}}</td>
+                                    <td><a routerLink="/perfil-user"><img src="{{userall.url_perfil}}" width="40px"
+                                                heigth="40px" alt="">{{userall.nombre}} {{userall.apellido}}</a></td>
+                                    <td>{{userall.nickname}}</td>
                                     <td>LOL</td>
                                     <td>DUL</td>
                                     <td>400pts</td>
-                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
-                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
-                                            data-target="#deleteModal" class="delete-user"><i
-                                                class="fa fa-trash fa-lg"></i></a></td>
+                                    <td>
+                                        <a data-toggle="modal" data-target="#editModal" class="edit-user">
+                                            <i class="fa fa-edit fa-lg"></i>
+                                        </a> &nbsp;&nbsp;
+                                        <a data-toggle="modal" data-target="#deleteModal" class="delete-user" (click)="displayInfo(i)">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </a>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td><a routerLink="/perfil-user"><img src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/rooster-img-1.jpg"
-                                            width="40px" heigth="40px" alt="">Urik Landa</a></td>
-                                    <td>urikland</td>
-                                    <td>FIFA</td>
-                                    <td>DUL</td>
-                                    <td>600pts</td>
-                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
-                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
-                                            data-target="#deleteModal" class="delete-user"><i
-                                                class="fa fa-trash fa-lg"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a routerLink="/perfil-user"><img src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/rooster-img-1.jpg"
-                                            width="40px" heigth="40px" alt="">Urik Landa</a></td>
-                                    <td>urikland</td>
-                                    <td>FIFA</td>
-                                    <td>DUL</td>
-                                    <td>600pts</td>
-                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
-                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
-                                            data-target="#deleteModal" class="delete-user"><i
-                                                class="fa fa-trash fa-lg"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a routerLink="/perfil-user"><img src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/rooster-img-1.jpg"
-                                            width="40px" heigth="40px" alt="">Urik Landa</a></td>
-                                    <td>urikland</td>
-                                    <td>FIFA</td>
-                                    <td>DUL</td>
-                                    <td>600pts</td>
-                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
-                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
-                                            data-target="#deleteModal" class="delete-user"><i
-                                                class="fa fa-trash fa-lg"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a routerLink="/perfil-user"><img src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/rooster-img-1.jpg"
-                                            width="40px" heigth="40px" alt="">Urik Landa</a></td>
-                                    <td>urikland</td>
-                                    <td>FIFA</td>
-                                    <td>DUL</td>
-                                    <td>600pts</td>
-                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
-                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
-                                            data-target="#deleteModal" class="delete-user"><i
-                                                class="fa fa-trash fa-lg"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a routerLink="/perfil-user"><img src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/rooster-img-1.jpg"
-                                            width="40px" heigth="40px" alt="">Urik Landa</a></td>
-                                    <td>urikland</td>
-                                    <td>FIFA</td>
-                                    <td>DUL</td>
-                                    <td>600pts</td>
-                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
-                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
-                                            data-target="#deleteModal" class="delete-user"><i
-                                                class="fa fa-trash fa-lg"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td><a routerLink="/perfil-user"><img src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/rooster-img-1.jpg"
-                                            width="40px" heigth="40px" alt="">Urik Landa</a></td>
-                                    <td>urikland</td>
-                                    <td>FIFA</td>
-                                    <td>DUL</td>
-                                    <td>600pts</td>
-                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
-                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
-                                            data-target="#deleteModal" class="delete-user"><i
-                                                class="fa fa-trash fa-lg"></i></a></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td><a routerLink="/perfil-user"><img src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/rooster-img-2-600x600.jpg"
-                                            width="40px" heigth="40px" alt="">Admond sayhel</a></td>
-                                    <td>m0squitoow</td>
-                                    <td>FIFA</td>
-                                    <td>DUL</td>
-                                    <td>100pts</td>
-                                    <td><a data-toggle="modal" data-target="#editModal" class="edit-user"><i
-                                                class="fa fa-edit fa-lg"></i></a> &nbsp;&nbsp; <a data-toggle="modal"
-                                            data-target="#deleteModal" class="delete-user"><i
-                                                class="fa fa-trash fa-lg"></i></a></td>
-                                </tr>
+
                             </table>
                         </div>
                     </div>
@@ -140,13 +62,13 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="form-group">
                             <input type="text" class="form-control" id="recipient-name"
                                 placeholder="G2P ID (Nombre de Usuario)">
                         </div>
-                        <!-- <input type="text" class="form-control" id="recipient-name" placeholder="Nombre"> -->
-                    </div>
+                        <input type="text" class="form-control" id="recipient-name" placeholder="Nombre">
+                    </div> -->
                     <div class="form-group">
                         <!-- <input type="text" class="form-control" id="recipient-name" placeholder="Apellido"> -->
                     </div>
@@ -229,17 +151,17 @@
         <div class="modal-content" style="margin-top: 0px;">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalLabel">ELIMINAR</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" #deleteAdmin data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form>
-                    <p>¿Desea eliminar el usuario @luisfrpe?</p>
+                    <p>¿Desea eliminar el usuario <b>{{userall[myIndex].nickname}}</b>?</p>
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="s-menu-mobile-register">ELIMINAR</a>
+                <a class="s-menu-mobile-register" (click)="deleteUser(userall[myIndex].usuario_id, myIndex)">ELIMINAR</a>
             </div>
         </div>
     </div>
