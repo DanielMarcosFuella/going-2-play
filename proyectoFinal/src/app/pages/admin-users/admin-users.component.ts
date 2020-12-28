@@ -33,6 +33,7 @@ export class AdminUsersComponent implements OnInit {
     this.userlogin = false;
     this.adminlogin = false;
     this.usercito = this.userService.usuarios;
+    this.userall = this.userService.collection
     this.g2pUserPerfil = this.userService.usuarios;
     this.adminUser();
     this.myIndex = 0;

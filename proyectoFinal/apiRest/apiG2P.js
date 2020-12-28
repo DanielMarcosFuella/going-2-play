@@ -492,7 +492,7 @@ app.post("/reglas", function (req, res) {
         console.log("error");
 
     } else {
-        let sql2 = `INSERT INTO chat (reglas_id, juego_id, descripcion) VALUES(null, ${req.body.juego_id}, \"${req.body.descripcion}\")`
+        let sql2 = `INSERT INTO reglas (reglas_id, modo, juego_id, descripcion) VALUES(null, \"${req.body.modo}\", ${req.body.juego_id}, \"${req.body.descripcion}\")`
         connection.query(sql2, function (err, result) {
             if (err) {
                 console.log(err);
