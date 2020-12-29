@@ -149,16 +149,22 @@
         <form>
 
           <div class="form-group">
-            <select name="country" class="form-control selectpicker" #modeodejuego>
-              <option value="">{{rulesall[myIndex].modo}}</option>
-              <option *ngFor="let games of modojuego; let i = index" [value]="i+1">
+            <div class="form-group" style="display:none">
+
+              <input type="text" class="form-control" id="reglas_idEdit"
+                  placeholder="G2P ID [{{rulesall[myIndex].reglas_id}}]" value="{{rulesall[myIndex].reglas_id}}" #reglas_id>
+          </div>
+            
+            <select name="country" class="form-control selectpicker" #tipojuego>
+              <option value="{{rulesall[myIndex].modo}}">{{rulesall[myIndex].modo}}</option>
+              <option *ngFor="let games of modojuego; let i = index" [value]="games">
                 {{games}}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <select name="country" class="form-control selectpicker" #juegostotal>
-              <option value="0">{{rulesall[myIndex].juego_id}}</option>
+            <select name="country" class="form-control selectpicker" #allgames>
+              <option value="">{{rulesall[myIndex].juego_id}}</option>
               <option *ngFor="let alljuegos of listajuegos; let i = index" [value]="i+1">
                 {{alljuegos}}
               </option>
@@ -166,7 +172,7 @@
             </select>
           </div>
           <div class="form-group">
-            <textarea class="form-control" placeholder="{{rulesall[myIndex].descripcion}}" id="floatingTextarea2"
+            <textarea class="form-control" placeholder="{{rulesall[myIndex].descripcion}}" id="detalleregla" #detalleregla
               style="height: 100px">{{rulesall[myIndex].descripcion}}</textarea>
           </div> 
 
@@ -174,7 +180,7 @@
       </div>
       <div class="modal-footer">
         <a class="s-menu-mobile-cancel" data-dismiss="modal" aria-label="Close">CANCELAR</a>
-        <a class="s-menu-mobile-register" data-dismiss="modal" aria-label="Close">EDITAR</a>
+        <a class="s-menu-mobile-register" data-dismiss="modal" aria-label="Close" (click)="editUser(myIndex, reglas_id.value, tipojuego.value, allgames.value, detalleregla.value)">EDITAR</a>
       </div>
     </div>
   </div>

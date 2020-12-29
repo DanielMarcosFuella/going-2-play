@@ -24,6 +24,7 @@ import { DetalleTorneoOctavosComponent } from './pages/detalle-torneo-octavos/de
 import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-dieciseisavos/detalle-torneo-dieciseisavos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoEncontradaComponent } from './pages/no-encontrada/no-encontrada.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PerfilUserComponent,
     PerfilTeamsComponent,
     AdminReglasComponent,
-    MisTorneosComponent
+    MisTorneosComponent,
+    NoEncontradaComponent
     
     
   ],

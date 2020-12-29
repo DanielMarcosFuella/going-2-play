@@ -24,6 +24,7 @@ export class AdminReglasComponent implements OnInit {
   public adminlogin: boolean;
   public g2pUserPerfil: User;
   public rulesall: Reglas[];
+  public regla: Reglas;
   public hola: any;
   public myIndex: number;
 
@@ -37,8 +38,6 @@ export class AdminReglasComponent implements OnInit {
     this.rulesall = this.G2PService.reglas;
     this.myIndex = 0;
   }
-
-  
 
   isLoggedIn() {
     this.userlogin = this.auth.isLoggedIn();
@@ -62,8 +61,8 @@ export class AdminReglasComponent implements OnInit {
   }
 
   getRules() {
-    let lol: any = "LOL"
-    let fifa: any = "FIFA"
+    let lol = "LOL"
+    let fifa = "FIFA"
     this.G2PService.getAllReglas().subscribe((data: Reglas[]) => {
       this.G2PService.reglas = data
       localStorage.setItem('adminrules', JSON.stringify(this.G2PService.reglas));
@@ -83,8 +82,8 @@ export class AdminReglasComponent implements OnInit {
   }
 
   addRules(modo: string, juego_id: number, descripcion: any) {
-    let lol: any = "LOL"
-    let fifa: any = "FIFA"
+    let lol = "LOL"
+    let fifa = "FIFA"
     this.G2PService.regla = new Reglas(null, modo, juego_id, descripcion)
     this.rulesall.push(this.G2PService.regla);
     this.G2PService.postReglas(new Reglas(this.hola, modo, juego_id, descripcion)).subscribe((data: any) => {
@@ -117,6 +116,58 @@ export class AdminReglasComponent implements OnInit {
     })
   }
 
+  editUser(idremplace: any, reglas_id: number, modo: string, juego_id: any, descripcion: any) {
+    let lol = "LOL"
+    let fifa = "FIFA"
+    let x = this.G2PService.reglas.find(reglas_id => reglas_id === reglas_id)
+    this.G2PService.regla = x;
+    if (x.juego_id === "FIFA") {
+      x.juego_id = 2
+    }
+    if (x.juego_id === "LOL") {
+      x.juego_id = 1
+    }
+    if (modo === "") {
+      modo = x.modo
+
+    } else {
+      this.G2PService.regla.modo = modo;
+      localStorage.setItem('modo', modo);
+    }
+    if (juego_id === "") {
+      juego_id = x.juego_id
+
+    } else {
+      this.G2PService.regla.juego_id = juego_id;
+      localStorage.setItem('juego_id', juego_id);
+    }
+    if (descripcion === "") {
+      descripcion = x.descripcion
+
+    } else {
+      this.G2PService.regla.descripcion = descripcion;
+      localStorage.setItem('descripcion', descripcion);
+    }
+    this.G2PService.putReglas(this.G2PService.regla).subscribe((data: Reglas) => {
+      console.log(this.G2PService.regla);
+      this.rulesall.splice(idremplace, 1, this.G2PService.regla)
+      localStorage.setItem('adminrules', JSON.stringify(this.rulesall))
+      for (let i = 0; i < this.rulesall.length; i++) {
+        console.log(this.rulesall[i].juego_id);
+        if (JSON.parse(localStorage.getItem('adminrules'))[i].juego_id === "1") {
+          this.rulesall[i].juego_id = lol;
+          localStorage.setItem('juego_id', this.rulesall[i].juego_id);
+          localStorage.setItem('adminrules', JSON.stringify(this.rulesall));
+        }
+        if (JSON.parse(localStorage.getItem('adminrules'))[i].juego_id === "2") {
+          this.rulesall[i].juego_id = fifa;
+          localStorage.setItem('juego_id', this.rulesall[i].juego_id);
+          localStorage.setItem('adminrules', JSON.stringify(this.rulesall));
+        }
+      }
+    })
+  }
+
   deleteRule(id: any, id2: any) {
     this.G2PService.deleteReglas(parseInt(id)).subscribe((data) => {
       this.deleteRules.nativeElement.click();
@@ -124,7 +175,7 @@ export class AdminReglasComponent implements OnInit {
       localStorage.setItem('adminrules', JSON.stringify(this.rulesall))
       console.log(this.rulesall);
       console.log(this.G2PService.reglas);
-      
+
       // this.rulesall = 
       Swal.fire({
         position: 'center',
@@ -141,7 +192,7 @@ export class AdminReglasComponent implements OnInit {
   public getData(i: number) {
     this.myIndex = i
     console.log(this.myIndex);
-    
+
   }
 
   ngOnInit(): void {

@@ -139,8 +139,23 @@
                     <div class="form-group" style="display:none">
 
                         <input type="text" class="form-control" id="usuario_idEdit"
-                            placeholder="G2P ID [{{g2pUserPerfil.usuario_id}}]" value="{{g2pUserPerfil.usuario_id}}" #usuario_id>
+                            placeholder="G2P ID [{{g2pUserPerfil.usuario_id}}]" value="{{g2pUserPerfil.usuario_id}}"
+                            #usuario_id>
                     </div>
+
+
+                    <div class="form-group">
+                        <input type="file" class="form-control" id="inputGroupFile04"
+                            aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="avatar" (change)="fileChange($event)" placeholder="Actualiza tu foto" #uploadfoto>
+                        
+
+                    </div>
+                    <div [innerHtml]='msg' *ngIf="msg" style="margin-top: .25rem;
+                    font-size: 80%;
+                    color: #dc3545;"></div>
+
+                    
+		
                     <div class="form-group">
 
                         <input type="text" class="form-control" id="nicknameEdit"
@@ -215,7 +230,8 @@
                 <div class="modal-footer">
                     <a class="s-menu-mobile-cancel" data-toggle="modal" data-target="#deleteUserModal">ELIMINAR
                         PERFIL</a>
-                    <button type="submit" class="s-menu-mobile-register" (click)="editUser(usuario_id.value, nicknameEdit.value, nombreEdit.value, apellidoEdit.value, nacimientoEdit.value, correoEdit.value, nacionalidadEdit.value, biografiaEdit.value, contrasenaEdit.value)">GUARDAR</button>
+                    <button type="submit" class="s-menu-mobile-register"
+                        (click)="editUser(usuario_id.value, nicknameEdit.value, nombreEdit.value, apellidoEdit.value, nacimientoEdit.value, correoEdit.value, nacionalidadEdit.value, biografiaEdit.value, contrasenaEdit.value)">GUARDAR</button>
                 </div>
             </form>
             <!-- <div class="modal-footer">
@@ -232,7 +248,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="loginModalLabel">¿Estas seguro?</h5>
-                <button type="button" class="close" #closeEdit data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" #closeDelete data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

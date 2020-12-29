@@ -1,10 +1,27 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const _ = require('lodash');
 const cors = require('cors')
+const path = require("path");
+const util = require("util");
 const app = express();
+const fs = require('fs');
+const os = require('os');
+const Busboy = require('busboy');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors())
+app.use(morgan('dev'));
+app.use(express.static('uploads'));
+app.use(fileUpload({
+    createParentPath: true,
+    limits: { 
+        fileSize: process.env.MAX_FILESIZE * 1024 * 1024 * 1024 //max file(s) size
+    },
+}));
+
 
 const mysql = require('mysql');
 const connection = mysql.createConnection({
@@ -24,11 +41,29 @@ connection.connect(function (error) {
     }
 });
 
+
+
 app.get("/", function (req, res) {
     console.log("Servidor ONLINE");
     res.send("Hola!!!")
 })
 
+
+app.post('/upload', function (req, res) {
+    var busboy = new Busboy({ headers: req.headers });
+    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+      var saveTo = path.join('../src/assets/images', filename);
+      console.log('Uploading: ' + saveTo);
+      file.pipe(fs.createWriteStream(saveTo));
+    });
+    busboy.on('finish', function() {
+      console.log('Upload complete');
+      res.writeHead(200, { 'Connection': 'close' });
+      res.end("That's all folks!");
+    });
+    return req.pipe(busboy);
+
+});
 
 // Login
 
@@ -506,38 +541,39 @@ app.post("/reglas", function (req, res) {
 
 app.put("/reglas", function (req, response) {
     let reglas_id = req.body.reglas_id;
-    let juego_id  = req.body.juego_id ;
-    let descripcion = req.descripcion;
-    
-    let sql = "UPDATE reglas_id SET"
+    let modo = req.body.modo;
+    let juego_id = req.body.juego_id;
+    let descripcion = req.body.descripcion;
+    let sql = "UPDATE reglas SET"
     let params = new Array()
     let modi = new Array()
     console.log(req.body)
-    
+    if (modo) {
+        params.push(modo)
+        modi.push(" modo = ? ")
+    }
     if (juego_id) {
         params.push(juego_id)
         modi.push(" juego_id = ? ")
-
     }
     if (descripcion) {
         params.push(descripcion)
         modi.push(" descripcion = ? ")
     }
-    
-  
-    
-
+    console.log(params);
+    console.log(modi);
     sql += modi.toString() + "WHERE reglas_id = " + reglas_id;
     console.log(sql);
     connection.query(sql, params, function (err, result) {
         if (err) {
             console.log(err);
         } else {
-            console.log("Datos de reglas actualizados");
+            console.log("Datos de usuarios actualizados");
         }
         response.send(result);
     });
 });      
+     
 
 app.delete("/reglas", function (req, res) {
     let sql4 = `DELETE FROM reglas WHERE reglas_id=${req.body.reglas_id}`
