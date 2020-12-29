@@ -20,7 +20,8 @@ export class UserService {
         const newUsuarios = []
         for (let usuario of usuarios){
           const email = usuario.email;
-          newUsuarios.push({correo: email})
+          const nickname = usuario.nickname;
+          newUsuarios.push({correo: email, nickname: nickname})
         }
         return newUsuarios
       }),

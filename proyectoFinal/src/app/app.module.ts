@@ -22,9 +22,12 @@ import { DetalleTorneoSemiComponent } from './pages/detalle-torneo-semi/detalle-
 import { DetalleTorneoFinalComponent } from './pages/detalle-torneo-final/detalle-torneo-final.component';
 import { DetalleTorneoOctavosComponent } from './pages/detalle-torneo-octavos/detalle-torneo-octavos.component';
 import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-dieciseisavos/detalle-torneo-dieciseisavos.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoEncontradaComponent } from './pages/no-encontrada/no-encontrada.component';
+import { UniqueNicknameValidatorDirective } from './shared/unique-nickname.validator.directive';
+import { UniqueEmailValidatorDirective } from './shared/email-nickname.validator.directive';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { NoEncontradaComponent } from './pages/no-encontrada/no-encontrada.compo
     FooterComponent,
     HeaderComponent,
     AdminUsersComponent,
+    UniqueNicknameValidatorDirective,
+    UniqueEmailValidatorDirective,
     LandingComponent,
     AdminTeamsComponent,
     EquiposComponent,
