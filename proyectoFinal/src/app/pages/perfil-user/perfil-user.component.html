@@ -1,18 +1,39 @@
 <div class="top-margin"></div>
 
 <div class="container px-4">
-    <div class="row gx-5 center-all" style="justify-content: center;">
-        <div class="col-lg-4 box-1">
-            <div class="p-3 bg-dark" style="margin-right: 20px; margin-bottom: 40px; border-radius: 7px 7px 7px 7px;">
-                <div class="contenedor-perfil">
-                    <img class="image-perfil-user" [src]="imgSrc">
-                    <div class="title-perfil-user">NOMBRE USUARIO</div>
-                    <div class="button-editar-perfil" data-toggle="modal" data-target="#editPerfilModal"> editar
-                        perfil&nbsp;&nbsp;<i class="fa fa-edit fa-lg" style="    float: right;
-                    margin-top: 3px;"></i></div>
-                    <div class="title-description-user">SOBRE EL JUGADOR</div>
-                    <p>Pequeña biografia del jugador</p>
-                    <!-- <div class="equipo-usuario">
+  <div
+    *ngIf="access()"
+    class="row gx-5 center-all"
+    style="justify-content: center"
+  >
+    <div class="col-lg-4 box-1">
+      <div
+        class="p-3 bg-dark"
+        style="
+          margin-right: 20px;
+          margin-bottom: 40px;
+          border-radius: 7px 7px 7px 7px;
+        "
+      >
+        <div class="contenedor-perfil">
+          <img class="image-perfil-user" src="{{ g2pUserPerfil.url_perfil }}" />
+          <div class="title-perfil-user">
+            {{ g2pUserPerfil.nombre }} {{ g2pUserPerfil.apellido }}
+          </div>
+          <p>{{ g2pUserPerfil.nickname }}</p>
+          <div
+            class="button-editar-perfil"
+            data-toggle="modal"
+            data-target="#editPerfilModal"
+          >
+            editar perfil&nbsp;&nbsp;<i
+              class="fa fa-edit fa-lg"
+              style="float: right; margin-top: 3px"
+            ></i>
+          </div>
+          <div class="title-description-user">SOBRE EL JUGADOR</div>
+          <p>{{ g2pUserPerfil.biografia }}</p>
+          <!-- <div class="equipo-usuario">
                         <div class="titulo-equipo-pertenece">
                             EQUIPO:
                         </div>
@@ -22,139 +43,220 @@
 
                         </div>
                     </div> -->
-                </div>
-            </div>
         </div>
-        <div class="col-lg-5 col-sm-11 col-xs-3">
-            <div class="row">
-                <div class="col-lg-12 box-1">
-                    <div class="p-3 bg-dark" style="margin-bottom: 40px; border-radius: 7px 7px 7px 7px;">
-                        <div class="container-diferent">
-                            <div class="title-stadics">
-                                EQUIPOS
-                            </div>
-
-                            <div class="contenedor-stadics">
-                                <div class="container d-flex justify-content-center">
-
-                                    <div class="row align-items-start">
-                                        <div class="col"><a routerLink="/perfil-teams">
-                                            <img class="equipo-pertenece-imagen"
-                                                src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png"></a>
-                                        </div>
-                                        <div class="col"><a routerLink="/perfil-teams">
-                                            <img class="equipo-pertenece-imagen"
-                                                src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png"></a>
-                                        </div>
-                                        <div class="col"><a routerLink="/perfil-teams">
-                                            <img class="equipo-pertenece-imagen"
-                                                src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png"></a>
-                                        </div>
-                                        <div class="col"><a routerLink="/perfil-teams">
-                                            <img class="equipo-pertenece-imagen"
-                                                src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png"></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-
-                    <div class="p-3 bg-dark" style="margin-bottom: 40px; border-radius: 7px 7px 7px 7px;">
-                        <div class="container-diferent">
-                            <div class="title-stadics">
-                                ESTADISTICAS
-                            </div>
-                            <div class="contenedor-stadics">
-                                <div class="container d-flex justify-content-center">
-                                    <div class="row align-items-start">
-                                        <div class="col">
-                                            <div class="container-data">
-                                                <div class="container-number">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="container-type">
-                                                    <span>GANADAS</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="container-data">
-                                                <div class="container-number">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="container-type">
-                                                    <span>PERDIDAS</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="container-data">
-                                                <div class="container-number">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="container-type">
-                                                    <span>EMPATADAS</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="container-data">
-                                                <div class="container-number">
-                                                    <span>1</span>
-                                                </div>
-                                                <div class="container-type">
-                                                    <span>JUGADAS</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="col-lg-5 col-sm-11 col-xs-3">
+      <div class="row">
+        <div class="col-lg-12 box-1">
+          <div
+            class="p-3 bg-dark"
+            style="margin-bottom: 40px; border-radius: 7px 7px 7px 7px"
+          >
+            <div class="container-diferent">
+              <div class="title-stadics">EQUIPOS</div>
+
+              <div class="contenedor-stadics">
+                <div class="container d-flex justify-content-center">
+                  <div class="row align-items-start">
+                    <div class="col">
+                      <a routerLink="/perfil-teams">
+                        <img
+                          class="equipo-pertenece-imagen"
+                          src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png"
+                      /></a>
+                    </div>
+                    <div class="col">
+                      <a routerLink="/perfil-teams">
+                        <img
+                          class="equipo-pertenece-imagen"
+                          src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png"
+                      /></a>
+                    </div>
+                    <div class="col">
+                      <a routerLink="/perfil-teams">
+                        <img
+                          class="equipo-pertenece-imagen"
+                          src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png"
+                      /></a>
+                    </div>
+                    <div class="col">
+                      <a routerLink="/perfil-teams">
+                        <img
+                          class="equipo-pertenece-imagen"
+                          src="https://overworld.qodeinteractive.com/wp-content/uploads/2019/10/team-img-1.png"
+                      /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div
+            class="p-3 bg-dark"
+            style="margin-bottom: 40px; border-radius: 7px 7px 7px 7px"
+          >
+            <div class="container-diferent">
+              <div class="title-stadics">ESTADISTICAS</div>
+              <div class="contenedor-stadics">
+                <div class="container d-flex justify-content-center">
+                  <div class="row align-items-start">
+                    <div class="col">
+                      <div class="container-data">
+                        <div class="container-number">
+                          <span>1</span>
+                        </div>
+                        <div class="container-type">
+                          <span>GANADAS</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="container-data">
+                        <div class="container-number">
+                          <span>1</span>
+                        </div>
+                        <div class="container-type">
+                          <span>PERDIDAS</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="container-data">
+                        <div class="container-number">
+                          <span>1</span>
+                        </div>
+                        <div class="container-type">
+                          <span>EMPATADAS</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="container-data">
+                        <div class="container-number">
+                          <span>1</span>
+                        </div>
+                        <div class="container-type">
+                          <span>JUGADAS</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!--  EDITAR USER -->
-<div class="modal fade" id="editPerfilModal" tabindex="-1" role="dialog" aria-labelledby="editPerfilModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editPerfilModalLabel">EDITAR PERFIL</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="recipient-name"
-                                placeholder="G2P ID (Nombre de Usuario)">
-                        </div>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="Nombre">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="recipient-name" placeholder="Apellido">
-                    </div>
-                    <div class="form-group">
-                        <input type="date" class="form-control" id="recipient-name" placeholder="Fecha de Nacimiento">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="recipient-name" placeholder="Direccion de Correo">
-                    </div>
-                    <!-- <div class="form-group">
+<div
+  class="modal fade"
+  id="editPerfilModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editPerfilModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPerfilModalLabel">EDITAR PERFIL</h5>
+        <button
+          type="button"
+          class="close"
+          #closeEdit
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="myFormEdit">
+        <div class="modal-body">
+          <div class="form-group" style="display: none">
+            <input
+              type="text"
+              class="form-control"
+              id="usuario_idEdit"
+              placeholder="G2P ID [{{ g2pUserPerfil.usuario_id }}]"
+              value="{{ g2pUserPerfil.usuario_id }}"
+              #usuario_id
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="file"
+              class="form-control"
+              id="inputGroupFile04"
+              aria-describedby="inputGroupFileAddon04"
+              aria-label="Upload"
+              name="avatar"
+              (change)="fileChange($event)"
+              placeholder="Actualiza tu foto"
+              #uploadfoto
+            />
+          </div>
+          <div
+            [innerHtml]="msg"
+            *ngIf="msg"
+            style="margin-top: 0.25rem; font-size: 80%; color: #dc3545"
+          ></div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              id="nicknameEdit"
+              placeholder="G2P ID [{{ g2pUserPerfil.nickname }}]"
+              #nicknameEdit
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              id="nombreEdit"
+              placeholder="{{ g2pUserPerfil.nombre }}"
+              #nombreEdit
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              id="apellidoEdit"
+              placeholder="{{ g2pUserPerfil.apellido }}"
+              #apellidoEdit
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="date"
+              class="form-control"
+              id="nacimientoEdit"
+              placeholder="{{ g2pUserPerfil.nacimiento }}"
+              #nacimientoEdit
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control"
+              id="correoEdit"
+              placeholder="{{ g2pUserPerfil.correo }}"
+              #correoEdit
+            />
+          </div>
+          <!-- <div class="form-group">
                         <input type="number" class="form-control" id="recipient-name" placeholder="Puntos">
                     </div> -->
-                    <!-- <div class="form-group">
+          <!-- <div class="form-group">
                         <select name="country" class="form-control selectpicker">
                             <option value="0">Seleccionar juego</option>
                             <option value="1">LOL</option>
@@ -170,53 +272,141 @@
 
                         </select>
                     </div> -->
-                    <div class="form-group">
-                        <select name="country" class="form-control">
-                            <option value="0">País de residencia</option>
-                            <option value="1">Panama</option>
-                            <option value="2">Colombia</option>
-                            <option value="3">Costa Rica</option>
-                            <option value="4">Honduras</option>
-                            <option value="5">Brazil</option>
-                            <option value="6">Argentina</option>
-                            <option value="7">Bolivia</option>
-                            <option value="8">Cuba</option>
-                            <option value="9">El Salvador</option>
-                            <option value="10">Ecuador</option>
-                            <option value="11">Guatemala</option>
-                            <option value="12">Jamaica</option>
-                            <option value="13">Mexico</option>
-                            <option value="14">Nicaragua</option>
-                            <option value="15">Paraguay</option>
-                            <option value="16">Peru</option>
-                            <option value="17">Puerto Rico</option>
-                            <option value="18">Espana</option>
-                            <option value="19">Estados Unidos</option>
-                            <option value="20">Uruguay</option>
-                            <option value="21">Venezuela</option>
-                            <option value="22">Portugal</option>
-                            <option value="23">China</option>
-                            <option value="24">Chile</option>
-                            <option value="25">Republica Dominicana</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="recipient-name" placeholder="Nueva contraseña">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="recipient-name"
-                            placeholder="Confirmar contraseña">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a class="s-menu-mobile-cancel">BORRAR</a>
-                <a class="s-menu-mobile-register">ACEPTAR</a>
-            </div>
-            <!-- <div class="modal-footer">
+          <div class="form-group">
+            <select
+              name="country"
+              class="form-control"
+              id="nacionalidadEdit"
+              #nacionalidadEdit
+            >
+              <option value="">{{ g2pUserPerfil.nacionalidad }}</option>
+              <option
+                *ngFor="let nationalityEdit of nationalitiesEdit"
+                [value]="nationalityEdit"
+              >
+                {{ nationalityEdit }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <textarea
+              class="form-control"
+              placeholder="{{ g2pUserPerfil.biografia }}"
+              id="biografia"
+              #biografiaEdit
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              id="contrasenaEdit"
+              placeholder="Cambiar  contraseña"
+              formControlName="contrasenaEdit"
+              [ngClass]="{
+                'is-invalid': !myFormEdit.get('contrasenaEdit').valid
+              }"
+              #contrasenaEdit
+            />
+            <p
+              *ngIf="myFormEdit.get('contrasenaEdit').invalid"
+              class="invalid-feedback"
+            >
+              Debe introducir una clave min 8 caracteres y máximo 20.
+            </p>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="repetir_contrasenaEdit"
+              class="form-control"
+              formControlName="repetir_contrasenaEdit"
+              placeholder="Confirmar contraseña"
+              [ngClass]="{
+                'is-invalid': !myFormEdit.get('repetir_contrasenaEdit').valid
+              }"
+            />
+            <p
+              *ngIf="!myFormEdit.get('repetir_contrasenaEdit').valid"
+              class="invalid-feedback"
+            >
+              Las contraseñas no coinciden.
+            </p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a
+            class="s-menu-mobile-cancel"
+            data-toggle="modal"
+            data-target="#deleteUserModal"
+            >ELIMINAR PERFIL</a
+          >
+          <button
+            type="submit"
+            class="s-menu-mobile-register"
+            (click)="
+              editUser(
+                usuario_id.value,
+                nicknameEdit.value,
+                nombreEdit.value,
+                apellidoEdit.value,
+                nacimientoEdit.value,
+                correoEdit.value,
+                nacionalidadEdit.value,
+                biografiaEdit.value,
+                contrasenaEdit.value
+              )
+            "
+          >
+            GUARDAR
+          </button>
+        </div>
+      </form>
+      <!-- <div class="modal-footer">
                 <a class="s-menu-mobile-register" data-dismiss="modal">Aceptar</a>
                 <a class="s-menu-mobile-register" data-dismiss="modal">Borrar</a>
             </div> -->
-        </div>
     </div>
+  </div>
+</div>
+<!--Modal CONFIRMAR ELIMINACION-->
+<div
+  class="modal fade"
+  id="deleteUserModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteUserModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">¿Estas seguro?</h5>
+        <button
+          type="button"
+          class="close"
+          #closeDelete
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form>
+        <div class="modal-body">
+          ¿Estas seguro que deseas eliminar el usuario
+          <b>{{ g2pUserPerfil.nickname }}</b
+          >?
+        </div>
+        <div class="modal-footer">
+          <a
+            class="s-menu-mobile-register"
+            (click)="deleteUser(usuario_id.value)"
+            >ELIMINAR</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

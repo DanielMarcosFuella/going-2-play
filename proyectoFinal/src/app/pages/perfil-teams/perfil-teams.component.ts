@@ -11,6 +11,12 @@ export class PerfilTeamsComponent implements OnInit {
   title = 'Equipo - G2P'
   constructor(private serviceTitle:Title) { }
 
+  hola(){
+    console.log("Hola");
+    alert("Hola");
+    
+  }
+
   ngOnInit(): void {
   this.serviceTitle.setTitle(this.title)
 

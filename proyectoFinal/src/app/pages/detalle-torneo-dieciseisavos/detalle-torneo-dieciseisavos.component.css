@@ -8,6 +8,8 @@
 
 .container-bracket {
     width: 90%;
+    overflow: auto;
+    overflow-y: hidden;
     min-width: 18em;
     margin: 20px auto;
     

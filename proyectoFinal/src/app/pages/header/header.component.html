@@ -12,7 +12,7 @@
     <i class="fa fa-bars fa-lg"></i>
   </button>
   <div class="navbar-collapse collapse justify-content-center order-2 bg-dark" id="navbarSupportedContent">
-    <ul *ngIf="admin" class="navbar-nav justify-content-center bold-transform">
+    <ul *ngIf="isAdminIn()" class="navbar-nav justify-content-center bold-transform">
       <li class="nav-item">
         <a class="nav-link uppercase" routerLink="/admin-partidos">partidos</a>
       </li>
@@ -29,7 +29,7 @@
         <a class="nav-link uppercase" routerLink="/admin-reglas">reglas</a>
       </li>
     </ul>
-    <ul *ngIf="user" class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center bold-transform">
+    <ul *ngIf="isUserIn()" class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center bold-transform">
       <!-- <ul  class="navbar-nav "> -->
       <li class="nav-item">
         <a class="nav-link uppercase" routerLink="/equipos">mis equipos</a>
@@ -38,17 +38,17 @@
         <a class="nav-link uppercase" routerLink="/mis-torneos">mis torneos</a>
       </li>
     </ul>
-    <div *ngIf="show==false" class="header-right-link">
+    <div *ngIf="!isLoggedIn()" class="header-right-link">
       <a class="s-menu" data-toggle="modal" data-target="#registerModal">REGISTRATE</a>
       <a class="login-user" data-toggle="modal" data-target="#loginModal">
         <i class="fa fa-user fa-lg"></i> <span class="entrar">ENTRAR</span>
       </a>
     </div>
-    <div *ngIf="show" class="header-right-link login-logged">
+    <div *ngIf="isLoggedIn()" class="header-right-link login-logged">
       <div class="login-user">
-        <img [src]="imageSrc" routerLink="perfil-user">
+        <img src="{{g2pUser.url_perfil}}" routerLink="perfil-user">
         <div class="ag">
-          <a class="name" routerLink="perfil-user">Luis Fernandez</a>
+          <a class="name" routerLink="perfil-user">{{g2pUser.nombre}} {{g2pUser.apellido}}</a>
           <div class="bajo">
             <a class="editprofile" routerLink="perfil-user">Editar Perfil</a>
             <a class="logout" data-toggle="modal" data-target="#logoutModal">Salir</a>
@@ -65,71 +65,95 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="registerModalLabel">REGISTRATE</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" #closeRegister data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form>
+      <form [formGroup]="myForm">
+
+        <div class="modal-body">
+
           <div class="form-group">
-            <div class="form-group">
-              <input type="text" class="form-control" id="recipient-name" placeholder="G2P ID (Nombre de Usuario)">
+            <input type="text" class="form-control" id="nickname" placeholder="G2P ID (Nombre de Usuario)"
+              formControlName="nickname" [ngClass]="{'is-invalid': myForm.get('nickname').invalid}" #nickname>
+            <div *ngIf="nickname.invalid">
+              <p *ngIf="nickname.errors && !myForm.controls.nickname.hasError('uniqueNickname')"
+                class="invalid-feedback">
+                El nickname de usuario debe tener min 4 caracteres y max 30
+              </p>
+              <p *ngIf="myForm.controls.nickname.hasError('uniqueNickname')" class="invalid-feedback">
+                Este usuario ya existe
+              </p>
             </div>
-            <input type="text" class="form-control" id="recipient-name" placeholder="Nombre">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="recipient-name" placeholder="Apellido">
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre" formControlName="nombre"
+              [ngClass]="{'is-invalid': !myForm.get('nombre').valid}" #nombre>
+            <p *ngIf="myForm.get('nombre').invalid" class="invalid-feedback">
+              El nombre debe tener max 30 caract
+            </p>
           </div>
           <div class="form-group">
-            <input type="date" class="form-control" id="recipient-name" placeholder="Fecha de Nacimiento">
+            <input type="text" class="form-control" id="apellido" placeholder="Apellido" formControlName="apellido"
+              [ngClass]="{'is-invalid': !myForm.get('apellido').valid}" #apellido>
+            <p *ngIf="myForm.get('apellido').invalid" class="invalid-feedback">
+              El apellido debe tener max 30 caract
+            </p>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="recipient-name" placeholder="Direccion de Correo">
+            <input type="date" class="form-control" id="nacimiento" placeholder="Fecha de Nacimiento"
+              formControlName="nacimiento" [ngClass]="{'is-invalid': !myForm.get('nacimiento').valid}" #nacimiento>
+            <p *ngIf="myForm.get('nacimiento').invalid" class="invalid-feedback">
+              Ingresa tu fecha de nacimiento
+            </p>
           </div>
           <div class="form-group">
-            <select name="country" class="form-control">
-              <option value="0">País de residencia</option>
-              <option value="1">Panama</option>
-              <option value="2">Colombia</option>
-              <option value="3">Costa Rica</option>
-              <option value="4">Honduras</option>
-              <option value="5">Brazil</option>
-              <option value="6">Argentina</option>
-              <option value="7">Bolivia</option>
-              <option value="8">Cuba</option>
-              <option value="9">El Salvador</option>
-              <option value="10">Ecuador</option>
-              <option value="11">Guatemala</option>
-              <option value="12">Jamaica</option>
-              <option value="13">Mexico</option>
-              <option value="14">Nicaragua</option>
-              <option value="15">Paraguay</option>
-              <option value="16">Peru</option>
-              <option value="17">Puerto Rico</option>
-              <option value="18">Espana</option>
-              <option value="19">Estados Unidos</option>
-              <option value="20">Uruguay</option>
-              <option value="21">Venezuela</option>
-              <option value="22">Portugal</option>
-              <option value="23">China</option>
-              <option value="24">Chile</option>
-              <option value="25">Republica Dominicana</option>
+            <input type="email" class="form-control" id="correo" placeholder="Direccion de Correo"
+              formControlName="correo" [ngClass]="{'is-invalid': !myForm.get('correo').valid}" #correo>
+            <p *ngIf="myForm.controls.correo.hasError && !myForm.controls.correo.hasError('uniqueEmail')"
+              class="invalid-feedback">
+              Debe introducir un email correcto.
+            </p>
+            <p *ngIf="myForm.controls.correo.hasError('uniqueEmail')" class="invalid-feedback">
+              Este correo ya existe
+            </p>
+          </div>
+          <div class="form-group">
+            <select name="country" class="form-control" id="nacionalidad" #nacionalidad>
+              <option value="">Selecciona un país</option>
+              <option *ngFor="let nationality of nationalities" [value]="nationality">
+                {{nationality}}
+              </option>
             </select>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" id="recipient-name" placeholder="Crear ontraseña">
+            <input type="password" class="form-control" id="contrasena" placeholder="Crear ontraseña"
+              formControlName="contrasena" [ngClass]="{'is-invalid': !myForm.get('contrasena').valid}" #contrasena>
+            <p *ngIf="myForm.get('contrasena').invalid" class="invalid-feedback">
+              Debe introducir una clave min 8 caracteres y máximo 20.
+            </p>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" id="recipient-name" placeholder="Confirmar contraseña">
+            <input type="password" class="form-control" formControlName="repetir_contrasena"
+              placeholder="Confirmar contraseña"
+              [ngClass]="{ 'is-invalid': !myForm.get('repetir_contrasena').valid }" />
+            <p *ngIf="myForm.controls.repetir_contrasena.hasError" class="invalid-feedback">
+              Las contraseñas no coinciden.
+            </p>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a class="s-menu-mobile-cancel">CANCELAR</a>
-        <a class="s-menu-mobile-register">REGISTRATE</a>
-      </div>
+
+        </div>
+        <div class="modal-footer">
+          <a class="s-menu-mobile-cancel">CANCELAR</a>
+          <button type="submit" class="s-menu-mobile-register"
+            (click)="registerUsuario(nickname.value, nombre.value, apellido.value, nacimiento.value, correo.value, nacionalidad.value, contrasena.value)"
+            [disabled]="myForm.invalid">REGISTRATE</button>
+        </div>
+      </form>
     </div>
   </div>
+
+
 </div>
 <!-- FIN MODAL REGISTER -->
 
@@ -140,23 +164,27 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="loginModalLabel">INGRESAR</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" #closeLogin data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form>
+      <form>
+        <div class="modal-body">
+
           <div class="form-group">
-            <input type="text" class="form-control" id="recipient-name" placeholder="G2P ID (Nombre de Usuario)">
+            <input type="text" class="form-control" id="nickname_login" placeholder="G2P ID (Nombre de Usuario)"
+              #nickname_login>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" id="recipient-name" placeholder="Contraseña">
+            <input type="password" class="form-control" id="contrasena_login" placeholder="Contraseña"
+              #contrasena_login>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <a class="s-menu-mobile-register">ENTRAR</a>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="s-menu-mobile-register"
+            (click)="loginUsuario(nickname_login.value,contrasena_login.value)">ENTRAR</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -173,7 +201,7 @@
         </button>
       </div>
       <div class="modal-footer">
-        <a class="s-menu-mobile-register" data-dismiss="modal" (click)="show=false">Confirmar</a>
+        <a class="s-menu-mobile-register" data-dismiss="modal" (click)="logout()">Confirmar</a>
       </div>
     </div>
   </div>

@@ -23,6 +23,12 @@ import { DetalleTorneoFinalComponent } from './pages/detalle-torneo-final/detall
 import { DetalleTorneoOctavosComponent } from './pages/detalle-torneo-octavos/detalle-torneo-octavos.component';
 import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-dieciseisavos/detalle-torneo-dieciseisavos.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoEncontradaComponent } from './pages/no-encontrada/no-encontrada.component';
+import { UniqueNicknameValidatorDirective } from './shared/unique-nickname.validator.directive';
+import { UniqueEmailValidatorDirective } from './shared/email-nickname.validator.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +41,8 @@ import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-diec
     FooterComponent,
     HeaderComponent,
     AdminUsersComponent,
+    UniqueNicknameValidatorDirective,
+    UniqueEmailValidatorDirective,
     LandingComponent,
     AdminTeamsComponent,
     EquiposComponent,
@@ -44,12 +52,17 @@ import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-diec
     PerfilUserComponent,
     PerfilTeamsComponent,
     AdminReglasComponent,
-    MisTorneosComponent
+    MisTorneosComponent,
+    NoEncontradaComponent
+    
     
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     Title

@@ -204,6 +204,7 @@ input:focus, textarea:focus, select:focus {
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
   }
   
   /* Track */
@@ -220,6 +221,7 @@ input:focus, textarea:focus, select:focus {
   ::-webkit-scrollbar-thumb:hover {
     background: #ff09d6; 
   }
+  
 .section-headline p {
     max-width: 560px;
     font-size: 17px;
@@ -1217,6 +1219,16 @@ input:focus, textarea:focus, select:focus {
     position: relative;
     overflow: hidden;
 }
+.landing-area-404{
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url(https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-9/120933680_3519455588279025_6798972984885692998_o.jpg?_nc_cat=109&ccb=2&_nc_sid=e3f864&_nc_ohc=W3vXv34jx_kAX8F0UkY&_nc_ht=scontent-cdt1-1.xx&oh=81437d3faa9546c8ac4fda989f904c92&oe=6010C0A1);
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position: unset;
+    background-size: cover;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+}
 .payment-history-area::after {
     background: rgba(24,23,40,0.4);
     position: absolute;
@@ -1277,6 +1289,10 @@ input[type=number]::-webkit-inner-spin-button {
     color: #333;
     text-align:center;
     position:relative;
+}
+
+input[type="file"] {
+    background-color: #171c3e;
 }
 
 input[type=number]:hover::-webkit-inner-spin-button { 
@@ -1675,7 +1691,7 @@ input[type=number]:hover::-webkit-inner-spin-button {
 }
 .footer-area-bottom {
     padding: 25px 0;
-    background:#0d112c;
+    background:#0b0f2c;
     border-top: solid 1px #171c3e;
 
 }
@@ -3832,6 +3848,8 @@ span.terms-text {
 	   -moz-box-shadow: 0 8px 6px -6px black;
 	        box-shadow: 0 8px 6px -6px black;
 }
+
+
 
 /* EFECTOS LUIS */
 :root {
