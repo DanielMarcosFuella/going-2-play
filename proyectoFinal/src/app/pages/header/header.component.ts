@@ -149,7 +149,8 @@ export class HeaderComponent implements OnInit {
     // here we have the 'passwords' group
     let pass = group.controls.contrasena.value;
     let confirmPass = group.controls.repetir_contrasena.value;
-    return pass === confirmPass ? { notSame: true } : null;
+    return pass === confirmPass ? null
+    : { notSame: true };
   }
 
   // Metodo que llama al servicio para crear el registro
@@ -162,7 +163,6 @@ export class HeaderComponent implements OnInit {
     nacionalidad: string,
     contrasena: { toString: () => string }
   ) {
-    console.log("hola");
 
     let encrypted = this.EncrDecr.set('123456$#@$^@1ERF', contrasena);
     if (
@@ -175,12 +175,22 @@ export class HeaderComponent implements OnInit {
       !encrypted ||
       !contrasena
     ) {
+      console.log("hola")
+
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Debes completar todos los campos',
       });
-    } else {
+    } else if(this.myForm.value.contrasena != this.myForm.value.repetir_contrasena || this.myForm.value.repetir_contrasena === ""){
+      console.log("hola");
+      Swal.fire({
+       icon: 'error',
+       title: 'Oops...',
+       text: 'Debes confirmar tu contraseña',
+     });
+    }
+    else {
       this.userService
         .postUser(
           new User(
@@ -207,6 +217,8 @@ export class HeaderComponent implements OnInit {
         });
     }
   }
+
+  
 
   loginUsuario(nickname_login: string, contrasena_login: string) {
     console.log('Contraseña insertada normal: ' + contrasena_login);
@@ -264,7 +276,7 @@ export class HeaderComponent implements OnInit {
             'usuario',
             JSON.stringify(this.userService.usuarios)
           );
-          // console.log(this.userService.usuario.nickname);
+          
         }
       });
   }
@@ -282,10 +294,11 @@ export class HeaderComponent implements OnInit {
     return this.userlogin;
   }
 
+ 
+
   isAdminIn() {
     if (this.isLoggedIn() && this.g2pUser.admin === 'admin') {
       this.adminlogin = true;
-      return this.adminlogin;
     } else if (this.g2pUser === null) {
       this.adminlogin = false;
       return this.adminlogin;
@@ -311,6 +324,5 @@ export class HeaderComponent implements OnInit {
     this.g2pUser = this.userService.usuarios;
     this.isLoggedIn();
     this.isAdminIn();
-    console.log(this.adminlogin);
   }
 }

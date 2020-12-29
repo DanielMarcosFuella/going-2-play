@@ -44,7 +44,8 @@ export class AdminUsersComponent implements OnInit {
   adminUser() {
     this.userService.getUserAll().subscribe((data: User[]) => {
       this.userService.collection = data;
-      localStorage.setItem('adminuser', JSON.stringify(this.userService.collection));
+      this.userall = this.userService.collection
+      localStorage.setItem('adminuser', JSON.stringify(this.userall));
     })
   }
 

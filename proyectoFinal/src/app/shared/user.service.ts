@@ -67,4 +67,6 @@ export class UserService {
     }
     return this.http.delete(this.url, options)
   }
+
+ 
 }

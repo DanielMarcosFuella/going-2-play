@@ -64,7 +64,7 @@
     <div class="modal-content" style="margin-top: 0px;">
       <div class="modal-header">
         <h5 class="modal-title" id="nuevaReglaLabel">CREAR REGLA</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" #addRule data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -141,7 +141,7 @@
     <div class="modal-content" style="margin-top: 0px;">
       <div class="modal-header">
         <h5 class="modal-title" id="editModalLabel">EDITAR REGLA</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" #editeRules data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -152,9 +152,8 @@
             <div class="form-group" style="display:none">
 
               <input type="text" class="form-control" id="reglas_idEdit"
-                  placeholder="G2P ID [{{rulesall[indexEdit].reglas_id}}]" value="{{rulesall[indexEdit].reglas_id}}" #reglas_id>
+                  placeholder="G2P Regla ID" value="{{rulesall[indexEdit].reglas_id}}" #reglas_id>
           </div>
-            
             <select name="country" class="form-control selectpicker" #tipojuego>
               <option value="{{rulesall[indexEdit].modo}}">{{rulesall[indexEdit].modo}}</option>
               <option *ngFor="let games of modojuego; let i = index" [value]="games">
