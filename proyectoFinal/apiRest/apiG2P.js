@@ -95,6 +95,51 @@ app.get("/usuarios/:id", function (req, res) {
   });
 });
 
+app.get("/usuarios/correo/:id", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT * FROM usuarios WHERE correo=\"${req.params.id}\"`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      var string = JSON.stringify(result);
+      var json = JSON.parse(string);
+      let x = json.find((id) => id === id);
+      if (x === undefined) {
+        resultado = false;
+        console.log(false);
+      } else {
+        resultado = true;
+        console.log(true);
+      }
+    }
+    res.send(result);
+  });
+});
+app.get("/usuarios/nickname/:id", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT * FROM usuarios WHERE nickname=\"${req.params.id}\"`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      var string = JSON.stringify(result);
+      var json = JSON.parse(string);
+      let x = json.find((id) => id === id);
+      if (x === undefined) {
+        resultado = false;
+        console.log(false);
+      } else {
+        resultado = true;
+        console.log(true);
+      }
+    }
+    res.send(result);
+  });
+});
+
 app.get("/usuarios", function (req, res) {
   id = req.params.id;
   let sql1 = "SELECT * FROM usuarios";
@@ -514,7 +559,7 @@ app.post("/reglas", function (req, res) {
   if (!req.body) {
     console.log("error");
   } else {
-    let sql2 = `INSERT INTO reglas (reglas_id, modo, juego_id, descripcion) VALUES(null, \"${req.body.modo}\", ${req.body.juego_id}, \"${req.body.descripcion}\")`;
+    let sql2 = `INSERT INTO reglas (reglas_id, modo, juego_id, descripcion) VALUES(null, \'${req.body.modo}\', ${req.body.juego_id}, \'${req.body.descripcion}\')`;
     connection.query(sql2, function (err, result) {
       if (err) {
         console.log(err);

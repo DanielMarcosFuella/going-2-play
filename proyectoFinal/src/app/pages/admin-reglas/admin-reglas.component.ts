@@ -27,6 +27,11 @@ export class AdminReglasComponent implements OnInit {
   public regla: Reglas;
   public hola: any;
   public myIndex: number;
+  public indexDelete:number;
+  public indexEdit:number;
+  public innerHTML:string;
+
+
 
   constructor(public userService: UserService, private formBuilder: FormBuilder, private router: Router, private serviceTitle: Title, private auth: AuthService, private G2PService: G2pService) {
     this.title = 'ADM - REGLAS';
@@ -37,6 +42,10 @@ export class AdminReglasComponent implements OnInit {
     this.g2pUserPerfil = this.userService.usuarios;
     this.rulesall = this.G2PService.reglas;
     this.myIndex = 0;
+    this.indexDelete = 0;
+    this.indexEdit = 0;
+    this.innerHTML = "";
+
   }
 
   isLoggedIn() {
@@ -189,13 +198,24 @@ export class AdminReglasComponent implements OnInit {
 
   }
 
+  public getEdit(i: number) {
+    this.indexEdit = i
+    console.log(this.indexEdit);
+  }
   public getData(i: number) {
     this.myIndex = i
     console.log(this.myIndex);
-
+    this.innerHTML = this.rulesall[i].descripcion
+    console.log(this.innerHTML);
+    
+  }
+  public getDelete(i: number) {
+    this.indexDelete= i
+    console.log(this.indexDelete);
   }
 
   ngOnInit(): void {
+    this.getRules();
     this.serviceTitle.setTitle(this.title);
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
     this.g2pUserPerfil = this.userService.usuarios;
@@ -203,7 +223,6 @@ export class AdminReglasComponent implements OnInit {
     this.rulesall = this.G2PService.reglas;
     this.isLoggedIn();
     this.noAdmin();
-    this.getRules()
 
   }
 }

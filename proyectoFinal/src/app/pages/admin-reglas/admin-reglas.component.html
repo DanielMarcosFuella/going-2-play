@@ -28,13 +28,13 @@
                   <td>{{rulesall.juego_id}}</td>
                   <td>
                     <a data-toggle="modal" data-target="#rulesModal" class="btn-primary uppercase"
-                      (click)="displayInfo(i)">ver regla</a>
+                      (click)="getData(i)">ver regla</a>
                   </td>
                   <td>
-                    <a data-toggle="modal" data-target="#editModal" class="edit-user" (click)="getData(i)">
+                    <a data-toggle="modal" data-target="#editModal" class="edit-user" (click)="getEdit(i)">
                       <i class="fa fa-edit fa-lg"></i>
                   </a> &nbsp;&nbsp;
-                  <a data-toggle="modal" data-target="#deleteModal" class="delete-user" (click)="getData(i)">
+                  <a data-toggle="modal" data-target="#deleteModal" class="delete-user" (click)="getDelete(i)">
                       <i class="fa fa-trash fa-lg"></i>
                   </a>
                   </td>
@@ -124,11 +124,11 @@
       </div>
       <div class="modal-body">
         <form>
-          <p>¿Desea eliminar la regla de <b>{{rulesall[myIndex].juego_id}} {{rulesall[myIndex].modo}}</b>?</p>
+          <p>¿Desea eliminar la regla de <b>{{rulesall[indexDelete].juego_id}} {{rulesall[indexDelete].modo}}</b>?</p>
         </form>
       </div>
       <div class="modal-footer">
-        <a class="s-menu-mobile-register" (click)="deleteRule(rulesall[myIndex].reglas_id, myIndex)">ELIMINAR</a>
+        <a class="s-menu-mobile-register" (click)="deleteRule(rulesall[indexDelete].reglas_id, indexDelete)">ELIMINAR</a>
       </div>
     </div>
   </div>
@@ -152,11 +152,11 @@
             <div class="form-group" style="display:none">
 
               <input type="text" class="form-control" id="reglas_idEdit"
-                  placeholder="G2P ID [{{rulesall[myIndex].reglas_id}}]" value="{{rulesall[myIndex].reglas_id}}" #reglas_id>
+                  placeholder="G2P ID [{{rulesall[indexEdit].reglas_id}}]" value="{{rulesall[indexEdit].reglas_id}}" #reglas_id>
           </div>
             
             <select name="country" class="form-control selectpicker" #tipojuego>
-              <option value="{{rulesall[myIndex].modo}}">{{rulesall[myIndex].modo}}</option>
+              <option value="{{rulesall[indexEdit].modo}}">{{rulesall[indexEdit].modo}}</option>
               <option *ngFor="let games of modojuego; let i = index" [value]="games">
                 {{games}}
               </option>
@@ -164,7 +164,7 @@
           </div>
           <div class="form-group">
             <select name="country" class="form-control selectpicker" #allgames>
-              <option value="">{{rulesall[myIndex].juego_id}}</option>
+              <option value="">{{rulesall[indexEdit].juego_id}}</option>
               <option *ngFor="let alljuegos of listajuegos; let i = index" [value]="i+1">
                 {{alljuegos}}
               </option>
@@ -172,15 +172,15 @@
             </select>
           </div>
           <div class="form-group">
-            <textarea class="form-control" placeholder="{{rulesall[myIndex].descripcion}}" id="detalleregla" #detalleregla
-              style="height: 100px">{{rulesall[myIndex].descripcion}}</textarea>
+            <textarea class="form-control" placeholder="{{rulesall[indexEdit].descripcion}}" id="detalleregla" #detalleregla
+              style="height: 100px">{{rulesall[indexEdit].descripcion}}</textarea>
           </div> 
 
         </form>
       </div>
       <div class="modal-footer">
         <a class="s-menu-mobile-cancel" data-dismiss="modal" aria-label="Close">CANCELAR</a>
-        <a class="s-menu-mobile-register" data-dismiss="modal" aria-label="Close" (click)="editUser(myIndex, reglas_id.value, tipojuego.value, allgames.value, detalleregla.value)">EDITAR</a>
+        <a class="s-menu-mobile-register" data-dismiss="modal" aria-label="Close" (click)="editUser(indexEdit, reglas_id.value, tipojuego.value, allgames.value, detalleregla.value)">EDITAR</a>
       </div>
     </div>
   </div>
@@ -199,9 +199,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="uncrip">
-        {{rulesall[myIndex].descripcion}}
-
+      <div class="modal-body" id="uncrip" [innerHTML]="innerHTML">
       </div>
       <div class="modal-footer">
         <a class="s-menu-mobile-register" data-dismiss="modal" aria-label="Close">CERRAR</a>

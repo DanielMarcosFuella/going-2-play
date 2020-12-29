@@ -21,7 +21,6 @@ export class AdminUsersComponent implements OnInit {
   public typeUser: string;
   public userlogin: boolean;
   public adminlogin: boolean;
-  public usercito: User;
   public g2pUserPerfil: User;
   public userall: User[];
   public myIndex: number;
@@ -32,10 +31,8 @@ export class AdminUsersComponent implements OnInit {
     this.typeUser = 'user';
     this.userlogin = false;
     this.adminlogin = false;
-    this.usercito = this.userService.usuarios;
-    this.userall = this.userService.collection
     this.g2pUserPerfil = this.userService.usuarios;
-    this.adminUser();
+    this.userall = this.userService.collection
     this.myIndex = 0;
   }
 
@@ -56,7 +53,6 @@ export class AdminUsersComponent implements OnInit {
       this.deleteAdmin.nativeElement.click();
       this.userall.splice(id2, 1);
       localStorage.setItem('adminuser', JSON.stringify(this.userall))
-      this.userall = this.userService.collection
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -65,7 +61,7 @@ export class AdminUsersComponent implements OnInit {
         timer: 2500
       });
     })
-    window.location.reload()
+    // window.location.reload()
   }
 
   public displayInfo(i: number) {
@@ -90,6 +86,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.adminUser();
     this.serviceTitle.setTitle(this.title);
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
     this.g2pUserPerfil = this.userService.usuarios;

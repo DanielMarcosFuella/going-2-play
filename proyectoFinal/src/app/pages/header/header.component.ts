@@ -8,6 +8,8 @@ import { validarQueSeanIguales } from './header.validator';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { tap, map } from 'rxjs/operators'
 
 
 
@@ -23,6 +25,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class HeaderComponent implements OnInit {
   @ViewChild('closeRegister') closeRegister;
   @ViewChild('closeLogin') closeLogin;
+  private url = "http://localhost:8000/usuarios"
   public nationalities: string[];
   public g2pUser: User;
   public User: User;
@@ -39,8 +42,9 @@ export class HeaderComponent implements OnInit {
   public userlogin: boolean;
   public adminlogin: boolean;
   public userinlogin: boolean;
+  public emails:string;
 
-  constructor(public userService: UserService, private formBuilder: FormBuilder, public EncrDecr: EncrDecrServiceService, private router: Router, private auth: AuthService) {
+  constructor(public userService: UserService, private formBuilder: FormBuilder, public EncrDecr: EncrDecrServiceService, private router: Router, private auth: AuthService, private http: HttpClient) {
     this.nationalities = ['Panama', 'Colombia', 'Costa Rica', 'Honduras', 'Brazil', 'Argentina', 'Bolivia', 'Cuba', 'El Salvador', 'Ecuador', 'Guatemala', 'Jamaica', 'Mexico', 'Nicaragua', 'Paraguay', 'Peru', 'Puerto Rico', 'Espana', 'Estados Unidos', 'Uruguay', 'Venezuela', 'Portugal', 'China', 'Republica Dominicana'];
     this.g2pUser = this.userService.usuarios;
     this.User = new User(null, null, null, null, null, null, null, null, null, null, null);
@@ -56,6 +60,7 @@ export class HeaderComponent implements OnInit {
     this.userlogin = false;
     this.adminlogin = false;
     this.userinlogin = false;
+
   }
 
   checarSiSonIguales(): boolean {
@@ -77,7 +82,7 @@ export class HeaderComponent implements OnInit {
       nacimiento: ['', Validators.required],
       correo: ['', [Validators.email]],
       contrasena: ['', [Validators.minLength(minPassLength), Validators.maxLength(maxPassLength)]],
-      repetir_contrasena: ['', RxwebValidators.compare({ fieldName: 'contrasena' })],
+      repetir_contrasena: ['',RxwebValidators.compare({ fieldName: 'contrasena' })],
 
     }, {
       validators: this.checkPasswords,
@@ -87,8 +92,29 @@ export class HeaderComponent implements OnInit {
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     let pass = group.controls.contrasena.value;
     let confirmPass = group.controls.repetir_contrasena.value;
-
+    
     return pass === confirmPass ? null : { notSame: true }
+  }
+
+  getUsers(){
+    return this.http.get<any>(this.url).pipe(
+      map(usuarios =>{
+        const newUsuarios = []
+        for (let usuario of usuarios){
+          const email = usuario.email;
+          newUsuarios.push({correo: email})
+        }
+        return newUsuarios
+      }),
+      tap(usuarios => console.log(usuarios))
+    );
+  }
+
+  getUserByEmail(email:string){
+    return this.http.get<any>(this.url + "/correo/" +email);
+  }
+  getUserByNickname(nickname:string){
+    return this.http.get<any>(this.url + "/correo/" +nickname);
   }
 
   // Metodo que llama al servicio para crear el registro 
@@ -198,6 +224,7 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn();
     this.isAdminIn()
     console.log(this.adminlogin);
+  
 
   }
 }
