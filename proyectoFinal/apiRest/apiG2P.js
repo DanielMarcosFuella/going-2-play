@@ -117,6 +117,7 @@ app.get("/usuarios/correo/:id", function (req, res) {
     res.send(result);
   });
 });
+
 app.get("/usuarios/nickname/:id", function (req, res) {
   id = req.params.id;
   let sql = `SELECT * FROM usuarios WHERE nickname=\"${req.params.id}\"`;

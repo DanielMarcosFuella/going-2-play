@@ -162,6 +162,8 @@ export class HeaderComponent implements OnInit {
     nacionalidad: string,
     contrasena: { toString: () => string }
   ) {
+    console.log("hola");
+
     let encrypted = this.EncrDecr.set('123456$#@$^@1ERF', contrasena);
     if (
       !nickname ||
