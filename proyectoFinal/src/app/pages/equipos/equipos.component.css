@@ -37,3 +37,6 @@ h5:hover{
 img:hover{
     animation: pulse 1s;
 }
+.top{
+    margin-top: 50px;
+}
