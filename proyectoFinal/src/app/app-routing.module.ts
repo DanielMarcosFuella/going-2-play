@@ -14,6 +14,7 @@ import { DetalleTorneoSemiComponent } from './pages/detalle-torneo-semi/detalle-
 import { DetalleTorneoComponent } from './pages/detalle-torneo/detalle-torneo.component';
 import { EquiposComponent } from './pages/equipos/equipos.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { HeaderTopComponent } from './pages/header-top/header-top.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { MisTorneosComponent } from './pages/mis-torneos/mis-torneos.component';
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path: 'perfil-equipo', component:PerfilTeamsComponent},
   {path: 'admin-reglas', component:AdminReglasComponent},
   {path: 'mis-torneos', component:MisTorneosComponent},
+  {path: 'pruebas', component: HeaderTopComponent},
   {path: '**', component: NoEncontradaComponent}
 
 ];

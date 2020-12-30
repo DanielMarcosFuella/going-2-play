@@ -50,7 +50,7 @@
         <div class="ag">
           <a class="name" routerLink="perfil-user">{{g2pUser.nombre}} {{g2pUser.apellido}}</a>
           <div class="bajo">
-            <a class="editprofile" routerLink="perfil-user">Editar Perfil</a>
+            <a class="editprofile" (click)="goPerfil()">Editar Perfil</a>
             <a class="logout" data-toggle="modal" data-target="#logoutModal">Salir</a>
           </div>
         </div>
@@ -72,19 +72,16 @@
       <form [formGroup]="myForm">
 
         <div class="modal-body">
-
           <div class="form-group">
             <input type="text" class="form-control" id="nickname" placeholder="G2P ID (Nombre de Usuario)"
               formControlName="nickname" [ngClass]="{'is-invalid': myForm.get('nickname').invalid}" #nickname>
-            <div *ngIf="nickname.invalid">
-              <p *ngIf="nickname.errors && !myForm.controls.nickname.hasError('uniqueNickname')"
-                class="invalid-feedback">
-                El nickname de usuario debe tener min 4 caracteres y max 30
-              </p>
-              <p *ngIf="myForm.controls.nickname.hasError('uniqueNickname')" class="invalid-feedback">
-                Este usuario ya existe
-              </p>
-            </div>
+              <p *ngIf="myForm.controls.nickname.hasError && !myForm.controls.nickname.hasError('uniqueNickname')"
+              class="invalid-feedback">
+              El nombre de usuario debe tener min 4 caracteres
+            </p>
+            <p *ngIf="myForm.controls.nickname.hasError('uniqueNickname')" class="invalid-feedback">
+              Este usuario ya existe
+            </p>
           </div>
           <div class="form-group">
             <input type="text" class="form-control" id="nombre" placeholder="Nombre" formControlName="nombre"
@@ -102,7 +99,7 @@
           </div>
           <div class="form-group">
             <input type="date" class="form-control" id="nacimiento" placeholder="Fecha de Nacimiento"
-            formControlName="nacimiento" [ngClass]="{'is-invalid': myForm.controls.nacimiento.invalid && (myForm.controls.nacimiento.dirty || myForm.controls.nacimiento.touched)}" #nacimiento>
+              formControlName="nacimiento" [ngClass]="{'is-invalid': myForm.controls.nacimiento.invalid && (myForm.controls.nacimiento.dirty || myForm.controls.nacimiento.touched)}" #nacimiento>
             <p *ngIf="myForm.get('nacimiento').invalid" class="invalid-feedback">
               Ingresa tu fecha de nacimiento
             </p>
@@ -146,7 +143,8 @@
         <div class="modal-footer">
           <a class="s-menu-mobile-cancel">CANCELAR</a>
           <button type="submit" class="s-menu-mobile-register"
-            (click)="registerUsuario(nickname.value, nombre.value, apellido.value, nacimiento.value, correo.value, nacionalidad.value, contrasena.value)">REGISTRATE</button>
+            (click)="registerUsuario(nickname.value, nombre.value, apellido.value, nacimiento.value, correo.value, nacionalidad.value, contrasena.value)"
+            [disabled]="myForm.invalid">REGISTRATE</button>
         </div>
       </form>
     </div>

@@ -1292,8 +1292,41 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 input[type="file"] {
-    background-color: #171c3e;
+    background-color: #0b0f2c;
 }
+
+.inputfile-box {
+    position: relative;
+  }
+  
+  .inputfile {
+    display: none;
+  }
+  
+
+  .file-box {
+    display: inline-block;
+    margin-top: 1px;
+    width: 100%;
+    border: 1px solid #171c3e;
+    border-radius: 4px;
+    padding: 5px 0px 5px 5px;
+    box-sizing: border-box;
+    height: calc(2.3rem - 2px);
+  }
+  
+  .file-button {
+    cursor: pointer;
+    padding: 7px 40px 7px 40px;
+    font-size: 13px;
+    border-radius: 4px 4px 4px 4px;
+    justify-content: center;
+    border: 2px solid #171c3e;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
 
 input[type=number]:hover::-webkit-inner-spin-button { 
     background: transparent url('assets/images/arrows.png') no-repeat 50% 50%;  
@@ -3784,7 +3817,8 @@ span.terms-text {
 .button-editar-perfil{
     text-transform: uppercase;
     font-weight: bold;
-    background-color: #171c3e;
+    background-color: transparent;
+    /* background-color:  #171c3e; */
     cursor: pointer;
     padding: 10px;
     font-size: 13px;

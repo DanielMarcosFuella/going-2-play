@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { G2pService } from 'src/app/shared/g2p.service';
 import { HttpClient } from '@angular/common/http';
+import * as Chart from 'chart.js';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-perfil-user',
@@ -19,22 +22,83 @@ import { HttpClient } from '@angular/common/http';
 export class PerfilUserComponent implements OnInit {
   @ViewChild('closeEdit') closeEdit;
   @ViewChild('closeDelete') closeDelete;
+  @ViewChild('gChart') gChart;
   imgSrc2 = 'assets/images/logo.png';
   title = 'Perfil - G2P';
   public g2pUserPerfil: User;
   public userall: User[];
   public typeUser: string;
-  public usercito: User;
   public userlogin: boolean;
   public adminlogin: boolean;
   public nationalitiesEdit: string[];
   public msg: string;
+  public msg2: string;
   public urlf: any;
   public myFormEdit: FormGroup;
   public filename: string;
   public FormData: FormData;
   public selectedFile: File; //para cargar la foto
   uploadedFiles: Array<File>;
+  // chart = [];
+
+  public pieChartData: ChartDataSets[] = [
+    {
+      borderColor: '#fff',
+      data: [20, 10, 9, 1],
+      // backgroundColor: ['#ff09d6', '#dc3545', '#171c3e', '#0b0f2c'],
+      // borderWidth: 0.5,
+      label: 'Poppins',
+    },
+  ];
+
+  public pieChartLabels: Label[] = [
+    'JUGADAS',
+    'GANADAS',
+    'PERDIDAS',
+    'EMPATADAS',
+  ];
+  public pieChartOptions: ChartOptions = {
+    plugins: {
+      datalabels: {
+        color: '#fff',
+      },
+    },
+    responsive: true,
+    legend: {
+      position: 'bottom',
+      fullWidth: false,
+      labels: {
+        boxWidth: 15,
+        fontColor: '#fff',
+        fontFamily: 'Poppins',
+        fontStyle: 'normal',
+        fontSize: 10,
+        padding: 25,
+        usePointStyle: true,
+      },
+    },
+    title: {
+      display: false,
+      text: '',
+    },
+    animation: {
+      animateScale: true,
+      animateRotate: true,
+    },
+  };
+
+  public pieChartColors: Color[] = [
+    {
+      backgroundColor: ['#0b0f2c', '#ff09d6', '#5f0505', '#171c3e'],
+      borderColor: '#fff',
+      borderWidth: 1,
+    },
+  ];
+
+  public pieChartLegend = true;
+  public pieChartType = 'pie';
+  public pieChartPlugins = [];
+
   constructor(
     private http: HttpClient,
     public userService: UserService,
@@ -74,16 +138,18 @@ export class PerfilUserComponent implements OnInit {
     this.buildForm();
     this.typeUser = 'user';
     this.msg = '';
+    this.msg2 = '';
     this.userlogin = false;
     this.adminlogin = false;
     this.urlf = '';
-    this.usercito = this.userService.usuarios;
     this.g2pUserPerfil = this.userService.usuarios;
     this.selectedFile = null;
   }
 
   fileChange(element) {
-    this.uploadedFiles = element.target.files;
+    this.selectedFile = <File>element.target.files;
+    console.log(this.selectedFile[0]);
+    this.msg2 = this.selectedFile[0].name;
   }
 
   private buildForm() {
@@ -150,7 +216,7 @@ export class PerfilUserComponent implements OnInit {
       this.g2pUserPerfil.apellido = apellido;
       localStorage.setItem('apellido', apellido);
     }
-    if (this.uploadedFiles === null) {
+    if (this.selectedFile === null) {
       userImageUrl = this.g2pUserPerfil.url_perfil;
     } else {
       oldImage = this.g2pUserPerfil.url_perfil;
@@ -161,7 +227,12 @@ export class PerfilUserComponent implements OnInit {
       localImg = 'assets/images/' + userImageUrl;
       this.g2pUserPerfil.url_perfil = localImg;
       localStorage.setItem('url_perfil', localImg);
-      console.log(userImageUrl);
+      let formData = new FormData();
+      const nombreFoto = userImageUrl;
+      formData.append('uploads', this.selectedFile[0], nombreFoto);
+      this.G2PService.uploadImg(formData).subscribe((response) => {
+        console.log('response received is ', response);
+      });
     }
     if (nacimiento == '') {
       nacimiento = this.g2pUserPerfil.nacimiento;
@@ -195,14 +266,7 @@ export class PerfilUserComponent implements OnInit {
       localStorage.setItem('contrasena', encrypted);
     }
     console.log(this.g2pUserPerfil);
-    let formData = new FormData();
-    const nombreFoto = userImageUrl;
-    for (var i = 0; i < this.uploadedFiles.length; i++) {
-      formData.append('uploads[]', this.uploadedFiles[i], nombreFoto);
-    }
-    this.G2PService.uploadImg(formData).subscribe((response) => {
-      console.log('response received is ', response);
-    });
+
     this.userService.putUser(this.g2pUserPerfil).subscribe((data: User) => {
       console.log(this.g2pUserPerfil);
       Swal.fire({
@@ -223,16 +287,26 @@ export class PerfilUserComponent implements OnInit {
 
   deleteUser(id: any) {
     this.userService.deleteUser(parseInt(id)).subscribe((data) => {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Perfil eliminado correctamente!',
-        showConfirmButton: false,
-        timer: 2500,
-      });
-      this.closeEdit.nativeElement.click();
-      this.closeDelete.nativeElement.click();
-      this.auth.logout();
+      if (data === true) {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Ha ocurrido un error, contacta con un administrador',
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      } else {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Perfil eliminado correctamente!',
+          showConfirmButton: false,
+          timer: 2500,
+        });
+        this.closeEdit.nativeElement.click();
+        this.closeDelete.nativeElement.click();
+        this.auth.logout();
+      }
     });
   }
 
@@ -264,6 +338,18 @@ export class PerfilUserComponent implements OnInit {
     }
   }
 
+  shuffeData() {
+    this.pieChartData = [
+      {
+        data: [20, 5, 6, 2],
+        // backgroundColor: ['#ff09d6', '#dc3545', '#171c3e', '#0b0f2c'],
+        borderColor: '#ffffff',
+        // borderWidth: 0.5,
+        label: 'Poppins',
+      },
+    ];
+  }
+
   ngOnInit(): void {
     this.serviceTitle.setTitle(this.title);
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
@@ -271,7 +357,10 @@ export class PerfilUserComponent implements OnInit {
     this.getall();
     this.access();
     this.g2pUserPerfil = this.userService.usuarios;
-    this.usercito = this.userService.usuarios;
     this.serviceTitle.setTitle(this.title);
+    this.shuffeData();
+    console.log(this.userService.usuarios.usuario_id);
+
+    // this.chartLog()
   }
 }

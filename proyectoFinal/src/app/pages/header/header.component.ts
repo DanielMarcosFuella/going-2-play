@@ -218,6 +218,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  goPerfil(){
+    this.router.navigateByUrl('/perfil-user?nickname=' + this.userService.usuarios.nickname);
+
+  }
   
 
   loginUsuario(nickname_login: string, contrasena_login: string) {

@@ -100,59 +100,33 @@
           >
             <div class="container-diferent">
               <div class="title-stadics">ESTADISTICAS</div>
-              <div class="contenedor-stadics">
-                <div class="container d-flex justify-content-center">
-                  <div class="row align-items-start">
-                    <div class="col">
-                      <div class="container-data">
-                        <div class="container-number">
-                          <span>1</span>
-                        </div>
-                        <div class="container-type">
-                          <span>GANADAS</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="container-data">
-                        <div class="container-number">
-                          <span>1</span>
-                        </div>
-                        <div class="container-type">
-                          <span>PERDIDAS</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="container-data">
-                        <div class="container-number">
-                          <span>1</span>
-                        </div>
-                        <div class="container-type">
-                          <span>EMPATADAS</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="container-data">
-                        <div class="container-number">
-                          <span>1</span>
-                        </div>
-                        <div class="container-type">
-                          <span>JUGADAS</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+              <!-- <div id="divChart">
+  <canvas id="myChart" style="color: #fff;"></canvas>
+</div> -->
+              <canvas
+                baseChart
+                width="50%"
+                [datasets]="pieChartData"
+                [labels]="pieChartLabels"
+                [options]="pieChartOptions"
+                [colors]="pieChartColors"
+                [legens]="pieChartLegend"
+                [chartType]="pieChartType"
+                [plugins]="pieChartPlugins"
+              ></canvas>
+              <button #gChart (click)="shuffeData()" style="display: none">
+                hola
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
+
 <!--  EDITAR USER -->
 <div
   class="modal fade"
@@ -190,17 +164,22 @@
           </div>
 
           <div class="form-group">
-            <input
-              type="file"
-              class="form-control"
-              id="inputGroupFile04"
-              aria-describedby="inputGroupFileAddon04"
+
+            <div class="inputfile-box">
+              <input type="file" id="file" class="inputfile" aria-describedby="upload-photo"
               aria-label="Upload"
               name="avatar"
               (change)="fileChange($event)"
               placeholder="Actualiza tu foto"
-              #uploadfoto
-            />
+              #uploadfoto>
+              <label for="file" style="width:100%">
+                <span id="file-name" class="file-box">{{msg2}}</span>
+                <span class="file-button">
+                  <i class="fa fa-upload" aria-hidden="true"></i>
+                  Select File
+                </span>
+              </label>
+            </div>
           </div>
           <div
             [innerHtml]="msg"
@@ -240,7 +219,7 @@
               type="date"
               class="form-control"
               id="nacimientoEdit"
-              placeholder="{{ g2pUserPerfil.nacimiento }}"
+              placeholder="" data-date="" data-date-format="DD/MM/YYYY" value="{{g2pUserPerfil.nacimiento}}"
               #nacimientoEdit
             />
           </div>
@@ -253,25 +232,7 @@
               #correoEdit
             />
           </div>
-          <!-- <div class="form-group">
-                        <input type="number" class="form-control" id="recipient-name" placeholder="Puntos">
-                    </div> -->
-          <!-- <div class="form-group">
-                        <select name="country" class="form-control selectpicker">
-                            <option value="0">Seleccionar juego</option>
-                            <option value="1">LOL</option>
-                            <option value="2">FIFA</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select name="country" class="form-control">
-                            <option value="0">Seleccionar equipo</option>
-                            <option value="1">LOL</option>
-                            <option value="2">FIFA</option>
-
-                        </select>
-                    </div> -->
+    
           <div class="form-group">
             <select
               name="country"
@@ -295,7 +256,7 @@
               placeholder="{{ g2pUserPerfil.biografia }}"
               id="biografia"
               #biografiaEdit
-            ></textarea>
+            >{{ g2pUserPerfil.biografia }}</textarea>
           </div>
           <div class="form-group">
             <input
@@ -342,8 +303,7 @@
             data-target="#deleteUserModal"
             >ELIMINAR PERFIL</a
           >
-          <button
-            type="submit"
+          <a
             class="s-menu-mobile-register"
             (click)="
               editUser(
@@ -360,7 +320,7 @@
             "
           >
             GUARDAR
-          </button>
+        </a>
         </div>
       </form>
       <!-- <div class="modal-footer">
@@ -382,7 +342,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">¿Estas seguro?</h5>
+        <h5 class="modal-title" id="loginModalLabel">Eliminar {{g2pUserPerfil.nickname}}</h5>
         <button
           type="button"
           class="close"
@@ -395,9 +355,8 @@
       </div>
       <form>
         <div class="modal-body">
-          ¿Estas seguro que deseas eliminar el usuario
-          <b>{{ g2pUserPerfil.nickname }}</b
-          >?
+          ¿Estas seguro que deseas tu perfil?
+          <p style="color: #fff;">{{ g2pUserPerfil.nickname }} al hacer clic en <b>ELIMINAR</b> tu perfil se eliminara por completo</p>
         </div>
         <div class="modal-footer">
           <a
