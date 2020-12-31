@@ -310,6 +310,10 @@ export class PerfilUserComponent implements OnInit {
     });
   }
 
+  isBanned(){
+    this.userService.isBanned()
+  }
+
   isLoggedIn() {
     this.userlogin = this.auth.isLoggedIn();
     return this.userlogin;
@@ -356,6 +360,7 @@ export class PerfilUserComponent implements OnInit {
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
     this.g2pUserPerfil = this.userService.usuarios;
     this.isLoggedIn();
+    this.isBanned();
     this.getall();
     this.access();
     this.shuffeData();

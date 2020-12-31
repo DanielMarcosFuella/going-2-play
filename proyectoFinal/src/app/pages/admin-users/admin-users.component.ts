@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class AdminUsersComponent implements OnInit {
   @ViewChild('deleteAdmin') deleteAdmin;
+  @ViewChild('editAdmin') editAdmin;
   public title: string;
   public nationalitiesEdit: string[];
   public typeUser: string;
@@ -22,7 +23,11 @@ export class AdminUsersComponent implements OnInit {
   public adminlogin: boolean;
   public g2pUserPerfil: User;
   public userall: User[];
-  public myIndex: number;
+  public indexEdit: number;
+  public indexDelete: number;
+  public notBan:boolean;
+  public yesBan:boolean;
+  public vertodo:boolean
 
   constructor(
     public userService: UserService,
@@ -64,7 +69,11 @@ export class AdminUsersComponent implements OnInit {
     this.adminlogin = false;
     this.g2pUserPerfil = this.userService.usuarios;
     this.userall = this.userService.collection;
-    this.myIndex = 0;
+    this.indexEdit = 0;
+    this.indexDelete = 0;
+    this.notBan = false;
+    this.yesBan = false
+    this.vertodo = false;
   }
 
   isLoggedIn() {
@@ -78,6 +87,74 @@ export class AdminUsersComponent implements OnInit {
       this.userall = this.userService.collection;
       localStorage.setItem('adminuser', JSON.stringify(this.userall));
     });
+  }
+
+
+  isYesBan(){
+    this.vertodo = true
+  }
+
+  banned(userid: number, findIndex:number) {
+
+    console.log(userid);
+    let finBand = JSON.parse(localStorage.getItem('allusers'));
+    if(finBand[findIndex].isBanned === 0){
+    console.log(finBand[findIndex].isBanned);
+    let json = {isBanned: 1, usuario_id: userid};
+    this.userService.putisBanned(json).subscribe(data=>{
+      console.log(data);
+      this.userService.getUserByID(userid).subscribe(data=>{
+        let found = data[0]
+        this.userall.splice(findIndex, 1, found);
+        localStorage.setItem('adminuser', JSON.stringify(this.userall));
+        this.editAdmin.nativeElement.click();
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Usuario baneado correctamente!',
+      showConfirmButton: false,
+      timer: 2500,
+    });
+      })
+    });
+    
+    } else {
+      console.log("No estas baneado");
+      
+    }
+
+    if(finBand[findIndex].isBanned === 1){
+      let json2 = {isBanned: 0, usuario_id: userid};
+    this.userService.putisBanned(json2).subscribe(data=>{
+      console.log(data);
+      this.userService.getUserByID(userid).subscribe(data=>{
+        let found = data[0]
+        this.userall.splice(findIndex, 1, found);
+        localStorage.setItem('adminuser', JSON.stringify(this.userall));
+        this.editAdmin.nativeElement.click();
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Usuario desbaneado correctamente!',
+      showConfirmButton: false,
+      timer: 2500,
+    });
+      })
+    });
+    } else{
+      console.log("JAJA");
+      
+    }
+  
+
+
+    
+
+
+
+    console.log(this.userall[findIndex]);
+    
+    
   }
 
   deleteUser(id: any, id2: any) {
@@ -106,8 +183,30 @@ export class AdminUsersComponent implements OnInit {
     // window.location.reload()
   }
 
-  public displayInfo(i: number) {
-    this.myIndex = i;
+  public displayEdit(i: number) {
+    this.indexEdit = i;
+    console.log(this.indexEdit);
+    
+    let peta = JSON.parse(localStorage.getItem('adminuser'));
+    console.log(peta);
+    
+    if(peta[i].isBanned === 0){
+    console.log(peta[i].isBanned);
+    this.notBan = true
+    
+    } else {
+      this.notBan = false
+    }
+
+    if(peta[i].isBanned === 1){
+      this.yesBan = true
+    } else{
+      this.yesBan = false
+    }
+  }
+
+  public displayDelete(i: number) {
+    this.indexDelete = i;
   }
 
   noAdmin() {
@@ -136,5 +235,6 @@ export class AdminUsersComponent implements OnInit {
     this.userall = this.userService.collection;
     this.isLoggedIn();
     this.noAdmin();
+    this.isYesBan()
   }
 }

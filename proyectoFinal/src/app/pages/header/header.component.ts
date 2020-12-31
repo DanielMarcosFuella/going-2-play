@@ -333,10 +333,6 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  comparar() {
-    this.userlogin === this.userlogin;
-  }
-
   logout() {
     this.auth.logout();
   }

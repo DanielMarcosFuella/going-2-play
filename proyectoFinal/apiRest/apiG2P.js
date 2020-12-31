@@ -170,6 +170,23 @@ app.post("/usuarios", function (req, res) {
   }
 });
 
+app.put("/usuarios/ban", function(req, response){
+  let usuario_id = req.body.usuario_id;
+  let ban = req.body.isBanned;
+  let sql = "UPDATE usuarios SET";
+  sql += " isBanned="+ban+" WHERE usuario_id="+usuario_id;
+  console.log(sql);
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Datos de usuarios actualizados");
+    }
+    response.send(result);
+  });
+  
+})
+
 app.put("/usuarios", function (req, response) {
   let usuario_id = req.body.usuario_id;
   let nickname = req.body.nickname;

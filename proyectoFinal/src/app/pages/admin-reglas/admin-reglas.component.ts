@@ -188,6 +188,9 @@ export class AdminReglasComponent implements OnInit {
       found.descripcion = descripcion;
     }
 
+    console.log(found);
+    
+
     this.G2PService.putReglas(found).subscribe((data: Reglas) => {
       console.log(this.G2PService.regla);
       this.rulesall.splice(idremplace, 1, found);
