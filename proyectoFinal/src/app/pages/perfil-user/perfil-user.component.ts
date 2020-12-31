@@ -318,6 +318,7 @@ export class PerfilUserComponent implements OnInit {
   getall() {
     this.userService.getUserAll().subscribe((data: User[]) => {
       this.userall = data;
+      console.log(this.userall);
     });
   }
 
@@ -353,11 +354,10 @@ export class PerfilUserComponent implements OnInit {
   ngOnInit(): void {
     this.serviceTitle.setTitle(this.title);
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
+    this.g2pUserPerfil = this.userService.usuarios;
     this.isLoggedIn();
     this.getall();
     this.access();
-    this.g2pUserPerfil = this.userService.usuarios;
-    this.serviceTitle.setTitle(this.title);
     this.shuffeData();
     console.log(this.userService.usuarios.usuario_id);
 

@@ -10,7 +10,8 @@ export class UserService {
 
   private url = "http://localhost:8000/usuarios"
   public usuarios:User;
-  public collection: User[]
+  public collection: User[];
+  public allusers: User[];
   public receptor:User;
   public almacen:string;
   constructor(private http: HttpClient) { }
@@ -23,6 +24,8 @@ export class UserService {
           const nickname = usuario.nickname;
           newUsuarios.push({correo: email, nickname: nickname})
         }
+        console.log(newUsuarios);
+        
         return newUsuarios
       }),
       tap(usuarios => console.log(usuarios))

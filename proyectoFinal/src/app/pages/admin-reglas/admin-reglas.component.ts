@@ -102,6 +102,8 @@ export class AdminReglasComponent implements OnInit {
         }
       }
       this.rulesall = this.G2PService.reglas;
+      console.log(this.rulesall);
+      
     });
   }
 
