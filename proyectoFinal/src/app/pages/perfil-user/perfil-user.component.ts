@@ -13,6 +13,8 @@ import { HttpClient } from '@angular/common/http';
 import * as Chart from 'chart.js';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-perfil-user',
@@ -107,7 +109,9 @@ export class PerfilUserComponent implements OnInit {
     private G2PService: G2pService,
     private router: Router,
     private serviceTitle: Title,
-    private auth: AuthService
+    private auth: AuthService,
+    private link: Location
+
   ) {
     this.nationalitiesEdit = [
       'Panama',
@@ -353,6 +357,18 @@ export class PerfilUserComponent implements OnInit {
         label: 'Poppins',
       },
     ];
+  }
+
+
+  goBack() {
+    // window.history.back();
+    this.link.back();
+
+    console.log('goBack()...');
+  }
+
+  goForward() {
+    this.link.forward();
   }
 
   ngOnInit(): void {

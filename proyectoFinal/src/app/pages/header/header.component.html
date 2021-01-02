@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
   <div class="d-flex w-25 logito-logo">
-    <a class="navbar-brand animate__animated animate__rotateIn" href="index.html">
+    <a class="navbar-brand animate__animated animate__rotateIn" routerLink="/torneos">
       <img [src]="imageSrc" width="60px" style="
       position: absolute;
       top: -13px;">
@@ -32,10 +32,10 @@
     <ul *ngIf="userinlogin" class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center bold-transform">
       <!-- <ul  class="navbar-nav "> -->
       <li class="nav-item">
-        <a class="nav-link uppercase" href="#">mis equipos</a>
+        <a class="nav-link uppercase" routerLink="/mis-equipos">mis equipos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link uppercase" href="#">mis torneos</a>
+        <a class="nav-link uppercase" routerLink="/mis-torneos">mis torneos</a>
       </li>
     </ul>
     <div *ngIf="!isLoggedIn()" class="header-right-link">

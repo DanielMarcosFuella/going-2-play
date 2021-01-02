@@ -165,7 +165,6 @@ export class AdminReglasComponent implements OnInit {
     let found = this.rulesall.find(function (element) {
       return element.reglas_id === parseInt(reglas_id);
     });
-
     if (found.juego_id === 'FIFA') {
       found.juego_id = 2;
     }
@@ -187,10 +186,6 @@ export class AdminReglasComponent implements OnInit {
     } else {
       found.descripcion = descripcion;
     }
-
-    console.log(found);
-    
-
     this.G2PService.putReglas(found).subscribe((data: Reglas) => {
       console.log(this.G2PService.regla);
       this.rulesall.splice(idremplace, 1, found);
@@ -214,7 +209,6 @@ export class AdminReglasComponent implements OnInit {
       }
     });
     this.editeRules.nativeElement.click();
-
     Swal.fire({
       position: 'center',
       icon: 'success',

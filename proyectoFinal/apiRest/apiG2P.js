@@ -95,6 +95,19 @@ app.get("/usuarios/:id", function (req, res) {
   });
 });
 
+
+app.get("/user", function (req, res) {
+  console.log(req.query);
+  let sql = `SELECT * FROM usuarios WHERE nickname=\"${req.query.nickname}\"`;
+  connection.query(sql, function (err, result) {
+    if (err) console.log(err);
+    else {
+      res.send(result);
+    }
+  });
+});
+
+
 app.get("/usuarios/correo/:id", function (req, res) {
   id = req.params.id;
   let sql = `SELECT * FROM usuarios WHERE correo=\"${req.params.id}\"`;
@@ -113,6 +126,50 @@ app.get("/usuarios/correo/:id", function (req, res) {
         resultado = true;
         console.log(true);
       }
+    }
+    res.send(result);
+  });
+});
+
+
+app.post("/usuarios/top10/", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC LIMIT 5`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+
+app.post("/usuarios/top1/", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC LIMIT 1`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+app.post("/usuarios/getyourtop/", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
     }
     res.send(result);
   });

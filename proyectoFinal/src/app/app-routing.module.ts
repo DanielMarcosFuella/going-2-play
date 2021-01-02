@@ -21,6 +21,7 @@ import { MisTorneosComponent } from './pages/mis-torneos/mis-torneos.component';
 import { NoEncontradaComponent } from './pages/no-encontrada/no-encontrada.component';
 import { PerfilTeamsComponent } from './pages/perfil-teams/perfil-teams.component';
 import { PerfilUserComponent } from './pages/perfil-user/perfil-user.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 import { TorneosComponent } from './pages/torneos/torneos.component';
 
 const routes: Routes = [
@@ -32,7 +33,7 @@ const routes: Routes = [
   {path: 'footer', component:FooterComponent},
   {path: 'admin-users', component:AdminUsersComponent},
   {path: 'admin-teams', component:AdminTeamsComponent},
-  {path: 'equipos', component:EquiposComponent},
+  {path: 'mis-equipos', component:EquiposComponent},
   {path: 'admin-torneos', component: AdminTorneosComponent},
   {path: 'detalle-dieciseisavos', component:DetalleTorneoDieciseisavosComponent},
   {path: 'detalle-octavos', component:DetalleTorneoOctavosComponent},
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path: 'admin-reglas', component:AdminReglasComponent},
   {path: 'mis-torneos', component:MisTorneosComponent},
   {path: 'pruebas', component: HeaderTopComponent},
+  {path: 'perfil', component:PerfilComponent},
   {path: '**', component: NoEncontradaComponent}
 
 ];

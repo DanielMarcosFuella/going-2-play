@@ -30,6 +30,7 @@ import { UniqueNicknameValidatorDirective } from './shared/unique-nickname.valid
 import { UniqueEmailValidatorDirective } from './shared/email-nickname.validator.directive';
 import { HeaderTopComponent } from './pages/header-top/header-top.component';
 import { ChartsModule } from 'ng2-charts';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ChartsModule } from 'ng2-charts';
     PerfilTeamsComponent,
     AdminReglasComponent,
     MisTorneosComponent,
-    NoEncontradaComponent
+    NoEncontradaComponent,
+    PerfilComponent
     
     
   ],
