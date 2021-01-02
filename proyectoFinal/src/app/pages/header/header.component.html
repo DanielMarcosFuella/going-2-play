@@ -14,19 +14,19 @@
   <div class="navbar-collapse collapse justify-content-center order-2 bg-dark" id="navbarSupportedContent">
     <ul *ngIf="adminlogin" class="navbar-nav justify-content-center bold-transform">
       <li class="nav-item">
-        <a class="nav-link uppercase" href="#">partidos</a>
+        <a class="nav-link uppercase" routerLink="/admin-partidos">partidos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link uppercase" href="#">equipos</a>
+        <a class="nav-link uppercase" routerLink="/admin-teams">equipos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link uppercase" href="#">torneos</a>
+        <a class="nav-link uppercase" routerLink="/admin-torneos">torneos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link uppercase" href="#">usuarios</a>
+        <a class="nav-link uppercase" routerLink="/admin-users">usuarios</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link uppercase" href="#">reglas</a>
+        <a class="nav-link uppercase" routerLink="/admin-reglas">reglas</a>
       </li>
     </ul>
     <ul *ngIf="userinlogin" class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center bold-transform">
