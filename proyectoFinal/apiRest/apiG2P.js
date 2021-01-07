@@ -757,4 +757,309 @@ app.delete("/partidos", function (req, res) {
   });
 });
 
+// Muestra todos los equipos de la bbdd
+
+app.get("/equipos", function (req, res) {
+  id = req.params.id;
+  let sql = "SELECT * FROM equipos";
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+// Muestra el equipo pasado por id
+
+app.get("/equipo", function (req, res) {
+  id = req.query.id;
+  let sql = "SELECT * FROM equipos WHERE equipo_id=" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+
+    res.send(result);
+  });
+});
+
+// Muestra los equipos a los que pertenece un usuario.
+
+app.get("/equipos/:id", function(req, res){
+    id = req.params.id;
+    let arr = [id];
+    let sql2 = "SELECT equipos.nombre, logo, usuarios.url_perfil FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE equipos.equipo_id = ?";
+    // let sql = "SELECT nombre, logo FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) WHERE usuario_id = ?";
+    connection.query(sql2, arr, function(err, result){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(result);
+            res.send(result)
+        }
+    });
+});
+
+// app.get("/equipos/equipo_id/:id", function (req, res) {
+//   id = req.params.id;
+//   let sql = `SELECT * FROM equipos WHERE nickname=\"${req.params.id}\"`;
+//   connection.query(sql, function (err, result) {
+//     let resultado;
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       var string = JSON.stringify(result);
+//       var json = JSON.parse(string);
+//       let x = json.find((id) => id === id);
+//       if (x === undefined) {
+//         resultado = false;
+//         console.log(false);
+//       } else {
+//         resultado = true;
+//         console.log(true);
+//       }
+//     }
+//     res.send(result);
+//   });
+// });
+
+// POST equipos (añade un nuevo equipo a la base de datos).
+
+app.post("/equipos", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql = `INSERT INTO equipos (equipo_id, nombre, logo, juego_id, capitan, ganadas, perdidas, jugadas, biografia) VALUES(null, \"${req.body.nombre}\", \"${req.body.logo}\", \"${req.body.juego_id}\",\"${req.body.capitan}\",\"${req.body.ganadas}\",\"${req.body.perdidas}\",\"${req.body.jugadas}\",\"${req.body.biografia}\")`;
+    connection.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+      res.send(result);
+    });
+  }
+});
+
+// PUT equipos (modifica la información de un equipo de la base de datos).
+
+app.put("/equipos", function (req, response) {
+  let equipo_id = req.body.equipo_id;
+  let nombre = req.body.nombre;
+  let logo = req.body.logo;
+  let juego_id = req.body.juego_id;
+  let capitan = req.body.capitan;
+  let ganadas = req.body.ganadas;
+  let perdidas = req.body.perdidas;
+  let jugadas = req.body.jugadas;
+  let biografia = req.body.biografia;
+  let sql = "UPDATE equipos SET";
+  let params = new Array();
+  let modi = new Array();
+  console.log(req.body);
+  if (nombre) {
+    params.push(nombre);
+    modi.push(" nombre = ? ");
+  }
+  if (logo) {
+    params.push(logo);
+    modi.push(" logo = ? ");
+  }
+  if (juego_id) {
+    params.push(juego_id);
+    modi.push(" juego_id = ? ");
+  }
+  if (capitan) {
+    params.push(capitan);
+    modi.push(" capitan = ? ");
+  }
+  if (ganadas) {
+    params.push(ganadas);
+    modi.push(" ganadas = ? ");
+  }
+  if (perdidas) {
+    params.push(perdidas);
+    modi.push(" perdidas = ? ");
+  }
+  if (jugadas) {
+    params.push(jugadas);
+    modi.push(" jugadas = ? ");
+  }
+  if (biografia) {
+    params.push(biografia);
+    modi.push(" biografia = ? ");
+  }
+
+  sql += modi.toString() + "WHERE equipo_id = " + equipo_id;
+  console.log(sql);
+  connection.query(sql, params, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Datos del equipo actualizados");
+    }
+    response.send(result);
+  });
+});
+
+// Delete equipo
+
+app.delete("/equipos", function (req, res) {
+  let sql = `DELETE FROM equipos WHERE equipo_id=${req.body.equipo_id}`;
+  connection.query(sql, function (err, result) {
+    let msg;
+    if (err) {
+      console.log(err);
+      msg =  true
+    } else {
+      msg = result
+      console.log(result);
+    }
+    res.send(msg);
+  });
+});
+
+// Muestra todos los torneos de la bbdd
+
+app.get("/torneos", function (req, res) {
+  id = req.params.id;
+  let sql = "SELECT * FROM torneos";
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+// Muestra el torneo pasado por id
+
+// app.get("/torneos/:id", function (req, res) {
+//   id = req.params.id;
+//   let sql = "SELECT * FROM torneos WHERE torneo_id=" + id;
+//   connection.query(sql, function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(result);
+//     }
+
+//     res.send(result);
+//   });
+// });
+
+// Mostrar los torneos de un equipo pasado por query
+
+app.get("/torneo", function (req, res) {
+  id = req.query.id;
+  let sql = "SELECT * FROM torneos WHERE torneo_id=" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+// POST torneos (añade un nuevo torneo a la base de datos).
+
+app.post("/torneos", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql = `INSERT INTO torneos (torneo_id, nombre, fecha, fases, reglas_id, hora, puntos, resultado) VALUES(null, \"${req.body.nombre}\", \"${req.body.fecha}\", \"${req.body.fases}\",\"${req.body.reglas_id}\",\"${req.body.hora}\", \"${req.body.puntos}\", \"${req.body.resultado}\")`;
+    connection.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+      res.send(result);
+    });
+  }
+});
+
+// PUT torneos (modifica la información de un torneo de la base de datos).
+
+app.put("/torneos", function (req, response) {
+  let torneo_id = req.body.torneo_id;
+  let nombre = req.body.nombre;
+  let fecha = req.body.fecha;
+  let fases = req.body.fases;
+  let reglas_id = req.body.reglas_id;
+  let hora = req.body.hora;
+  let puntos = req.body.puntos;
+  let resultado = req.body.resultado;
+  let sql = "UPDATE torneos SET";
+  let params = new Array();
+  let modi = new Array();
+  console.log(req.body);
+  if (nombre) {
+    params.push(nombre);
+    modi.push(" nombre = ? ");
+  }
+  if (fecha) {
+    params.push(fecha);
+    modi.push(" fecha = ? ");
+  }
+  if (fases) {
+    params.push(fases);
+    modi.push(" fases = ? ");
+  }
+  if (reglas_id) {
+    params.push(reglas_id);
+    modi.push(" reglas_id = ? ");
+  }
+  if (hora) {
+    params.push(hora);
+    modi.push(" hora = ? ");
+  }
+  if (puntos) {
+    params.push(puntos);
+    modi.push(" puntos = ? ");
+  }
+  if (resultado) {
+    params.push(resultado);
+    modi.push(" resultado = ? ");
+  }
+
+  sql += modi.toString() + "WHERE torneo_id = " + torneo_id;
+  console.log(sql);
+  connection.query(sql, params, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Datos del torneo actualizados");
+    }
+    response.send(result);
+  });
+});
+
+// Elimina un torneo pasado por id
+
+app.delete("/torneos", function (req, res) {
+  let sql = `DELETE FROM torneos WHERE torneo_id=${req.body.torneo_id}`;
+  connection.query(sql, function (err, result) {
+    let msg;
+    if (err) {
+      console.log(err);
+      msg =  true
+    } else {
+      msg = result
+      console.log(result);
+    }
+    res.send(msg);
+  });
+});
+
+
 app.listen(8000);
