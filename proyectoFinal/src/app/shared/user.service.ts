@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class UserService {
 
   private url = "http://localhost:8000/usuarios"
+  private url2 = "http://localhost:8000"
   public User:User;
   public usuarios:User;
   public usersBan: User[];
@@ -19,8 +20,38 @@ export class UserService {
   public collection: User[];
   public allusers: User[];
   public receptor:User;
+  public usersRank: User[]
+  public teamRank: []
+  public userTopOne:User;
+  public teamTopOne:any;
+  public otherPerfil:User;
+  public adminTeams:[];
   constructor(private http: HttpClient, private router: Router, private auth:AuthService) { }
 
+
+  rankTop10(){
+    return this.http.post(this.url + "/top10/", null)
+  }
+
+  rankTop5Team(){
+    return this.http.post(this.url2 + "/equipos/top5", null )
+  }
+
+  getOneTopTeam(){
+    return this.http.post(this.url2 + "/equipos/top1", null)
+  }
+
+  yourtop(){
+    return this.http.post(this.url + "/getyourtop/", null)
+  }
+
+  topOne(){
+    return this.http.post(this.url + "/top1/", null)
+  }
+
+  getOtroPerfil(usernick:any){
+    return this.http.get(this.url2 + "/user" + "?nickname=" +usernick )
+  }
   
 
   isBanned() {
@@ -78,6 +109,10 @@ export class UserService {
       }),
       tap(usuarios => console.log(usuarios))
     );
+  }
+
+  getTeams(){
+    return this.http.get(this.url2 +"/admin-equipos")
   }
 
   getUserByEmail(email:string){

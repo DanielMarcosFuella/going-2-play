@@ -268,7 +268,7 @@ export class HeaderComponent implements OnInit {
 
   goPerfil() {
     this.router.navigateByUrl(
-      '/perfil-user?nickname=' + this.userService.usuarios.nickname
+      '/perfil-user'
     );
   }
 
@@ -303,7 +303,6 @@ export class HeaderComponent implements OnInit {
             text: 'Debes ingresar tu G2P ID y tu contraseña',
           });
         }
-        // console.log(data)
         else if (data.length == 0) {
           Swal.fire({
             icon: 'error',
@@ -312,16 +311,9 @@ export class HeaderComponent implements OnInit {
           });
         } else {
           console.log(this.userlogin);
-
-          // console.log(this.userService.usuarios);
           this.userService.usuarios = data[0];
-          // this.User = data[0];
-          // console.log(data[0]);
           this.show = true;
-          // this.userlogin = localStorage.getItem('usuario') != null;
-          // console.log(this.User);
           this.closeLogin.nativeElement.click();
-          this.router.navigateByUrl('/torneos?userId=' + this.User.usuario_id);
           window.location.reload();
           localStorage.setItem('usuariologged', 'true');
           localStorage.setItem(

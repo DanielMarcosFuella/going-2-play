@@ -81,7 +81,8 @@ h6{
 }
 a {
 	transition: all 0.3s ease 0s;
-	text-decoration:none;
+    text-decoration:none;
+    cursor: pointer;
 }
 a:hover {
   color: #ff09d6;

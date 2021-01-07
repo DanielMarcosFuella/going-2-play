@@ -95,6 +95,19 @@ app.get("/usuarios/:id", function (req, res) {
   });
 });
 
+
+app.get("/user", function (req, res) {
+  console.log(req.query);
+  let sql = `SELECT * FROM usuarios WHERE nickname=\"${req.query.nickname}\"`;
+  connection.query(sql, function (err, result) {
+    if (err) console.log(err);
+    else {
+      res.send(result);
+    }
+  });
+});
+
+
 app.get("/usuarios/correo/:id", function (req, res) {
   id = req.params.id;
   let sql = `SELECT * FROM usuarios WHERE correo=\"${req.params.id}\"`;
@@ -113,6 +126,79 @@ app.get("/usuarios/correo/:id", function (req, res) {
         resultado = true;
         console.log(true);
       }
+    }
+    res.send(result);
+  });
+});
+
+
+app.post("/usuarios/top10/", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC LIMIT 5`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+
+app.post("/equipos/top5/", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT equipos.equipo_id, equipos.nombre, equipos.logo, juegos.juego_id AS juego_id, juegos.nombre AS juego_nombre, juegos.foto AS juego_logo, usuarios.usuario_id AS capitan_id, usuarios.nickname AS capitan_nickname, equipos.ganadas, equipos.perdidas, equipos.empatadas, equipos.jugadas, equipos.biografia, equipos.puntuacion FROM equipos JOIN juegos ON(equipos.juego_id = juegos.juego_id) JOIN usuarios ON (equipos.capitan = usuarios.usuario_id) ORDER BY equipos.puntuacion DESC LIMIT 5`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+
+app.post("/usuarios/top1/", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC LIMIT 1`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+app.post("/usuarios/getyourtop/", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+app.post("/equipos/top1/", function (req, res) {
+  id = req.params.id;
+  let sql = `SELECT nombre, logo, puntuacion FROM equipos ORDER BY equipos.puntuacion DESC LIMIT 1`;
+  connection.query(sql, function (err, result) {
+    let resultado;
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
     }
     res.send(result);
   });
@@ -650,6 +736,25 @@ app.delete("/reglas", function (req, res) {
     res.send(msg);
   });
 });
+
+// ENDPOINT EQUIPOS //
+
+app.get("/admin-equipos", function (req, res) {
+  id = req.params.id;
+  let sql = "SELECT DISTINCT e.equipo_id, e.logo, e.nombre, e.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS juego_foto, e.capitan, e.ganadas, e.perdidas, e.empatadas, e.jugadas FROM equipo_usuario JOIN equipos AS e ON(equipo_usuario.equipo_id = e.equipo_id) JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) JOIN juegos ON (e.juego_id = juegos.juego_id)"
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+
+    res.send(result);
+  });
+});
+
+
+
 
 // ENDPOINT PARTIDOS //
 
