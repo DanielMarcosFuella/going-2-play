@@ -9,7 +9,7 @@ export class AuthService {
   isAdminin:boolean = false
   isUserin:boolean = false
   constructor(private router:Router) { }
-
+  
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');

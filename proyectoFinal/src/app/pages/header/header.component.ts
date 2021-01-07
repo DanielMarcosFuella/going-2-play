@@ -39,6 +39,7 @@ export class HeaderComponent implements OnInit {
   public adminlogin: boolean;
   public userinlogin: boolean;
   public errors: string;
+  public useralls: User[];
 
   constructor(
     public userService: UserService,
@@ -88,6 +89,8 @@ export class HeaderComponent implements OnInit {
       null,
       null
     );
+    this.useralls = this.userService.allusers;
+
     this.typeUser = 'user';
     this.typeAdmin = 'admin';
     this.buildForm();
@@ -100,6 +103,7 @@ export class HeaderComponent implements OnInit {
     this.userlogin = false;
     this.adminlogin = false;
     this.userinlogin = false;
+    this.g2pUser = this.userService.usuarios;
   }
 
   checarSiSonIguales(): boolean {
@@ -118,11 +122,19 @@ export class HeaderComponent implements OnInit {
 
     this.myForm = this.formBuilder.group(
       {
-        nickname: ['', Validators.minLength(minWordsLength), uniqueNicknameValidator(this.userService)],
+        nickname: [
+          '',
+          Validators.minLength(minWordsLength),
+          uniqueNicknameValidator(this.userService),
+        ],
         nombre: ['', Validators.maxLength(maxWordsLength)],
         apellido: ['', Validators.maxLength(maxWordsLength)],
         nacimiento: ['', Validators.required],
-        correo: ['', [Validators.email], uniqueEmailValidator(this.userService)],
+        correo: [
+          '',
+          [Validators.email],
+          uniqueEmailValidator(this.userService),
+        ],
         contrasena: [
           '',
           [
@@ -141,15 +153,51 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  get username(){
+  get username() {
     return this.myForm.get('nickname');
+  }
+
+  getUsersAll() {
+    this.userService.getUserAll().subscribe((data: User[]) => {
+      this.userService.allusers = data;
+      localStorage.setItem(
+        'allusers',
+        JSON.stringify(this.userService.allusers)
+      );
+      this.userService.allusers = JSON.parse(localStorage.getItem('allusers'));
+      let peta = JSON.parse(localStorage.getItem('allusers'));
+      this.useralls = this.userService.allusers;
+      if (this.isLoggedIn() === true) {
+        let usuario_id = this.g2pUser.usuario_id;
+        this.userService.getUserByID(usuario_id).subscribe((data) => {
+          this.User = data[0];
+          let convert = JSON.stringify(this.User);
+          let search = JSON.parse(convert);
+          if (search.isBanned === 1) {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Lo sentimos, estas baneado',
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            localStorage.clear();
+            this.router.navigateByUrl('/');
+          } else {
+            console.log('No estas baneado');
+          }
+        });
+      } else {
+        console.log('No estas logeado!');
+      }
+    });
   }
 
   checkPasswords(group: FormGroup) {
     // here we have the 'passwords' group
     let pass = group.controls.contrasena.value;
     let confirmPass = group.controls.repetir_contrasena.value;
-    return pass === confirmPass ? { notSame: true } : null;
+    return pass === confirmPass ? null : { notSame: true };
   }
 
   // Metodo que llama al servicio para crear el registro
@@ -162,8 +210,6 @@ export class HeaderComponent implements OnInit {
     nacionalidad: string,
     contrasena: { toString: () => string }
   ) {
-    console.log("hola");
-
     let encrypted = this.EncrDecr.set('123456$#@$^@1ERF', contrasena);
     if (
       !nickname ||
@@ -175,10 +221,22 @@ export class HeaderComponent implements OnInit {
       !encrypted ||
       !contrasena
     ) {
+      console.log('hola');
+
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Debes completar todos los campos',
+      });
+    } else if (
+      this.myForm.value.contrasena != this.myForm.value.repetir_contrasena ||
+      this.myForm.value.repetir_contrasena === ''
+    ) {
+      console.log('hola');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes confirmar tu contraseña',
       });
     } else {
       this.userService
@@ -206,6 +264,12 @@ export class HeaderComponent implements OnInit {
           });
         });
     }
+  }
+
+  goPerfil() {
+    this.router.navigateByUrl(
+      '/perfil-user?nickname=' + this.userService.usuarios.nickname
+    );
   }
 
   loginUsuario(nickname_login: string, contrasena_login: string) {
@@ -251,10 +315,10 @@ export class HeaderComponent implements OnInit {
 
           // console.log(this.userService.usuarios);
           this.userService.usuarios = data[0];
-          this.User = data[0];
+          // this.User = data[0];
           // console.log(data[0]);
           this.show = true;
-          this.userlogin = localStorage.getItem('usuario') != null;
+          // this.userlogin = localStorage.getItem('usuario') != null;
           // console.log(this.User);
           this.closeLogin.nativeElement.click();
           this.router.navigateByUrl('/torneos?userId=' + this.User.usuario_id);
@@ -264,13 +328,9 @@ export class HeaderComponent implements OnInit {
             'usuario',
             JSON.stringify(this.userService.usuarios)
           );
-          // console.log(this.userService.usuario.nickname);
+          console.log(this.userService.usuarios);
         }
       });
-  }
-
-  comparar() {
-    this.userlogin === this.userlogin;
   }
 
   logout() {
@@ -284,8 +344,10 @@ export class HeaderComponent implements OnInit {
 
   isAdminIn() {
     if (this.isLoggedIn() && this.g2pUser.admin === 'admin') {
+      // console.log("hola");
+
       this.adminlogin = true;
-      return this.adminlogin;
+      // console.log(this.adminlogin);
     } else if (this.g2pUser === null) {
       this.adminlogin = false;
       return this.adminlogin;
@@ -293,6 +355,25 @@ export class HeaderComponent implements OnInit {
       return false;
     }
   }
+
+  // isBanned() {
+  //   if (
+  //     this.isLoggedIn() &&
+  //     JSON.parse(localStorage.getItem('usuario')).isBanned === 1
+  //   ) {
+  //     Swal.fire({
+  //       position: 'center',
+  //       icon: 'error',
+  //       title: 'Lo sentimos, estas baneado',
+  //       showConfirmButton: false,
+  //       timer: 2000,
+  //     });
+  //     localStorage.clear();
+  //     this.router.navigateByUrl('/');
+  //   } else {
+  //     console.log('hola');
+  //   }
+  // }
 
   isUserIn() {
     if (this.isLoggedIn() && this.g2pUser.admin === 'user') {
@@ -306,11 +387,15 @@ export class HeaderComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    // Obteniendo valores del localstorage para la sesion del objeto
+    this.getUsersAll();
+
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
     this.g2pUser = this.userService.usuarios;
+
+    this.isUserIn();
+    // console.log(this.userService.usuarios);
     this.isLoggedIn();
     this.isAdminIn();
-    console.log(this.adminlogin);
+    // this.isBanned();
   }
 }

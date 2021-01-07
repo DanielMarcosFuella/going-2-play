@@ -170,6 +170,23 @@ app.post("/usuarios", function (req, res) {
   }
 });
 
+app.put("/usuarios/ban", function(req, response){
+  let usuario_id = req.body.usuario_id;
+  let ban = req.body.isBanned;
+  let sql = "UPDATE usuarios SET";
+  sql += " isBanned="+ban+" WHERE usuario_id="+usuario_id;
+  console.log(sql);
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Datos de usuarios actualizados");
+    }
+    response.send(result);
+  });
+  
+})
+
 app.put("/usuarios", function (req, response) {
   let usuario_id = req.body.usuario_id;
   let nickname = req.body.nickname;
@@ -242,12 +259,15 @@ app.put("/usuarios", function (req, response) {
 app.delete("/usuarios", function (req, res) {
   let sql4 = `DELETE FROM usuarios WHERE usuario_id=${req.body.usuario_id}`;
   connection.query(sql4, function (err, result) {
+    let msg;
     if (err) {
       console.log(err);
+      msg =  true
     } else {
+      msg = result
       console.log(result);
     }
-    res.send(result);
+    res.send(msg);
   });
 });
 
@@ -330,12 +350,15 @@ app.put("/juegos", function (req, response) {
 app.delete("/juegos", function (req, res) {
   let sql4 = `DELETE FROM juegos WHERE juego_id=${req.body.juego_id}`;
   connection.query(sql4, function (err, result) {
+    let msg;
     if (err) {
       console.log(err);
+      msg =  true
     } else {
+      msg = result
       console.log(result);
     }
-    res.send(result);
+    res.send(msg);
   });
 });
 
@@ -424,12 +447,15 @@ app.put("/chat_id", function (req, response) {
 app.delete("/chat", function (req, res) {
   let sql4 = `DELETE FROM chat WHERE chat_id=${req.body.chat_id}`;
   connection.query(sql4, function (err, result) {
+    let msg;
     if (err) {
       console.log(err);
+      msg =  true
     } else {
+      msg = result
       console.log(result);
     }
-    res.send(result);
+    res.send(msg);
   });
 });
 
@@ -518,12 +544,15 @@ app.put("/mensajes", function (req, response) {
 app.delete("/mensajes", function (req, res) {
   let sql4 = `DELETE FROM mensajes WHERE mensaje_id=${req.body.mensaje_id}`;
   connection.query(sql4, function (err, result) {
+    let msg;
     if (err) {
       console.log(err);
+      msg =  true
     } else {
+      msg = result
       console.log(result);
     }
-    res.send(result);
+    res.send(msg);
   });
 });
 
@@ -610,12 +639,15 @@ app.put("/reglas", function (req, response) {
 app.delete("/reglas", function (req, res) {
   let sql4 = `DELETE FROM reglas WHERE reglas_id=${req.body.reglas_id}`;
   connection.query(sql4, function (err, result) {
+    let msg;
     if (err) {
       console.log(err);
+      msg =  true
     } else {
+      msg = result
       console.log(result);
     }
-    res.send(result);
+    res.send(msg);
   });
 });
 
@@ -713,12 +745,15 @@ app.put("/partidos", function (req, response) {
 app.delete("/partidos", function (req, res) {
   let sql4 = `DELETE FROM partidos WHERE partido_id=${req.body.partido_id}`;
   connection.query(sql4, function (err, result) {
+    let msg;
     if (err) {
       console.log(err);
+      msg =  true
     } else {
+      msg = result
       console.log(result);
     }
-    res.send(result);
+    res.send(msg);
   });
 });
 

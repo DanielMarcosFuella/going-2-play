@@ -28,6 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoEncontradaComponent } from './pages/no-encontrada/no-encontrada.component';
 import { UniqueNicknameValidatorDirective } from './shared/unique-nickname.validator.directive';
 import { UniqueEmailValidatorDirective } from './shared/email-nickname.validator.directive';
+import { HeaderTopComponent } from './pages/header-top/header-top.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { UniqueEmailValidatorDirective } from './shared/email-nickname.validator
     UniqueNicknameValidatorDirective,
     UniqueEmailValidatorDirective,
     LandingComponent,
+    HeaderTopComponent,
     AdminTeamsComponent,
     EquiposComponent,
     AdminTorneosComponent,
@@ -62,7 +65,8 @@ import { UniqueEmailValidatorDirective } from './shared/email-nickname.validator
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [
     Title

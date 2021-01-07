@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-perfil-teams',
@@ -9,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 export class PerfilTeamsComponent implements OnInit {
   imgSrc = 'assets/images/logo.png'
   title = 'Equipo - G2P'
-  constructor(private serviceTitle:Title) { }
+  constructor(private serviceTitle:Title, public userService:UserService) { }
 
   hola(){
     console.log("Hola");
@@ -17,8 +18,15 @@ export class PerfilTeamsComponent implements OnInit {
     
   }
 
+
+  isBanned(){
+    this.userService.isBanned()
+
+  }
+
   ngOnInit(): void {
   this.serviceTitle.setTitle(this.title)
+  this.isBanned()
 
   }
 

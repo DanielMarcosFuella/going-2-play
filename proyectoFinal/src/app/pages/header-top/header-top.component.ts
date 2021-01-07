@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/shared/user.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-header-top',
   templateUrl: './header-top.component.html',
-  styleUrls: ['./header-top.component.css']
+  styleUrls: ['./header-top.component.css'],
 })
 export class HeaderTopComponent implements OnInit {
+  constructor() {}
 
-  constructor(public userService:UserService) { }
-  
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

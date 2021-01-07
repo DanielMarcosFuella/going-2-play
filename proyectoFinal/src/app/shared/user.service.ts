@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { tap, map } from 'rxjs/operators'
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +12,58 @@ import { tap, map } from 'rxjs/operators'
 export class UserService {
 
   private url = "http://localhost:8000/usuarios"
+  public User:User;
   public usuarios:User;
-  public collection: User[]
+  public usersBan: User[];
+  public userBan:User;
+  public collection: User[];
+  public allusers: User[];
   public receptor:User;
-  public almacen:string;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private auth:AuthService) { }
+
+  
+
+  isBanned() {
+    this.getUserAll().subscribe((data: User[]) => {
+      this.usersBan = data;
+      localStorage.setItem(
+        'allusersban',
+        JSON.stringify(this.usersBan)
+      );
+      this.usersBan = JSON.parse(localStorage.getItem('allusers'));
+      let peta = JSON.parse(localStorage.getItem('allusers'));
+      this.usersBan = this.usersBan;
+      if (this.auth.isLoggedIn() === true) {
+        let usuario_id = this.usuarios.usuario_id;
+        this.getUserByID(usuario_id).subscribe((data) => {
+          this.User = data[0];
+          let convert = JSON.stringify(this.User);
+          let search = JSON.parse(convert);
+          if (search.isBanned === 1) {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Lo sentimos, estas baneado',
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            localStorage.clear();
+            this.router.navigateByUrl('/');
+          } else {
+            console.log('No estas baneado');
+          }
+        });
+      } else {
+        console.log('No estas logeado!');
+      }
+    });
+  }
+
+  putisBanned(newBan:any){
+    return this.http.put(this.url + "/ban", newBan)
+  }
+
+
   getUsers(){
     return this.http.get<any>(this.url).pipe(
       map(usuarios =>{
@@ -23,6 +73,7 @@ export class UserService {
           const nickname = usuario.nickname;
           newUsuarios.push({correo: email, nickname: nickname})
         }
+        
         return newUsuarios
       }),
       tap(usuarios => console.log(usuarios))
@@ -67,4 +118,6 @@ export class UserService {
     }
     return this.http.delete(this.url, options)
   }
+
+ 
 }

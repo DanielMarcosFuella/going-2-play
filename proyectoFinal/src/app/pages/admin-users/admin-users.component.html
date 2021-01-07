@@ -32,10 +32,10 @@
                                     <td>DUL</td>
                                     <td>400pts</td>
                                     <td>
-                                        <a data-toggle="modal" data-target="#editModal" class="edit-user">
+                                        <a data-toggle="modal" data-target="#editModal" class="edit-user" (click)="displayEdit(i)">
                                             <i class="fa fa-edit fa-lg"></i>
                                         </a> &nbsp;&nbsp;
-                                        <a data-toggle="modal" data-target="#deleteModal" class="delete-user" (click)="displayInfo(i)">
+                                        <a data-toggle="modal" data-target="#deleteModal" class="delete-user" (click)="displayDelete(i)">
                                             <i class="fa fa-trash fa-lg"></i>
                                         </a>
                                     </td>
@@ -56,88 +56,24 @@
         <div class="modal-content" style="margin-top: 0px;">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">EDITAR USUARIO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" #editAdmin data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form>
-                    <!-- <div class="form-group">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="recipient-name"
-                                placeholder="G2P ID (Nombre de Usuario)">
-                        </div>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="Nombre">
-                    </div> -->
-                    <div class="form-group">
-                        <!-- <input type="text" class="form-control" id="recipient-name" placeholder="Apellido"> -->
-                    </div>
-                    <div class="form-group">
-                        <!-- <input type="date" class="form-control" id="recipient-name" placeholder="Fecha de Nacimiento"> -->
-                    </div>
-                    <div class="form-group">
-                        <!-- <input type="email" class="form-control" id="recipient-name" placeholder="Direccion de Correo"> -->
-                    </div>
+                    
                     <div class="form-group">
                         <input type="number" class="form-control" id="recipient-name" placeholder="Puntos">
                     </div>
-                    <!-- <div class="form-group">
-                        <select name="country" class="form-control selectpicker">
-                            <option value="0">Seleccionar juego</option>
-                            <option value="1">LOL</option>
-                            <option value="2">FIFA</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select name="country" class="form-control">
-                            <option value="0">Logros</option>
-                            <option value="1">JUGON</option>
-                            <option value="2">FIFA</option>
-
-                        </select>
-                    </div> -->
-                    <!-- <div class="form-group">
-                        <select name="country" class="form-control">
-                            <option value="0">País de residencia</option>
-                            <option value="1">Panama</option>
-                            <option value="2">Colombia</option>
-                            <option value="3">Costa Rica</option>
-                            <option value="4">Honduras</option>
-                            <option value="5">Brazil</option>
-                            <option value="6">Argentina</option>
-                            <option value="7">Bolivia</option>
-                            <option value="8">Cuba</option>
-                            <option value="9">El Salvador</option>
-                            <option value="10">Ecuador</option>
-                            <option value="11">Guatemala</option>
-                            <option value="12">Jamaica</option>
-                            <option value="13">Mexico</option>
-                            <option value="14">Nicaragua</option>
-                            <option value="15">Paraguay</option>
-                            <option value="16">Peru</option>
-                            <option value="17">Puerto Rico</option>
-                            <option value="18">Espana</option>
-                            <option value="19">Estados Unidos</option>
-                            <option value="20">Uruguay</option>
-                            <option value="21">Venezuela</option>
-                            <option value="22">Portugal</option>
-                            <option value="23">China</option>
-                            <option value="24">Chile</option>
-                            <option value="25">Republica Dominicana</option>
-                        </select>
-                    </div> -->
-                    <!-- <div class="form-group">
-                        <input type="password" class="form-control" id="recipient-name" placeholder="Crear Contraseña">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="recipient-name"
-                            placeholder="Confirmar contraseña">
-                    </div> -->
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="s-menu-mobile-cancel">BANNEAR</a>
+                <div *ngIf="vertodo">
+                <a class="s-menu-mobile-cancel" *ngIf="notBan"  (click)="banned(userall[indexEdit].usuario_id, indexEdit)">BANNEAR</a>
+                <a class="s-menu-mobile-cancel"  *ngIf="yesBan" (click)="banned(userall[indexEdit].usuario_id, indexEdit)">DESBANEAR</a>
+            </div>
+                <!-- <a class="s-menu-mobile-cancel" (click)="isYesBan(indexEdit)">no</a> -->
                 <a class="s-menu-mobile-register">EDITAR</a>
             </div>
         </div>
@@ -157,11 +93,11 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <p>¿Desea eliminar el usuario <b>{{userall[myIndex].nickname}}</b>?</p>
+                    <p>¿Desea eliminar el usuario <b>{{userall[indexDelete].nickname}}</b>?</p>
                 </form>
             </div>
             <div class="modal-footer">
-                <a class="s-menu-mobile-register" (click)="deleteUser(userall[myIndex].usuario_id, myIndex)">ELIMINAR</a>
+                <a class="s-menu-mobile-register" (click)="deleteUser(userall[indexDelete].usuario_id, indexDelete)">ELIMINAR</a>
             </div>
         </div>
     </div>
