@@ -100,16 +100,16 @@
               class="fa fa-medal fa-lg"></i></h1>
 
         </div>
-        <div class="games-logo">
+        <!-- <div class="games-logo">
           <div class="cuerpo-logo">
             <img type="button" id="clickranking" class="logo-ranking" (click)="fifa=false" (click)="lol=true" [src]="lolLogo">
           </div>
           <div class="cuerpo-logo">
             <img type="button" id="clickranking" class="logo-ranking" (click)="fifa=true" (click)="lol=false" [src]="fifaLogo">
           </div>
-        </div>
+        </div> -->
       </div>
-      <div  *ngIf="lol==true" class="l-wrapper animate__animated animate__backInRight">
+      <div  *ngIf="user" class="l-wrapper animate__animated animate__backInRight">
 
         <div class="l-grid">
           <div class="l-grid__item">
@@ -151,7 +151,7 @@
             <div class="c-card">
               <div class="c-card__header">
                 <h3>
-                  TOP 5
+                  TOP 5 - JUGADORES
                 </h3>
 
               </div>
@@ -163,7 +163,7 @@
                         #
                       </div>
                       <div class="u-text--left u-text--small u-text--medium">
-                        JUGADOR / EQUIPO
+                        <a (click)="changeEquipo()">JUGADOR</a> / <a (click)="changeEquipo()">EQUIPO</a>
                       </div>
                       <div class="u-text--right u-text--small u-text--medium">
                         PUNTOS
@@ -197,7 +197,7 @@
           </div>
         </div>
       </div>
-      <div  *ngIf="fifa==true" class="l-wrapper animate__animated animate__backInRight">
+      <div  *ngIf="team" class="l-wrapper animate__animated animate__backInRight">
 
         <div class="l-grid">
           <div class="l-grid__item">
@@ -226,20 +226,20 @@
             <div class="c-card">
               <div class="c-card__body">
                 <div class="u-text--center" id="winner">
-                  <div class="u-text-small u-text--medium u-mb--16">Jugador TOP de la semana</div>
+                  <div class="u-text-small u-text--medium u-mb--16">Equipo TOP de la semana</div>
                   <div class="border-media">
-                    <img [src]="imgSrc" width="80px">
+                    <img src="{{teamTopOne.logo}}" width="80px">
                   </div>
-                  <h3 class="u-mt--16 bold">Luis Fernandez</h3>
-                  <a class="c-media__link u-text--small justify-content-center" href="https://instagram.com/carlossainz55"
-                  target="_blank">@luisfrpe</a>
+                  <h3 class="u-mt--16 bold">{{teamTopOne.nombre}}</h3>
+                  <!-- <a class="c-media__link u-text--small justify-content-center" href="https://instagram.com/carlossainz55"
+                  target="_blank">@{{teamTopOne.}}</a> -->
                 </div>
               </div>
             </div>
             <div class="c-card">
               <div class="c-card__header">
                 <h3>
-                  FIFA
+                TOP 5 - EQUIPOS
                 </h3>
 
               </div>
@@ -251,213 +251,33 @@
                         #
                       </div>
                       <div class="u-text--left u-text--small u-text--medium">
-                        JUGADOR / EQUIPO
+                        <a (click)="changeEquipo()">JUGADOR</a> / <a (click)="changeEquipo()">EQUIPO</a>
                       </div>
                       <div class="u-text--right u-text--small u-text--medium">
                         PUNTOS
                       </div>
                     </div>
                   </li>
-                  <li class="c-list__item">
+                  <li class="c-list__item" *ngFor="let dataTeamTop5 of dataTeamTop5; let i = index">
                     <div class="c-list__grid">
-                      <div class="c-flag c-place">1</div>
+                      <div class="c-flag c-place">{{i+1}}</div>
                       <div class="c-media">
                         <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
+                          <img class="c-avatar c-media__img" src="{{dataTeamTop5.logo}}" width="40px">
                         </div>
                         <div class="c-media__content">
-                          <div class="c-media__title float-left">Luis Fernandez</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/lewishamilton"
-                            target="_blank">@luisfrpe</a>
+                          <div class="c-media__title float-left">{{dataTeamTop5.nombre}}</div>
+                          <a class="c-media__link u-text--small float-left" (click)="goPerfil(dataTeamTop5.capitan_nickname)"  target="_blank">@{{dataTeamTop5.capitan_nickname}}</a>
                         </div>
                       </div>
                       <div class="u-text--right c-kudos">
                         <div class="u-mt--8">
-                          <strong>600</strong>
+                          <strong>{{dataTeamTop5.puntuacion}}</strong>
                         </div>
                       </div>
                     </div>
                   </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place">2</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content">
-                          <div class="c-media__title float-left">Daniel Fuella</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/kimimatiasraikkonen"
-                            target="_blank">@Mosquit0p</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>510</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place">3</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content">
-                          <div class="c-media__title float-left">Urik Landa</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/vettelofficial"
-                            target="_blank">@uriklanda</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>460</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place u-bg--transparent">4</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content">
-                          <div class="c-media__title float-left">Jesus Cano</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/maxverstappen1"
-                            target="_blank">@jesuscano</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>400</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place u-bg--transparent">5</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content">
-                          <div class="c-media__title float-left">Juan Gianina</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/landonorris"
-                            target="_blank">@juang</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>380</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place u-bg--transparent">6</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content">
-                          <div class="c-media__title float-left">Carolly Garcia</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/charles_leclerc"
-                            target="_blank">@carollyg</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>350</strong> 
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place u-bg--transparent">7</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content">
-                          <div class="c-media__title float-left">Javier Campos</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/georgerussell63"
-                            target="_blank">@javiC</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>300</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place u-bg--transparent">8</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content">
-                          <div class="c-media__title ">Jorge Rodriguez</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/danielricciardo"
-                            target="_blank">@jorgero</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>250</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place u-bg--transparent">9</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content ">
-                          <div class="c-media__title float-left">Jose Hernandez</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/alex_albon"
-                            target="_blank">@josehernan</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>240</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="c-list__item">
-                    <div class="c-list__grid">
-                      <div class="c-flag c-place u-bg--transparent">10</div>
-                      <div class="c-media">
-                        <div class="border-media">
-                          <img class="c-avatar c-media__img" [src]="imgSrc" width="40px">
-                        </div>
-                        <div class="c-media__content">
-                          <div class="c-media__title float-left">Carlos Sainz Jr.</div>
-                          <a class="c-media__link u-text--small float-left" href="https://instagram.com/carlossainz55"
-                            target="_blank">@carlossainz55</a>
-                        </div>
-                      </div>
-                      <div class="u-text--right c-kudos">
-                        <div class="u-mt--8">
-                          <strong>100</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                  
                 </ul>
               </div>
             </div>

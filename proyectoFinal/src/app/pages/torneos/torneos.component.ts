@@ -21,11 +21,13 @@ export class TorneosComponent implements OnInit {
   fifaLogo = 'assets/fifaLogo.png';
   imgSrc = 'assets/images/logo.png';
   public dataTop10: User[];
+  public dataTeamTop5: [];
   public yourRankTop: User;
   public topOne:User;
+  public teamTopOne:any;
   public yourNumberTop:number;
-  lol: boolean;
-  fifa: boolean;
+  user: boolean;
+  team: boolean;
   title = 'Torneos - G2P';
   public userlogin:boolean;
   constructor(
@@ -34,10 +36,13 @@ export class TorneosComponent implements OnInit {
     private serviceTitle: Title,
     private auth: AuthService
   ) {
-    this.fifa = false;
+    this.team = false;
     this.dataTop10 = this.userService.usersRank;
+    this.dataTeamTop5 = this.userService.teamRank;
     this.topOne = this.userService.userTopOne
-    this.lol = false;
+    this.teamTopOne = this.userService.teamTopOne;
+
+    this.user = true;
     this.userlogin = false
   }
 
@@ -53,6 +58,16 @@ export class TorneosComponent implements OnInit {
       this.dataTop10 = this.userService.usersRank;
       localStorage.setItem('ranktop10', JSON.stringify(this.dataTop10));
     });
+  }
+
+  rankTop5Team(){
+    this.userService.rankTop5Team().subscribe((data:[])=>{
+      this.userService.teamRank = data;
+      this.dataTeamTop5 = this.userService.teamRank;
+      localStorage.setItem('ranktop5team', JSON.stringify(this.dataTeamTop5))
+      console.log(data);
+      
+    })
   }
 
   findYourTop(){
@@ -72,25 +87,46 @@ export class TorneosComponent implements OnInit {
   findTopOne(){
     this.userService.topOne().subscribe((data:User)=>{
       this.userService.userTopOne = data[0];
-      this.topOne = this.userService.userTopOne
+      this.topOne = this.userService.userTopOne;
     })
+    this.userService.getOneTopTeam().subscribe((data)=>{
+      this.userService.teamTopOne = data[0];
+    this.teamTopOne = this.userService.teamTopOne;
+    console.log(data[0]);
+    
+    })
+    
   }
 
   isLoggedIn() {
     this.userlogin = this.auth.isLoggedIn();
     return this.userlogin;
   }
+  
+  changeEquipo(){
+    if(this.user === true){
+      this.user = false;
+      this.team = true;
+    }else {
+      this.user = true;
+      this.team = false;
+    }
+
+  }
 
   ngOnInit(): void {
     this.rankTop10();
+    this.rankTop5Team();
     this.findTopOne();
     this.findYourTop();
     this.isLoggedIn();
     this.userService.usersRank = JSON.parse(localStorage.getItem('ranktop10'));
     this.dataTop10 = this.userService.usersRank;
+    this.userService.teamRank = JSON.parse(localStorage.getItem('ranktop5team'))
+    this.dataTeamTop5 = this.userService.teamRank;
     this.topOne = this.userService.userTopOne
     this.serviceTitle.setTitle(this.title);
-    console.log(this.userlogin);
+    console.log(this.dataTeamTop5);
     
     
   }

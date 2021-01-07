@@ -268,7 +268,7 @@ export class HeaderComponent implements OnInit {
 
   goPerfil() {
     this.router.navigateByUrl(
-      '/perfil-user?nickname=' + this.userService.usuarios.nickname
+      '/perfil-user'
     );
   }
 

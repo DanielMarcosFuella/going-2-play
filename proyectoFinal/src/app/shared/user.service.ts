@@ -21,14 +21,26 @@ export class UserService {
   public allusers: User[];
   public receptor:User;
   public usersRank: User[]
+  public teamRank: []
   public userTopOne:User;
+  public teamTopOne:any;
   public otherPerfil:User;
+  public adminTeams:[];
   constructor(private http: HttpClient, private router: Router, private auth:AuthService) { }
 
 
   rankTop10(){
     return this.http.post(this.url + "/top10/", null)
   }
+
+  rankTop5Team(){
+    return this.http.post(this.url2 + "/equipos/top5", null )
+  }
+
+  getOneTopTeam(){
+    return this.http.post(this.url2 + "/equipos/top1", null)
+  }
+
   yourtop(){
     return this.http.post(this.url + "/getyourtop/", null)
   }
@@ -97,6 +109,10 @@ export class UserService {
       }),
       tap(usuarios => console.log(usuarios))
     );
+  }
+
+  getTeams(){
+    return this.http.get(this.url2 +"/admin-equipos")
   }
 
   getUserByEmail(email:string){
