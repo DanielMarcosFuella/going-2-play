@@ -95,6 +95,34 @@ app.get("/usuarios/:id", function (req, res) {
   });
 });
 
+// OBTENER JUGADORES POR ID DE UN EQUIPO
+app.get("/jugadores/:id", function (req, res){
+  id = req.params.id;
+  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE equipos.equipo_id ="+id;
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+    }
+    res.send(result);
+  })
+})
+
+// OBTEN EQUIPOS POR ID DE UN JUGADOR
+app.get("/list-teams/:id", function (req, res){
+  id = req.params.id;
+  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE usuarios.usuario_id=" + id + " OR equipos.capitan="+id;
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+    }
+    res.send(result);
+  })
+})
+
 
 app.get("/user", function (req, res) {
   console.log(req.query);
@@ -134,7 +162,7 @@ app.get("/usuarios/correo/:id", function (req, res) {
 
 app.post("/usuarios/top10/", function (req, res) {
   id = req.params.id;
-  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC LIMIT 5`;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE isBanned= false ORDER BY usuarios.puntuacion DESC LIMIT 5`;
   connection.query(sql, function (err, result) {
     let resultado;
     if (err) {
@@ -164,7 +192,7 @@ app.post("/equipos/top5/", function (req, res) {
 
 app.post("/usuarios/top1/", function (req, res) {
   id = req.params.id;
-  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC LIMIT 1`;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE isBanned= false ORDER BY usuarios.puntuacion DESC LIMIT 1`;
   connection.query(sql, function (err, result) {
     let resultado;
     if (err) {
@@ -178,7 +206,7 @@ app.post("/usuarios/top1/", function (req, res) {
 
 app.post("/usuarios/getyourtop/", function (req, res) {
   id = req.params.id;
-  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE admin="user" AND isBanned= false ORDER BY usuarios.puntuacion DESC`;
+  let sql = `SELECT nickname, nombre, apellido, url_perfil, puntuacion FROM usuarios WHERE isBanned= false ORDER BY usuarios.puntuacion DESC`;
   connection.query(sql, function (err, result) {
     let resultado;
     if (err) {
@@ -230,6 +258,19 @@ app.get("/usuarios/nickname/:id", function (req, res) {
 app.get("/usuarios", function (req, res) {
   id = req.params.id;
   let sql1 = "SELECT * FROM usuarios";
+  connection.query(sql1, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+app.get("/admin-usuarios", function (req, res) {
+  id = req.params.id;
+  let sql1 = "SELECT DISTINCT usuarios.*, equipos.equipo_id, equipos.nombre AS nombre_equipo, equipos.capitan FROM usuarios LEFT JOIN equipo_usuario ON(usuarios.usuario_id = equipo_usuario.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id)";
   connection.query(sql1, function (err, result) {
     if (err) {
       console.log(err);
@@ -741,7 +782,7 @@ app.delete("/reglas", function (req, res) {
 
 app.get("/admin-equipos", function (req, res) {
   id = req.params.id;
-  let sql = "SELECT DISTINCT e.equipo_id, e.logo, e.nombre, e.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS juego_foto, e.capitan, e.ganadas, e.perdidas, e.empatadas, e.jugadas FROM equipo_usuario JOIN equipos AS e ON(equipo_usuario.equipo_id = e.equipo_id) JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) JOIN juegos ON (e.juego_id = juegos.juego_id)"
+  let sql = "SELECT DISTINCT e.equipo_id, e.logo, e.nombre, e.juego_id, juegos.nombre AS juego_nombre, usuarios.usuario_id AS capitan_id, usuarios.nickname AS nickname_capitan, juegos.foto AS juego_foto, e.capitan, e.ganadas, e.perdidas, e.empatadas, e.jugadas, torneos.estado FROM equipo_usuario JOIN equipos AS e ON(equipo_usuario.equipo_id = e.equipo_id) JOIN usuarios ON (e.capitan = usuarios.usuario_id) JOIN juegos ON (e.juego_id = juegos.juego_id) LEFT JOIN equipos_torneos ON (equipo_usuario.equipo_id = equipos_torneos.equipo_id) LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id)"
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -752,6 +793,83 @@ app.get("/admin-equipos", function (req, res) {
     res.send(result);
   });
 });
+
+app.put("/admin-equipos", function (req, response) {
+  let equipo_id = req.body.equipo_id;
+  let nombre = req.body.nombre;
+  let juego_id = req.body.juego_id;
+  let capitan = req.body.capitan;
+  let ganadas = req.body.ganadas;
+  let perdidas = req.body.perdidas;
+  let jugadas = req.body.jugadas;
+  let biografia = req.body.biografia;
+  let puntuacion = req.body.puntuacion
+
+  let sql = "UPDATE equipos SET";
+  let params = new Array();
+  let modi = new Array();
+  console.log(req.body);
+
+  if (nombre) {
+    params.push(nombre);
+    modi.push(" nombre = ? ");
+  }
+  if (juego_id) {
+    params.push(juego_id);
+    modi.push(" juego_id = ? ");
+  }
+  if (capitan) {
+    params.push(capitan);
+    modi.push(" capitan = ? ");
+  }
+  if (ganadas) {
+    params.push(ganadas);
+    modi.push(" ganadas = ? ");
+  }
+  if (perdidas) {
+    params.push(perdidas);
+    modi.push(" perdidas = ? ");
+  }
+  if(jugadas){
+    params.push(jugadas)
+    modi.push(" jugadas = ? ")
+  }
+  if(biografia){
+    params.push(biografia)
+    modi.push(" biografia = ? ")
+  }
+  if(puntuacion){
+    params.push(puntuacion)
+    modi.push(" puntuacion = ? ")
+  }
+
+  sql += modi.toString() + "WHERE equipo_id= " + equipo_id;
+  console.log(sql);
+  connection.query(sql, params, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Datos de EQUIPOS actualizados");
+    }
+    response.send(result);
+  });
+});
+
+app.delete("/admin-equipos", function (req, res) {
+  let sql4 = `DELETE FROM equipos WHERE equipo_id=${req.body.equipo_id}`;
+  connection.query(sql4, function (err, result) {
+    let msg;
+    if (err) {
+      console.log(err);
+      msg =  true
+    } else {
+      msg = result
+      console.log(result);
+    }
+    res.send(msg);
+  });
+});
+
 
 
 
@@ -881,7 +999,7 @@ app.get("/equipos", function (req, res) {
 
 app.get("/equipo", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT * FROM equipos WHERE equipo_id=" + id;
+  let sql = "SELECT DISTINCT e.*, usuarios.usuario_id AS capitan_id, usuarios.nickname AS nickname_capitan, torneos.estado FROM equipo_usuario JOIN equipos AS e ON(equipo_usuario.equipo_id = e.equipo_id) JOIN usuarios ON (e.capitan = usuarios.usuario_id) JOIN juegos ON (e.juego_id = juegos.juego_id) LEFT JOIN equipos_torneos ON (equipo_usuario.equipo_id = equipos_torneos.equipo_id) LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) WHERE e.equipo_id=" + id;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);

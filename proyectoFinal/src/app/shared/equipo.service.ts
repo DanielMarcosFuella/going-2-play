@@ -18,6 +18,10 @@ export class EquipoService {
     return this.http.get(this.url + "equipo/?id=" + id)
   }
 
+  getPlayersByID(id:any){
+    return this.http.get(this.url + "jugadores/" + id)
+  }
+
   borrarEquipo(id:number){​​​​
     let options = {​​​​
       headers: new HttpHeaders({​​​​

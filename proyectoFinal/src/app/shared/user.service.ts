@@ -53,6 +53,7 @@ export class UserService {
     return this.http.get(this.url2 + "/user" + "?nickname=" +usernick )
   }
   
+  
 
   isBanned() {
     this.getUserAll().subscribe((data: User[]) => {
@@ -115,6 +116,22 @@ export class UserService {
     return this.http.get(this.url2 +"/admin-equipos")
   }
 
+  editTeam(newTeam:any){
+    return this.http.put(this.url2 + "/admin-equipos", newTeam)
+  }
+
+  deleteTeam(id:number){
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        equipo_id: id
+      },
+    }
+    return this.http.delete(this.url2 + "/admin-equipos", options)
+  }
+
   getUserByEmail(email:string){
     return this.http.get<any>(this.url + "/correo/" +email);
   }
@@ -126,12 +143,20 @@ export class UserService {
     return this.http.get(this.url + "/" + id)
   }
 
+  getTeamsById(id:number){
+    return this.http.get(this.url2 + "/list-teams/" + id)
+  }
+
   login(usuario:User){
     return this.http.post(this.url + "/login", usuario)
   }
 
   getUserAll(){
     return this.http.get(this.url)
+  }
+
+  getUserAllAdmin(){
+    return this.http.get(this.url2 + "/admin-usuarios")
   }
 
   postUser(newUser:User){
