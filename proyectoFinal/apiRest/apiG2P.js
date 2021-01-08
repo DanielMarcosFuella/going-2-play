@@ -1060,11 +1060,11 @@ app.get("/torneos", function (req, res) {
 //   });
 // });
 
-// Mostrar los torneos de un equipo pasado por query
+// Mostrar los torneos en los que está inscrito un usuario
 
 app.get("/torneo", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT * FROM torneos WHERE torneo_id=" + id;
+  let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.resultado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1075,13 +1075,28 @@ app.get("/torneo", function (req, res) {
   });
 });
 
+// Mostrar los torneos de un equipo pasado por query
+
+// app.get("/torneo", function (req, res) {
+//   id = req.query.id;
+//   let sql = "SELECT * FROM torneos WHERE torneo_id=" + id;
+//   connection.query(sql, function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(result);
+//     }
+//     res.send(result);
+//   });
+// });
+
 // POST torneos (añade un nuevo torneo a la base de datos).
 
 app.post("/torneos", function (req, res) {
   if (!req.body) {
     console.log("error");
   } else {
-    let sql = `INSERT INTO torneos (torneo_id, nombre, fecha, fases, reglas_id, hora, puntos, resultado) VALUES(null, \"${req.body.nombre}\", \"${req.body.fecha}\", \"${req.body.fases}\",\"${req.body.reglas_id}\",\"${req.body.hora}\", \"${req.body.puntos}\", \"${req.body.resultado}\")`;
+    let sql = `INSERT INTO torneos (torneo_id, nombre, juego, fecha, fases, reglas_id, hora, puntos, resultado) VALUES(null, \"${req.body.nombre}\", \"${req.body.juego}\", \"${req.body.fecha}\", \"${req.body.fases}\",\"${req.body.reglas_id}\",\"${req.body.hora}\", \"${req.body.puntos}\", \"${req.body.resultado}\")`;
     connection.query(sql, function (err, result) {
       if (err) {
         console.log(err);
@@ -1098,6 +1113,7 @@ app.post("/torneos", function (req, res) {
 app.put("/torneos", function (req, response) {
   let torneo_id = req.body.torneo_id;
   let nombre = req.body.nombre;
+  let juego = req.body.juego;
   let fecha = req.body.fecha;
   let fases = req.body.fases;
   let reglas_id = req.body.reglas_id;
@@ -1111,6 +1127,10 @@ app.put("/torneos", function (req, response) {
   if (nombre) {
     params.push(nombre);
     modi.push(" nombre = ? ");
+  }
+  if (juego) {
+    params.push(juego);
+    modi.push(" juego = ? ");
   }
   if (fecha) {
     params.push(fecha);

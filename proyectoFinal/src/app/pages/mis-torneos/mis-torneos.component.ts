@@ -13,29 +13,24 @@ export class MisTorneosComponent implements OnInit {
   title = 'Mis Torneos - G2P'
   public torneo: Torneo;
   public torneoArray: Torneo[];
-  public saveUrl: string;
 
   constructor(private serviceTitle:Title, private torneoService: TorneoService, private route: ActivatedRoute) { 
 
-    this.saveUrl = this.route.snapshot.queryParams.id;
     this.torneo = this.torneoService.torneo;
-  }
-
-  getTorneoByID() {
-    this.torneoService.getTorneoByID(this.saveUrl).subscribe((data:Torneo[])=>{
-      this.torneoService.torneo = data[0];
-      localStorage.setItem("perfilTorneo", JSON.stringify(this.torneoService.torneo));
-      this.torneo = this.torneoService.torneo;
-      console.log(this.torneo);
-    });
+    this.torneoArray = [];
   }
 
   ngOnInit(): void {
   this.serviceTitle.setTitle(this.title)
-  this.getTorneoByID();
-  this.torneoService.torneo = JSON.parse(localStorage.getItem("perfilTorneo"));
-  this.torneo = this.torneoService.torneo;
-  console.log(this.torneo);
+  
+  let id = JSON.parse(localStorage.getItem("usuario")).usuario_id 
+  
+  this.torneoService.getTorneoByID(id).subscribe((data:Torneo[])=>{
+    this.torneoArray = data;
+    localStorage.setItem("perfilTorneo", JSON.stringify(this.torneoService.torneo));
+    console.log(this.torneoArray);
+  });
+  
   }
 
 }
