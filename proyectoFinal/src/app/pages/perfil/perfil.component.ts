@@ -133,6 +133,8 @@ export class PerfilComponent implements OnInit {
         this.router.navigateByUrl('/perfil-user');
         
       }
+      console.log(this.g2pPerfil);
+      
     });
   }
 
@@ -141,6 +143,9 @@ export class PerfilComponent implements OnInit {
   }
 
   shuffeData() {
+    
+
+    
     this.pieChartData = [
       {
         data: [20, 5, 6, 2],
@@ -183,7 +188,9 @@ export class PerfilComponent implements OnInit {
     this.shuffeData();
     this.serviceTitle.setTitle(this.title);
     this.g2pPerfil = this.userService.otherPerfil;
-    console.log(this.userService.otherPerfil.usuario_id);
+    console.log(this.userService.otherPerfil);
+    console.log(this.g2pPerfil);
+    
     
   }
 }

@@ -109,7 +109,7 @@
           </div>
         </div> -->
       </div>
-      <div  *ngIf="user" class="l-wrapper animate__animated animate__backInRight">
+      <div  *ngIf="team === false" class="l-wrapper animate__animated animate__backInRight">
 
         <div class="l-grid">
           <div class="l-grid__item">
@@ -153,7 +153,8 @@
                 <h3>
                   TOP 5 - JUGADORES
                 </h3>
-
+               
+                
               </div>
               <div class="c-card__body">
                 <ul class="c-list" id="list">
@@ -163,7 +164,26 @@
                         #
                       </div>
                       <div class="u-text--left u-text--small u-text--medium">
-                        <a (click)="changeEquipo()">JUGADOR</a> / <a (click)="changeEquipo()">EQUIPO</a>
+                        <div ng-app="MyApp" ng-controller="lController">  
+                          <label class="toggle-checkbox">
+                            <input type="checkbox" ng-model="checkboxInput" (change)="onItemChange($event.target.checked)">
+                            <div class="toggle-slider"></div>
+                            <div class="toggle-info toggle-left">
+                              <div class="icon"><i _ngcontent-pqr-c80="" class="fas fa-user" style="
+                                color: #fff;
+                            "></i></div>
+                              <div class="icon-text">
+                            
+                              </div>
+                                    
+                            </div>
+                            <div class="toggle-info toggle-right">
+                              <div class="icon"><i class="fas fa-users"></i></div>
+                              <div class="icon-text">
+                              </div>
+                            </div>
+                          </label>
+                         </div>
                       </div>
                       <div class="u-text--right u-text--small u-text--medium">
                         PUNTOS
@@ -197,27 +217,28 @@
           </div>
         </div>
       </div>
-      <div  *ngIf="team" class="l-wrapper animate__animated animate__backInRight">
+      <div *ngIf="team === true" class="l-wrapper animate__animated animate__backInRight">
 
         <div class="l-grid">
           <div class="l-grid__item">
-            <div class="c-card">
+            <div class="c-card" *ngIf="userlogin">
               <div class="c-card__body">
-                <div class="u-display--flex u-justify--space-between">
+                <p *ngIf="jugadores.length === 0">Este equipo no tiene jugadores</p>
+                <div class="u-display--flex u-justify--space-between" *ngIf="jugadores.length != 0">
                   <div class="u-text--left">
                     <div class="u-text--small">
-                      Posicion
+                      Posicion Equipo
                     </div>
                     <h4>
-                      #3
+                      #{{yourNumberTopTeam}}
                     </h4>
                   </div>
                   <div class="u-text--right">
                     <div class="u-text--small">
-                      Mis Puntos
+                      Puntuación Equipo
                     </div>
                     <h4>
-                      500
+                      {{yourRankTopTeam.puntuacion}}
                     </h4>
                   </div>
                 </div>
@@ -251,7 +272,28 @@
                         #
                       </div>
                       <div class="u-text--left u-text--small u-text--medium">
-                        <a (click)="changeEquipo()">JUGADOR</a> / <a (click)="changeEquipo()">EQUIPO</a>
+                        <div ng-app="MyApp" ng-controller="lController">  
+                          <label class="toggle-checkbox">
+                            <input type="checkbox" ng-model="checkboxInput" (change)="onItemChange($event.target.checked)" [checked]="true">
+                            <div class="toggle-slider"></div>
+                            <div class="toggle-info toggle-left">
+                              <div class="icon"><i _ngcontent-pqr-c80="" class="fas fa-user" style="
+                                color: #fff;
+                            "></i></div>
+                              <div class="icon-text">
+                            
+                              </div>
+                                    
+                            </div>
+                            <div class="toggle-info toggle-right">
+                              <div class="icon"><i class="fas fa-users"></i></div>
+                              <div class="icon-text">
+                              </div>
+                            </div>
+                          </label>
+                         </div>
+                        
+                        
                       </div>
                       <div class="u-text--right u-text--small u-text--medium">
                         PUNTOS
@@ -267,7 +309,7 @@
                         </div>
                         <div class="c-media__content">
                           <div class="c-media__title float-left">{{dataTeamTop5.nombre}}</div>
-                          <a class="c-media__link u-text--small float-left" (click)="goPerfil(dataTeamTop5.capitan_nickname)"  target="_blank">@{{dataTeamTop5.capitan_nickname}}</a>
+                          <a class="c-media__link u-text--small float-left" (click)="goPerfilTeam(dataTeamTop5.equipo_id)"  target="_blank">ver equipo</a>
                         </div>
                       </div>
                       <div class="u-text--right c-kudos">

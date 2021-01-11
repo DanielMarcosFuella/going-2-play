@@ -147,6 +147,10 @@ export class UserService {
     return this.http.get(this.url2 + "/list-teams/" + id)
   }
 
+  yourTeamRank(id:number){
+    return this.http.get(this.url2 + "/yourTeamRank/" + id)
+  }
+
   login(usuario:User){
     return this.http.post(this.url + "/login", usuario)
   }

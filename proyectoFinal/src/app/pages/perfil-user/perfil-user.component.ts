@@ -398,6 +398,7 @@ export class PerfilUserComponent implements OnInit {
     this.getTeamsById();
     this.access();
     this.shuffeData();
+    console.log(this.jugadores)
 
     // this.chartLog()
   }

@@ -123,6 +123,31 @@ app.get("/list-teams/:id", function (req, res){
   })
 })
 
+app.get("/yourTeamRank/:id", function (req, res){
+  id = req.params.id;
+  let sql = "SELECT DISTINCT equipos.* FROM equipo_usuario LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE equipos.capitan="+id;
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+    }
+    res.send(result);
+  })
+})
+
+app.get("/admin-torneos", function (req, res){
+  let sql = "SELECT DISTINCT torneos.torneo_id, torneos.nombre AS torneo_nombre, juegos.juego_id AS juego_nombre, juegos.nombre, torneos.fecha, torneos.hora, torneos.puntos, reglas.reglas_id, reglas.modo, torneos.estado FROM equipos_torneos LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id)";
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+    }
+    res.send(result)
+  })
+})
+
 
 app.get("/user", function (req, res) {
   console.log(req.query);

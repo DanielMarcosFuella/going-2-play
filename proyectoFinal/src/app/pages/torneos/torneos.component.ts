@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
+import { Equipo } from 'src/app/models/equipo';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/shared/auth.service';
 import { UserService } from 'src/app/shared/user.service';
@@ -23,9 +24,12 @@ export class TorneosComponent implements OnInit {
   public dataTop10: User[];
   public dataTeamTop5: [];
   public yourRankTop: User;
+  public yourRankTopTeam: Equipo;
   public topOne:User;
   public teamTopOne:any;
   public yourNumberTop:number;
+  public yourNumberTopTeam:number;
+  public jugadores: any;
   user: boolean;
   team: boolean;
   title = 'Torneos - G2P';
@@ -41,7 +45,7 @@ export class TorneosComponent implements OnInit {
     this.dataTeamTop5 = this.userService.teamRank;
     this.topOne = this.userService.userTopOne
     this.teamTopOne = this.userService.teamTopOne;
-
+    this.jugadores = []
     this.user = true;
     this.userlogin = false
   }
@@ -49,6 +53,12 @@ export class TorneosComponent implements OnInit {
   goPerfil(nickname: string) {
     this.router.navigateByUrl(
       '/perfil?nickname=' + nickname
+    );
+  }
+
+  goPerfilTeam(id: number) {
+    this.router.navigateByUrl(
+      '/perfil-equipo?id=' + id
     );
   }
 
@@ -65,8 +75,6 @@ export class TorneosComponent implements OnInit {
       this.userService.teamRank = data;
       this.dataTeamTop5 = this.userService.teamRank;
       localStorage.setItem('ranktop5team', JSON.stringify(this.dataTeamTop5))
-      console.log(data);
-      
     })
   }
 
@@ -92,8 +100,6 @@ export class TorneosComponent implements OnInit {
     this.userService.getOneTopTeam().subscribe((data)=>{
       this.userService.teamTopOne = data[0];
     this.teamTopOne = this.userService.teamTopOne;
-    console.log(data[0]);
-    
     })
     
   }
@@ -104,6 +110,7 @@ export class TorneosComponent implements OnInit {
   }
   
   changeEquipo(){
+
     if(this.user === true){
       this.user = false;
       this.team = true;
@@ -113,12 +120,42 @@ export class TorneosComponent implements OnInit {
     }
 
   }
+  onItemChange(value){
+    console.log(" Value is : ", value );
+    this.team = value
+ }
+
+  getTeamsById() {
+
+    this.userService.yourTeamRank(this.userService.usuarios.usuario_id).subscribe((data) => {
+      const dataPlayerJSON = JSON.stringify(data[0]);
+      const dataPlayer = JSON.parse(dataPlayerJSON);
+      this.jugadores = dataPlayer;
+      console.log(this.jugadores);
+      const newTeam = JSON.parse(localStorage.getItem('ranktop5team'))
+      console.log(newTeam);
+      
+      const saveID = this.userService.usuarios.usuario_id
+      let found = newTeam.find(function (element) {
+        return element.capitan_id === saveID;
+      });
+      console.log(found);
+
+      const isLargeNumber = (element) => element.capitan_id === saveID;
+      this.yourRankTopTeam = found
+      const saveYourTop = newTeam.findIndex(isLargeNumber) + 1
+      this.yourNumberTopTeam = saveYourTop
+      console.log(this.yourNumberTopTeam);
+      
+    });
+  }
 
   ngOnInit(): void {
     this.rankTop10();
     this.rankTop5Team();
     this.findTopOne();
     this.findYourTop();
+    this.getTeamsById();
     this.isLoggedIn();
     this.userService.usersRank = JSON.parse(localStorage.getItem('ranktop10'));
     this.dataTop10 = this.userService.usersRank;
@@ -126,8 +163,5 @@ export class TorneosComponent implements OnInit {
     this.dataTeamTop5 = this.userService.teamRank;
     this.topOne = this.userService.userTopOne
     this.serviceTitle.setTitle(this.title);
-    console.log(this.dataTeamTop5);
-    
-    
   }
 }
