@@ -896,8 +896,159 @@ app.delete("/admin-equipos", function (req, res) {
 });
 
 
+// ENDPOINT JUEGOS
+app.get("/juegosall", function(req, res){
+  let sql = "SELECT DISTINCT e.juego_id, e.nombre AS juego_nombre, e.foto FROM juegos LEFT JOIN juegos AS e ON (juegos.juego_id = juegos.juego_id)";
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+    }
+    res.send(result)
+  })
+})
+
+app.get("/torneosall", function(req, res){
+  let sql = "SELECT DISTINCT e.* FROM torneos LEFT JOIN torneos AS e ON (torneos.torneo_id = torneos.torneo_id)";
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+    }
+    res.send(result)
+  })
+})
 
 
+// ENDPOINT PARTIDOS 
+app.get("/admin-partidos", function (req, res) {
+  id = req.params.id;
+  let sql = "SELECT DISTINCT partidos.partido_id, torneos.torneo_id, torneos.nombre AS torneo_nombre, torneos.estado AS estado_torneo, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS juego_foto, partidos.fecha, partidos.hora, partidos.equipo_first, e1.nombre AS nombre_equipo_first,e1.logo AS logo_first, partidos.equipo_second, e2.nombre AS nombre_equipo_second, e2.logo AS logo_second,partidos.resultado_first, partidos.resultado_second, partidos.comentario FROM partidos LEFT JOIN juegos ON (partidos.juego_id = juegos.juego_id) LEFT JOIN equipos AS e1 ON (partidos.equipo_first = e1.equipo_id) LEFT JOIN equipos AS e2 ON (partidos.equipo_second = e2.equipo_id) LEFT JOIN torneos ON (partidos.torneo_id = torneos.torneo_id)"
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+
+    res.send(result);
+  });
+});
+
+app.post("/admin-partidos", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql2 = `INSERT INTO partidos (partido_id, torneo_id, juego_id, fecha, hora, equipo_first, equipo_second, resultado_first, resultado_second, comentario) VALUES(null, ${req.body.torneo_id}, ${req.body.juego_id}, \"${req.body.fecha}\", \"${req.body.hora}\", ${req.body.equipo_first}, ${req.body.equipo_second}, ${req.body.resultado_first}, ${req.body.resultado_second}, \"${req.body.comentario}\")`;
+    connection.query(sql2, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+      res.send(result);
+    });
+  }
+});
+
+app.put("/admin-partidos", function (req, response) {
+  let partido_id = req.body.partido_id;
+  let torneo_id = req.body.torneo_id;
+  let juego_id = req.body.juego_id;
+  let fecha = req.body.fecha;
+  let hora = req.body.hora;
+  let equipo_first = req.body.equipo_first;
+  let equipo_second = req.body.equipo_second;
+  let resultado_first = req.body.resultado_first;
+  let resultado_second = req.body.resultado_second
+  let comentario = req.body.comentario
+
+  let sql = "UPDATE partidos SET";
+  let params = new Array();
+  let modi = new Array();
+  console.log(req.body);
+
+  if (torneo_id) {
+    params.push(torneo_id);
+    modi.push(" torneo_id = ? ");
+  }
+  if (juego_id) {
+    params.push(juego_id);
+    modi.push(" juego_id = ? ");
+  }
+  if (fecha) {
+    params.push(fecha);
+    modi.push(" fecha = ? ");
+  }
+  if (hora) {
+    params.push(hora);
+    modi.push(" hora = ? ");
+  }
+  if (equipo_first) {
+    params.push(equipo_first);
+    modi.push(" equipo_first = ? ");
+  }
+  if(equipo_second){
+    params.push(equipo_second)
+    modi.push(" equipo_second = ? ")
+  }
+  if(resultado_first){
+    params.push(resultado_first)
+    modi.push(" resultado_first = ? ")
+  }
+  if(resultado_second){
+    params.push(resultado_second)
+    modi.push(" resultado_second = ? ")
+  }
+  if(comentario){
+    params.push(comentario)
+    modi.push(" comentario = ? ")
+  }
+
+  sql += modi.toString() + "WHERE partido_id= " + partido_id;
+  console.log(sql);
+  connection.query(sql, params, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Datos de EQUIPOS actualizados");
+    }
+    response.send(result);
+  });
+});
+
+app.delete("/admin-partidos", function (req, res) {
+  let sql4 = `DELETE FROM partidos WHERE partido_id=${req.body.partido_id}`;
+  connection.query(sql4, function (err, result) {
+    let msg;
+    if (err) {
+      console.log(err);
+      msg =  true
+    } else {
+      msg = result
+      console.log(result);
+    }
+    res.send(msg);
+  });
+});
+// FIN
+
+app.get("/admin-equipo/:nombre", function(req, res){
+  id = req.params.id
+  nombre = req.params.nombre
+  let arr = [id, nombre]
+  let sql = `SELECT * FROM equipos WHERE nombre = \"${nombre}\"`
+  connection.query(sql, function(err, result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+    }
+    res.send(result)
+  }) 
+})
 
 // ENDPOINT PARTIDOS //
 
@@ -1052,6 +1203,8 @@ app.get("/equipos/:id", function(req, res){
         }
     });
 });
+
+
 
 // app.get("/equipos/equipo_id/:id", function (req, res) {
 //   id = req.params.id;

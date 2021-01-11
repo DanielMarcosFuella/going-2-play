@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
 import { UserService } from 'src/app/shared/user.service';
 import Swal from 'sweetalert2';
 
@@ -17,13 +18,38 @@ export class AdminTeamsComponent implements OnInit {
   public indexDelete: number;
   public indexEdit: number;
   public adminTeams: any[];
+  public userlogin: boolean;
+  public adminlogin: boolean;
   public listajuegos: string[];
 
-    constructor(private router: Router, public userService: UserService, private serviceTitle: Title, ) {
+    constructor(private router: Router, private auth: AuthService, public userService: UserService, private serviceTitle: Title) {
     this.adminTeams = this.userService.adminTeams;
     this.indexDelete = 0;
     this.listajuegos = ['LOL', 'FIFA'];
     this.indexEdit = 0;
+    this.userlogin = false;
+    this.adminlogin = false;
+  }
+
+  isLoggedIn() {
+    this.userlogin = this.auth.isLoggedIn();
+    return this.userlogin;
+  }
+
+  noAdmin() {
+    if (this.isLoggedIn() && this.userService.usuarios.admin === 'admin') {
+      return true;
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'error', 
+        title: 'No tienes permiso para entrar aqui',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      this.router.navigateByUrl('/');
+      return false;
+    }
   }
 
   getAllTeams() {
@@ -149,6 +175,7 @@ export class AdminTeamsComponent implements OnInit {
   ngOnInit(): void {
     this.serviceTitle.setTitle(this.title);
     this.getAllTeams();
+    this.noAdmin();
     this.userService.adminTeams = JSON.parse(
       localStorage.getItem('adminteams')
     );
