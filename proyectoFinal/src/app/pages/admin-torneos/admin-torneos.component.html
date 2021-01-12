@@ -120,12 +120,12 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Nombre del torneo" #editName
+              placeholder="{{adminTorneos[indexEdit].nombre}}" #editName
             />
           </div>
           <div class="form-group">
             <select name="country" class="form-control selectpicker" #editJuego>
-              <option value="0">Seleccionar juego</option>
+              <option value="{{adminTorneos[indexEdit].juego_id}}">{{adminTorneos[indexEdit].juego_nombre}}</option>
               <option
                 [value]="juegos.juego_id"
                 *ngFor="let juegos of juegos; let i = index"
@@ -147,17 +147,17 @@
           </div>
 
           <div class="form-group">
-            <input type="date" class="form-control" placeholder="Fecha" #editFecha />
+            <input type="date" class="form-control" value="{{adminTorneos[indexEdit].fecha}}" #editFecha />
           </div>
           <div class="form-group">
-            <input type="time" class="form-control" #editHora/>
+            <input type="time" class="form-control" value="{{adminTorneos[indexEdit].hora}}"  #editHora/>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Premios" #editPremio/>
+            <input type="text" class="form-control" placeholder="{{adminTorneos[indexEdit].puntos}}" #editPremio/>
           </div>
           <div class="form-group">
             <select name="country" class="form-control selectpicker" #editRegla>
-              <option value="0">Seleccionar regla</option>
+              <option value="{{adminTorneos[indexEdit].reglas_id}}">{{adminTorneos[indexEdit].juego_nombre}} - {{adminTorneos[indexEdit].reglas_modo}}</option>
               <option
                 [value]="rulesall.reglas_id"
                 *ngFor="let rulesall of rulesall; let i = index"
@@ -168,7 +168,7 @@
           </div>
           <div class="form-group">
             <select name="country" class="form-control selectpicker" #editFase>
-              <option value="0">Seleccionar fase</option>
+              <option value="{{adminTorneos[indexEdit].fases}}">{{adminTorneos[indexEdit].fases}}</option>
               <option
                 [value]="fases"
                 *ngFor="let fases of fases; let i = index"
@@ -179,7 +179,7 @@
           </div>
           <div class="form-group">
             <select name="country" class="form-control selectpicker" #editEstado>
-              <option value="0">Seleccionar estado</option>
+              <option value="{{adminTorneos[indexEdit].estado}}">{{adminTorneos[indexEdit].estado}}</option>
               <option
                 [value]="estado"
                 *ngFor="let estado of estado; let i = index"
