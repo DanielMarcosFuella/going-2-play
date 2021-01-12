@@ -5,7 +5,7 @@ import { User } from 'src/app/models/user';
 import { EncrDecrServiceService } from 'src/app/shared/encr-decr-service.service';
 import { UserService } from 'src/app/shared/user.service';
 import Swal from 'sweetalert2';
-import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { json, RxwebValidators } from '@rxweb/reactive-form-validators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { G2pService } from 'src/app/shared/g2p.service';
@@ -24,6 +24,7 @@ export class PerfilComponent implements OnInit {
   title = 'Perfil - G2P';
   public saveUrl: string;
   public g2pPerfil: User;
+  public jugadores: any;
   public pieChartData: ChartDataSets[] = [
     {
       borderColor: '#fff',
@@ -96,6 +97,8 @@ export class PerfilComponent implements OnInit {
   ) {
     this.saveUrl = this.route.snapshot.queryParams.nickname;
     this.g2pPerfil = this.userService.otherPerfil;
+    this.jugadores = [];
+
   }
 
   comprobate() {
@@ -125,17 +128,24 @@ export class PerfilComponent implements OnInit {
         });
         this.router.navigateByUrl('/torneos');
       }
-      console.log(this.g2pPerfil.nickname);
-      console.log(this.userService.usuarios.nickname);
       
       if(this.g2pPerfil.nickname === this.userService.usuarios.nickname){
         this.router.navigateByUrl('/perfil-user');
         
       }
+      console.log(this.g2pPerfil);
+      
     });
   }
 
+  goPerfil(id: string) {
+    this.router.navigateByUrl('/perfil-equipo?id=' + id);
+  }
+
   shuffeData() {
+    
+
+    
     this.pieChartData = [
       {
         data: [20, 5, 6, 2],
@@ -145,6 +155,19 @@ export class PerfilComponent implements OnInit {
         label: 'Poppins',
       },
     ];
+  }
+
+  getTeamsById() {
+
+    this.userService.getOtroPerfil(this.saveUrl).subscribe((data: User) => {
+      const saveUser = JSON.stringify(data[0]);
+      const saveUserJSON = JSON.parse(saveUser)
+    this.userService.getTeamsById(saveUserJSON.usuario_id).subscribe((data: []) => {
+      const dataPlayerJSON = JSON.stringify(data);
+      const dataPlayer = JSON.parse(dataPlayerJSON);
+      this.jugadores = dataPlayer;
+    });
+    });
   }
 
   goBack() {
@@ -161,8 +184,13 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     this.comprobate();
     this.getUser();
+    this.getTeamsById();
     this.shuffeData();
     this.serviceTitle.setTitle(this.title);
     this.g2pPerfil = this.userService.otherPerfil;
+    console.log(this.userService.otherPerfil);
+    console.log(this.g2pPerfil);
+    
+    
   }
 }
