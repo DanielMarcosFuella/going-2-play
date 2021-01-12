@@ -1046,19 +1046,19 @@ app.get("/torneos", function (req, res) {
 
 // Muestra el torneo pasado por id
 
-// app.get("/torneos/:id", function (req, res) {
-//   id = req.params.id;
-//   let sql = "SELECT * FROM torneos WHERE torneo_id=" + id;
-//   connection.query(sql, function (err, result) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log(result);
-//     }
+app.get("/torneos/:id", function (req, res) {
+  id = req.params.id;
+  let sql = "SELECT * FROM torneos WHERE torneo_id=" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
 
-//     res.send(result);
-//   });
-// });
+    res.send(result);
+  });
+});
 
 // Mostrar los torneos de un equipo pasado por query
 
@@ -1166,5 +1166,73 @@ app.delete("/torneos", function (req, res) {
   });
 });
 
+
+// ENDPOINTS COLOCACION TORNEO
+
+app.post("/colocacion", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql = `INSERT INTO colicacion_torneo (torneo_id, equipo_id, posicion) VALUES(\"${req.body.torneo_id}\", \"${req.body.equipo_id}\", \"${req.body.posicion}\")`;
+    connection.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+      res.send(result);
+    });
+  }
+});
+
+app.put("/colocacion", function (req, response) {
+  let id = req.body.id;
+  let torneo_id = req.body.torneo_id;
+  let equipo_id = req.body.equipo_id;
+  let posicion = req.body.posicion;
+  let sql = "UPDATE colicacion_torneo SET";
+  let params = new Array();
+  let modi = new Array();
+  console.log(req.body);
+  if (torneo_id) {
+    params.push(torneo_id);
+    modi.push(" torneo_id = ? ");
+  }
+  if (equipo_id) {
+    params.push(equipo_id);
+    modi.push(" equipo_id = ? ");
+  }
+  if (posicion) {
+    params.push(posicion);
+    modi.push(" posicion = ? ");
+  }
+
+  sql += modi.toString() + "WHERE id = " + id;
+  console.log(sql);
+  connection.query(sql, params, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Datos de la colocacion actualizados");
+    }
+    response.send(result);
+  });
+});
+
+app.get("/colocacion", function (req, res) {
+  id = req.query.id;
+  let sql = "SELECT colicacion_torneo.posicion, logo, nombre, resultado_first, resultado_second " + 
+  "FROM `colicacion_torneo` INNER JOIN equipos ON (colicacion_torneo.equipo_id = equipos.equipo_id) " +
+  "LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id) " + 
+  "WHERE colicacion_torneo.torneo_id = " + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
 
 app.listen(8000);

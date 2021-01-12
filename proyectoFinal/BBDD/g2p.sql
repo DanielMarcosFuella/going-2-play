@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 29-12-2020 a las 12:06:01
--- Versión del servidor: 10.4.16-MariaDB
--- Versión de PHP: 7.4.12
+-- Host: 127.0.0.1
+-- Generation Time: Jan 07, 2021 at 12:28 PM
+-- Server version: 10.4.16-MariaDB
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `g2p`
+-- Database: `g2p`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `chat`
+-- Table structure for table `chat`
 --
 
 CREATE TABLE `chat` (
@@ -37,33 +37,35 @@ CREATE TABLE `chat` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `equipos`
+-- Table structure for table `equipos`
 --
 
 CREATE TABLE `equipos` (
   `equipo_id` int(30) NOT NULL,
   `nombre` varchar(60) NOT NULL,
+  `logo` varchar(900) NOT NULL,
   `juego_id` int(11) NOT NULL,
   `capitan` int(11) NOT NULL,
-  `ganadas` int(4) NOT NULL,
-  `perdidas` int(4) NOT NULL,
-  `empatadas` int(4) NOT NULL,
-  `jugadas` int(4) NOT NULL,
-  `biografia` varchar(360) NOT NULL
+  `ganadas` int(4) NOT NULL DEFAULT 0,
+  `perdidas` int(4) NOT NULL DEFAULT 0,
+  `jugadas` int(4) NOT NULL DEFAULT 0,
+  `biografia` varchar(360) NOT NULL,
+  `puntuacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `equipos`
+-- Dumping data for table `equipos`
 --
 
-INSERT INTO `equipos` (`equipo_id`, `nombre`, `juego_id`, `capitan`, `ganadas`, `perdidas`, `empatadas`, `jugadas`, `biografia`) VALUES
-(1, 'LOS TITALES', 1, 5, 10, 3, 4, 17, 'Somos los titanes AUGHGHGHGHG'),
-(2, 'LOS CAMALEONES', 2, 4, 7, 1, 2, 10, 'Nos camuflamos entre los jugadores, camaleones al combate !!!');
+INSERT INTO `equipos` (`equipo_id`, `nombre`, `logo`, `juego_id`, `capitan`, `ganadas`, `perdidas`, `jugadas`, `biografia`, `puntuacion`) VALUES
+(1, 'Los papis', 'assets/images/logo.png', 1, 5, 10, 3, 17, 'Chomoloko', 0),
+(2, 'LOS CAMALEONES', 'assets/images/logo.png', 2, 4, 7, 1, 10, 'Nos camuflamos entre los jugadores, camaleones al combate !!!', 0),
+(8, 'Los colosos', 'assets/images/logo.png', 1, 4, 25, 0, 25, 'Vamonoh pal pary', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `equipos_torneos`
+-- Table structure for table `equipos_torneos`
 --
 
 CREATE TABLE `equipos_torneos` (
@@ -74,7 +76,7 @@ CREATE TABLE `equipos_torneos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `equipo_usuario`
+-- Table structure for table `equipo_usuario`
 --
 
 CREATE TABLE `equipo_usuario` (
@@ -82,10 +84,22 @@ CREATE TABLE `equipo_usuario` (
   `equipo_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `equipo_usuario`
+--
+
+INSERT INTO `equipo_usuario` (`usuario_id`, `equipo_id`) VALUES
+(5, 2),
+(4, 8),
+(4, 8),
+(67, 8),
+(70, 8),
+(71, 8);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `juegos`
+-- Table structure for table `juegos`
 --
 
 CREATE TABLE `juegos` (
@@ -95,7 +109,7 @@ CREATE TABLE `juegos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `juegos`
+-- Dumping data for table `juegos`
 --
 
 INSERT INTO `juegos` (`juego_id`, `nombre`, `foto`) VALUES
@@ -105,7 +119,7 @@ INSERT INTO `juegos` (`juego_id`, `nombre`, `foto`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `mensajes`
+-- Table structure for table `mensajes`
 --
 
 CREATE TABLE `mensajes` (
@@ -118,7 +132,7 @@ CREATE TABLE `mensajes` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `partidos`
+-- Table structure for table `partidos`
 --
 
 CREATE TABLE `partidos` (
@@ -133,7 +147,7 @@ CREATE TABLE `partidos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `reglas`
+-- Table structure for table `reglas`
 --
 
 CREATE TABLE `reglas` (
@@ -144,7 +158,7 @@ CREATE TABLE `reglas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `reglas`
+-- Dumping data for table `reglas`
 --
 
 INSERT INTO `reglas` (`reglas_id`, `modo`, `juego_id`, `descripcion`) VALUES
@@ -154,23 +168,33 @@ INSERT INTO `reglas` (`reglas_id`, `modo`, `juego_id`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `torneos`
+-- Table structure for table `torneos`
 --
 
 CREATE TABLE `torneos` (
   `torneo_id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
+  `juego` enum('FIFA','LOL') NOT NULL,
   `fecha` date NOT NULL,
   `fases` enum('semifinal','cuartos','octavos','dieciseisavos') NOT NULL,
   `reglas_id` int(11) NOT NULL,
   `hora` varchar(30) NOT NULL,
-  `puntos` int(10) NOT NULL
+  `puntos` int(10) NOT NULL,
+  `resultado` enum('ganado','perdido','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `torneos`
+--
+
+INSERT INTO `torneos` (`torneo_id`, `nombre`, `juego`, `fecha`, `fases`, `reglas_id`, `hora`, `puntos`, `resultado`) VALUES
+(1, 'torneazo', '', '2021-01-13', 'semifinal', 133, '', 1000, 'ganado'),
+(2, 'tornefaka', '', '2021-01-15', 'cuartos', 142, '', 5000, 'ganado');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `torneo_usuario`
+-- Table structure for table `torneo_usuario`
 --
 
 CREATE TABLE `torneo_usuario` (
@@ -181,7 +205,7 @@ CREATE TABLE `torneo_usuario` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -195,25 +219,30 @@ CREATE TABLE `usuarios` (
   `nacionalidad` varchar(30) NOT NULL,
   `contrasena` varchar(60) NOT NULL,
   `biografia` varchar(360) NOT NULL,
-  `admin` enum('admin','user') DEFAULT NULL
+  `admin` enum('admin','user') DEFAULT NULL,
+  `isBanned` tinyint(1) NOT NULL DEFAULT 0,
+  `puntuacion` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`usuario_id`, `nickname`, `nombre`, `apellido`, `url_perfil`, `nacimiento`, `correo`, `nacionalidad`, `contrasena`, `biografia`, `admin`) VALUES
-(4, 'joseh', 'Jose', 'Herrera', '', '1980-11-04', 'joseh@g2p.com', 'Española', 'pepitopalote', 'Hola soy el profe de codenotch y hago folladas mentales xd', 'user'),
-(5, 'jorger', 'Jorge', 'Rodriguez', '', '1996-07-12', 'jorger@g2p.com', 'Española', 'pepitopalote', 'Hola soy jorge y juego al LOL\r\nIQ: 100000000', 'user'),
-(64, 'cacaaaaa', 'Luis', 'Fernandez', 'assets/images/logo.png', '1999-10-21', 'lualfer99@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user'),
-(67, 'luisfr', '2222', 'Fernandez', 'assets/images/2222671609212087203luisfr.jpg', '0000-00-00', 'lualfer99@gmail.com', 'Estados Unidos', 'vVOQRWUkcaZ7Ai3lrZi9cA==', '212121212', 'admin');
+INSERT INTO `usuarios` (`usuario_id`, `nickname`, `nombre`, `apellido`, `url_perfil`, `nacimiento`, `correo`, `nacionalidad`, `contrasena`, `biografia`, `admin`, `isBanned`, `puntuacion`) VALUES
+(4, 'joseh', 'Jose', 'Herrera', '', '1980-11-04', 'joseh@g2p.com', 'Española', 'pepitopalote', 'Hola soy el profe de codenotch y hago folladas mentales xd', 'user', 0, 0),
+(5, 'jorger', 'Jorge', 'Rodriguez', '', '1996-07-12', 'jorger@g2p.com', 'Española', 'pepitopalote', 'Hola soy jorge y juego al LOL\r\nIQ: 100000000', 'user', 0, 0),
+(64, 'cacaaaaa', 'Luis', 'Fernandez', 'assets/images/logo.png', '1999-10-21', 'lualfer99@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 0),
+(67, 'luisfr', '2222', 'Fernandez', 'assets/images/2222671609212087203luisfr.jpg', '0000-00-00', 'lualfer99@gmail.com', 'Estados Unidos', 'vVOQRWUkcaZ7Ai3lrZi9cA==', '212121212', 'admin', 0, 0),
+(70, 'surikato', 'urik', 'landa', 'sdsfd', '0000-00-00', 'ddsf', '', '', '', 'user', 0, 0),
+(71, 'carollys', 'carolly', 'csdfs', 'fsd', '0000-00-00', '', '', '', '', NULL, 0, 0),
+(72, '', '', '', '', '0000-00-00', '', '', '', '', 'user', 0, 0);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `chat`
+-- Indexes for table `chat`
 --
 ALTER TABLE `chat`
   ADD PRIMARY KEY (`chat_id`),
@@ -222,7 +251,7 @@ ALTER TABLE `chat`
   ADD KEY `capitan_second` (`capitan_second`);
 
 --
--- Indices de la tabla `equipos`
+-- Indexes for table `equipos`
 --
 ALTER TABLE `equipos`
   ADD PRIMARY KEY (`equipo_id`),
@@ -230,27 +259,27 @@ ALTER TABLE `equipos`
   ADD KEY `juego_id` (`juego_id`);
 
 --
--- Indices de la tabla `equipos_torneos`
+-- Indexes for table `equipos_torneos`
 --
 ALTER TABLE `equipos_torneos`
   ADD KEY `torneo_id` (`torneo_id`),
   ADD KEY `equipo_id` (`equipo_id`);
 
 --
--- Indices de la tabla `equipo_usuario`
+-- Indexes for table `equipo_usuario`
 --
 ALTER TABLE `equipo_usuario`
   ADD KEY `equipo_id` (`equipo_id`),
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
--- Indices de la tabla `juegos`
+-- Indexes for table `juegos`
 --
 ALTER TABLE `juegos`
   ADD PRIMARY KEY (`juego_id`);
 
 --
--- Indices de la tabla `mensajes`
+-- Indexes for table `mensajes`
 --
 ALTER TABLE `mensajes`
   ADD PRIMARY KEY (`mensaje_id`),
@@ -258,7 +287,7 @@ ALTER TABLE `mensajes`
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
--- Indices de la tabla `partidos`
+-- Indexes for table `partidos`
 --
 ALTER TABLE `partidos`
   ADD PRIMARY KEY (`partido_id`),
@@ -267,90 +296,90 @@ ALTER TABLE `partidos`
   ADD KEY `torneo_id` (`torneo_id`);
 
 --
--- Indices de la tabla `reglas`
+-- Indexes for table `reglas`
 --
 ALTER TABLE `reglas`
   ADD PRIMARY KEY (`reglas_id`),
   ADD KEY `juego_id` (`juego_id`);
 
 --
--- Indices de la tabla `torneos`
+-- Indexes for table `torneos`
 --
 ALTER TABLE `torneos`
   ADD PRIMARY KEY (`torneo_id`),
   ADD KEY `reglas_id` (`reglas_id`);
 
 --
--- Indices de la tabla `torneo_usuario`
+-- Indexes for table `torneo_usuario`
 --
 ALTER TABLE `torneo_usuario`
   ADD KEY `torneo_id` (`torneo_id`),
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`usuario_id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `chat`
+-- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
   MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `equipos`
+-- AUTO_INCREMENT for table `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `equipo_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `equipo_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT de la tabla `juegos`
+-- AUTO_INCREMENT for table `juegos`
 --
 ALTER TABLE `juegos`
   MODIFY `juego_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `mensajes`
+-- AUTO_INCREMENT for table `mensajes`
 --
 ALTER TABLE `mensajes`
   MODIFY `mensaje_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `partidos`
+-- AUTO_INCREMENT for table `partidos`
 --
 ALTER TABLE `partidos`
   MODIFY `partido_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `reglas`
+-- AUTO_INCREMENT for table `reglas`
 --
 ALTER TABLE `reglas`
   MODIFY `reglas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
--- AUTO_INCREMENT de la tabla `torneos`
+-- AUTO_INCREMENT for table `torneos`
 --
 ALTER TABLE `torneos`
-  MODIFY `torneo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `torneo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `chat`
+-- Constraints for table `chat`
 --
 ALTER TABLE `chat`
   ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`partido_id`) REFERENCES `partidos` (`partido_id`),
@@ -358,35 +387,35 @@ ALTER TABLE `chat`
   ADD CONSTRAINT `chat_ibfk_3` FOREIGN KEY (`capitan_second`) REFERENCES `usuarios` (`usuario_id`);
 
 --
--- Filtros para la tabla `equipos`
+-- Constraints for table `equipos`
 --
 ALTER TABLE `equipos`
   ADD CONSTRAINT `equipos_ibfk_1` FOREIGN KEY (`capitan`) REFERENCES `usuarios` (`usuario_id`),
   ADD CONSTRAINT `equipos_ibfk_2` FOREIGN KEY (`juego_id`) REFERENCES `juegos` (`juego_id`);
 
 --
--- Filtros para la tabla `equipos_torneos`
+-- Constraints for table `equipos_torneos`
 --
 ALTER TABLE `equipos_torneos`
   ADD CONSTRAINT `equipos_torneos_ibfk_1` FOREIGN KEY (`torneo_id`) REFERENCES `torneos` (`torneo_id`),
   ADD CONSTRAINT `equipos_torneos_ibfk_2` FOREIGN KEY (`equipo_id`) REFERENCES `equipos` (`equipo_id`);
 
 --
--- Filtros para la tabla `equipo_usuario`
+-- Constraints for table `equipo_usuario`
 --
 ALTER TABLE `equipo_usuario`
   ADD CONSTRAINT `equipo_usuario_ibfk_1` FOREIGN KEY (`equipo_id`) REFERENCES `equipos` (`equipo_id`),
   ADD CONSTRAINT `equipo_usuario_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`);
 
 --
--- Filtros para la tabla `mensajes`
+-- Constraints for table `mensajes`
 --
 ALTER TABLE `mensajes`
   ADD CONSTRAINT `mensajes_ibfk_1` FOREIGN KEY (`chat_id`) REFERENCES `chat` (`chat_id`),
   ADD CONSTRAINT `mensajes_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`);
 
 --
--- Filtros para la tabla `partidos`
+-- Constraints for table `partidos`
 --
 ALTER TABLE `partidos`
   ADD CONSTRAINT `partidos_ibfk_1` FOREIGN KEY (`equipo_first`) REFERENCES `usuarios` (`usuario_id`),
@@ -394,19 +423,19 @@ ALTER TABLE `partidos`
   ADD CONSTRAINT `partidos_ibfk_3` FOREIGN KEY (`torneo_id`) REFERENCES `torneos` (`torneo_id`);
 
 --
--- Filtros para la tabla `reglas`
+-- Constraints for table `reglas`
 --
 ALTER TABLE `reglas`
   ADD CONSTRAINT `reglas_ibfk_1` FOREIGN KEY (`juego_id`) REFERENCES `juegos` (`juego_id`);
 
 --
--- Filtros para la tabla `torneos`
+-- Constraints for table `torneos`
 --
 ALTER TABLE `torneos`
   ADD CONSTRAINT `torneos_ibfk_1` FOREIGN KEY (`reglas_id`) REFERENCES `reglas` (`reglas_id`);
 
 --
--- Filtros para la tabla `torneo_usuario`
+-- Constraints for table `torneo_usuario`
 --
 ALTER TABLE `torneo_usuario`
   ADD CONSTRAINT `torneo_usuario_ibfk_1` FOREIGN KEY (`torneo_id`) REFERENCES `torneos` (`torneo_id`),
