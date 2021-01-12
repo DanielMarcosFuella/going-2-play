@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Partidos } from 'src/app/models/partidos';
+import { Reglas } from 'src/app/models/reglas';
+import { Torneo } from 'src/app/models/torneo';
 import { AuthService } from 'src/app/shared/auth.service';
+import { G2pService } from 'src/app/shared/g2p.service';
 import { UserService } from 'src/app/shared/user.service';
 import Swal from 'sweetalert2';
 
@@ -28,18 +31,26 @@ export class AdminTorneosComponent implements OnInit {
   public msge2: string;
   public msg2e1: string;
   public juegos: any[];
+  public rulesall: Reglas[];
   public torneos: any[];
+  public fases:string[];
   public msg2e2: string;
+  public estado: string[];
   public saveEquipo1: number;
+  public participantes: any[]
   public saveEquipo2: number;
   constructor(
     private serviceTitle: Title,
     private auth: AuthService,
     private router: Router,
+    private G2PService: G2pService,
     private adminService: UserService
   ) {
     this.adminTorneos = this.adminService.adminTorneos;
     this.juegos = this.adminService.adminJuegos;
+    this.rulesall = this.G2PService.reglas;
+    this.fases = ['semifinal', 'cuartos', 'octavos', 'dieciseisavos']
+    this.estado = ['ACTIVO', 'PENDIENTE', 'FINALIZADO']
     this.userlogin = false;
     this.adminlogin = false;
     this.indexDelete = 0;
@@ -84,89 +95,76 @@ export class AdminTorneosComponent implements OnInit {
     });
   }
 
-  editPar(
+  editTorn(
     idremplace: any,
-    partido_id: number,
-    equipo1: any,
-    equipo2: any,
-    juego: number,
-    fecha: string,
-    hora: string,
-    resultado1: any,
-    resultado2: any,
-    comentarios: string
+    torneo_id:number,
+    nombre:string,
+    fecha:string,
+    fases:string,
+    reglas_id:any,
+    game_id:any,
+    hora:string,
+    puntos:any,
+    estado: string
   ) {
     let xi = JSON.parse(localStorage.getItem('admintorneos'));
 
     let found = xi.find(function (element) {
-      return element.partido_id === partido_id;
+      return element.torneo_id === torneo_id;
     });
-
-    if (equipo1 === 0) {
-      equipo1 = found.equipo_first;
+    console.log(found.fases);
+    
+    if (nombre === "") {
+      nombre = found.nombre;
     } else {
-      found.equipo_first = equipo1;
+      found.nombre = nombre;
     }
-    if (equipo2 === 0) {
-      equipo2 = found.equipo_second;
-    } else {
-      found.equipo_second = equipo2;
-    }
-    if (juego === undefined || juego === null) {
-      juego = Number(found.juego_id);
-    } else {
-      found.juego_id = Number(juego);
-    }
-    if (fecha === null || fecha === '' || fecha === undefined) {
+    
+    if (fecha === null || fecha === "" || fecha === undefined) {
       fecha = found.fecha;
     } else {
       found.fecha = fecha;
     }
-    if (hora === '') {
-      hora = found.hora;
+    if (fases === "0") {
+      fases = found.fases;
     } else {
-      found.hora = hora;
+      found.fases = fases;
     }
-    if (resultado1 === null || resultado1 === '' || resultado1 === undefined) {
-      resultado1 = Number(found.resultado1);
+    if (reglas_id === null || reglas_id === "" || reglas_id === undefined ) {
+      reglas_id = Number(found.reglas_id);
     } else {
-      found.resultado1 = Number(resultado1);
+      found.reglas_id = Number(reglas_id);
     }
-    if (resultado2 === null || resultado2 === '' || resultado2 === undefined) {
-      resultado2 = Number(found.resultado2);
+    if (game_id === null || game_id === "0" || game_id === undefined) {
+      game_id = Number(found.game_id);
     } else {
-      found.resultado2 = Number(resultado2);
+      found.game_id = Number(game_id);
+    }
+    if(hora === "" || hora === "0"){
+      hora = found.hora
+    }else{
+      found.hora = hora
     }
     if (
-      comentarios === null ||
-      comentarios === '' ||
-      comentarios === undefined
+      puntos === null ||
+      puntos === "" ||
+      puntos === undefined
     ) {
-      comentarios = found.comentarios;
+      puntos = found.puntos;
     } else {
-      found.comentarios = comentarios;
+      found.puntos = puntos;
     }
 
-    this.adminService.editPartidos(found).subscribe((data) => {
-      this.adminService.getPartidos().subscribe((data: []) => {
-        this.adminService.adminTeams = data;
-        this.adminTorneos = this.adminService.adminTeams;
-        localStorage.setItem('admintorneos', JSON.stringify(this.adminTorneos));
-        let xi2 = JSON.parse(localStorage.getItem('admintorneos'));
-        let found2 = xi2.find(function (element) {
-          return element.partido_id === partido_id;
-        });
-        this.adminTorneos.splice(idremplace, 1, found2);
-        localStorage.setItem('admintorneos', JSON.stringify(this.adminTorneos));
-      });
-      this.editeTorneo.nativeElement.click();
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Partido modificado correctamente!',
-        showConfirmButton: false,
-        timer: 2500,
-      });
+    if(estado === "0" || estado === null || estado === undefined){
+      estado = found.estado
+    }else{
+      found.estado = estado
+    }
+    console.log(found);
+
+    this.adminService.editTorneos(found).subscribe((data) => {
+      console.log(data);
+      
     });
   }
 
@@ -202,20 +200,22 @@ export class AdminTorneosComponent implements OnInit {
     }
   }
 
-  addPartido(
-    equipo1: number,
-    equipo2: number,
-    juego_id: any,
-    torneo_id: any,
-    fecha: string,
-    hora: string,
-    comentario: string
+  addTour(
+    nombre:string,
+    fecha:string,
+    fases:string,
+    reglas_id:number,
+    game_id:number,
+    hora:string,
+    puntos:number
   ) {
     if (
-      torneo_id === '0' ||
-      juego_id === '0' ||
-      equipo1 === 0 ||
-      equipo2 === 0
+      nombre === "" ||
+      fecha === "" ||
+      fases === "0" || 
+      reglas_id === 0 ||
+      game_id === 0 ||
+      hora === ""
     ) {
       Swal.fire({
         position: 'center',
@@ -225,30 +225,29 @@ export class AdminTorneosComponent implements OnInit {
         timer: 2500,
       });
     } else {
-      this.adminService.partido = new Partidos(
+
+      this.adminService.torneo = new Torneo(
         null,
-        Number(torneo_id),
-        Number(juego_id),
+        nombre,
         fecha,
+        fases,
+        Number(reglas_id),
+        Number(game_id),
         hora,
-        equipo1,
-        equipo2,
-        0,
-        0,
-        comentario
+        Number(puntos)
       );
-      console.log(this.adminService.partido);
+
+      console.log(this.adminService.torneo);
 
       this.adminService
-        .addPartido(this.adminService.partido)
+        .addTorneo(this.adminService.torneo)
         .subscribe((data: any) => {
-          this.getPartidos();
+          this.getTorneos();
           this.addTorneo.nativeElement.click();
-
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Partido creada correctamente!',
+            title: 'Torneo creada correctamente!',
             showConfirmButton: false,
             timer: 2500,
           });
@@ -265,6 +264,18 @@ export class AdminTorneosComponent implements OnInit {
         JSON.stringify(this.adminService.adminJuegos)
       );
       console.log(this.juegos);
+    });
+  }
+
+  getRules() {
+    this.G2PService.getAllReglas().subscribe((data: Reglas[]) => {
+      this.G2PService.reglas = data;
+      localStorage.setItem(
+        'adminrules',
+        JSON.stringify(this.G2PService.reglas)
+      );
+      this.rulesall = this.G2PService.reglas;
+      console.log(this.rulesall);
     });
   }
 
@@ -315,7 +326,8 @@ export class AdminTorneosComponent implements OnInit {
   }
 
   getEquiposTorneos(id:number){
-    this.adminService.getEquiposTorneos(id).subscribe((data:[])=>{
+    this.adminService.getEquiposTorneos(id).subscribe((data:any[])=>{
+      this.participantes = data
       console.log(data);
     })
   }
@@ -331,6 +343,7 @@ export class AdminTorneosComponent implements OnInit {
   ngOnInit(): void {
     this.getTorneos();
     this.getJuegos();
+    this.getRules();
     this.noAdmin();
     this.adminService.adminTorneos = JSON.parse(
       localStorage.getItem('admintorneos')
@@ -340,8 +353,12 @@ export class AdminTorneosComponent implements OnInit {
       localStorage.getItem('adminjuegos')
     );
     this.juegos = this.adminService.adminJuegos;
+    this.G2PService.reglas = JSON.parse(
+      localStorage.getItem('adminrules')
+    );
+    this.rulesall = this.G2PService.reglas;
 
     this.serviceTitle.setTitle(this.title);
-    console.log(this.adminTorneos);
+    console.log(this.rulesall);
   }
 }

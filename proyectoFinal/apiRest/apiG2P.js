@@ -726,7 +726,7 @@ app.get("/reglas/:id", function (req, res) {
 
 app.get("/reglas", function (req, res) {
   id = req.params.id;
-  let sql1 = "SELECT * FROM reglas";
+  let sql1 = "SELECT DISTINCT reglas.*, juegos.juego_id, juegos.nombre AS nombre_juego, juegos.foto AS foto_juego FROM reglas LEFT JOIN juegos ON (reglas.juego_id = juegos.juego_id)";
   connection.query(sql1, function (err, result) {
     if (err) {
       console.log(err);
@@ -939,7 +939,7 @@ app.get("/admin-equipos-torneos/:id", function (req, res) {
 
 app.get("/admin-torneos-all", function (req, res) {
   let id = req.params.id;
-  let sql = "SELECT DISTINCT torneos.torneo_id, torneos.nombre, juegos.juego_id, juegos.nombre AS juego_nombre, torneos.fases, torneos.fecha, torneos.hora, torneos.estado, torneos.puntos, reglas.reglas_id, reglas.modo AS reglas_modo FROM equipos_torneos LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id)"
+  let sql = "SELECT DISTINCT torneos.torneo_id, torneos.nombre, juegos.juego_id, juegos.nombre AS juego_nombre, torneos.fases, torneos.fecha, torneos.hora, torneos.estado, torneos.puntos, reglas.reglas_id, reglas.modo AS reglas_modo FROM torneos LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id)"
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -948,6 +948,83 @@ app.get("/admin-torneos-all", function (req, res) {
     }
 
     res.send(result);
+  });
+});
+
+app.post("/admin-torneos-all", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql2 = `INSERT INTO torneos (torneo_id, nombre, fecha, fases, reglas_id, game_id, hora, puntos) VALUES(null, \"${req.body.nombre}\", \"${req.body.fecha}\", \"${req.body.fases}\", ${req.body.reglas_id}, ${req.body.game_id}, \"${req.body.hora}\", ${req.body.puntos})`;
+    connection.query(sql2, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+      res.send(result);
+    });
+  }
+});
+
+app.put("/admin-torneos-all", function (req, response) {
+  let torneo_id = req.body.torneo_id;
+  let nombre = req.body.nombre;
+  let fecha = req.body.fecha;
+  let fases = req.body.fases;
+  let reglas_id = req.body.reglas_id;
+  let game_id = req.body.game_id;
+  let hora = req.body.hora;
+  let puntos = req.body.puntos;
+  let estado = req.body.estado;
+
+  let sql = "UPDATE partidos SET";
+  let params = new Array();
+  let modi = new Array();
+  console.log(req.body);
+
+  if (nombre) {
+    params.push(nombre);
+    modi.push(" nombre = ? ");
+  }
+  if (fecha) {
+    params.push(fecha);
+    modi.push(" juego_id = ? ");
+  }
+  if (fases) {
+    params.push(fases);
+    modi.push(" fecha = ? ");
+  }
+  if (reglas_id) {
+    params.push(reglas_id);
+    modi.push(" reglas_id = ? ");
+  }
+  if (game_id) {
+    params.push(game_id);
+    modi.push(" game_id = ? ");
+  }
+  if(hora){
+    params.push(hora)
+    modi.push(" hora = ? ")
+  }
+  if(puntos){
+    params.push(puntos)
+    modi.push(" puntos = ? ")
+  }
+  if(estado){
+    params.push(estado)
+    modi.push(" estado = ? ")
+  }
+  
+  sql += modi.toString() + "WHERE torneo_id= " + torneo_id;
+  console.log(sql);
+  connection.query(sql, params, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Datos de TORNEOS actualizados");
+    }
+    response.send(result);
   });
 });
 

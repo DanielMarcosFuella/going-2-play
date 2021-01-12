@@ -193,6 +193,9 @@ export class UserService {
   editTeam(newTeam: any) {
     return this.http.put(this.url2 + '/admin-equipos', newTeam);
   }
+  editTorneos(newTorneo: any) {
+    return this.http.put(this.url2 + '/admin-torneos-all', newTorneo);
+  }
 
   deleteTeam(id: number) {
     let options = {
@@ -217,6 +220,10 @@ export class UserService {
 
   addPartido(partido:Partidos){
     return this.http.post(this.url2 + "/admin-partidos", partido)
+  }
+
+  addTorneo(newtorneo:Torneo){
+    return this.http.post(this.url2 + "/admin-torneos-all", newtorneo)
   }
 
   deletePartido(id: number) {
