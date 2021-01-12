@@ -38,9 +38,11 @@
                   <td>
                     <button
                       class="s-menu-crear"
-                      style="font-size: 14px; padding: 5px; margin: 0px;"
+                      style="font-size: 14px; padding: 5px; margin: 0px"
                       (click)="getEquiposTorneos(adminTorneos.torneo_id)"
                       #seeParti
+                      data-toggle="modal"
+                      data-target="#seeModal"
                     >
                       VER PARTICIPANTES
                     </button>
@@ -102,7 +104,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="margin-top: 0px">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">EDITAR Torneo</h5>
+        <h5 class="modal-title uppercase" id="editModalLabel">EDITAR Torneo</h5>
         <button
           type="button"
           class="close"
@@ -118,15 +120,18 @@
             <input
               type="text"
               class="form-control"
-              id="recipient-name"
-              placeholder="Nombre del torneo"
+              placeholder="Nombre del torneo" #editName
             />
           </div>
           <div class="form-group">
-            <select name="country" class="form-control selectpicker">
+            <select name="country" class="form-control selectpicker" #editJuego>
               <option value="0">Seleccionar juego</option>
-              <option value="1">LOL</option>
-              <option value="2">FIFA</option>
+              <option
+                [value]="juegos.juego_id"
+                *ngFor="let juegos of juegos; let i = index"
+              >
+                {{ juegos.juego_nombre }} 
+              </option>
             </select>
           </div>
 
@@ -142,51 +147,51 @@
           </div>
 
           <div class="form-group">
-            <input
-              type="date"
-              class="form-control"
-              id="recipient-name"
-              placeholder="Fecha"
-            />
+            <input type="date" class="form-control" placeholder="Fecha" #editFecha />
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="recipient-name"
-              placeholder="Hora"
-            />
+            <input type="time" class="form-control" #editHora/>
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="recipient-name"
-              placeholder="Premios"
-            />
+            <input type="text" class="form-control" placeholder="Premios" #editPremio/>
           </div>
           <div class="form-group">
-            <select name="country" class="form-control selectpicker">
-              <option value="0">Reglas</option>
-              <option value="1">LOL 1vs1</option>
-              <option value="2">FIFA 1vs1</option>
-              <option value="3">LOL 5vs5</option>
-              <option value="4">FIFA 11vs11</option>
+            <select name="country" class="form-control selectpicker" #editRegla>
+              <option value="0">Seleccionar regla</option>
+              <option
+                [value]="rulesall.reglas_id"
+                *ngFor="let rulesall of rulesall; let i = index"
+              >
+               {{rulesall.nombre_juego}} - {{ rulesall.modo }}
+              </option>
             </select>
           </div>
           <div class="form-group">
-            <select name="country" class="form-control selectpicker">
-              <option value="0">fases</option>
-              <option value="2">Semifinales</option>
-              <option value="3">Cuartos</option>
-              <option value="4">Octavos</option>
-              <option value="4">Dieciseisavos</option>
+            <select name="country" class="form-control selectpicker" #editFase>
+              <option value="0">Seleccionar fase</option>
+              <option
+                [value]="fases"
+                *ngFor="let fases of fases; let i = index"
+              >
+                {{ fases }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select name="country" class="form-control selectpicker" #editEstado>
+              <option value="0">Seleccionar estado</option>
+              <option
+                [value]="estado"
+                *ngFor="let estado of estado; let i = index"
+              >
+                {{ estado }}
+              </option>
             </select>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <a class="s-menu-mobile-register">EDITAR</a>
+        <a class="s-menu-mobile-register" (click)="editTorn(indexEdit, adminTorneos[indexEdit].torneo_id, editName.value, editFecha.value, editFase.value, editRegla.value, editJuego.value, editHora.value, editPremio.value, editEstado.value)">EDITAR</a>
       </div>
     </div>
   </div>
@@ -204,7 +209,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="margin-top: 0px">
       <div class="modal-header">
-        <h5 class="modal-title" id="seeModalLabel">ELIMINAR</h5>
+        <h5 class="modal-title uppercase" id="seeModalLabel">PARTICIPANTES</h5>
         <button
           type="button"
           class="close"
@@ -217,17 +222,17 @@
       </div>
       <div class="modal-body">
         <form>
-          <p>
-            ¿Desea eliminar el torneo {{ adminTorneos[indexDelete].nombre }}?
-          </p>
+          <div *ngFor="let participantes of participantes; let i = index">
+            <ol>
+              {{
+                participantes.nombre
+              }}
+            </ol>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
-        <a
-          class="s-menu-mobile-register"
-          (click)="deletePar(adminTorneos[indexDelete].torneo_id, indexDelete)"
-          >ELIMINAR</a
-        >
+        <a class="s-menu-mobile-register" data-dismiss="modal">VALE</a>
       </div>
     </div>
   </div>
@@ -244,7 +249,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="margin-top: 0px">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">ELIMINAR</h5>
+        <h5 class="modal-title uppercase" id="deleteModalLabel">ELIMINAR</h5>
         <button
           type="button"
           class="close"
@@ -285,7 +290,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content" style="margin-top: 0px">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Crear Torneo</h5>
+        <h5 class="modal-title uppercase" id="editModalLabel">Crear Torneo</h5>
         <button
           type="button"
           class="close"
@@ -302,63 +307,82 @@
             <input
               type="text"
               class="form-control"
-              id="recipient-name"
               placeholder="Nombre del torneo"
+              #newname
             />
           </div>
           <div class="form-group">
-            <select name="country" class="form-control selectpicker">
+            <select name="country" class="form-control selectpicker" #newgame>
               <option value="0">Seleccionar juego</option>
-              <option value="1">LOL</option>
-              <option value="2">FIFA</option>
+              <option
+                [value]="juegos.juego_id"
+                *ngFor="let juegos of juegos; let i = index"
+              >
+                {{ juegos.juego_nombre }}
+              </option>
             </select>
           </div>
           <div class="form-group">
             <input
               type="date"
               class="form-control"
-              id="recipient-name"
               placeholder="Fecha"
+              #newfecha
             />
+          </div>
+          <div class="form-group">
+            <input type="time" class="form-control" #newhora />
           </div>
           <div class="form-group">
             <input
               type="text"
               class="form-control"
-              id="recipient-name"
-              placeholder="Hora"
+              placeholder="Puntos de premio"
+              #newpuntos
             />
           </div>
+
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="recipient-name"
-              placeholder="Premios"
-            />
-          </div>
-          <div class="form-group">
-            <select name="country" class="form-control selectpicker">
-              <option value="0">Reglas</option>
-              <option value="1">LOL 1vs1</option>
-              <option value="2">FIFA 1vs1</option>
-              <option value="3">LOL 5vs5</option>
-              <option value="4">FIFA 11vs11</option>
+            <select name="country" class="form-control selectpicker" #newregla>
+              <option value="0">Seleccionar regla</option>
+              <option
+                [value]="rulesall.reglas_id"
+                *ngFor="let rulesall of rulesall; let i = index"
+              >
+              {{rulesall.nombre_juego}} - {{ rulesall.modo }}
+
+              </option>
             </select>
           </div>
           <div class="form-group">
-            <select name="country" class="form-control selectpicker">
-              <option value="0">fases</option>
-              <option value="2">Semifinales</option>
-              <option value="3">Cuartos</option>
-              <option value="4">Octavos</option>
-              <option value="4">Dieciseisavos</option>
+            <select name="country" class="form-control selectpicker" #newfase>
+              <option value="0">Seleccionar fase</option>
+              <option
+                [value]="fases"
+                *ngFor="let fases of fases; let i = index"
+              >
+                {{ fases }}
+              </option>
             </select>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <a class="s-menu-mobile-register" data-dismiss="modal">CREAR</a>
+        <a
+          class="s-menu-mobile-register"
+          (click)="
+            addTour(
+              newname.value,
+              newfecha.value,
+              newfase.value,
+              newregla.value,
+              newgame.value,
+              newhora.value,
+              newpuntos.value
+            )
+          "
+          >CREAR</a
+        >
       </div>
     </div>
   </div>
