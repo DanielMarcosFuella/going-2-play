@@ -82,7 +82,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   adminUser() {
-    this.userService.getUserAll().subscribe((data: User[]) => {
+    this.userService.getUserAllAdmin().subscribe((data: User[]) => {
       this.userService.collection = data;
       this.userall = this.userService.collection;
       localStorage.setItem('adminuser', JSON.stringify(this.userall));
@@ -142,6 +142,12 @@ export class AdminUsersComponent implements OnInit {
       console.log('JAJA');
     }
     console.log(this.userall[findIndex]);
+  }
+
+  goPerfil(id: string) {
+    this.router.navigateByUrl(
+      '/perfil-equipo?id=' + id
+    );
   }
 
   deleteUser(id: any, id2: any) {
@@ -220,6 +226,8 @@ export class AdminUsersComponent implements OnInit {
     this.userall = this.userService.collection;
     this.isLoggedIn();
     this.noAdmin();
+    console.log(this.userall);
+    
     this.isYesBan();
   }
 }

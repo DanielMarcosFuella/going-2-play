@@ -20,41 +20,16 @@
                                     <th>Juego</th>
                                     <th>Fecha</th>
                                     <th>Hora</th>
-                                    <th>Premio</th>
+                                    <th>Puntos</th>
                                     <th>Resultado</th>
                                 </tr>
-                                <tr>
-                                    <td><a routerLink="/detalle-octavos">Fifa open Cup #1</a></td>
-                                    <td>Fifa</td>
-                                    <td>27/2/21</td>
-                                    <td>17:00</td>
-                                    <td>100/50/30</td>
-                                    <td>GANADA</td>
-                                </tr>
-                                <tr>
-                                    <td><a routerLink="/detalle-octavos">Jonia Cup #2</a></td>
-                                    <td>LOL</td>
-                                    <td>2/3/21</td>
-                                    <td>12:30</td>
-                                    <td>50/25/10</td>
-                                    <td>PERDIDA</td>
-                                   
-                                </tr>
-                                <tr>
-                                    <td><a routerLink="/detalle-octavos">Copa Danone</a></td>
-                                    <td>Fifa</td>
-                                    <td>10/3/21</td>
-                                    <td>19:00</td>
-                                    <td>200/100/50</td>
-                                    <td>EMPATADA</td>
-                                </tr>
-                                <tr>
-                                    <td><a routerLink="/detalle-octavos">Everybody hate teemo Cup</a></td>
-                                    <td>LOL</td>
-                                    <td>11/3/21</td>
-                                    <td>15:00</td>
-                                    <td>100/50/30</td>
-                                    <td>Lol 1 vs 1</td>
+                                <tr *ngFor="let torneoArray of torneoArray; let i = index">
+                                    <td><a routerLink="/detalle-octavos">{{torneoArray.nombre}}</a></td>
+                                    <td>{{torneoArray.juego}}</td>
+                                    <td>{{torneoArray.fecha | date:'longDate'}}</td>
+                                    <td>{{torneoArray.hora}}</td>
+                                    <td>{{torneoArray.puntos}}</td>
+                                    <td>{{torneoArray.resultado}}</td>
                                 </tr>
                             </table>
                         </div>

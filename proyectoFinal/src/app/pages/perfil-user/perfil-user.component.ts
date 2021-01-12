@@ -39,6 +39,7 @@ export class PerfilUserComponent implements OnInit {
   public myFormEdit: FormGroup;
   public filename: string;
   public FormData: FormData;
+  public jugadores: any;
   public selectedFile: File; //para cargar la foto
   uploadedFiles: Array<File>;
   // chart = [];
@@ -148,11 +149,12 @@ export class PerfilUserComponent implements OnInit {
     this.urlf = '';
     this.g2pUserPerfil = this.userService.usuarios;
     this.selectedFile = null;
+    this.jugadores = [];
+
   }
 
   fileChange(element) {
     this.selectedFile = <File>element.target.files;
-    console.log(this.selectedFile[0]);
     this.msg2 = this.selectedFile[0].name;
   }
 
@@ -269,10 +271,8 @@ export class PerfilUserComponent implements OnInit {
       this.g2pUserPerfil.contrasena = encrypted;
       localStorage.setItem('contrasena', encrypted);
     }
-    console.log(this.g2pUserPerfil);
 
     this.userService.putUser(this.g2pUserPerfil).subscribe((data: User) => {
-      console.log(this.g2pUserPerfil);
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -284,7 +284,6 @@ export class PerfilUserComponent implements OnInit {
         'usuario',
         JSON.stringify(this.userService.usuarios)
       );
-      console.log(localStorage.getItem('usuario'));
       this.closeEdit.nativeElement.click();
     });
   }
@@ -326,8 +325,11 @@ export class PerfilUserComponent implements OnInit {
   getall() {
     this.userService.getUserAll().subscribe((data: User[]) => {
       this.userall = data;
-      console.log(this.userall);
     });
+  }
+
+  goPerfil(id: string) {
+    this.router.navigateByUrl('/perfil-equipo?id=' + id);
   }
 
   access() {
@@ -363,12 +365,27 @@ export class PerfilUserComponent implements OnInit {
   goBack() {
     // window.history.back();
     this.link.back();
-
-    console.log('goBack()...');
   }
 
   goForward() {
     this.link.forward();
+  }
+
+
+  getTeamsById() {
+
+    this.userService.getTeamsById(this.g2pUserPerfil.usuario_id).subscribe((data: []) => {
+      const dataPlayerJSON = JSON.stringify(data);
+      const dataPlayer = JSON.parse(dataPlayerJSON);
+      this.jugadores = dataPlayer;
+      console.log(this.jugadores);
+      
+      //  for(let i = 0; i < dataPlayer.length; i++){
+      //   console.log(dataPlayer[i].nickname);
+      //   this.jugadores.push(dataPlayer[i].nickname)
+
+      //  }
+    });
   }
 
   ngOnInit(): void {
@@ -378,9 +395,10 @@ export class PerfilUserComponent implements OnInit {
     this.isLoggedIn();
     this.isBanned();
     this.getall();
+    this.getTeamsById();
     this.access();
     this.shuffeData();
-    console.log(this.userService.usuarios.usuario_id);
+    console.log(this.jugadores)
 
     // this.chartLog()
   }

@@ -221,8 +221,6 @@ export class HeaderComponent implements OnInit {
       !encrypted ||
       !contrasena
     ) {
-      console.log('hola');
-
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -232,7 +230,6 @@ export class HeaderComponent implements OnInit {
       this.myForm.value.contrasena != this.myForm.value.repetir_contrasena ||
       this.myForm.value.repetir_contrasena === ''
     ) {
-      console.log('hola');
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -273,12 +270,7 @@ export class HeaderComponent implements OnInit {
   }
 
   loginUsuario(nickname_login: string, contrasena_login: string) {
-    console.log('Contraseña insertada normal: ' + contrasena_login);
     let encrypted = this.EncrDecr.set('123456$#@$^@1ERF', contrasena_login);
-    console.log(
-      'Contraseña pasada por método de encriptado para comparar con la almacenada en bbdd: ' +
-        encrypted
-    );
     this.userService
       .login(
         new User(
@@ -310,7 +302,6 @@ export class HeaderComponent implements OnInit {
             text: 'Usuario o contraseña erróneo',
           });
         } else {
-          console.log(this.userlogin);
           this.userService.usuarios = data[0];
           this.show = true;
           this.closeLogin.nativeElement.click();
@@ -320,7 +311,6 @@ export class HeaderComponent implements OnInit {
             'usuario',
             JSON.stringify(this.userService.usuarios)
           );
-          console.log(this.userService.usuarios);
         }
       });
   }
@@ -336,10 +326,7 @@ export class HeaderComponent implements OnInit {
 
   isAdminIn() {
     if (this.isLoggedIn() && this.g2pUser.admin === 'admin') {
-      // console.log("hola");
-
       this.adminlogin = true;
-      // console.log(this.adminlogin);
     } else if (this.g2pUser === null) {
       this.adminlogin = false;
       return this.adminlogin;
@@ -380,14 +367,10 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getUsersAll();
-
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
     this.g2pUser = this.userService.usuarios;
-
     this.isUserIn();
-    // console.log(this.userService.usuarios);
     this.isLoggedIn();
     this.isAdminIn();
-    // this.isBanned();
   }
 }
