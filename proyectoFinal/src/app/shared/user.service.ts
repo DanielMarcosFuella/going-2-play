@@ -179,6 +179,12 @@ export class UserService {
   getTeams() {
     return this.http.get(this.url2 + '/admin-equipos');
   }
+  getTorneosAll() {
+    return this.http.get(this.url2 + '/admin-torneos-all');
+  }
+  getEquiposTorneos(id:number) {
+    return this.http.get(this.url2 + '/admin-equipos-torneos/' +id);
+  }
 
   getTeamByName(name:string){
     return this.http.get(this.url2 + "/admin-equipo/" + name)
@@ -223,6 +229,18 @@ export class UserService {
       },
     };
     return this.http.delete(this.url2 + '/admin-partidos', options);
+  }
+
+  deleteTorneo(id: number) {
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        torneo_id: id,
+      },
+    };
+    return this.http.delete(this.url2 + '/admin-torneos-all', options);
   }
 
   // FIN FUNCIONALIDADES ADMINISTRADOR

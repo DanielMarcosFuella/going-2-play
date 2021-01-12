@@ -923,6 +923,50 @@ app.get("/torneosall", function(req, res){
 
 
 // ENDPOINT PARTIDOS 
+app.get("/admin-equipos-torneos/:id", function (req, res) {
+  let id = req.params.id;
+  let sql = "SELECT torneos.torneo_id, equipos.equipo_id, equipos.nombre, equipos.logo FROM equipos_torneos LEFT JOIN torneos ON(equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN equipos ON (equipos_torneos.equipo_id = equipos.equipo_id) WHERE torneos.torneo_id="+id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+
+    res.send(result);
+  });
+});
+
+app.get("/admin-torneos-all", function (req, res) {
+  let id = req.params.id;
+  let sql = "SELECT DISTINCT torneos.torneo_id, torneos.nombre, juegos.juego_id, juegos.nombre AS juego_nombre, torneos.fases, torneos.fecha, torneos.hora, torneos.estado, torneos.puntos, reglas.reglas_id, reglas.modo AS reglas_modo FROM equipos_torneos LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id)"
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+
+    res.send(result);
+  });
+});
+
+app.delete("/admin-torneos-all", function (req, res) {
+  let sql4 = `DELETE FROM torneos WHERE torneo_id=${req.body.torneo_id}`;
+  connection.query(sql4, function (err, result) {
+    let msg;
+    if (err) {
+      console.log(err);
+      msg =  true
+    } else {
+      msg = result
+      console.log(result);
+    }
+    res.send(msg);
+  });
+});
+
+
 app.get("/admin-partidos", function (req, res) {
   id = req.params.id;
   let sql = "SELECT DISTINCT partidos.partido_id, torneos.torneo_id, torneos.nombre AS torneo_nombre, torneos.estado AS estado_torneo, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS juego_foto, partidos.fecha, partidos.hora, partidos.equipo_first, e1.nombre AS nombre_equipo_first,e1.logo AS logo_first, partidos.equipo_second, e2.nombre AS nombre_equipo_second, e2.logo AS logo_second,partidos.resultado_first, partidos.resultado_second, partidos.comentario FROM partidos LEFT JOIN juegos ON (partidos.juego_id = juegos.juego_id) LEFT JOIN equipos AS e1 ON (partidos.equipo_first = e1.equipo_id) LEFT JOIN equipos AS e2 ON (partidos.equipo_second = e2.equipo_id) LEFT JOIN torneos ON (partidos.torneo_id = torneos.torneo_id)"
