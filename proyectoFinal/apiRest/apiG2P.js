@@ -989,11 +989,11 @@ app.put("/admin-torneos-all", function (req, response) {
   }
   if (fecha) {
     params.push(fecha);
-    modi.push(" juego_id = ? ");
+    modi.push(" fecha = ? ");
   }
   if (fases) {
     params.push(fases);
-    modi.push(" fecha = ? ");
+    modi.push(" fases = ? ");
   }
   if (reglas_id) {
     params.push(reglas_id);
@@ -1610,7 +1610,7 @@ app.post("/colocacion", function (req, res) {
   if (!req.body) {
     console.log("error");
   } else {
-    let sql = `INSERT INTO colicacion_torneo (torneo_id, equipo_id, posicion) VALUES(\"${req.body.torneo_id}\", \"${req.body.equipo_id}\", \"${req.body.posicion}\")`;
+    let sql = `INSERT INTO colocacion_torneo (torneo_id, equipo_id, posicion) VALUES(\"${req.body.torneo_id}\", \"${req.body.equipo_id}\", \"${req.body.posicion}\")`;
     connection.query(sql, function (err, result) {
       if (err) {
         console.log(err);
@@ -1627,7 +1627,7 @@ app.put("/colocacion", function (req, response) {
   let torneo_id = req.body.torneo_id;
   let equipo_id = req.body.equipo_id;
   let posicion = req.body.posicion;
-  let sql = "UPDATE colicacion_torneo SET";
+  let sql = "UPDATE colocacion_torneo SET";
   let params = new Array();
   let modi = new Array();
   console.log(req.body);
@@ -1658,10 +1658,11 @@ app.put("/colocacion", function (req, response) {
 
 app.get("/colocacion", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT colicacion_torneo.posicion, logo, nombre, resultado_first, resultado_second " + 
-  "FROM `colicacion_torneo` INNER JOIN equipos ON (colicacion_torneo.equipo_id = equipos.equipo_id) " +
-  "LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id) " + 
-  "WHERE colicacion_torneo.torneo_id = " + id;
+  let sql = "SELECT DISTINCT colocacion_torneo.posicion, logo, nombre, resultado_first, resultado_second" +
+  " FROM colocacion_torneo LEFT JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id)" +
+  " LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id)"+
+  " WHERE colocacion_torneo.torneo_id = "+id +  
+  " ORDER BY colocacion_torneo.posicion ASC" ;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);

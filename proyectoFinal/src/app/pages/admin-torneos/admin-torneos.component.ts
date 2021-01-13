@@ -108,56 +108,70 @@ export class AdminTorneosComponent implements OnInit {
   ) {
     let xi = JSON.parse(localStorage.getItem('admintorneos'));
 
-    let found = xi.find(function (element) {
-      return element.torneo_id === torneo_id;
-    });
-    console.log(found.fases);
+    // let found = xi.find(function (element) {
+    //   return element.torneo_id === torneo_id;
+    // });
+    // console.log(found);
 
-    if (nombre === '') {
-      nombre = found.nombre;
-    } else {
-      found.nombre = nombre;
-    }
+    // if (nombre === '') {
+    //   nombre = found.nombre;
+    // } else {
+    //   found.nombre = nombre;
+    // }
 
-    if (fecha === null || fecha === '' || fecha === undefined) {
-      fecha = found.fecha;
-    } else {
-      found.fecha = fecha;
-    }
-    if (fases === '0') {
-      fases = found.fases;
-    } else {
-      found.fases = fases;
-    }
-    if (reglas_id === null || reglas_id === '' || reglas_id === undefined) {
-      reglas_id = Number(found.reglas_id);
-    } else {
-      found.reglas_id = Number(reglas_id);
-    }
-    if (game_id === null || game_id === '0' || game_id === undefined) {
-      game_id = Number(found.game_id);
-    } else {
-      found.game_id = Number(game_id);
-    }
-    if (hora === '' || hora === '0') {
-      hora = found.hora;
-    } else {
-      found.hora = hora;
-    }
-    if (puntos === null || puntos === '' || puntos === undefined) {
-      puntos = found.puntos;
-    } else {
-      found.puntos = puntos;
-    }
+    // if (fecha === null || fecha === '' || fecha === undefined) {
+    //   fecha = found.fecha;
+    // } else {
+    //   found.fecha = fecha;
+    // }
+    // if (fases === '0') {
+    //   fases = found.fases;
+    // } else {
+    //   found.fases = fases;
+    // }
+    // if (reglas_id === null || reglas_id === '' || reglas_id === undefined) {
+    //   reglas_id = Number(found.reglas_id);
+    // } else {
+    //   found.reglas_id = Number(reglas_id);
+    // }
+    // if (game_id === null || game_id === '0' || game_id === undefined) {
+    //   game_id = Number(found.game_id);
+    // } else {
+    //   found.game_id = Number(game_id);
+    // }
+    // if (hora === '' || hora === '0') {
+    //   hora = found.hora;
+    // } else {
+    //   found.hora = hora;
+    // }
+    // if (puntos === null || puntos === '' || puntos === undefined) {
+    //   puntos = found.puntos;
+    // } else {
+    //   found.puntos = puntos;
+    // }
 
-    if (estado === '0' || estado === null || estado === undefined) {
-      estado = found.estado;
-    } else {
-      found.estado = estado;
-    }
-    console.log(found);
+    // if (estado === '0' || estado === null || estado === undefined) {
+    //   estado = found.estado;
+    // } else {
+    //   found.estado = estado;
+    // }
+    // console.log(found);
+    this.adminService.torneo = new Torneo(
+      torneo_id,
+      nombre,
+      fecha,
+      fases,
+      Number(reglas_id),
+      Number(game_id),
+      hora,
+      Number(puntos),
+      estado
+    );
 
-    this.adminService.editTorneos(found).subscribe((data) => {
+    console.log(this.adminService.torneo);
+    
+
+    this.adminService.editTorneos(this.adminService.torneo).subscribe((data) => {
       console.log(data);
     });
   }
@@ -203,6 +217,7 @@ export class AdminTorneosComponent implements OnInit {
     hora: string,
     puntos: number
   ) {
+    let estado =  "PENDIENTE"
     if (
       nombre === '' ||
       fecha === '' ||
@@ -227,7 +242,8 @@ export class AdminTorneosComponent implements OnInit {
         Number(reglas_id),
         Number(game_id),
         hora,
-        Number(puntos)
+        Number(puntos),
+        estado
       );
 
       console.log(this.adminService.torneo);
@@ -333,6 +349,14 @@ export class AdminTorneosComponent implements OnInit {
     this.indexEdit = i;
   }
 
+
+  goDetalle(fases:any, id: any) {
+    this.router.navigateByUrl('/detalle-'+fases+'?id='+id);
+    console.log("/detalle-"+fases+"?id="+id);
+    
+  }
+
+  
   ngOnInit(): void {
     this.getTorneos();
     this.getJuegos();

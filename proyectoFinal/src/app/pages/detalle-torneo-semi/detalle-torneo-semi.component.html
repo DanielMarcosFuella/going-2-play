@@ -23,24 +23,16 @@
                                 </tr>
                             </thead>
                             <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
+                                <tr class="tournament-bracket__team" *ngFor="let dos of dos; let i = index">
+                                    <td class="tournament-bracket__country"> 
+                                        <abbr class="tournament-bracket__code" title="{{dos.nombre}}">{{dos.nombre}}</abbr>
+                                        <img src="{{dos.logo}}" width="30px">
                                     </td>
                                     <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
+                                        <span class="tournament-bracket__number">{{dos.resultado_first}}</span>
                                     </td>
                                 </tr>
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">2</span>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div></a>
@@ -59,24 +51,16 @@
                                 </tr>
                             </thead>
                             <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="jorgeRland">jorgeR</abbr>
-                                        <img [src]="imglogo" width="30px">
+                                <tr class="tournament-bracket__team" *ngFor="let cuatro of cuatro; let i = index">
+                                    <td class="tournament-bracket__country"> 
+                                        <abbr class="tournament-bracket__code" title="{{cuatro.nombre}}">{{cuatro.nombre}}</abbr>
+                                        <img src="{{cuatro.logo}}" width="30px">
                                     </td>
                                     <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
+                                        <span class="tournament-bracket__number">{{cuatro.resultado_first}}</span>
                                     </td>
                                 </tr>
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="ventuKsia">ventuK</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">7</span>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div></a>
@@ -103,24 +87,16 @@
                                 </tr>
                             </thead>
                             <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
+                                <tr class="tournament-bracket__team" *ngFor="let seis of seis; let i = index">
+                                    <td class="tournament-bracket__country"> 
+                                        <abbr class="tournament-bracket__code" title="{{seis.nombre}}">{{seis.nombre}}</abbr>
+                                        <img src="{{seis.logo}}" width="30px">
                                     </td>
                                     <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
+                                        <span class="tournament-bracket__number">{{seis.resultado_first}}</span>
                                     </td>
                                 </tr>
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">2</span>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div></a>

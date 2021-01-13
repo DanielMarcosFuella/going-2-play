@@ -30,7 +30,7 @@
                 <tr *ngFor="let adminTorneos of adminTorneos; let i = index">
                   <td id="getid" value="{{ i }}">{{ i + 1 }}</td>
                   <td>
-                    <a routerLink="/detalle-{{ adminTorneos.fases }}">{{
+                    <a (click)="goDetalle(adminTorneos.fases, adminTorneos.torneo_id)">{{
                       adminTorneos.nombre
                     }}</a>
                   </td>

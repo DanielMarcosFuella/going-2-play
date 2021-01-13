@@ -8,13 +8,14 @@ import { Posicion } from '../models/posicion';
 @Injectable({
   providedIn: 'root'
 })
-export class G2pService {
+export class PosicionService {
 
   private url = "http://localhost:8000/"
   private urlIMG = "http://localhost:3000/"
   public posicion: Posicion;
   public posiciones: Posicion[]
   public games: any = []
+  public saveData: []
   constructor(private http: HttpClient) { }
 
   public uploadImg(fd: FormData){

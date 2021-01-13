@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class G2pService {
+export class VideoJuegosService {
 
   private url = "http://localhost:8000/"
   private urlIMG = "http://localhost:3000/"

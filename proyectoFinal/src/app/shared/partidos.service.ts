@@ -8,7 +8,7 @@ import { Partidos } from '../models/partidos';
 @Injectable({
   providedIn: 'root'
 })
-export class G2pService {
+export class PartidosService {
 
   private url = "http://localhost:8000/"
   private urlIMG = "http://localhost:3000/"
