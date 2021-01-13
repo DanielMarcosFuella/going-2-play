@@ -120,7 +120,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="{{adminTorneos[indexEdit].nombre}}" #editName
+              placeholder="{{adminTorneos[indexEdit].nombre}}" [value]="adminTorneos[indexEdit].nombre" #editName
             />
           </div>
           <div class="form-group">
@@ -153,7 +153,7 @@
             <input type="time" class="form-control" value="{{adminTorneos[indexEdit].hora}}"  #editHora/>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="{{adminTorneos[indexEdit].puntos}}" #editPremio/>
+            <input type="text" class="form-control" placeholder="{{adminTorneos[indexEdit].puntos}}" [value]="adminTorneos[indexEdit].puntos" #editPremio/>
           </div>
           <div class="form-group">
             <select name="country" class="form-control selectpicker" #editRegla>

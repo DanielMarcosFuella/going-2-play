@@ -91,6 +91,5 @@ export class DetalleTorneoSemiComponent implements OnInit {
     this.saveData = this.posicion.saveData;
     window.onresize = () => (this.isMobileLayout = window.innerWidth <= 1200);
     this.serviceTitle.setTitle(this.title);
-    console.log(this.route.snapshot.queryParams);
   }
 }

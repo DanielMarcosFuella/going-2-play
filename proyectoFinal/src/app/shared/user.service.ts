@@ -193,7 +193,7 @@ export class UserService {
   editTeam(newTeam: any) {
     return this.http.put(this.url2 + '/admin-equipos', newTeam);
   }
-  editTorneos(newTorneo: any) {
+  editTorneos(newTorneo: Torneo) {
     return this.http.put(this.url2 + '/admin-torneos-all', newTorneo);
   }
 

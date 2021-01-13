@@ -955,7 +955,7 @@ app.post("/admin-torneos-all", function (req, res) {
   if (!req.body) {
     console.log("error");
   } else {
-    let sql2 = `INSERT INTO torneos (torneo_id, nombre, fecha, fases, reglas_id, game_id, hora, puntos) VALUES(null, \"${req.body.nombre}\", \"${req.body.fecha}\", \"${req.body.fases}\", ${req.body.reglas_id}, ${req.body.game_id}, \"${req.body.hora}\", ${req.body.puntos})`;
+    let sql2 = `INSERT INTO torneos (torneo_id, nombre, fecha, fases, reglas_id, game_id, hora, puntos, estado) VALUES(null, \"${req.body.nombre}\", \"${req.body.fecha}\", \"${req.body.fases}\", ${req.body.reglas_id}, ${req.body.game_id}, \"${req.body.hora}\", ${req.body.puntos}, \"${req.body.estado}\")`;
     connection.query(sql2, function (err, result) {
       if (err) {
         console.log(err);
@@ -978,7 +978,7 @@ app.put("/admin-torneos-all", function (req, response) {
   let puntos = req.body.puntos;
   let estado = req.body.estado;
 
-  let sql = "UPDATE partidos SET";
+  let sql = "UPDATE torneos SET";
   let params = new Array();
   let modi = new Array();
   console.log(req.body);

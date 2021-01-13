@@ -106,56 +106,6 @@ export class AdminTorneosComponent implements OnInit {
     puntos: any,
     estado: string
   ) {
-    let xi = JSON.parse(localStorage.getItem('admintorneos'));
-
-    // let found = xi.find(function (element) {
-    //   return element.torneo_id === torneo_id;
-    // });
-    // console.log(found);
-
-    // if (nombre === '') {
-    //   nombre = found.nombre;
-    // } else {
-    //   found.nombre = nombre;
-    // }
-
-    // if (fecha === null || fecha === '' || fecha === undefined) {
-    //   fecha = found.fecha;
-    // } else {
-    //   found.fecha = fecha;
-    // }
-    // if (fases === '0') {
-    //   fases = found.fases;
-    // } else {
-    //   found.fases = fases;
-    // }
-    // if (reglas_id === null || reglas_id === '' || reglas_id === undefined) {
-    //   reglas_id = Number(found.reglas_id);
-    // } else {
-    //   found.reglas_id = Number(reglas_id);
-    // }
-    // if (game_id === null || game_id === '0' || game_id === undefined) {
-    //   game_id = Number(found.game_id);
-    // } else {
-    //   found.game_id = Number(game_id);
-    // }
-    // if (hora === '' || hora === '0') {
-    //   hora = found.hora;
-    // } else {
-    //   found.hora = hora;
-    // }
-    // if (puntos === null || puntos === '' || puntos === undefined) {
-    //   puntos = found.puntos;
-    // } else {
-    //   found.puntos = puntos;
-    // }
-
-    // if (estado === '0' || estado === null || estado === undefined) {
-    //   estado = found.estado;
-    // } else {
-    //   found.estado = estado;
-    // }
-    // console.log(found);
     this.adminService.torneo = new Torneo(
       torneo_id,
       nombre,
@@ -168,11 +118,8 @@ export class AdminTorneosComponent implements OnInit {
       estado
     );
 
-    console.log(this.adminService.torneo);
-    
-
     this.adminService.editTorneos(this.adminService.torneo).subscribe((data) => {
-      console.log(data);
+      this.getTorneos();
     });
   }
 
@@ -246,8 +193,6 @@ export class AdminTorneosComponent implements OnInit {
         estado
       );
 
-      console.log(this.adminService.torneo);
-
       this.adminService
         .addTorneo(this.adminService.torneo)
         .subscribe((data: any) => {
@@ -272,7 +217,6 @@ export class AdminTorneosComponent implements OnInit {
         'adminjuegos',
         JSON.stringify(this.adminService.adminJuegos)
       );
-      console.log(this.juegos);
     });
   }
 
@@ -284,13 +228,11 @@ export class AdminTorneosComponent implements OnInit {
         JSON.stringify(this.G2PService.reglas)
       );
       this.rulesall = this.G2PService.reglas;
-      console.log(this.rulesall);
     });
   }
 
   getTorneos() {
     this.adminService.getTorneosAll().subscribe((data: []) => {
-      console.log(data);
 
       this.adminService.adminTorneos = data;
       this.adminTorneos = this.adminService.adminTorneos;
@@ -337,7 +279,6 @@ export class AdminTorneosComponent implements OnInit {
   getEquiposTorneos(id: number) {
     this.adminService.getEquiposTorneos(id).subscribe((data: any[]) => {
       this.participantes = data;
-      console.log(data);
     });
   }
 
@@ -352,7 +293,6 @@ export class AdminTorneosComponent implements OnInit {
 
   goDetalle(fases:any, id: any) {
     this.router.navigateByUrl('/detalle-'+fases+'?id='+id);
-    console.log("/detalle-"+fases+"?id="+id);
     
   }
 
@@ -374,6 +314,5 @@ export class AdminTorneosComponent implements OnInit {
     this.rulesall = this.G2PService.reglas;
 
     this.serviceTitle.setTitle(this.title);
-    console.log(this.rulesall);
   }
 }

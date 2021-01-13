@@ -9,9 +9,9 @@ export class Torneo {
     public game_id:number;
     public hora:string;
     public puntos:number;
-    public estados:string
+    public estado:string
 
-    constructor (torneo_id:number, nombre:string, fecha:string, fases:string, reglas_id:number, game_id:number, hora:string, puntos:number, estados:string) {
+    constructor (torneo_id:number, nombre:string, fecha:string, fases:string, reglas_id:number, game_id:number, hora:string, puntos:number, estado:string) {
         this.torneo_id = torneo_id;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -20,7 +20,7 @@ export class Torneo {
         this.game_id = game_id;
         this.hora = hora;
         this.puntos = puntos;
-        this.estados = estados;
+        this.estado = estado;
     }
 }
 
