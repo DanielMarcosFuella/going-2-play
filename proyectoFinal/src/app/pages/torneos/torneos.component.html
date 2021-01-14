@@ -312,63 +312,19 @@
           </div>
         </div>
       </div>
-      <!-- <div class="ranking-all">
-        <div *ngIf="lol==true" class="torneo-ranking">
-          <div class="cuerpo-users-ranking">
-            <div class="ranking-game">
-              <h1 class="title-torneo">LoL</h1>
-            </div>
-            <div class="ranking-users">
-              <div class="ranking-numero">
-                1
-              </div>
-
-              <div class="ranking-user">
-                <div class="ranking-user-image"><img class="image-user-ranking" [src]="imgSrc"></div>
-
-                <div class="ranking-user-name">JAJA</div>
-              </div>
-              <div class="ranking-points">
-                as
-              </div>
-            </div>
-             <ol>
-              <li><a routerLink="/perfil-user">Faker (500pts)</a></li>
-              <li><a routerLink="/perfil-user">Caps (450pts)</a></li>
-              <li><a routerLink="/perfil-user">MisterYoyas (350pts)</a></li>
-              <li><a routerLink="/perfil-user">Mosquit0 (300pts)</a></li>
-              <li><a routerLink="/perfil-user">Toky0dragon (280pts)</a></li>
-              <li><a routerLink="/perfil-user">Shendo (250pts)</a></li>
-            </ol>
-          </div>
-        </div>
-        <div *ngIf="fifa==true" class="torneo-ranking">
-          <div class="cuerpo-users-ranking">
-
-            <h1 class="title-torneo">Fifa</h1>
-            <ol>
-              <li><a routerLink="/perfil-user">Luiso (500pts)</a></li>
-              <li><a routerLink="/perfil-user">Surikato (450pts)</a></li>
-              <li><a routerLink="/perfil-user">Paquito (350pts)</a></li>
-              <li><a routerLink="/perfil-user">Drk (300pts)</a></li>
-              <li><a routerLink="/perfil-user">Toky0dragon (280pts)</a></li>
-              <li><a routerLink="/perfil-user">Shendo (250pts)</a></li>
-            </ol>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>
 
-<div #modalApuntate class="modal fade" id="modalApuntate" tabindex="-1" role="dialog" aria-labelledby="modalApuntateLabel" aria-hidden="true">
+  <div class="modal fade" id="modalApuntate" tabindex="-1" role="dialog" aria-labelledby="modalApuntateLabel"
+  aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalApuntateLabel">
           <i class="fas fa-star"></i> SELECCIONA TU EQUIPO FAVORITO <i class="fas fa-star"></i>
         </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -382,34 +338,11 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-cancel uppercase" data-dismiss="modal"
-        aria-label="Close">
+        <button type="button" class="but-cancel uppercase" data-bs-dismiss="modal" aria-label="Close">
           Cancelar
         </button>
-        <button type="button" class="s-menu-mobile-register uppercase" (click)="confirmarEquipo(home[myIndex].torneo_id, confirmTeam.value)">
+        <button type="button" class="but-ok uppercase" (click)="confirmarEquipo(home[myIndex].torneo_id, confirmTeam.value)">
           Apuntar equipo
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="reglasModal" tabindex="-1" role="dialog" aria-labelledby="reglasModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="reglasModalLabel">
-          REGLAS DE {{home[myIndex].juego_nombre}} {{home[myIndex].modo_regla}}
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="uncrip" [innerHTML]="innerHTML">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">
-          ACEPTAR
         </button>
       </div>
     </div>
@@ -434,7 +367,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">
+        <button type="button" class="but-ok uppercase" data-dismiss="modal">
           CONFIRMAR
         </button>
       </div>

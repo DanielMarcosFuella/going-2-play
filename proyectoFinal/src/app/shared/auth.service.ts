@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    if (localStorage.getItem("usuario") == null) {
+    if (localStorage.getItem("usuario") === null) {
       this.isLoggedin = false;
       return this.isLoggedin;
     }

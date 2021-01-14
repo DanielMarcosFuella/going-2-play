@@ -182,7 +182,7 @@ a:hover {
 }
 
 a:not([href]):not([class]) {
-    color: inherit;
+    color: #ff09d6;
     text-decoration: none
 }
 
@@ -207,7 +207,7 @@ pre {
 }
 
 figure {
-    margin: 0 0 1rem
+    margin: 0 0 0rem
 }
 
 img {

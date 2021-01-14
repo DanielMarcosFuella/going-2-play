@@ -22,7 +22,6 @@ export class PartidosService {
   }
 
   getMisPartidos(id: any) {
-    console.log(id);
     return this.http.get(this.url + "mis-partidas/?id=" + id)
     
   }

@@ -317,10 +317,7 @@ export class PerfilUserComponent implements OnInit {
     this.userService.isBanned()
   }
 
-  isLoggedIn() {
-    this.userlogin = this.auth.isLoggedIn();
-    return this.userlogin;
-  }
+ 
 
   getall() {
     this.userService.getUserAll().subscribe((data: User[]) => {
@@ -332,22 +329,7 @@ export class PerfilUserComponent implements OnInit {
     this.router.navigateByUrl('/perfil-equipo?id=' + id);
   }
 
-  access() {
-    if (this.isLoggedIn() && this.g2pUserPerfil != null) {
-      return true;
-    } else if (!this.isLoggedIn() && this.g2pUserPerfil === null) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'No tienes permiso para entrar aqui',
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      this.router.navigateByUrl('/');
-    } else {
-      return true;
-    }
-  }
+  
 
   shuffeData() {
     this.pieChartData = [
@@ -388,15 +370,39 @@ export class PerfilUserComponent implements OnInit {
     });
   }
 
+  isLoggedIn() {
+    this.userlogin = this.auth.isLoggedIn();
+  return this.userlogin    
+    // console.log(this.userlogin);
+    
+  }
+
+  access() {
+    if (this.isLoggedIn() === true && (this.g2pUserPerfil != null || this.g2pUserPerfil != undefined)) {
+      return true;
+    } else if (this.isLoggedIn() === false && (this.g2pUserPerfil === null || this.g2pUserPerfil === undefined)) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'No tienes permiso para entrar aqui',
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      this.router.navigateByUrl('/');
+    } else {
+      return true;
+    }
+  }
+
   ngOnInit(): void {
+    this.isLoggedIn();
+    this.access();
     this.serviceTitle.setTitle(this.title);
     this.userService.usuarios = JSON.parse(localStorage.getItem('usuario'));
     this.g2pUserPerfil = this.userService.usuarios;
-    this.isLoggedIn();
     this.isBanned();
     this.getall();
     this.getTeamsById();
-    this.access();
     this.shuffeData();
     console.log(this.jugadores)
 

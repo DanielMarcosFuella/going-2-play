@@ -15,10 +15,7 @@ export class TorneoService {
   constructor(private http: HttpClient) { }
 
   getTorneoByID(id:any) {
-    console.log(id);
-    
-    return this.http.get(this.url + "torneo/?id=" + id)
-    
+    return this.http.get(this.url + "mis-torneos/?id=" + id)
   }
 
 }

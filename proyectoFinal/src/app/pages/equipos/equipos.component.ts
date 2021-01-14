@@ -37,10 +37,7 @@ export class EquiposComponent implements OnInit {
     this.photoTeam = 'assets/images/logo.png';
   }
 
-  isLoggedIn() {
-    this.userlogin = this.auth.isLoggedIn();
-    return this.userlogin;
-  }
+  
 
   getJuegos() {
     this.userService.getJuegos().subscribe((data: []) => {
@@ -56,9 +53,18 @@ export class EquiposComponent implements OnInit {
   }
 
   access() {
-    if (this.isLoggedIn() && this.g2pUserPerfil != null) {
+    console.log(this.userlogin);
+    if(this.isLoggedIn() === true){
+      console.log("AJAJA");
+      
+    }else{
+      console.log("XD");
+      
+    }
+    
+    if (this.isLoggedIn() === true && (this.g2pUserPerfil != null || this.g2pUserPerfil != undefined)) {
       return true;
-    } else if (!this.isLoggedIn() && this.g2pUserPerfil === null) {
+    } else if (this.isLoggedIn() === false && (this.g2pUserPerfil === null || this.g2pUserPerfil === undefined)) {
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -124,9 +130,17 @@ export class EquiposComponent implements OnInit {
     }
   } 
 
+  isLoggedIn() {
+    this.userlogin = this.auth.isLoggedIn();
+  return this.userlogin    
+    // console.log(this.userlogin);
+    
+  }
+
   ngOnInit(): void {
+    this.isLoggedIn()
+    this.access()    
     this.getTeamsUser();
-    this.access()
     this.getJuegos()
     this.serviceTitle.setTitle(this.title);
   }

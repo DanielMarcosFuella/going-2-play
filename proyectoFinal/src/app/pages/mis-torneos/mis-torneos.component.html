@@ -16,20 +16,31 @@
                         <div class="deposite-table">
                             <table>
                                 <tr>
+                                    <th>#</th>
                                     <th>Torneo</th>
                                     <th>Juego</th>
+                                    <!-- <th>Equipo</th> -->
+                                    <th>Reglas</th>
                                     <th>Fecha</th>
                                     <th>Hora</th>
                                     <th>Puntos</th>
                                     <th>Estado</th>
                                 </tr>
                                 <tr *ngFor="let torneoArray of torneoArray; let i = index">
-                                    <td><a routerLink="/detalle-octavos">{{torneoArray.nombre}}</a></td>
-                                    <td>{{torneoArray.juego}}</td>
+                                    <td>{{i+1}}</td>
+                                    <td><a (click)="goDetalle(torneoArray.fases, torneoArray.torneo_id)">{{torneoArray.nombre}}</a></td>
+                                    <td>{{torneoArray.juego_nombre}}</td>
+                                    <!-- <td><a (click)="goPerfilTeam(torneoArray.equipo_id)">
+                                        <img
+                                          src="{{ torneoArray.equipo_logo }}"
+                                          width="40px"
+                                          heigth="40px"
+                                          alt="" /></a>{{torneoArray.equipo_nombre}}</td> -->
+                                    <td>{{torneoArray.reglas_modo}}</td>
                                     <td>{{torneoArray.fecha | date:'longDate'}}</td>
                                     <td>{{torneoArray.hora}}</td>
                                     <td>{{torneoArray.puntos}}</td>
-                                    <td>{{torneoArray.estado}}</td>
+                                    <td><h6 [ngStyle]="{'color':getColor(torneoArray.estado)}">{{torneoArray.estado}}</h6></td>
                                 </tr>
                             </table>
                         </div>

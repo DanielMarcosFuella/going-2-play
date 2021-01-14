@@ -29,7 +29,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: null,
-  database: "g2p_4",
+  database: "g2p",
 });
 
 //FUNCIONAMIENTO
@@ -1048,7 +1048,25 @@ app.delete("/admin-torneos-all", function (req, res) {
 
 app.get("/mis-partidas", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.estado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
+  let sql = "SELECT DISTINCT partidos.partido_id, torneos.torneo_id, torneos.nombre AS torneo_nombre, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto, torneos.fecha, torneos.fases, torneos.hora, torneos.puntos, torneos.estado, e.equipo_id AS first_equipo_id, e.nombre AS first_equipo_nombre, e.logo AS first_equipo_logo, e1.equipo_id as second_equipo_id, e1.nombre AS second_equipo_nombre, e1.logo AS second_equipo_logo"+
+  " FROM partidos LEFT JOIN torneos ON (partidos.torneo_id = torneos.torneo_id)" + 
+  " LEFT JOIN juegos ON (partidos.juego_id = juegos.juego_id)"+
+  " LEFT JOIN equipos AS e ON (partidos.equipo_first = e.equipo_id)"+
+  " LEFT JOIN equipos AS e1 ON (partidos.equipo_second = e1.equipo_id)"+
+  " WHERE e1.equipo_id ="+id+" OR e.equipo_id =" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+app.get("/mis-torneos", function (req, res) {
+  id = req.query.id;
+  let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, torneos.hora, torneos.puntos, torneos.estado, juegos.juego_id, juegos.nombre AS juego_nombre, reglas.reglas_id, reglas.modo AS reglas_modo, equipos.equipo_id, equipos.nombre AS equipo_nombre, equipos.logo AS equipo_logo FROM equipos_torneos LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN equipos ON (equipos_torneos.equipo_id = equipos.equipo_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE equipos.equipo_id ="+id;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1525,18 +1543,18 @@ app.get("/torneos/:id", function (req, res) {
 
 // Mostrar los torneos en los que está inscrito un usuario
 
-app.get("/torneo", function (req, res) {
-  id = req.query.id;
-  let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.estado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result);
-    }
-    res.send(result);
-  });
-});
+// app.get("/torneo", function (req, res) {
+//   id = req.query.id;
+//   let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.estado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
+//   connection.query(sql, function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(result);
+//     }
+//     res.send(result);
+//   });
+// });
 
 // Mostrar los torneos de un equipo pasado por query
 
