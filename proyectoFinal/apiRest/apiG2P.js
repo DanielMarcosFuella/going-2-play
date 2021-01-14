@@ -29,7 +29,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: null,
-  database: "g2p",
+  database: "g2p_4",
 });
 
 //FUNCIONAMIENTO
@@ -966,6 +966,34 @@ app.delete("/admin-torneos-all", function (req, res) {
   });
 });
 
+// obtener listado de partidas de un usuario
+
+app.get("/mis-partidas", function (req, res) {
+  id = req.query.id;
+  let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.estado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+// app.get("/mis-partidas", function (req, res) {
+//   id = req.query.id;
+//   let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.estado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
+//   connection.query(sql, function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(result);
+//     }
+
+//     res.send(result);
+//   });
+
 
 app.get("/admin-partidos", function (req, res) {
   id = req.params.id;
@@ -1404,7 +1432,7 @@ app.get("/torneos/:id", function (req, res) {
 
 app.get("/torneo", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.resultado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
+  let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.estado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);

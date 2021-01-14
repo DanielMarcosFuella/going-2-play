@@ -31,6 +31,7 @@ import { UniqueEmailValidatorDirective } from './shared/email-nickname.validator
 import { HeaderTopComponent } from './pages/header-top/header-top.component';
 import { ChartsModule } from 'ng2-charts';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { MisPartidasComponent } from './pages/mis-partidas/mis-partidas.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     AdminReglasComponent,
     MisTorneosComponent,
     NoEncontradaComponent,
-    PerfilComponent
+    PerfilComponent,
+    MisPartidasComponent
     
     
   ],

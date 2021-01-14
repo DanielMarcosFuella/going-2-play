@@ -21,6 +21,12 @@ export class G2pService {
     return this.http.post(this.urlIMG + "upload", fd)
   }
 
+  getMisPartidos(id: any) {
+    console.log(id);
+    return this.http.get(this.url + "mis-partidas/?id=" + id)
+    
+  }
+
   getPartidosByID(id: number) {
     return this.http.get(this.url + "partidos/" + id)
   }

@@ -4,13 +4,13 @@ export class Torneo {
 
     constructor (public torneo_id: number,
                 public nombre: string,
-                public juego: string,
                 public fecha: Date,
                 public fases: string,
                 public reglas_id: Reglas,
+                public game_id: number,
+                public juego: string,
                 public hora: string,
                 public puntos: number,
-                public resultado: boolean) {}
+                public estado: string) {}
 }
 
-// habrá que crear una clase de fases????

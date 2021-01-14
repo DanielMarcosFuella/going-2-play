@@ -1,0 +1,147 @@
+<!--Start payment-history area -->
+<div class="payment-history-area bg-color area-padding top-margin">
+    <div class="container container-torneos">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>Partidos</h3>
+                    <p>Mis partidas de G2P</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="deposite-content">
+                    <div class="diposite-box">
+                        <div class="deposite-table">
+                            <table>
+                                <tr>
+                                    <th>Torneo</th>
+                                    <th>Juego</th>
+                                    <th>Equipos</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Puntos</th>
+                                    <th>Estado</th>
+                                </tr>
+                                <tr *ngFor="let partidoArray of partidoArray; let i = index">
+                                    <td><a routerLink="/detalle-octavos">{{partidoArray.nombre}}</a></td>
+                                    <td>{{partidoArray.juego}}</td>
+                                    <td>
+                                      <a routerLink="/detalle-partido">
+                                        <img
+                                          src="{{ adminPartidos.logo_first }}"
+                                          width="40px"
+                                          heigth="40px"
+                                          alt="" />
+                                          
+                                        VS
+                                        <img
+                                          src="{{ adminPartidos.logo_second }}"
+                                          width="40px"
+                                          heigth="40px"
+                                          alt=""
+                                      /></a>
+                                     
+                                    </td>
+                                    <td>{{partidoArray.fecha | date:'longDate'}}</td>
+                                    <td>{{partidoArray.hora}}</td>
+                                    <td>{{partidoArray.puntos}}</td>
+                                    <td>{{partidoArray.estado}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<!--Start payment-history area -->
+<!-- <div class="payment-history-area bg-color area-padding top-margin">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="section-headline text-center">
+            <h3>PARTIDOS</h3>
+            <p>Lista de partidos G2P</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="deposite-content">
+            <div class="diposite-box">
+              <div class="deposite-table">
+                <table>
+                  <tr>
+                    <th>#</th>
+                    <th>Torneo</th>
+                    <th>JUGADORES</th>
+                    <th>Juego</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estado</th>
+                  </tr>
+                  <tr *ngFor="let adminPartidos of adminPartidos; let i = index">
+                    <td id="getid" value="{{ i }}">{{ i + 1 }}</td>
+                    <td>
+                      <a routerLink="/detalle-octavos">{{
+                        adminPartidos.torneo_nombre
+                      }}</a>
+                    </td>
+                    <td>
+                      <a routerLink="/detalle-partido">
+                        <img
+                          src="{{ adminPartidos.logo_first }}"
+                          width="40px"
+                          heigth="40px"
+                          alt="" />
+                          
+                        VS
+                        <img
+                          src="{{ adminPartidos.logo_second }}"
+                          width="40px"
+                          heigth="40px"
+                          alt=""
+                      /></a>
+                     
+                    </td>
+                    <td>{{ adminPartidos.juego_nombre }}</td>
+                    <td>{{ adminPartidos.fecha }}</td>
+                    <td>{{ adminPartidos.hora }}</td>
+                    <td>
+                      {{ adminPartidos.resultado_first }} -
+                      {{ adminPartidos.resultado_second }}
+                    </td>
+                    <td>
+                      <a
+                        data-toggle="modal"
+                        data-target="#editModal"
+                        class="edit-user"
+                        (click)="getEdit(i)"
+                        ><i class="fa fa-edit fa-lg"></i
+                      ></a>
+                      &nbsp;&nbsp;
+                      <a
+                        data-toggle="modal"
+                        data-target="#deleteModal"
+                        class="delete-user"
+                        (click)="getDelete(i)"
+                        ><i class="fa fa-trash fa-lg"></i
+                      ></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="top-margin"></div>
+      <div class="row">
+      </div>
+    </div>
+  </div> -->
