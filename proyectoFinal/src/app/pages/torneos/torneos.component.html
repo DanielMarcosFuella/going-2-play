@@ -82,7 +82,8 @@
                 </p>
               </div>
               <div class="botones">
-                <a class="btn but1" (click)="apuntate()">Apúntate</a>
+                <a class="btn but1" *ngIf="home.estado != 'FINALIZADO'" id="apuntate" (click)="apuntate(i)">Apúntate</a>
+                <a class="btn but1" *ngIf="home.estado === 'FINALIZADO'">VER RESULTADOS</a>
                 <a class="btn but2" (click)="getData(i)" data-toggle="modal" data-target="#reglasModal" >Reglas</a>
               </div>
             </div>
@@ -359,39 +360,13 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="modalFifa" tabindex="-1" role="dialog" aria-labelledby="modalFifaLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalFifaLabel">Selecciona un equipo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Tus equipos</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>Equipo 1</option>
-            <option>Equipo 2</option>
-            <option>Equipo 3</option>
-            <option>Equipo 4</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a class="s-menu-mobile-cancel uppercase" data-dismiss="modal">Cancelar</a>
-        <a class="s-menu-mobile-register uppercase">Apuntar equipo</a>
-      </div>
-    </div>
-  </div>
-</div>
+
 <div #modalApuntate class="modal fade" id="modalApuntate" tabindex="-1" role="dialog" aria-labelledby="modalApuntateLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalApuntateLabel">
-          Selecciona un equipo de lol
+          <i class="fas fa-star"></i> SELECCIONA TU EQUIPO FAVORITO <i class="fas fa-star"></i>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -399,20 +374,19 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="exampleFormControlSelect1">Tus equipos</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>Equipo 1</option>
-            <option>Equipo 2</option>
-            <option>Equipo 3</option>
-            <option>Equipo 4</option>
+          <label class="uppercase">Tus equipos ({{players.length}})</label>
+          <select class="form-control" #confirmTeam>
+            <option value="0">Seleccionar equipo</option>
+            <option [value]="players.equipo_id" *ngFor="let players of players; let i = index">{{players.nombre}}</option>
           </select>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-cancel uppercase" data-dismiss="modal">
+        <button type="button" class="s-menu-mobile-cancel uppercase" data-dismiss="modal"
+        aria-label="Close">
           Cancelar
         </button>
-        <button type="button" class="s-menu-mobile-register uppercase">
+        <button type="button" class="s-menu-mobile-register uppercase" (click)="confirmarEquipo(home[myIndex].torneo_id, confirmTeam.value)">
           Apuntar equipo
         </button>
       </div>

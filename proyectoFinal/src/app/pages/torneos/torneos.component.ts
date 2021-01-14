@@ -7,7 +7,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/shared/auth.service';
 import { UserService } from 'src/app/shared/user.service';
 import Swal from 'sweetalert2';
-
+declare var $: any 
 
 @Component({
   selector: 'app-torneos',
@@ -38,6 +38,9 @@ export class TorneosComponent implements OnInit {
   public juegos: any[];
   public myIndex: number;
   public jugadores: any;
+  public players: any[];
+  public finalizado: boolean;
+
   public innerHTML: string;
   user: boolean;
   team: boolean;
@@ -58,10 +61,12 @@ export class TorneosComponent implements OnInit {
     this.dataTeamTop5 = this.userService.teamRank;
     this.topOne = this.userService.userTopOne;
     this.myIndex = 0;
+    this.players = [];
     this.teamTopOne = this.userService.teamTopOne;
     this.jugadores = [];
     this.user = true;
     this.innerHTML = '';
+    this.finalizado = false;
     this.userlogin = false;
   }
 
@@ -121,21 +126,75 @@ export class TorneosComponent implements OnInit {
     return this.userlogin;
   }
 
-  apuntate(){
-    if(this.userlogin === true){
-      this.modalApuntate.nativeElement.click();
-    } else {
+  apuntate(i:number){
+    this.myIndex = i;
+    if(this.userlogin === true && (this.home[i].estado === "PENDIENTE" || this.home[i].estado === "FINALIZADO")){
       Swal.fire({
+        title: '<strong style="text-transform:uppercase">Ha ocurrido un error</strong>',
         position: 'center',
-        icon: 'error', 
-        title: 'Por favor inicia sesión o registrate',
+        icon: 'error',
+        html: `Lo sentimos, no puedes acceder a este torneo ` + 
+          `ESTADO : <b>${this.home[i].estado}</b>`,
         showConfirmButton: false,
-        timer: 2000,
+        timer: 2500,
+        timerProgressBar: true,
       });
-      $('#ManualMinMaxModal').modal('show');
-      this.registrateButton.nativeElement.click();
+    }
+    if(this.userlogin === true && this.home[i].estado === "ACTIVO"){
+      this.userService.getTeamsById(this.userService.usuarios.usuario_id).subscribe((data: []) => {
+        this.players = data;
+        console.log(this.players);
+  
+      });
+      $('#modalApuntate').modal('show')
+    }
+    if(this.userlogin === false){
+      Swal.fire({
+        title: '<strong>¿Que sucede?</strong>',
+        icon: 'info',
+        html:
+          'Por favor ' +
+          '<a id="registratep"><u>registrate</u></a> ' +
+          'o <a id="entrap"><u>inicia sesion</u></a> ',
+        showCloseButton: false,
+        showCancelButton: false,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> OK, esta bien!',
+        confirmButtonAriaLabel: 'LISTO!',
+        
+      })
+      
+      $('#registratep').click(function(){
+        $('#registerModal').modal('show')
+        $('.swal2-container').hide()
+      })
+      $('#entrap').click(function(){
+        $('#loginModal').modal('show')
+        $('.swal2-container').hide()
+      })
       
     }
+  }
+
+  confirmarEquipo(torneo:number, equipo:any){
+    if(equipo === "0"){
+      Swal.fire({
+        title: '<strong style="text-transform:uppercase">Ha ocurrido un error</strong>',
+        position: 'center',
+        icon: 'error',
+        html: `Por favor selecciona un equipo`,
+        showConfirmButton: false,
+        timer: 2500,
+        timerProgressBar: true,
+      });
+      
+    } else {
+      
+    }
+    console.log(torneo);
+    console.log(equipo);
+    
   }
 
   changeEquipo() {
@@ -156,7 +215,7 @@ export class TorneosComponent implements OnInit {
       case 'ACTIVO':
         return '#28a745';
       case 'PENDIENTE':
-        return '#ffc107';
+        return '#ff8401';
       case 'FINALIZADO':
         return '#dc3545';
     }
@@ -214,9 +273,22 @@ export class TorneosComponent implements OnInit {
   }
 
   getHome() {
+    
     this.userService.getHome().subscribe((data: any[]) => {
       this.home = data;
+    
+      for(let i = 0; i < this.home.length; i++){
+        if(this.home[i].estado === "FINALIZADO"){
+          console.log(this.home[i]);
+
+          
+        }
+      }
     });
+
+    if(this.userlogin === true){
+      this.getTeamsUser();
+    }
   }
 
   getJuegos() {
@@ -231,14 +303,22 @@ export class TorneosComponent implements OnInit {
     this.innerHTML = this.home[i].descripcion_regla;
   }
 
+  getTeamsUser() {
+    this.userService.getTeamsById(this.userService.usuarios.usuario_id).subscribe((data: []) => {
+      this.players = data;
+      console.log(this.players);
+
+    });
+  }
+
   ngOnInit(): void {
     this.getHome();
+    this.getJuegos();
     this.rankTop10();
     this.rankTop5Team();
     this.findTopOne();
     this.findYourTop();
     this.getTeamsById();
-    this.getJuegos();
     this.isLoggedIn();
     this.home;
     this.userService.usersRank = JSON.parse(localStorage.getItem('ranktop10'));
@@ -249,6 +329,7 @@ export class TorneosComponent implements OnInit {
     this.dataTeamTop5 = this.userService.teamRank;
     this.topOne = this.userService.userTopOne;
     this.serviceTitle.setTitle(this.title);
+    
     
   }
 }
