@@ -17,6 +17,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { HeaderTopComponent } from './pages/header-top/header-top.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { LandingComponent } from './pages/landing/landing.component';
+import { MisPartidasComponent } from './pages/mis-partidas/mis-partidas.component';
 import { MisTorneosComponent } from './pages/mis-torneos/mis-torneos.component';
 import { NoEncontradaComponent } from './pages/no-encontrada/no-encontrada.component';
 import { PerfilTeamsComponent } from './pages/perfil-teams/perfil-teams.component';
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'mis-torneos', component:MisTorneosComponent},
   {path: 'pruebas', component: HeaderTopComponent},
   {path: 'perfil', component:PerfilComponent},
+  {path: 'mis-partidas', component: MisPartidasComponent},
   {path: '**', component: NoEncontradaComponent}
 
 ];

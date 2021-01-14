@@ -24,4 +24,3 @@ export class Torneo {
     }
 }
 
-// habrá que crear una clase de fases????

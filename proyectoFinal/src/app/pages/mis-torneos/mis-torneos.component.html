@@ -21,7 +21,7 @@
                                     <th>Fecha</th>
                                     <th>Hora</th>
                                     <th>Puntos</th>
-                                    <th>Resultado</th>
+                                    <th>Estado</th>
                                 </tr>
                                 <tr *ngFor="let torneoArray of torneoArray; let i = index">
                                     <td><a routerLink="/detalle-octavos">{{torneoArray.nombre}}</a></td>
@@ -29,7 +29,7 @@
                                     <td>{{torneoArray.fecha | date:'longDate'}}</td>
                                     <td>{{torneoArray.hora}}</td>
                                     <td>{{torneoArray.puntos}}</td>
-                                    <td>{{torneoArray.resultado}}</td>
+                                    <td>{{torneoArray.estado}}</td>
                                 </tr>
                             </table>
                         </div>
