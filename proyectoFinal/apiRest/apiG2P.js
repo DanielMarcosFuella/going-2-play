@@ -112,7 +112,7 @@ app.get("/jugadores/:id", function (req, res){
 // OBTEN EQUIPOS POR ID DE UN JUGADOR
 app.get("/list-teams/:id", function (req, res){
   id = req.params.id;
-  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE usuarios.usuario_id=" + id + " OR equipos.capitan="+id;
+  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname, equipos.capitan FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE usuarios.usuario_id=" + id + " OR equipos.capitan="+id;
   connection.query(sql, function (err, result){
     if(err){
       console.log(err);
@@ -325,8 +325,9 @@ app.post("/usuarios", function (req, res) {
 app.put("/usuarios/ban", function(req, response){
   let usuario_id = req.body.usuario_id;
   let ban = req.body.isBanned;
+  let url_perfil = req.body.url_perfil;
   let sql = "UPDATE usuarios SET";
-  sql += " isBanned="+ban+" WHERE usuario_id="+usuario_id;
+  sql += ` url_perfil=\"${url_perfil}"\, isBanned=${ban} WHERE usuario_id=${usuario_id}`;
   console.log(sql);
   connection.query(sql, function (err, result) {
     if (err) {
@@ -1391,6 +1392,23 @@ app.post("/equipos", function (req, res) {
       } else {
         console.log(result);
       }
+      res.send(result)
+    });
+  }
+});
+
+
+app.post("/equipo-usuario", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql = `INSERT INTO equipo_usuario (usuario_id, equipo_id) VALUES(${req.body.usuario_id}, ${req.body.equipo_id})`;
+    connection.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
       res.send(result);
     });
   }
@@ -1701,4 +1719,94 @@ app.get("/colocacion", function (req, res) {
   });
 });
 
+app.get("/colocacionPar", function (req, res) {
+  id = req.query.id;
+  let sql = "SELECT colocacion_torneo.posicion, logo, nombre, resultado_second " + 
+  "FROM colocacion_torneo INNER JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id) " +
+  "LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id) " + 
+  "WHERE colocacion_torneo.torneo_id = " + id; +  
+  " ORDER BY colocacion_torneo.posicion ASC" ;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+app.get("/colocacionImpar", function (req, res) {
+  id = req.query.id;
+  let sql = "SELECT colocacion_torneo.posicion, logo, nombre, resultado_first " + 
+  "FROM colocacion_torneo INNER JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id) " +
+  "LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id) " + 
+  "WHERE colocacion_torneo.torneo_id = " + id;+  
+  " ORDER BY colocacion_torneo.posicion ASC" ;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+// HOME
+app.get("/home", function (req, res){
+  let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS descripcion_regla, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id)"
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+    }
+    res.send(result)
+  })
+})
+// FIN HOME 
+
+
+app.get("/gethome", function (req, res){
+  id = req.query.game
+  estado = req.query.estado
+  if(id && !estado){
+    console.log("existe game");
+    let sql = `SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS reglas_descripcion, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE juegos.juego_id=${id}`
+    connection.query(sql, function (err, result){
+      if(err){
+        console.log(err);
+      }else{
+        console.log(result);
+      }
+      res.send(result)
+    })
+  }
+  if(!id && estado){
+    console.log("solo estado");
+    let sql = `SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS reglas_descripcion, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE torneos.estado=\"${estado}\"` 
+    connection.query(sql, function (err, result){
+      if(err){
+        console.log(err);
+      }else{
+        console.log(result);
+      }
+      res.send(result)
+    })
+  }
+  if(id && estado){
+    console.log("EXISTE GAME Y TODO");
+    let sql = `SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS reglas_descripcion, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE juegos.juego_id=${id} AND torneos.estado=\"${estado}\"` 
+    connection.query(sql, function (err, result){
+      if(err){
+        console.log(err);
+      }else{
+        console.log(result);
+      }
+      res.send(result)
+    })
+  }
+
+})
 app.listen(8000);

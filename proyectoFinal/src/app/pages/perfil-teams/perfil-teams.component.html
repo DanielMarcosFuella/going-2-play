@@ -243,13 +243,13 @@
       </div>
       <div class="modal-footer">
         <a
-          class="s-menu-mobile-cancel"
+          class="but-cancel"
           data-toggle="modal"
           data-target="#deleteUserModal"
           >BORRAR</a
         >
         <a
-          class="s-menu-mobile-register"
+          class="but-ok"
           (click)="
             editarEquipo(equipo.equipo_id, nombre.value, biografia.value)
           "
@@ -298,7 +298,7 @@
         </div>
         <div class="modal-footer">
           <a
-            class="s-menu-mobile-register"
+            class="but-ok"
             (click)="borrarEquipo(equipo.equipo_id)"
             >ELIMINAR</a
           >

@@ -66,10 +66,10 @@
     </ul>
 
     <div *ngIf="!isLoggedIn()" class="header-right-link">
-      <a class="s-menu" data-toggle="modal" data-target="#registerModal"
+      <a #registrateButton id="registrateButton" class="s-menu" data-toggle="modal" data-target="#registerModal"
         >REGISTRATE</a
       >
-      <a class="login-user" data-toggle="modal" data-target="#loginModal">
+      <a #entrarButton id="entrarButton" class="login-user" data-toggle="modal" data-target="#loginModal">
         <i class="fa fa-user fa-lg"></i> <span class="entrar">ENTRAR</span>
       </a>
     </div>
@@ -120,6 +120,7 @@
 </nav>
 <!-- MODAL REGISTER -->
 <div
+#registrateButton
   class="modal fade"
   id="registerModal"
   tabindex="-1"
@@ -297,10 +298,11 @@
           </div>
         </div>
         <div class="modal-footer">
-          <a class="s-menu-mobile-cancel">CANCELAR</a>
+          <a class="but-cancel" data-dismiss="modal"
+          aria-label="Close">CANCELAR</a>
           <button
             type="submit"
-            class="s-menu-mobile-register"
+            class="but-ok"
             (click)="
               registerUsuario(
                 nickname.value,
@@ -324,7 +326,7 @@
 <!-- FIN MODAL REGISTER -->
 
 <!-- MODAL LOGIN -->
-<div
+<div #entrarButton
   class="modal fade"
   id="loginModal"
   tabindex="-1"
@@ -370,7 +372,7 @@
         <div class="modal-footer">
           <button
             type="submit"
-            class="s-menu-mobile-register"
+            class="but-ok"
             (click)="loginUsuario(nickname_login.value, contrasena_login.value)"
           >
             ENTRAR

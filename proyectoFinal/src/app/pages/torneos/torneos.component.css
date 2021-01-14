@@ -781,9 +781,6 @@ select {
 }
 
 
-.botones{
-    margin-top: 40px;
-}
 
 
 .but1:hover{
@@ -802,6 +799,11 @@ select {
 
     /* background-color: #ff09d6; */
 }
+
+.botones{
+    margin-top: 40px;
+}
+
 .card-description{
     text-align: left;
 }
@@ -839,17 +841,21 @@ select {
 .card1{
     margin-top: 40px;
     margin-left: 125px;
+    border: 2px solid rgb(23 28 62);
     margin-bottom: 40px;
-    box-shadow: 3px 3px 3px 3px rgb(0,0,0,0.5);
+    box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.7);
 
 }
 .title-card{
     color: #fff;
-    background: #0b0f2c;
-    padding: 10px;
+    background: #171c3e;
+    padding-top: 10px;
     text-align: center;
+    margin-top: 0px;
     font-weight: 700;
+    font-size: 15px;
     text-transform: uppercase;
+    padding-bottom: 10px;
 }
 ol{
     font-size: x-large;

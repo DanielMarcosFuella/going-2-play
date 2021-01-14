@@ -1,225 +1,84 @@
 <div class="top-margin"></div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="section-headline text-center">
-            <a class="s-menu-crear" data-toggle="modal" data-target="#modalNewTeam">Crear Equipo</a>
-        </div>
-    </div>
-</div>
+
 <div class="container fade-in">
 <div class="container animate__animated animate__bounceInDown">
-    <div class="row center-all">
-        <div class="col-lg-4">   
-                <div class="custom-column">
-                    <a class="wt" routerLink="/perfil-teams">
-                        <h5 class="custom-column-footer one-edge-shadow">
-                        overGame
-                    </h5>
-                </a>
-                    <div class="custom-column-content">
-                        <a class="wt" routerLink="/perfil-teams">
-                        <img class="image-equipo" [src]="logoOg">
-                    </a>
-                    </div>
-                </div>
-        </div>
-        <div class="col-lg-4">
-                <div class="custom-column">
-                    <a class="wt" routerLink="/perfil-teams">
-                    <h5 class="custom-column-footer one-edge-shadow">
-                        x6tence
-                    </h5>
-                </a>
-                    <div class="custom-column-content">
-                        <a class="wt" routerLink="/perfil-teams">
-                        <img class="image-equipo" [src]="logoX6">
-                    </a>
-                    </div> 
-                </div>
-        </div>
-        <div class="col-lg-4">
-                <div class="custom-column">
-                    <a class="wt" routerLink="/perfil-teams">
-                    <h5 class="custom-column-footer one-edge-shadow">
-                        Giants
-                    </h5>
-                </a>
-                    <div class="custom-column-content">
-                    <a class="wt" routerLink="/perfil-teams">
-                        <img class="image-equipo" [src]="logoGiants">
-                    </a>
-                    </div>
-                </div>
-        </div>
-        <div class="col-lg-4">
-                <div class="custom-column">
-                    <a class="wt" routerLink="/perfil-teams">
-                    <h5 class="custom-column-footer one-edge-shadow">
-                        G2
-                    </h5>
-                </a>
-                    <div class="custom-column-content">
-                    <a class="wt" routerLink="/perfil-teams">
-
-                        <img class="image-equipo" [src]="logoG2">
-                    </a>
-                    </div>   
-                </div>
+  
+    <div class="row" style="padding: 80px 0px 30px;">
+        <div class="col-12" *ngIf="equipos.length === 0" style="text-align: center;">
+            <img src="assets/images/404.png" class="animate__animated animate__backInDown"
+              style="margin: 80px 0px 40px 0px; width:250px">
+            <p class="animate__animated animate__backInUp" style="
+            font-size: 30px;
+            font-weight: 600;
+            color: #fff;
+        ">No tienes ningun equipo, ¿Deseas crear uno?</p>
+          </div>
+          <br>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+                <a class="s-menu-crear" data-toggle="modal" data-target="#modalNewTeam">Crear Equipo</a>
+            </div>
         </div>
     </div>
+    <div class="row " style="
+    justify-content: center;
+">
+        
+        <div class="col-lg-4" *ngFor="let equipos of equipos; let i = index">   
+                <div class="custom-column">
+                    <a class="wt" (click)="goPerfil(equipos.equipo_id)">
+                        <h5 class="custom-column-footer one-edge-shadow" [ngStyle]="{'background-color':getColor(equipos.capitan)}" >
+                        {{equipos.nombre}}
+                    </h5>
+                </a>
+                    <div class="custom-column-content" style="text-align: center;">
+                        <a class="wt" (click)="goPerfil(equipos.equipo_id)">
+                        <img class="image-equipo" src="{{equipos.logo}}">
+                    </a>
+                    </div>
+                </div>
+        </div>
+        
+    </div>
 </div>
+<div class="top-margin"></div>
+
 <div class="modal fade" id="modalNewTeam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nuevo Equipo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title uppercase" id="exampleModalLabel">Crear equipo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #addTeam>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="text"></label>
-                    <input type="text" class="form-control" id="" aria-describedby="emailHelp"
-                        placeholder="Nombre del equipo">
-                    <small id="emailHelp" class="form-text text-muted"></small>
+                    <input type="text" class="form-control" aria-describedby="emailHelp" #nombreEquipo
+                        placeholder="Escribe un nombre para tu equipo">
                 </div>
+                
                 <div class="form-group">
-                    <label for="exampleFormControlFile1"></label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </div>
-                <div class="form-group">
-                    <label for="text"></label>
-                    <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="Pais">
-                </div>
-                <div class="form-group">
-                    <label for="text">Jugador 1</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                (click)="jugadores1=jugadores1+1">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=2" class="form-group">
-                    <label for="text">Jugador 2</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                (click)="jugadores1=jugadores1+1">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=3" class="form-group">
-                    <label for="text">Jugador 3</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                (click)="jugadores1=jugadores1+1">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=4" class="form-group">
-                    <label for="text">Jugador 4</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                (click)="jugadores1=jugadores1+1">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=5" class="form-group">
-                    <label for="text">Jugador 5</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                (click)="jugadores1=jugadores1+1">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=6" class="form-group">
-                    <label for="text">Jugador 6</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button"
-                                (click)="jugadores1=jugadores1+1">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=7" class="form-group">
-                    <label for="text">Jugador 7</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=8" class="form-group">
-                    <label for="text">Jugador 8</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=9" class="form-group">
-                    <label for="text">Jugador 9</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=10" class="form-group">
-                    <label for="text">Jugador 10</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="jugadores1>=11" class="form-group">
-                    <label for="text">Jugador 11</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Id del Jugador"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">+</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Juego</label>
-                    <select class="form-control" id="">
-                        <option>League of legends</option>
-                        <option>Fifa 21</option>
+                    <select class="form-control" #juegoEquipo>
+                        <option value="0">Selecciona un juego</option>
+                        <option value="{{juegos.juego_id}}" *ngFor="let juegos of juegos; let i = index">{{juegos.juego_nombre}}</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <textarea
+                      class="form-control"
+                    placeholder="Escribe una pequeña biografia para tu equipo"
+                      #biografiaEquipo
+                    ></textarea>
+                  </div>
             </div>
             <div class="modal-footer">
-                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
-                <button type="button" class="btn btn-primary">Apuntar equipo</button>
+                <a class="but-cancel" data-dismiss="modal"
+          aria-label="Close">CANCELAR</a>
+                <button type="button" class="but-ok uppercase" (click)="newEquipo(nombreEquipo.value, juegoEquipo.value, biografiaEquipo.value)">crear equipo</button>
             </div>
         </div>
     </div>

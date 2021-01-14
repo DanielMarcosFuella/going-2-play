@@ -87,6 +87,8 @@ export class HeaderComponent implements OnInit {
       null,
       null,
       null,
+      null,
+      null,
       null
     );
     this.useralls = this.userService.allusers;
@@ -249,7 +251,9 @@ export class HeaderComponent implements OnInit {
             nacionalidad,
             encrypted,
             this.biografia,
-            this.typeUser
+            this.typeUser,
+            null,
+            null
           )
         )
         .subscribe((data: User) => {
@@ -284,7 +288,9 @@ export class HeaderComponent implements OnInit {
           null,
           encrypted,
           null,
-          this.typeUser
+          this.typeUser,
+          null,
+          null
         )
       )
       .subscribe((data: User[]) => {

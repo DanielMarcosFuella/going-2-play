@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import Swal from 'sweetalert2';
 import { Torneo } from '../models/torneo';
 import { Partidos } from '../models/partidos';
+import { Equipo } from '../models/equipo';
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +53,13 @@ export class UserService {
     return this.http.post(this.url2 + '/equipos/top1', null);
   }
 
+  postEquipo(newEquipo:Equipo){
+    return this.http.post(this.url2 + "/equipos", newEquipo)
+  }
+  postEquipoUsuario(newEquipo:any){
+    return this.http.post(this.url2 + "/equipo-usuario", newEquipo)
+  }
+
   yourtop() {
     return this.http.post(this.url + '/getyourtop/', null);
   }
@@ -62,6 +70,20 @@ export class UserService {
 
   getOtroPerfil(usernick: any) {
     return this.http.get(this.url2 + '/user' + '?nickname=' + usernick);
+  }
+
+  getHomeSearch(id:any, estado:any){
+    if(id != "all" && estado === "all"){
+      return this.http.get(this.url2 + '/gethome?game='+id)
+    }
+    if(id === "all" && estado != "all"){
+      return this.http.get(this.url2 + '/gethome?estado='+estado)
+    }
+    if(id && estado){
+      return this.http.get(this.url2 + "/gethome?game="+id+"&estado="+estado)
+    }
+    
+    
   }
 
   isBanned() {
@@ -251,4 +273,10 @@ export class UserService {
   }
 
   // FIN FUNCIONALIDADES ADMINISTRADOR
+
+  // HOME
+
+  getHome(){
+    return this.http.get(this.url2 + "/home")
+  }
 }

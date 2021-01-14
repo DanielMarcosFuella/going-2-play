@@ -22,7 +22,8 @@ import { DetalleTorneoSemiComponent } from './pages/detalle-torneo-semi/detalle-
 import { DetalleTorneoFinalComponent } from './pages/detalle-torneo-final/detalle-torneo-final.component';
 import { DetalleTorneoOctavosComponent } from './pages/detalle-torneo-octavos/detalle-torneo-octavos.component';
 import { DetalleTorneoDieciseisavosComponent } from './pages/detalle-torneo-dieciseisavos/detalle-torneo-dieciseisavos.component';
-
+import * as bootstrap from 'bootstrap';
+import * as $ from 'jquery';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoEncontradaComponent } from './pages/no-encontrada/no-encontrada.component';

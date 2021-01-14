@@ -31,9 +31,9 @@ export class DetalleTorneoSemiComponent implements OnInit {
     this.seis = [];
   }
 
-  comprobarurl(){
+  comprobarurl() {
     console.log(this.route.snapshot.queryParams.id);
-    
+
     if (this.saveUrl === undefined || this.saveUrl === null) {
       Swal.fire({
         position: 'center',
@@ -48,36 +48,35 @@ export class DetalleTorneoSemiComponent implements OnInit {
 
   getPosicionesByID() {
     this.posicion.getPosicion(this.saveUrl).subscribe((data: []) => {
-      this.posicion.saveData = data;
-      localStorage.setItem('savedata', JSON.stringify(this.posicion.saveData));
-      this.saveData = this.posicion.saveData;
-      let saveD = JSON.parse(localStorage.getItem('savedata'));
-    console.log(saveD);
-    
-    for (let i = 0; i < saveD.length; i++) {
-      if(saveD[i].posicion === 1 || saveD[i].posicion === 2){
-        this.dos.push(saveD[i])
-        console.log(this.dos);
+      this.saveData = data;
+
+      for (let i = 0; i < this.saveData.length; i++) {
+        if (
+          this.saveData[i].posicion === 1 ||
+          this.saveData[i].posicion === 2
+        ) {
+          this.dos.push(this.saveData[i]);
+          console.log(this.dos);
         }
 
-      if(saveD[i].posicion === 3 || saveD[i].posicion === 4){
-        this.cuatro.push(saveD[i])
-        console.log(this.cuatro);
-      }
+        if (
+          this.saveData[i].posicion === 3 ||
+          this.saveData[i].posicion === 4
+        ) {
+          this.cuatro.push(this.saveData[i]);
+          console.log(this.cuatro);
+        }
 
-      if(saveD[i].posicion === 5 || saveD[i].posicion === 6){
-        this.seis.push(saveD[i])
-        console.log(this.seis)
+        if (
+          this.saveData[i].posicion === 5 ||
+          this.saveData[i].posicion === 6
+        ) {
+          this.seis.push(this.saveData[i]);
+          console.log(this.seis);
+        }
       }
-    }
     });
-    
-    
-
-
   }
-
-  
 
   public isMobileLayout = false;
 
