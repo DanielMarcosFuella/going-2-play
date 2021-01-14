@@ -190,6 +190,7 @@ export class PerfilTeamsComponent implements OnInit {
     if (team.estado === null || team.estado === 'FINALIZADO') {
       this.equipoService.borrarEquipo(id).subscribe((data) => {
         this.closeDelete.nativeElement.click();
+        this.closeEdit.nativeElement.click();
         Swal.fire({
           position: 'center',
           icon: 'success',

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-01-2021 a las 12:46:55
+-- Tiempo de generación: 14-01-2021 a las 16:00:39
 -- Versión del servidor: 10.4.16-MariaDB
 -- Versión de PHP: 7.4.12
 
@@ -53,11 +53,11 @@ CREATE TABLE `colocacion_torneo` (
 
 INSERT INTO `colocacion_torneo` (`id`, `torneo_id`, `equipo_id`, `posicion`) VALUES
 (6, 5, 6, 1),
-(7, 5, 6, 3),
-(8, 5, 6, 5),
+(7, 5, 8, 3),
+(8, 5, 5, 5),
 (9, 5, 5, 2),
-(10, 5, 5, 4),
-(11, 5, 5, 6);
+(10, 5, 7, 4),
+(11, 5, 7, 6);
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,7 @@ INSERT INTO `colocacion_torneo` (`id`, `torneo_id`, `equipo_id`, `posicion`) VAL
 CREATE TABLE `equipos` (
   `equipo_id` int(30) NOT NULL,
   `nombre` varchar(60) NOT NULL,
-  `logo` longtext DEFAULT 'assets/images/logo.png',
+  `logo` longtext NOT NULL DEFAULT 'assets/images/logo.png',
   `juego_id` int(11) NOT NULL,
   `capitan` int(11) NOT NULL,
   `ganadas` int(4) NOT NULL,
@@ -84,9 +84,14 @@ CREATE TABLE `equipos` (
 --
 
 INSERT INTO `equipos` (`equipo_id`, `nombre`, `logo`, `juego_id`, `capitan`, `ganadas`, `perdidas`, `empatadas`, `jugadas`, `biografia`, `puntuacion`) VALUES
-(5, 'LOS CAGAOS', 'assets/images/logo.png', 1, 67, 5, 6, 1, 12, 'xd', 200),
-(6, 'LOS INTOCABLES2', 'assets/images/logo.png', 1, 4, 0, 0, 0, 0, 'xd', 100),
-(7, 'LOS INTOCABLES3', 'assets/images/logo.png', 1, 75, 20, 5, 0, 25, 'xd', 50);
+(5, 'GULDAN BOI', 'assets/images/fire.png', 1, 67, 5, 6, 1, 12, 'xd', 10),
+(6, 'RACCONS', 'assets/images/raccons.png', 1, 4, 0, 0, 0, 0, 'xd', 100),
+(7, 'SHURIKEN', 'assets/images/shuriken.png', 1, 75, 20, 5, 0, 25, 'xd', 50),
+(8, 'OG GORILLA', 'assets/images/gorila.png', 2, 75, 0, 0, 0, 0, 'xd', 60),
+(9, 'DRAGONS', 'assets/images/dragons.png', 2, 4, 0, 0, 0, 0, 'xd', 55),
+(10, 'ERUDITES', 'assets/images/buho.png', 1, 76, 0, 0, 0, 0, 'xd', 90),
+(35, 'KNIGHTSOULS', 'assets/images/reyes.png', 1, 4, 0, 0, 0, 0, 'Los reyes', 40),
+(36, 'FOX UNIT', 'assets/images/fox.png', 1, 76, 0, 0, 0, 0, 'FOX', 70);
 
 -- --------------------------------------------------------
 
@@ -108,7 +113,10 @@ INSERT INTO `equipos_torneos` (`torneo_id`, `equipo_id`) VALUES
 (3, 7),
 (4, 5),
 (5, 5),
-(3, 7);
+(3, 7),
+(5, 6),
+(5, 7),
+(5, 8);
 
 -- --------------------------------------------------------
 
@@ -148,8 +156,8 @@ CREATE TABLE `juegos` (
 --
 
 INSERT INTO `juegos` (`juego_id`, `nombre`, `foto`) VALUES
-(1, 'LOL', 'd'),
-(2, 'FIFA', 'x');
+(1, 'LOL', 'assets/images/games/lol.jpg'),
+(2, 'FIFA', 'assets/images/games/fifa.jpg');
 
 -- --------------------------------------------------------
 
@@ -182,6 +190,15 @@ CREATE TABLE `partidos` (
   `resultado_second` int(10) NOT NULL DEFAULT 0,
   `comentario` longtext NOT NULL DEFAULT '\'sin comentarios\''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `partidos`
+--
+
+INSERT INTO `partidos` (`partido_id`, `torneo_id`, `juego_id`, `fecha`, `hora`, `equipo_first`, `equipo_second`, `resultado_first`, `resultado_second`, `comentario`) VALUES
+(9, 5, 1, '20-09-2020', '22:40', 6, 5, 0, 3, '\'sin comentarios\''),
+(12, 5, 1, '20-10-2019', '20:30', 8, 7, 2, 6, '\'sin comentarios\''),
+(14, 5, 2, '20-01-2020', '20:30', 5, 7, 3, 1, '\'sin comentarios\'');
 
 -- --------------------------------------------------------
 
@@ -229,12 +246,14 @@ CREATE TABLE `torneos` (
 --
 
 INSERT INTO `torneos` (`torneo_id`, `nombre`, `fecha`, `fases`, `reglas_id`, `game_id`, `hora`, `puntos`, `estado`) VALUES
-(3, 'PAPO', '2021-01-14', 'dieciseisavos', 149, 2, '20:30', 200, 'ACTIVO'),
+(3, 'PAPO23', '2021-01-14', 'dieciseisavos', 149, 2, '20:30', 200, 'ACTIVO'),
 (4, 'PAPO2', '2021-01-14', 'semifinal', 149, 2, '20:30', 200, 'PENDIENTE'),
 (5, 'PAPO3', '2021-01-14', 'semifinal', 149, 2, '20:30', 200, 'FINALIZADO'),
 (7, 'CACA2', '22-11-2020', 'semifinal', 147, 1, '20:20', 200, 'PENDIENTE'),
 (8, 'POAO', '2021-01-08', 'cuartos', 148, 2, '18:54', 333, 'PENDIENTE'),
-(10, 'LOS PALURDOS', '2021-01-14', 'semifinal', 147, 1, '21:58', 333, 'PENDIENTE');
+(10, 'LOS PALURDOS', '2021-01-14', 'semifinal', 147, 1, '21:58', 333, 'PENDIENTE'),
+(11, 'PAPO', '2021-01-14', 'dieciseisavos', 149, 2, '20:30', 200, 'ACTIVO'),
+(12, 'PEPE2', '2020-10-21', 'semifinal', 148, 2, '20:30', 3333, 'PENDIENTE');
 
 -- --------------------------------------------------------
 
@@ -263,13 +282,21 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`usuario_id`, `nickname`, `nombre`, `apellido`, `url_perfil`, `nacimiento`, `correo`, `nacionalidad`, `contrasena`, `biografia`, `admin`, `isBanned`, `puntuacion`) VALUES
-(4, 'joseh', 'Jose', 'Herrera', 'assets/images/Jose41609347944696joseh.jpg', '1980-11-03', 'joseh@g2p.com', 'Española', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Hola soy el profe de codenotch y hago folladas mentales xd', 'user', 0, 50),
-(67, 'luisfr', 'Luis ', 'Fernandez', 'assets/images/Luis 671610062219208luisfr.jpg', '1999-10-20', 'lualfer99@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', '¡Hola soy luis!', 'admin', 0, 40),
-(73, 'asdasdasd', 'email', 'email', 'assets/images/logo.png', '2020-12-25', 'aasdas@asasd.com', 'Puerto Rico', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 60),
-(75, 'elpepe', 'elpepe', 'elpepe', 'assets/images/elpepe751610096221840elpepe.jpg', '2016-01-20', 'elpepe@gmail.com', 'Peru', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'elpepeasasdasdadsads', 'user', 1, 70),
-(76, 'xpepe', 'Luis', 'Fernandez', 'assets/images/logo.png', '1999-10-21', 'pepitopalote@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 100),
-(85, 'xpepa3', 'Luisa', 'Fernandea', 'assets/images/logo.png', '1999-10-21', 'laasd@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 7),
-(86, 'xpepa311', 'Luisa', 'Fernandea', 'assets/images/logo.png', '1999-10-21', 'laasd@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 65);
+(4, 'zacha', 'Zacha', 'Magnus', 'assets/images/user5.jpg', '1980-11-03', 'joseh@g2p.com', 'Española', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Hola soy el profe de codenotch y hago folladas mentales xd', 'user', 0, 66),
+(67, 'luisfr', 'Luis ', 'Fernandez', 'assets/images/logo.png', '1999-10-20', 'lualfer99@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', '¡Hola soy luis!', 'admin', 0, 49),
+(73, 'arnfa', 'Arnfa', 'Akerme', 'assets/images/user4.jpg', '2020-12-25', 'aasdas@asasd.com', 'Puerto Rico', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 60),
+(75, 'ben', 'Ben', 'Gaqvist', 'assets/images/user2.jpg', '2016-01-19', 'elpepe@gmail.com', 'Peru', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'elpepeasasdasdadsads', 'user', 0, 70),
+(76, 'dereck ', 'Dereck', 'Bissen', 'assets/images/user1.jpg', '1999-10-21', 'pepitopalote@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 100),
+(85, 'lind', 'Sverker', 'Lind', 'assets/images/user6.jpg', '1999-10-21', 'laasd@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 77),
+(86, 'gosta', 'Gösta', 'Ström', 'assets/images/user3.jpg', '1999-10-21', 'laasd@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 1, 65),
+(89, 'albas', 'Alba', 'Saenz', 'assets/images/user7.jpg', '2002-02-20', 'alba@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'melachupas', 'user', 0, 80),
+(90, 'lunatic', 'Lunatic', 'Laura', 'assets/images/user8.jpg', '0000-00-00', 'lunatic@g2p.com', 'Espanola', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Lunatic Laura', 'user', 0, 76),
+(91, 'julieta', 'Julieta', 'Nightmare', 'assets/images/user9.jpg', '0000-00-00', 'juliete@g2p.com', 'Espanola', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Soy julieta', 'user', 0, 200),
+(92, 'allyson', 'Allyson', 'Poison', 'assets/images/user10.jpg', '0000-00-00', 'poison@g2p.com', 'Espanola', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Soy poison', 'user', 0, 147),
+(93, 'carla', 'Dangerous', 'Carla', 'assets/images/user11.jpg', '0000-00-00', 'carla@g2p.com', 'Espanola', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Soy carla', 'user', 0, 354),
+(94, 'emma', 'Emma Nine', 'Lives', 'assets/images/user12.jpg', '0000-00-00', 'emma@g2p.com', 'Espanola', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Soy emma', 'user', 0, 105),
+(95, 'dana', 'Dana', 'the Queen', 'assets/images/user13.jpg', '0000-00-00', 'dana@gmail.com', 'Espanola', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'soy dana', 'user', 0, 90),
+(96, 'sofia', 'Sofía', 'Moneybags', 'assets/images/user14.jpg', '0000-00-00', 'sofia@g2p.com', 'Espanola', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Soy sofia', 'user', 0, 70);
 
 --
 -- Índices para tablas volcadas
@@ -379,7 +406,7 @@ ALTER TABLE `colocacion_torneo`
 -- AUTO_INCREMENT de la tabla `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `equipo_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `equipo_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
@@ -397,7 +424,7 @@ ALTER TABLE `mensajes`
 -- AUTO_INCREMENT de la tabla `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `partido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `partido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `reglas`
@@ -409,13 +436,13 @@ ALTER TABLE `reglas`
 -- AUTO_INCREMENT de la tabla `torneos`
 --
 ALTER TABLE `torneos`
-  MODIFY `torneo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `torneo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- Restricciones para tablas volcadas

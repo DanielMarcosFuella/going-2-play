@@ -112,7 +112,7 @@ app.get("/jugadores/:id", function (req, res){
 // OBTEN EQUIPOS POR ID DE UN JUGADOR
 app.get("/list-teams/:id", function (req, res){
   id = req.params.id;
-  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE usuarios.usuario_id=" + id + " OR equipos.capitan="+id;
+  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname, equipos.capitan FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE usuarios.usuario_id=" + id + " OR equipos.capitan="+id;
   connection.query(sql, function (err, result){
     if(err){
       console.log(err);
@@ -1358,6 +1358,23 @@ app.post("/equipos", function (req, res) {
     console.log("error");
   } else {
     let sql = `INSERT INTO equipos (equipo_id, nombre, logo, juego_id, capitan, ganadas, perdidas, jugadas, biografia) VALUES(null, \"${req.body.nombre}\", \"${req.body.logo}\", \"${req.body.juego_id}\",\"${req.body.capitan}\",\"${req.body.ganadas}\",\"${req.body.perdidas}\",\"${req.body.jugadas}\",\"${req.body.biografia}\")`;
+    connection.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+      }
+      res.send(result)
+    });
+  }
+});
+
+
+app.post("/equipo-usuario", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql = `INSERT INTO equipo_usuario (usuario_id, equipo_id) VALUES(${req.body.usuario_id}, ${req.body.equipo_id})`;
     connection.query(sql, function (err, result) {
       if (err) {
         console.log(err);

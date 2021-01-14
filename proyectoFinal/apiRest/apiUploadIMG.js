@@ -32,10 +32,10 @@ app.post("/upload", function (req, res) {
   });
   busboy.on("finish", function () {
     console.log("Upload complete");
-    res.writeHead(200, { Connection: "close" });
+    // res.writeHead(200, { Connection: "close" });
     res.end("That's all folks!");
   });
-  return req.pipe(busboy);
+  req.pipe(busboy);
 });
 
 var server = app.listen(3000, function () {

@@ -82,8 +82,8 @@
                 </p>
               </div>
               <div class="botones">
-                <a class="btn but1" *ngIf="home.estado != 'FINALIZADO'" id="apuntate" (click)="apuntate(i)">Apúntate</a>
-                <a class="btn but1" *ngIf="home.estado === 'FINALIZADO'">VER RESULTADOS</a>
+                <a class="btn but1" *ngIf="home.estado === 'ACTIVO'" id="apuntate" (click)="apuntate(i)">Apúntate</a>
+                <a class="btn but1" *ngIf="home.estado === 'FINALIZADO' || home.estado === 'PENDIENTE'">VER RESULTADOS</a>
                 <a class="btn but2" (click)="getData(i)" data-toggle="modal" data-target="#reglasModal" >Reglas</a>
               </div>
             </div>

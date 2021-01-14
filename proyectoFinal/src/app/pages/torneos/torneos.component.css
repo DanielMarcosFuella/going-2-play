@@ -781,9 +781,6 @@ select {
 }
 
 
-.botones{
-    margin-top: 40px;
-}
 
 
 .but1:hover{
@@ -802,6 +799,11 @@ select {
 
     /* background-color: #ff09d6; */
 }
+
+.botones{
+    margin-top: 40px;
+}
+
 .card-description{
     text-align: left;
 }
