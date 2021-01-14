@@ -10,6 +10,8 @@ export class User {
     public contrasena:any;
     public biografia:string;
     public admin: string;
+    public isBanned:any;
+    public puntuacion:number;
 
     constructor(usuario_id:number, 
         nickname:string, 
@@ -21,7 +23,9 @@ export class User {
         nacionalidad:string, 
         contrasena:any, 
         biografia:string,
-        admin:string){
+        admin:string,
+        isBanned:any,
+        puntuacion:number){
             this.usuario_id = usuario_id;
             this.nickname = nickname;
             this.nombre = nombre;
@@ -33,5 +37,7 @@ export class User {
             this.contrasena = contrasena;
             this.biografia = biografia;
             this.admin = admin;
+            this.isBanned = isBanned;
+            this.puntuacion = puntuacion;
         }
 }

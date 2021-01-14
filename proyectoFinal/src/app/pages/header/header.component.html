@@ -63,10 +63,10 @@
     </ul>
 
     <div *ngIf="!isLoggedIn()" class="header-right-link">
-      <a class="s-menu" data-toggle="modal" data-target="#registerModal"
+      <a #registrateButton id="registrateButton" class="s-menu" data-toggle="modal" data-target="#registerModal"
         >REGISTRATE</a
       >
-      <a class="login-user" data-toggle="modal" data-target="#loginModal">
+      <a #entrarButton id="entrarButton" class="login-user" data-toggle="modal" data-target="#loginModal">
         <i class="fa fa-user fa-lg"></i> <span class="entrar">ENTRAR</span>
       </a>
     </div>
@@ -117,6 +117,7 @@
 </nav>
 <!-- MODAL REGISTER -->
 <div
+#registrateButton
   class="modal fade"
   id="registerModal"
   tabindex="-1"
@@ -321,7 +322,7 @@
 <!-- FIN MODAL REGISTER -->
 
 <!-- MODAL LOGIN -->
-<div
+<div #entrarButton
   class="modal fade"
   id="loginModal"
   tabindex="-1"

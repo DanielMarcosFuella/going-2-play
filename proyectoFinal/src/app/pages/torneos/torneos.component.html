@@ -6,99 +6,97 @@
   <div class="row">
     <div
       class="col-xs-10 col-xl-8 col-lg-10 col-md-12 secondary1 animate__animated animate__bounceInLeft justify-content-center">
-      <div class="row text-center">
-        <div class="col-md-5">
-          <div class="hover01 card card1 bg-dark" style="width: 20rem;">
-            <figure>
-              <img [src]="imageAshe" class="card-img-top" alt="...">
-            </figure>
-            <h5 class="title-card one-edge-shadow">League of legends </h5>
-            <div class="card-body bg-dark">
-              <div class="card-description">
-                <p class="wt card-text">Modo 5vs5</p>
-                <p class="wt card-text">Región: EUW</p>
-                <p class="wt card-text">Grieta del invocador</p>
-                <p class="wt card-text">Fecha: 1, feb, 2021. 18:00</p>
-                <p class="wt card-text">Premios: 100/50/20 puntos</p>
-              </div>
-              <div class="botones">
-                <a class="btn but1" data-toggle="modal" data-target="#modalLol">Apúntate</a>
-                <a class="btn but2" data-toggle="modal" data-target="#reglasLol5v5">Reglas</a>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-        <div class="col-md-5">
-          <div class="hover01 card card1 bg-dark" style="width: 20rem;">
-            <figure>
-              <img [src]="imageJhin" class="card-img-top" alt="...">
-            </figure>
-            <h5 class="title-card one-edge-shadow">League of legens</h5>
-            <div class="card-body bg-dark">
-              <div class="card-description">
-                <p class="wt card-text">Modo 1vs1</p>
-                <p class="wt card-text">Región: EUW</p>
-                <p class="wt card-text">Abismo de los lamentos</p>
-                <p class="wt card-text">Fecha: 2, feb, 2021. 18:00</p>
-                <p class="wt card-text">Premios: 100/50/20 puntos</p>
-              </div>
-              <div class="botones">
-                <a href="#" id="1vs1" class="btn but1" data-toggle="modal" data-target="#confirmacion1VS1">Apúntate</a>
-                <a class="btn but2" data-toggle="modal" data-target="#reglasLol1v1">Reglas</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-5">
-          <div class="hover01 card card1 bg-dark" style="width: 20rem;">
-            <figure>
-              <img [src]="fifa1vs1" class="card-img-top " alt="...">
-            </figure>
-            <h5 class="title-card one-edge-shadow">Fifa 21</h5>
-            <div class="card-body bg-dark">
-              <div class="card-description">
-                <p class="wt card-text">Modo 1vs1</p>
-                <p class="wt card-text">Región: Europa</p>
-                <p class="wt card-text">Fecha: 1, feb, 2021. 18:00</p>
-                <p class="wt card-text">Premios: 100/50/20 puntos</p>
-              </div>
-              <div class="botones">
-                <a href="#" id="1vs1" class="btn but1" data-toggle="modal" data-target="#confirmacion1VS1">Apúntate</a>
-                <a class="btn but2" data-toggle="modal" data-target="#reglasFifa1v1">Reglas</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-5">
-          <div class="hover01 card card1 bg-dark" style="width: 20rem;">
-            <figure>
-              <img [src]="fifa11vs11" class="card-img-top " alt="...">
-            </figure>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="busqueda">
+            <span id="title-copa">
+              <i class="fas fa-trophy"></i>&nbsp;TORNEOS {{anio}}</span>
+            <div class="float-right">
+              <label class="filter-labels">JUEGOS:</label>
+              <select class="form-control-busqueda selectpicker" #juegotorneo id="juego">
+                <option value="all" selected="">TODAS</option>
+                <option [value]="juegos.juego_id" *ngFor="let juegos of juegos; let i = index">
+                  {{ juegos.juego_nombre }}
+                </option>
+              </select><label class="filter-labels">Estado:</label>
+              <select class="form-control-busqueda selectpicker" #estadojuego id="estado">
+                <option value="all">TODAS</option>
+                <option [value]="estado" *ngFor="let estado of estado; let i = index">
+                  {{ estado }}
+                </option>
 
-            <h5 class="title-card one-edge-shadow">Fifa 21</h5>
+              </select>
+              <a style="margin-left: 10px;border: 1px solid #171c3e;padding: 5px;padding: 5px 10px;border-radius: 4px;"
+                (click)="search(juegotorneo.value, estadojuego.value)"><i class="fas fa-search fa-xs"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center">
+
+        <div class="col-12" *ngIf="home.length === 0">
+          <img src="assets/images/404.png" class="animate__animated animate__backInDown"
+            style="margin: 80px 0px 40px 0px; width:250px">
+          <p class="animate__animated animate__backInUp" style="
+          font-size: 30px;
+          font-weight: 600;
+          color: #fff;
+      ">NO SE HAN ENCONTRADO RESULTADOS</p>
+        </div>
+        <div class="col-xs-8 col-md-5 col-lg-6 col-xl-5" *ngFor="let home of home; let i = index">
+          <div class="hover01 card card1 bg-dark" style="width: 20rem">
+            <div class="">
+              <figure>
+                <img src="{{ home.logo_juego }}" class="card-img-top" alt="..." />
+                <span style="
+                    position: absolute;
+                    left: 0px;
+                    top: 20px;
+                    background-color: #0b0f2c;
+                    padding: 10px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    border-right: 2px solid #171c3e;
+                    border-bottom: 2px solid #171c3e;
+                    border-top: 2px solid #171c3e;
+                  ">{{ home.modo_regla }}</span>
+              </figure>
+            </div>
+
+            <h5 class="title-card one-edge-shadow" [ngStyle]="{'background-color':getColor(home.estado)}">
+              {{ home.estado }}
+            </h5>
             <div class="card-body bg-dark">
               <div class="card-description">
-                <p class="wt card-text">Modo 11vs11</p>
-                <p class="wt card-text">Región: Europa</p>
-                <p class="wt card-text">Fecha: 1, feb, 2021. 18:00</p>
-                <p class="wt card-text">Premios: 100/50/20 puntos</p>
+                <p class="wt card-text">
+                  Premio : <br /><i class="fas fa-award"></i>&nbsp;{{
+                  home.puntos
+                  }}
+                  puntos
+                </p>
+                <p class="wt card-text">
+                  Fecha: <br /><i class="far fa-calendar-alt"></i> &nbsp;{{
+                  home.fecha
+                  }}
+                  <br /><i class="fas fa-clock"></i> &nbsp;{{ home.hora }}
+                </p>
               </div>
               <div class="botones">
-                <a class="btn but1" data-toggle="modal" data-target="#modalFifa">Apúntate</a>
-                <a class="btn but2" data-toggle="modal" data-target="#reglasFifa11v11">Reglas</a>
+                <a class="btn but1" (click)="apuntate()">Apúntate</a>
+                <a class="btn but2" (click)="getData(i)" data-toggle="modal" data-target="#reglasModal" >Reglas</a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-12 col-xl-4 col-md-12 col-xl-4 secondary2" style="padding-left: 0px;">
+    <div class="col-lg-12 col-xl-4 col-md-12 col-xl-4 secondary2" style="padding-left: 0px">
       <div class="secondary2">
         <div class="ranking-torneo one-edge-shadow">
-          <h1 class="text-center title-ranking"><i class="fa fa-medal fa-lg"></i> RANKING <i
-              class="fa fa-medal fa-lg"></i></h1>
-
+          <h1 class="text-center title-ranking">
+            <i class="fa fa-medal fa-lg"></i> RANKING
+            <i class="fa fa-medal fa-lg"></i>
+          </h1>
         </div>
         <!-- <div class="games-logo">
           <div class="cuerpo-logo">
@@ -109,27 +107,20 @@
           </div>
         </div> -->
       </div>
-      <div  *ngIf="team === false" class="l-wrapper animate__animated animate__backInRight">
-
+      <div *ngIf="team === false" class="l-wrapper animate__animated animate__backInRight">
         <div class="l-grid">
           <div class="l-grid__item">
             <div class="c-card" *ngIf="userlogin">
               <div class="c-card__body">
                 <div class="u-display--flex u-justify--space-between">
                   <div class="u-text--left">
-                    <div class="u-text--small">
-                      Mi Posicion
-                    </div>
-                    <h4>
-                      #{{yourNumberTop}}
-                    </h4>
+                    <div class="u-text--small">Mi Posicion</div>
+                    <h4>#{{ yourNumberTop }}</h4>
                   </div>
                   <div class="u-text--right">
-                    <div class="u-text--small">
-                      Mis Puntos
-                    </div>
+                    <div class="u-text--small">Mis Puntos</div>
                     <h4>
-                      {{yourRankTop.puntuacion}}
+                      {{ yourRankTop.puntuacion }}
                     </h4>
                   </div>
                 </div>
@@ -138,23 +129,23 @@
             <div class="c-card">
               <div class="c-card__body">
                 <div class="u-text--center" id="winner">
-                  <div class="u-text-small u-text--medium u-mb--16">Jugador TOP de la semana</div>
-                  <div class="border-media">
-                    <img src="{{topOne.url_perfil}}" width="80px">
+                  <div class="u-text-small u-text--medium u-mb--16">
+                    Jugador TOP de la semana
                   </div>
-                  <h3 class="u-mt--16 bold">{{topOne.nombre}} {{topOne.apellido}}</h3>
+                  <div class="border-media">
+                    <img src="{{ topOne.url_perfil }}" width="80px" />
+                  </div>
+                  <h3 class="u-mt--16 bold">
+                    {{ topOne.nombre }} {{ topOne.apellido }}
+                  </h3>
                   <a class="c-media__link u-text--small justify-content-center" (click)="goPerfil(topOne.nickname)"
-                  target="_blank">@{{topOne.nickname}}</a>
+                    target="_blank">@{{ topOne.nickname }}</a>
                 </div>
               </div>
             </div>
             <div class="c-card">
               <div class="c-card__header">
-                <h3>
-                  TOP 5 - JUGADORES
-                </h3>
-               
-                
+                <h3>TOP 5 - JUGADORES</h3>
               </div>
               <div class="c-card__body">
                 <ul class="c-list" id="list">
@@ -164,26 +155,25 @@
                         #
                       </div>
                       <div class="u-text--left u-text--small u-text--medium">
-                        <div ng-app="MyApp" ng-controller="lController">  
+                        <div ng-app="MyApp" ng-controller="lController">
                           <label class="toggle-checkbox">
-                            <input type="checkbox" ng-model="checkboxInput" (change)="onItemChange($event.target.checked)">
+                            <input type="checkbox" ng-model="checkboxInput"
+                              (change)="onItemChange($event.target.checked)" />
                             <div class="toggle-slider"></div>
                             <div class="toggle-info toggle-left">
-                              <div class="icon"><i _ngcontent-pqr-c80="" class="fas fa-user" style="
-                                color: #fff;
-                            "></i></div>
-                              <div class="icon-text">
-                            
+                              <div class="icon">
+                                <i _ngcontent-pqr-c80="" class="fas fa-user" style="color: #fff"></i>
                               </div>
-                                    
+                              <div class="icon-text"></div>
                             </div>
                             <div class="toggle-info toggle-right">
-                              <div class="icon"><i class="fas fa-users"></i></div>
-                              <div class="icon-text">
+                              <div class="icon">
+                                <i class="fas fa-users"></i>
                               </div>
+                              <div class="icon-text"></div>
                             </div>
                           </label>
-                         </div>
+                        </div>
                       </div>
                       <div class="u-text--right u-text--small u-text--medium">
                         PUNTOS
@@ -192,25 +182,27 @@
                   </li>
                   <li class="c-list__item" *ngFor="let dataTop10 of dataTop10; let i = index">
                     <div class="c-list__grid">
-                      <div class="c-flag c-place">{{i+1}}</div>
+                      <div class="c-flag c-place">{{ i + 1 }}</div>
                       <div class="c-media">
                         <div class="border-media">
-                          <img class="c-avatar c-media__img" src="{{dataTop10.url_perfil}}" width="40px">
+                          <img class="c-avatar c-media__img" src="{{ dataTop10.url_perfil }}" width="40px" />
                         </div>
                         <div class="c-media__content">
-                          <div class="c-media__title float-left">{{dataTop10.nombre}} {{dataTop10.apellido}}</div>
-                          <a class="c-media__link u-text--small float-left" (click)="goPerfil(dataTop10.nickname)"  target="_blank">
-                           @{{dataTop10.nickname}}</a>
+                          <div class="c-media__title float-left">
+                            {{ dataTop10.nombre }} {{ dataTop10.apellido }}
+                          </div>
+                          <a class="c-media__link u-text--small float-left" (click)="goPerfil(dataTop10.nickname)"
+                            target="_blank">
+                            @{{ dataTop10.nickname }}</a>
                         </div>
                       </div>
                       <div class="u-text--right c-kudos">
                         <div class="u-mt--8">
-                          <strong>{{dataTop10.puntuacion}}</strong>
+                          <strong>{{ dataTop10.puntuacion }}</strong>
                         </div>
                       </div>
                     </div>
                   </li>
-                  
                 </ul>
               </div>
             </div>
@@ -218,27 +210,22 @@
         </div>
       </div>
       <div *ngIf="team === true" class="l-wrapper animate__animated animate__backInRight">
-
         <div class="l-grid">
           <div class="l-grid__item">
             <div class="c-card" *ngIf="userlogin">
               <div class="c-card__body">
-                <p *ngIf="jugadores.length === 0">Este equipo no tiene jugadores</p>
+                <p *ngIf="jugadores.length === 0">
+                  Este equipo no tiene jugadores
+                </p>
                 <div class="u-display--flex u-justify--space-between" *ngIf="jugadores.length != 0">
                   <div class="u-text--left">
-                    <div class="u-text--small">
-                      Posicion Equipo
-                    </div>
-                    <h4>
-                      #{{yourNumberTopTeam}}
-                    </h4>
+                    <div class="u-text--small">Posicion Equipo</div>
+                    <h4>#{{ yourNumberTopTeam }}</h4>
                   </div>
                   <div class="u-text--right">
-                    <div class="u-text--small">
-                      Puntuación Equipo
-                    </div>
+                    <div class="u-text--small">Puntuación Equipo</div>
                     <h4>
-                      {{yourRankTopTeam.puntuacion}}
+                      {{ yourRankTopTeam.puntuacion }}
                     </h4>
                   </div>
                 </div>
@@ -247,11 +234,13 @@
             <div class="c-card">
               <div class="c-card__body">
                 <div class="u-text--center" id="winner">
-                  <div class="u-text-small u-text--medium u-mb--16">Equipo TOP de la semana</div>
-                  <div class="border-media">
-                    <img src="{{teamTopOne.logo}}" width="80px">
+                  <div class="u-text-small u-text--medium u-mb--16">
+                    Equipo TOP de la semana
                   </div>
-                  <h3 class="u-mt--16 bold">{{teamTopOne.nombre}}</h3>
+                  <div class="border-media">
+                    <img src="{{ teamTopOne.logo }}" width="80px" />
+                  </div>
+                  <h3 class="u-mt--16 bold">{{ teamTopOne.nombre }}</h3>
                   <!-- <a class="c-media__link u-text--small justify-content-center" href="https://instagram.com/carlossainz55"
                   target="_blank">@{{teamTopOne.}}</a> -->
                 </div>
@@ -259,10 +248,7 @@
             </div>
             <div class="c-card">
               <div class="c-card__header">
-                <h3>
-                TOP 5 - EQUIPOS
-                </h3>
-
+                <h3>TOP 5 - EQUIPOS</h3>
               </div>
               <div class="c-card__body">
                 <ul class="c-list" id="list">
@@ -272,28 +258,25 @@
                         #
                       </div>
                       <div class="u-text--left u-text--small u-text--medium">
-                        <div ng-app="MyApp" ng-controller="lController">  
+                        <div ng-app="MyApp" ng-controller="lController">
                           <label class="toggle-checkbox">
-                            <input type="checkbox" ng-model="checkboxInput" (change)="onItemChange($event.target.checked)" [checked]="true">
+                            <input type="checkbox" ng-model="checkboxInput"
+                              (change)="onItemChange($event.target.checked)" [checked]="true" />
                             <div class="toggle-slider"></div>
                             <div class="toggle-info toggle-left">
-                              <div class="icon"><i _ngcontent-pqr-c80="" class="fas fa-user" style="
-                                color: #fff;
-                            "></i></div>
-                              <div class="icon-text">
-                            
+                              <div class="icon">
+                                <i _ngcontent-pqr-c80="" class="fas fa-user" style="color: #fff"></i>
                               </div>
-                                    
+                              <div class="icon-text"></div>
                             </div>
                             <div class="toggle-info toggle-right">
-                              <div class="icon"><i class="fas fa-users"></i></div>
-                              <div class="icon-text">
+                              <div class="icon">
+                                <i class="fas fa-users"></i>
                               </div>
+                              <div class="icon-text"></div>
                             </div>
                           </label>
-                         </div>
-                        
-                        
+                        </div>
                       </div>
                       <div class="u-text--right u-text--small u-text--medium">
                         PUNTOS
@@ -302,24 +285,26 @@
                   </li>
                   <li class="c-list__item" *ngFor="let dataTeamTop5 of dataTeamTop5; let i = index">
                     <div class="c-list__grid">
-                      <div class="c-flag c-place">{{i+1}}</div>
+                      <div class="c-flag c-place">{{ i + 1 }}</div>
                       <div class="c-media">
                         <div class="border-media">
-                          <img class="c-avatar c-media__img" src="{{dataTeamTop5.logo}}" width="40px">
+                          <img class="c-avatar c-media__img" src="{{ dataTeamTop5.logo }}" width="40px" />
                         </div>
                         <div class="c-media__content">
-                          <div class="c-media__title float-left">{{dataTeamTop5.nombre}}</div>
-                          <a class="c-media__link u-text--small float-left" (click)="goPerfilTeam(dataTeamTop5.equipo_id)"  target="_blank">ver equipo</a>
+                          <div class="c-media__title float-left">
+                            {{ dataTeamTop5.nombre }}
+                          </div>
+                          <a class="c-media__link u-text--small float-left"
+                            (click)="goPerfilTeam(dataTeamTop5.equipo_id)" target="_blank">ver equipo</a>
                         </div>
                       </div>
                       <div class="u-text--right c-kudos">
                         <div class="u-mt--8">
-                          <strong>{{dataTeamTop5.puntuacion}}</strong>
+                          <strong>{{ dataTeamTop5.puntuacion }}</strong>
                         </div>
                       </div>
                     </div>
                   </li>
-                  
                 </ul>
               </div>
             </div>
@@ -401,11 +386,13 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="modalLol" tabindex="-1" role="dialog" aria-labelledby="modalLolLabel" aria-hidden="true">
+<div #modalApuntate class="modal fade" id="modalApuntate" tabindex="-1" role="dialog" aria-labelledby="modalApuntateLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLolLabel">Selecciona un equipo de lol</h5>
+        <h5 class="modal-title" id="modalApuntateLabel">
+          Selecciona un equipo de lol
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -422,369 +409,34 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-cancel uppercase" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="s-menu-mobile-register uppercase">Apuntar equipo</button>
+        <button type="button" class="s-menu-mobile-cancel uppercase" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="s-menu-mobile-register uppercase">
+          Apuntar equipo
+        </button>
       </div>
     </div>
   </div>
 </div>
-<div class="modal fade" id="reglasLol5v5" tabindex="-1" role="dialog" aria-labelledby="reglasLol5v5Label"
+<div class="modal fade" id="reglasModal" tabindex="-1" role="dialog" aria-labelledby="reglasModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="reglasLol5v5Label">Reglas League of Legends 5vs5</h5>
+        <h5 class="modal-title" id="reglasModalLabel">
+          REGLAS DE {{home[myIndex].juego_nombre}} {{home[myIndex].modo_regla}}
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <p>1.Información General <br>
-            2.Cuentas <br>
-            <br>
-            Para la participación en cualquier evento online es necesario el tener indicado en la configuración del
-            perfil el Game ID (Nombre de Invocador) correspondiente. Es responsabilidad de cada jugador que el valor
-            indicado en cada caso sea correcto. Tener un Game ID mal cumplimentado puede suponer la expulsión de la
-            competición. <br>
-
-            2.1.Jugador <br>
-            <br>
-            Cada jugador, únicamente, puede poseer una cuenta en la web. Este puede configurar su cuenta como desee,
-            siempre y cuando los datos introducidos sean reales y veraces.<br>
-
-            Para la participación en cualquier torneo/evento online es necesario tener introducido tu “GameID” en la
-            configuración del perfil. Paso importante a realizar ya que tener un “GameID” mal introducido puede
-            suponer su expulsión de la competición, o en su defecto, la de su equipo.
-
-            Únicamente, un jugador/equipo no será expulsado de la competición si el correspondiente “GameID” está mal
-            cumplimentado debido a la introducción del TAG y no el “GameID” o un mínimo fallo en cuanto a caracteres
-            sobre el “GameID” original. Obviamente este jugador/equipo será advertido por la organización de que su
-            incorrecta cumplimentación de los datos, los cuales deberá corregir con la mayor brevedad posible.
-            Solamente podrá tener mal introducido su “GameID” una persona por equipo. De no ser así, tener a varios
-            jugadores con su “GameID” mal introducido, por pequeños que sean los errores, acarrearán las medidas
-            expuestas con anterioridad.<br>
-
-            Es, totalmente, responsabilidad de cada jugador que el valor introducido en cada paso sea correcto. Si
-            esto repercute a un equipo, la responsabilidad recae sobre este, sufriendo así las consecuencias.<br>
-
-            <br>
-            2.2.1.Capitán <br>
-            <br>
-            Cada equipo deberá tener uno o varios capitanes, estos tendrán la posibilidad de abrir protestas para
-            mantener una línea directa con la administración y resolver encuentros con rivales no presentados,
-            incumplimientos del reglamento u otras cuestiones.<br>
-
-            Este se encargará de que los miembros de su equipo tengan introducidos correctamente el “Nombre de
-            Invocador” de forma correcta. Recordamos que este procedimientos es muy importante, ya que un equipo que
-            juegue con un jugador el cual no tenga su "GameID" introducido, acarreará una derrota en su
-            enfrentamiento, junto a la descalificación de la competición.<br>
-            <br>
-            2.2.2.Miembros <br>
-            <br>
-            Cada miembro del clan es un jugador, por lo que deberá cumplir con todo los expuesto en el punto 2.1.<br>
-
-            Todos los miembros del equipo pueden inscribir un equipo en cualquier competición siempre y cuando cumpla
-            los requisitos básicos.<br>
-
-            Un jugador nunca podrá competir con dos equipos diferentes en una misma competición. Si esto se detecta el
-            jugador será sancionado y los equipos expulsados de la competición.<br>
-
-            Queda totalmente prohibido añadir nuevos miembros al equipo durante el trascurso de un torneo. En caso de
-            realizarse esta acción, dicho equipo será expulsado de la competición inmediatamente.<br>
-            <br>
-            3.Competiciones<br>
-            <br>
-            3.1.Modo de juego<br>
-            <br>
-            El torneo será disputado en el modo “Torneo de Reclutamiento” y se jugarán en “La Grieta del
-            Invocador”.<br>
-
-            El ganador de cada partida será el equipo que consiga uno de los siguientes objetivos:<br>
-            • El equipo rival se rinda (surrender).<br>
-            • Uno de los equipos destruye la base del equipo rival.<br>
-            <br>
-            3.2.Primera elección (First Pick)<br>
-            <br>
-            El equipo que disponga de un mejor seeding, o en su defecto esté situado en la parte izquierda del
-            enfrentamiento y en la parte superior en el cuadro de enfrentamientos, tendrá “First Pick””.<br>
-
-            En el caso de que el torneo o la eliminatoria se disputen al mejor de tres o cinco partidas se irán
-            alternando las opciones no pudiendo repetir opción consecutivamente.<br>
-            <br>
-            4.Procedimiento del partido<br>
-            <br>
-            4.1.Antes del partido<br>
-            <br>
-            4.1.1.Ficha del partido<br>
-            Cuando un torneo comienza, automáticamente se crea en la web el partido en donde los jugadores de cada
-            equipo podrán: <br>
-            • Visualizar el “Nombre de Invocador” de cada uno de los miembros de ambos equipos. <br>
-            • Hablar con sus contrincantes por medio de comentarios. Estos comentarios solo podrán ser visualizados
-            por los integrantes del partido, es decir los miembros de ambos equipos, o en su defecto, si el encuentro
-            es individual, ambos jugadores. <br>
-            • Introducir el resultado del partido. <br>
-            • Abrir una protesta. <br>
-            <br>
-            4.1.2.Creador de la partida <br>
-            <br>
-            El encargado de crear la partida será el jugado que esté situado en la parte superior en el cuadro de
-            enfrentamientos. Si por cualquier motivo ambos llegáis a un acuerdo y la crea el otro jugador/equipo no
-            existe ningún problema. <br>
-
-            Las características que la partida debe contener están expuestas en el siguiente punto.<br>
-            <br>
-            4.1.3.Configuración del servidor<br>
-            <br>
-            La configuración de la partida deberá tener las siguientes características: <br>
-            • Nombre de la partida: Jugador/Equipo 1 vs Jugador/Equipo 2 <br>
-            • Ubicación del servidor: Europa Oeste (EU West) <br>
-            • Mapa: La Grieta del Invocador <br>
-            • Modo de juego: Torneo de Reclutamiento <br>
-            • Equipo inicial: (PUNTO 3.2) <br>
-            • Espectadores: Todos<br>
-            <br>
-            4.1.4.Tiempo de espera / no presentado<br>
-            <br>
-            Cuando uno de los dos jugadores/equipos no se presente, se conceden 15 minutos de cortesía para que éste
-            se presente. Si después de este tiempo no aparece, se le adjudicará una victoria por defecto (defwin) al
-            jugador/equipo que está presente en ese enfrentamiento. Dicho jugador/equipo presente, debe hacer constar
-            esto a los organizadores, mediante una protesta del tipo "Oponente no presentado", comunicando a los
-            árbitros que su rival no ha aparecido y estos actúen en consecuencia.
-            <br>
-            Si por cualquier motivo hace falta entregar pruebas. El capitan del equipo presente deberá enviar una
-            captura de pantalla de la partida creada, en la cual deberá verse el nombre de la partida, la invitación
-            al equipo rival, y la hora.
-          </p>
-        </div>
+      <div class="modal-body" id="uncrip" [innerHTML]="innerHTML">
       </div>
       <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">ACEPTAR</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="reglasLol1v1" tabindex="-1" role="dialog" aria-labelledby="reglasLol1v1Label"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="reglasLol1v1Label">Reglas League of Legends 1vs1</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">
+          ACEPTAR
         </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <p>1.Información General <br>
-            2.Cuentas <br>
-            <br>
-            Para la participación en cualquier evento online es necesario el tener indicado en la configuración del
-            perfil el Game ID (Nombre de Invocador) correspondiente. Es responsabilidad de cada jugador que el valor
-            indicado en cada caso sea correcto. Tener un Game ID mal cumplimentado puede suponer la expulsión de la
-            competición. <br>
-
-            2.1.Jugador <br>
-            <br>
-            Cada jugador, únicamente, puede poseer una cuenta en la web. Este puede configurar su cuenta como desee,
-            siempre y cuando los datos introducidos sean reales y veraces.<br>
-
-            Para la participación en cualquier torneo/evento online es necesario tener introducido tu “GameID” en la
-            configuración del perfil. Paso importante a realizar ya que tener un “GameID” mal introducido puede
-            suponer su expulsión de la competición, o en su defecto, la de su equipo.
-
-            Únicamente, un jugador/equipo no será expulsado de la competición si el correspondiente “GameID” está mal
-            cumplimentado debido a la introducción del TAG y no el “GameID” o un mínimo fallo en cuanto a caracteres
-            sobre el “GameID” original. Obviamente este jugador/equipo será advertido por la organización de que su
-            incorrecta cumplimentación de los datos, los cuales deberá corregir con la mayor brevedad posible.
-            Solamente podrá tener mal introducido su “GameID” una persona por equipo. De no ser así, tener a varios
-            jugadores con su “GameID” mal introducido, por pequeños que sean los errores, acarrearán las medidas
-            expuestas con anterioridad.<br>
-
-            Es, totalmente, responsabilidad de cada jugador que el valor introducido en cada paso sea correcto. Si
-            esto repercute a un equipo, la responsabilidad recae sobre este, sufriendo así las consecuencias.<br>
-
-            <br>
-            3.Competiciones<br>
-            <br>
-            3.1.Modo de juego<br>
-            <br>
-            El torneo será disputado en el modo “Torneo de Reclutamiento” y se jugarán en “El abismo de los
-            lamentos.<br>
-
-            El ganador de cada partida será el jugador que consiga uno de los siguientes objetivos:<br>
-            • El equipo rival se rinda (surrender).<br>
-            • Uno de los equipos destruye la primera torre del rival.<br>
-            • Conseguir un total de dos eliminaciones.<br>
-            <br>
-            3.2.Elección<br>
-            <br>
-            La fase de pick y bans será Blind Mode
-            <br>
-            4.Procedimiento del partido<br>
-            <br>
-            4.1.Antes del partido<br>
-            <br>
-            4.1.1.Ficha del partido<br>
-            Cuando un torneo comienza, automáticamente se crea en la web el partido en donde los jugadores de cada
-            equipo podrán: <br>
-            • Visualizar el “Nombre de Invocador” de cada uno de los miembros de ambos equipos. <br>
-            • Hablar con sus contrincantes por medio de comentarios. Estos comentarios solo podrán ser visualizados
-            por los integrantes del partido, es decir los miembros de ambos equipos, o en su defecto, si el encuentro
-            es individual, ambos jugadores. <br>
-            • Introducir el resultado del partido. <br>
-            • Abrir una protesta. <br>
-            <br>
-            4.1.2.Creador de la partida <br>
-            <br>
-            El encargado de crear la partida será el jugado que esté situado en la parte superior en el cuadro de
-            enfrentamientos. Si por cualquier motivo ambos llegáis a un acuerdo y la crea el otro jugador/equipo no
-            existe ningún problema. <br>
-
-            Las características que la partida debe contener están expuestas en el siguiente punto.<br>
-            <br>
-            4.1.3.Configuración del servidor<br>
-            <br>
-            La configuración de la partida deberá tener las siguientes características: <br>
-            • Nombre de la partida: Jugador/Equipo 1 vs Jugador/Equipo 2 <br>
-            • Ubicación del servidor: Europa Oeste (EU West) <br>
-            • Mapa: El abismo de los lamentos <br>
-            • Modo de juego: Blind Mode <br>
-            • Equipo inicial: (PUNTO 3.2) <br>
-            • Espectadores: Todos<br>
-            <br>
-            4.1.4.Tiempo de espera / no presentado<br>
-            <br>
-            Cuando uno de los dos jugadores/equipos no se presente, se conceden 15 minutos de cortesía para que éste
-            se presente. Si después de este tiempo no aparece, se le adjudicará una victoria por defecto (defwin) al
-            jugador/equipo que está presente en ese enfrentamiento. Dicho jugador/equipo presente, debe hacer constar
-            esto a los organizadores, mediante una protesta del tipo "Oponente no presentado", comunicando a los
-            árbitros que su rival no ha aparecido y estos actúen en consecuencia.
-            <br>
-            Si por cualquier motivo hace falta entregar pruebas. El capitan del equipo presente deberá enviar una
-            captura de pantalla de la partida creada, en la cual deberá verse el nombre de la partida, la invitación
-            al equipo rival, y la hora.
-          </p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">ACEPTAR</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="reglasFifa1v1" tabindex="-1" role="dialog" aria-labelledby="reglasFifa1v1Label"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="reglasFifa1v1Label">Reglas Fifa 1vs1</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <p>1.Información General <br>
-            2.Presentación <br>
-            <br>
-            2.1.Asistencia <br>
-            <br>
-            Tienes 10 minutos para poder presentarte en el chat de la hoja de partido a partir de la hora indicada en
-            "Fecha de juego". Una vez finalizado este tiempo el rival podrá reportar como “Rival no presentado”. <br>
-            <br>
-            2.2.Nombre de usuario<br>
-            <br>
-            El ID de los jugadores tiene que ser exactamente igual en la web como en el cliente de juego. En el caso
-            que no coincida en su totalidad será decisión del administrador si ese jugador puede disputar o no los
-            partidos. <br>
-            <br>
-            3.Creación de partida y restricciones<br>
-            <br>
-            3.1.Creación de partida. <br>
-            <br>
-            Los partidos se deben jugar siguiendo el siguiente procedimiento: <br>
-
-            • Agregar la ID del jugador rival a tu cuenta. <br>
-            • El jugador que aparezca en la parte superior de la tabla deberá crear una Temporada Amistosa Online en
-            la sección de FIFA Ultimate Team e invitar al rival. <br>
-            • Se deberá seguir las normas estipuladas por el torneo. <br>
-            <br>
-            3.2. Configuración y funcionamiento. <br>
-            <br>
-            Los desafíos se deben crear con la siguiente configuración y con las plantillas actualizadas. <br>
-
-            • Duración: 6 minutos por parte. <br>
-            • Tipo de partida: FIFA Ultimate Team. <br>
-            • Controles: Semiasistidos<br>
-            • Velocidad de juego: Normal<br>
-            • Tiempo: Sol / Despejado<br>
-            • En caso de empate se deberá jugar prórroga y penaltis<br>
-            <br>
-            Está prohibido el uso de la defensa clásica.
-          </p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">ACEPTAR</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="reglasFifa11v11" tabindex="-1" role="dialog" aria-labelledby="reglasFifa11v11Label"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="reglasFifa11v11Label">Reglas Fifa 11vs11</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <p>1.Información General <br>
-            2.Presentación <br>
-            <br>
-            2.1.Asistencia <br>
-            <br>
-            El equipo entero tiene 10 minutos para poder presentarte en el chat de la hoja de partido a partir de la
-            hora indicada en "Fecha de juego". Una vez finalizado este tiempo el rival podrá reportar como “Rival no
-            presentado”. <br>
-            <br>
-            2.2.Nombre de usuarios<br>
-            <br>
-            El ID de los jugadores tiene que ser exactamente igual en la web como en el cliente de juego. En el caso
-            que no coincida en su totalidad será decisión del administrador si ese jugador puede disputar o no los
-            partidos. <br>
-            <br>
-            3.Creación de partida y restricciones<br>
-            <br>
-            3.1.Creación de partida. <br>
-            <br>
-            Los partidos se deben jugar siguiendo el siguiente procedimiento: <br>
-
-            • Agregar la ID del jugador rival a tu cuenta. <br>
-            • El equipo que aparezca en la parte superior de la tabla deberá crear una Temporada Amistosa Online en la
-            sección de FIFA Ultimate Team e invitar al rival. <br>
-            • Se deberá seguir las normas estipuladas por el torneo. <br>
-            <br>
-            3.2. Configuración y funcionamiento. <br>
-            <br>
-            Los desafíos se deben crear con la siguiente configuración y con las plantillas actualizadas. <br>
-
-            • Duración: 6 minutos por parte. <br>
-            • Tipo de partida: FIFA Ultimate Champions. <br>
-            • Controles: Semiasistidos<br>
-            • Velocidad de juego: Normal<br>
-            • Tiempo: Sol / Despejado<br>
-            • En caso de empate se deberá jugar prórroga y penaltis<br>
-            <br>
-          </p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">ACEPTAR</button>
       </div>
     </div>
   </div>
@@ -795,18 +447,22 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title uppercase" id="confirmacion1VS1Label">¡Se necesita confirmación!</h5>
+        <h5 class="modal-title uppercase" id="confirmacion1VS1Label">
+          ¡Se necesita confirmación!
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <p>Confirmar que se ha leído las reglas y desea participar </p>
+          <p>Confirmar que se ha leído las reglas y desea participar</p>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">CONFIRMAR</button>
+        <button type="button" class="s-menu-mobile-register uppercase" data-dismiss="modal">
+          CONFIRMAR
+        </button>
       </div>
     </div>
   </div>

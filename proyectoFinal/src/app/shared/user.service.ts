@@ -64,6 +64,20 @@ export class UserService {
     return this.http.get(this.url2 + '/user' + '?nickname=' + usernick);
   }
 
+  getHomeSearch(id:any, estado:any){
+    if(id != "all" && estado === "all"){
+      return this.http.get(this.url2 + '/gethome?game='+id)
+    }
+    if(id === "all" && estado != "all"){
+      return this.http.get(this.url2 + '/gethome?estado='+estado)
+    }
+    if(id && estado){
+      return this.http.get(this.url2 + "/gethome?game="+id+"&estado="+estado)
+    }
+    
+    
+  }
+
   isBanned() {
     this.getUserAll().subscribe((data: User[]) => {
       this.usersBan = data;
@@ -251,4 +265,10 @@ export class UserService {
   }
 
   // FIN FUNCIONALIDADES ADMINISTRADOR
+
+  // HOME
+
+  getHome(){
+    return this.http.get(this.url2 + "/home")
+  }
 }

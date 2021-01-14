@@ -1289,6 +1289,45 @@ select:focus {
   color: #ff09d6;
 }
 
+.box-image-torneo{
+  position: absolute;
+}
+
+#title-copa {
+  margin-top: 25px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.busqueda{
+  padding: 45px 45px 31px 33px;
+  background: #0b0f2c;
+  box-shadow: 0 -1px 12px 7px black;
+}
+
+.form-control-busqueda {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #171c3e;
+  border-radius: 4px;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  font-weight: 400;
+  line-height: 1.5;
+  background-clip: padding-box;
+}
+
+.box-span{
+  position: relative;
+  left: 10px;
+  top: 10px;
+}
+
 .edit-user,
 .delete-user {
   cursor: pointer;
