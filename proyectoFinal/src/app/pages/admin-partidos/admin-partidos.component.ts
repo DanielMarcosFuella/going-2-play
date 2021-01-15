@@ -56,6 +56,22 @@ export class AdminPartidosComponent implements OnInit {
     return this.userlogin;
   }
 
+  goDetalle(fases:any, id: any) {
+    // console.log(fases);
+    // console.log("/detalle-"+fases+"/"+id);
+    
+    this.router.navigateByUrl('/detalle-'+fases+'/'+id);
+    
+  }
+  goPartido(id:number) {
+    this.router.navigateByUrl('/detalle-partido/'+id);
+    
+  }
+  goPerfilTeam(id: any) {
+    this.router.navigateByUrl('/perfil-teams?id='+id);
+    
+  }
+
   noAdmin() {
     if (this.isLoggedIn() && this.adminService.usuarios.admin === 'admin') {
       return true;
@@ -214,6 +230,9 @@ export class AdminPartidosComponent implements OnInit {
     }
   }
 
+
+  
+
   addPartido(
     equipo1: number,
     equipo2: number,
@@ -352,5 +371,7 @@ export class AdminPartidosComponent implements OnInit {
     );
     this.torneos = this.adminService.adminTorneos;
     this.serviceTitle.setTitle(this.title);
+    console.log(this.adminPartidos);
+    
   }
 }

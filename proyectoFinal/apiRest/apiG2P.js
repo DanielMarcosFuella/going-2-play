@@ -1093,7 +1093,7 @@ app.get("/mis-torneos", function (req, res) {
 
 app.get("/admin-partidos", function (req, res) {
   id = req.params.id;
-  let sql = "SELECT DISTINCT partidos.partido_id, torneos.torneo_id, torneos.nombre AS torneo_nombre, torneos.estado AS estado_torneo, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS juego_foto, partidos.fecha, partidos.hora, partidos.equipo_first, e1.nombre AS nombre_equipo_first,e1.logo AS logo_first, partidos.equipo_second, e2.nombre AS nombre_equipo_second, e2.logo AS logo_second,partidos.resultado_first, partidos.resultado_second, partidos.comentario FROM partidos LEFT JOIN juegos ON (partidos.juego_id = juegos.juego_id) LEFT JOIN equipos AS e1 ON (partidos.equipo_first = e1.equipo_id) LEFT JOIN equipos AS e2 ON (partidos.equipo_second = e2.equipo_id) LEFT JOIN torneos ON (partidos.torneo_id = torneos.torneo_id)"
+  let sql = "SELECT DISTINCT partidos.partido_id, torneos.torneo_id, torneos.fases, torneos.nombre AS torneo_nombre, torneos.estado AS estado_torneo, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS juego_foto, partidos.fecha, partidos.hora, partidos.equipo_first, e1.nombre AS nombre_equipo_first,e1.logo AS logo_first, partidos.equipo_second, e2.nombre AS nombre_equipo_second, e2.logo AS logo_second,partidos.resultado_first, partidos.resultado_second, partidos.comentario FROM partidos LEFT JOIN juegos ON (partidos.juego_id = juegos.juego_id) LEFT JOIN equipos AS e1 ON (partidos.equipo_first = e1.equipo_id) LEFT JOIN equipos AS e2 ON (partidos.equipo_second = e2.equipo_id) LEFT JOIN torneos ON (partidos.torneo_id = torneos.torneo_id)"
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1220,19 +1220,20 @@ app.get("/admin-equipo/:nombre", function(req, res){
 
 // ENDPOINT PARTIDOS //
 
-app.get("/partidos/:id", function (req, res) {
-  id = req.params.id;
-  let sql = "SELECT * FROM partidos WHERE partido_id=" + id;
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result);
-    }
 
-    res.send(result);
-  });
-});
+// app.get("/partidos/:id", function (req, res) {
+//   id = req.params.id;
+//   let sql = "SELECT * FROM partidos WHERE partido_id=" + id;
+//   connection.query(sql, function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(result);
+//     }
+
+//     res.send(result);
+//   });
+// });
 
 app.get("/partidos", function (req, res) {
   id = req.params.id;
@@ -1512,9 +1513,10 @@ app.delete("/equipos", function (req, res) {
 
 // Muestra todos los torneos de la bbdd
 
+// Nuevo: se agrego un Join para obtener los datos de los equipos en el torneo
 app.get("/torneos", function (req, res) {
   id = req.params.id;
-  let sql = "SELECT * FROM torneos";
+  let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, torneos.reglas_id, torneos.game_id, torneos.hora, torneos.puntos, torneos.estado, j.juego_id, j.nombre as juego_nombre, j.foto AS logo_juego, r.reglas_id, r.modo AS modo_regla, r.juego_id, r.descripcion AS descripcion_regla FROM torneos INNER JOIN juegos j on torneos.game_id = j.juego_id INNER JOIN reglas r on torneos.reglas_id = r.reglas_id";
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1543,18 +1545,19 @@ app.get("/torneos/:id", function (req, res) {
 
 // Mostrar los torneos en los que está inscrito un usuario
 
-// app.get("/torneo", function (req, res) {
-//   id = req.query.id;
-//   let sql = "SELECT torneos.nombre, torneos.juego, torneos.fecha, torneos.hora, torneos.puntos, torneos.estado FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id;
-//   connection.query(sql, function (err, result) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log(result);
-//     }
-//     res.send(result);
-//   });
-// });
+// Nuevo: corregir consulta, el campo resultado no existe
+app.get("/torneo", function (req, res) {
+  id = req.query.id;
+  let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.hora, torneos.puntos FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id + " GROUP BY torneos.nombre";
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
 
 // Mostrar los torneos de un equipo pasado por query
 
@@ -1827,4 +1830,269 @@ app.get("/gethome", function (req, res){
   }
 
 })
+
+
+//FUNCIONALIDADES NUEVAS 
+
+// Nuevo: se agrego la relación de los equipos para obtener el nombre y foto
+app.get("/partidos/:id", function (req, res) {
+  id = req.params.id;
+  let sql = "SELECT partidos.partido_id,partidos.torneo_id,partidos.juego_id,partidos.fecha,partidos.hora,partidos.equipo_first,partidos.equipo_second,partidos.resultado_first,partidos.resultado_second,partidos.comentario,partidos.posicion,partidos.finalizado,partidos.fase,e1.equipo_id,e1.nombre as nombre_first,e1.logo as logo_first,e2.equipo_id,e2.nombre as nombre_second,e2.logo as logo_second, e1.capitan as capitan_first, e2.capitan as capitan_second FROM partidos INNER JOIN equipos e1 on partidos.equipo_first = e1.equipo_id INNER JOIN equipos e2 on partidos.equipo_second = e2.equipo_id WHERE partido_id=" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+
+    res.send(result);
+  });
+});
+
+// Nuevo: nuevo endpoint para recuperar la lista de partidos por fase en un torneo
+app.get("/partidos-torneo/:torneo_id", function (req, res) {
+  id = req.params.torneo_id;
+  let sql = "SELECT partidos.partido_id,partidos.torneo_id,partidos.juego_id,partidos.fecha,partidos.hora,partidos.equipo_first,partidos.equipo_second,partidos.resultado_first,partidos.resultado_second,partidos.comentario,partidos.posicion,partidos.finalizado,partidos.fase,e1.equipo_id,e1.nombre as nombre_first,e1.logo,e2.equipo_id,e2.nombre as nombre_second,e2.logo FROM partidos INNER JOIN equipos e1 on partidos.equipo_first = e1.equipo_id INNER JOIN equipos e2 on partidos.equipo_second = e2.equipo_id WHERE torneo_id =" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+
+    const octavoList = []
+    const cuartoList = []
+    const semiList = []
+    const finalList = []
+
+    result.forEach(item => {
+      if (item.fase === '8vo') {
+        octavoList.push(item)
+      }
+      if (item.fase === '4to') {
+        cuartoList.push(item)
+      }
+      if (item.fase === 'semi') {
+        semiList.push(item)
+      }
+      if (item.fase === 'final') {
+        finalList.push(item)
+      }
+    })
+
+    result = {
+      octavoList,
+      cuartoList,
+      semiList,
+      finalList
+    }
+
+    res.send(result);
+  });
+});
+
+// Nuevo: para actualizar los resultados partidos, también se agrega un nuevo partido para la siguiente fase
+app.put("/partidos-resultados", function (req, res) {
+  const partido_id = req.body.partido_id;
+  const resultado_first = req.body.resultado_first;
+  const resultado_second = req.body.resultado_second;
+
+  let sql = "UPDATE partidos SET resultado_first = ?, resultado_second = ?, finalizado = 1 WHERE partido_id= " + partido_id;
+  const params = [resultado_first, resultado_second]
+  connection.query(sql, params, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      let sqlPartidos = `SELECT partidos.partido_id,partidos.torneo_id,partidos.juego_id,partidos.fecha,partidos.hora,partidos.equipo_first,partidos.equipo_second,partidos.resultado_first,partidos.resultado_second,partidos.comentario,partidos.posicion,partidos.finalizado,partidos.fase,e1.equipo_id,e1.nombre as nombre_first,e1.logo,e2.equipo_id,e2.nombre as nombre_second,e2.logo FROM partidos INNER JOIN equipos e1 on partidos.equipo_first = e1.equipo_id INNER JOIN equipos e2 on partidos.equipo_second = e2.equipo_id WHERE torneo_id = ${req.body.torneo_id} AND fase = '${req.body.fase}'`
+      connection.query(sqlPartidos, function (err, partidosResult) {
+        if (err) {
+          res.status(400);
+          res.send(err)
+        }
+
+        const partidos = partidosResult.filter(item => item.posicion === req.body.posicion && item.finalizado === 1)
+
+        if (partidos.length === 2) {
+          let equipo_first = partidos[0].resultado_first > partidos[0].resultado_second ? partidos[0].equipo_first : partidos[0].equipo_second
+          let equipo_second = partidos[1].resultado_first > partidos[1].resultado_second ? partidos[1].equipo_first : partidos[1].equipo_second
+
+          let fase = '8vo'
+          let posicion = 1
+
+          if (req.body.fase === '8vo') {
+            fase = '4to'
+
+            if (req.body.posicion === 1 || req.body.posicion === 2) {
+              posicion = 1
+            }
+
+            if (req.body.posicion === 3 || req.body.posicion === 4) {
+              posicion = 2
+            }
+
+            if (req.body.posicion === 5 || req.body.posicion === 6) {
+              posicion = 3
+            }
+
+            if (req.body.posicion === 7 || req.body.posicion === 8) {
+              posicion = 4
+            }
+          }
+          if (req.body.fase === '4to') {
+            fase = 'semi'
+
+            if (req.body.posicion === 1 || req.body.posicion === 2) {
+              posicion = 1
+            }
+
+            if (req.body.posicion === 3 || req.body.posicion === 4) {
+              posicion = 2
+            }
+          }
+          if (req.body.fase === 'semi') {
+            fase = 'final'
+
+            if (req.body.posicion === 1 || req.body.posicion === 2) {
+              posicion = 1
+            }
+          }
+
+          const sqlPartidos = `INSERT INTO partidos (torneo_id, juego_id, fecha, equipo_first, equipo_second, resultado_first, resultado_second, comentario, posicion, fase)
+                      VALUES(${req.body.torneo_id}, 1, NOW(), ?, ?, 0, 0, '', ?, ?)`;
+          connection.query(sqlPartidos, [equipo_first, equipo_second, posicion, fase], function (err, resultPartido) {
+            if (err) {
+              res.status(400);
+              res.send(err)
+            } else {
+              res.send(partidos);
+            }
+          });
+          console.log("Datos de PARTIDOS actualizados");
+        } else {
+          res.send({message: 'Datos de PARTIDOS actualizados', value: partidosResult});
+        }
+      })
+    }
+  });
+});
+
+// Nuevo: obtener equipos por usuario
+app.get("/equipos-usuario", function(req, res){
+    const userId = req.query.userId;
+    let arr = [userId];
+    let sql2 = "SELECT equipos.nombre, equipos.equipo_id, equipos.nombre, equipos.logo, equipos.juego_id, equipos.capitan, equipos.ganadas, equipos.perdidas, equipos.empatadas, equipos.jugadas, equipos.biografia, equipos.puntuacion FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id = ?";
+    connection.query(sql2, arr, function(err, result){
+        if(err){
+            console.log(err);
+        }else{
+            console.log(result);
+        }
+        res.send(result);
+    });
+});
+
+// Nuevo: agregar un equipo y agregar en la tabla equipo_usuario
+app.post("/equipos", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql = `
+    INSERT INTO equipos (equipo_id, nombre, logo, juego_id, capitan, ganadas, perdidas, empatadas, jugadas, biografia)
+    VALUES(null, \"${req.body.nombre}\", \"${req.body.logo}\", \"${req.body.juego_id}\",\"${req.body.capitan}\",\"${req.body.ganadas}\",\"${req.body.perdidas}\",\"${req.body.empatadas}\",\"${req.body.jugadas}\",\"${req.body.biografia}\")`;
+    connection.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+        res.send(err);
+      } else {
+        const sqlEquipoUsuario = `
+        INSERT INTO equipo_usuario (usuario_id, equipo_id)
+        VALUES(\"${req.body.capitan}\", \"${result.insertId}\")`;
+
+        connection.query(sqlEquipoUsuario, function (err, resultEquipoUsuario) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(result);
+            }
+            res.send(resultEquipoUsuario);
+        })
+      }
+    });
+  }
+});
+
+
+// Nuevo: endpoint para obtener equipos torneos
+app.get("/equipos-torneos", function (req, res) {
+  let sql = "SELECT * FROM equipos_torneos";
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
+});
+
+// Nuevo: se valida si el equipo ya esta registrado en un torneo en específico, se valida si alcanzo el limite del torneo, se agrega un nuevo equipo
+app.post("/equipos-torneos", function (req, res) {
+  if (!req.body) {
+    console.log("error");
+  } else {
+    let sql3 = `SELECT * FROM equipos_torneos WHERE torneo_id = ${req.body.torneo_id}`
+    connection.query(sql3, function (err, equiposTorneosResult) {
+      if (equiposTorneosResult.some(item => item.equipo_id === req.body.equipo_id)) {
+        res.status(400);
+        res.send({message: 'El equipo ya esta agregado'})
+      } else if (equiposTorneosResult.length >= 16) {
+        res.status(400);
+        res.send({message: 'No se pueden agregar más equipos al torneo'})
+      } else {
+        let sql = `INSERT INTO equipos_torneos (torneo_id, equipo_id) VALUES(\"${req.body.torneo_id}\", \"${req.body.equipo_id}\")`;
+        connection.query(sql, function (err, resultTorneo) {
+          if (err) {
+            res.status(400);
+            res.send(err)
+          } else {
+            if (equiposTorneosResult.length === 1 || equiposTorneosResult.length % 2 !== 0) {
+              let sqlPartidos = `SELECT * FROM partidos WHERE torneo_id = ${req.body.torneo_id}`
+              connection.query(sqlPartidos, function (err, partidosResult) {
+                if (err) {
+                  res.status(400);
+                  res.send(err)
+                }
+
+                let posicion = 1
+                if (partidosResult.length) {
+                  posicion = partidosResult[partidosResult.length - 1].posicion
+                  const countPosicion = partidosResult.filter(item => item.posicion === posicion);
+                  if (countPosicion.length === 2) {
+                    posicion = posicion + 1
+                  }
+                }
+
+                const equipoFirst = equiposTorneosResult[equiposTorneosResult.length - 1].equipo_id
+
+                let sql = `INSERT INTO partidos (torneo_id, juego_id, fecha, equipo_first, equipo_second, resultado_first, resultado_second, comentario, posicion, fase)
+                          VALUES(${req.body.torneo_id}, 1, NOW(), ${equipoFirst}, ${req.body.equipo_id}, 0, 0, '', ${posicion}, '8vo')`;
+                connection.query(sql, function (err, equipoResult) {
+                  if (err) {
+                    res.status(400);
+                    res.send(err)
+                  } else {
+                    res.send({message: equipoResult});
+                  }
+                });
+              });
+            } else {
+              res.send({message: 'Agregado'});
+            }
+          }
+        });
+      }
+    })
+  }
+});
+
 app.listen(8000);

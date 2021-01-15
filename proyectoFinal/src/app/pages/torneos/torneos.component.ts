@@ -1,12 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { element } from 'protractor';
-import { Equipo } from 'src/app/models/equipo';
-import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/shared/auth.service';
-import { UserService } from 'src/app/shared/user.service';
-import Swal from 'sweetalert2';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Equipo} from 'src/app/models/equipo';
+import {User} from 'src/app/models/user';
+import {AuthService} from 'src/app/shared/auth.service';
+import {UserService} from 'src/app/shared/user.service';
+import {Torneo} from "../../models/torneo"
+import {EquipoService} from "../../shared/equipo.service"
+import Swal from "sweetalert2"
+import {EquiposTorneoService} from "../../shared/equipos-torneo.service"
+import {EquipoTorneo} from "../../models/equipo-torneo"
+import {TorneoService} from "../../shared/torneo.service"
 declare var $: any 
 
 @Component({
@@ -17,7 +21,6 @@ declare var $: any
 export class TorneosComponent implements OnInit {
   @ViewChild('modalApuntate') modalApuntate;
   @ViewChild('registrateButton') registrateButton;
-
   imageAshe = 'assets/asheHeader.jpg';
   imageJhin = 'assets/lolHeader.jpg';
   fifa1vs1 = 'assets/FIFA-21-Header.jpg';
@@ -31,51 +34,118 @@ export class TorneosComponent implements OnInit {
   public yourRankTop: User;
   public yourRankTopTeam: Equipo;
   public topOne: User;
-  public estado: string[];
   public teamTopOne: any;
   public yourNumberTop: number;
   public yourNumberTopTeam: number;
-  public juegos: any[];
-  public myIndex: number;
   public jugadores: any;
-  public players: any[];
-  public finalizado: boolean;
-
-  public innerHTML: string;
+  public estado: string[];
   user: boolean;
   team: boolean;
-  anio: number = new Date().getFullYear();
   title = 'Torneos - G2P';
   public userlogin: boolean;
-  public home: any[];
+  public torneosList: any[] = []
+  public misEquipoStartList: Equipo[] = []
+  public misEquipoList: Equipo[] = []
+  private torneoId: number
+  public equipoId: any = ''
+  private userInfo = JSON.parse(localStorage.getItem('usuario'))
+  private equiposTorneoList: EquipoTorneo[] = []
+  private isUpdateSelectEquipo: boolean = false
+  anio: number = new Date().getFullYear();
+  public juegos: any[];
+  public myIndex: number;
+  public innerHTML: string;
+
   constructor(
     private router: Router,
     public userService: UserService,
     private serviceTitle: Title,
+    private auth: AuthService,
+    private equiposTorneoService: EquiposTorneoService,
+    private torneoService: TorneoService,
     private route: ActivatedRoute,
-    private auth: AuthService
+    private equipoService: EquipoService
   ) {
     this.team = false;
-    this.dataTop10 = this.userService.usersRank;
     this.estado = ['ACTIVO', 'PENDIENTE', 'FINALIZADO'];
+    this.dataTop10 = this.userService.usersRank;
     this.dataTeamTop5 = this.userService.teamRank;
-    this.topOne = this.userService.userTopOne;
-    this.myIndex = 0;
-    this.players = [];
+    this.topOne = this.userService.userTopOne
     this.teamTopOne = this.userService.teamTopOne;
-    this.jugadores = [];
-    this.user = true;
+    this.myIndex = 0;
+    this.jugadores = []
     this.innerHTML = '';
-    this.finalizado = false;
-    this.userlogin = false;
+    this.user = true;
+    this.userlogin = false
   }
 
   goPerfil(nickname: string) {
-    this.router.navigateByUrl('/perfil?nickname=' + nickname);
+    this.router.navigateByUrl(
+      '/perfil?nickname=' + nickname
+    );
   }
 
   goPerfilTeam(id: number) {
-    this.router.navigateByUrl('/perfil-equipo?id=' + id);
+    this.router.navigateByUrl(
+      '/perfil-equipo?id=' + id
+    );
+  }
+
+  goTorneoDetalle(fase:string, id:number){
+    
+    this.router.navigateByUrl(
+      '/detalle-'+fase+'/' + id
+    );
+    
+  }
+
+  getJuegos() {
+    this.userService.getJuegos().subscribe((data: []) => {
+      this.userService.adminJuegos = data;
+      this.juegos = this.userService.adminJuegos;
+    });
+  }
+
+  getColor(estado) { 
+    switch (estado) {
+      case 'ACTIVO':
+        return '#28a745';
+      case 'PENDIENTE':
+        return '#ff8401';
+      case 'FINALIZADO':
+        return '#dc3545';
+    }
+  }
+
+  search(id: any, estado: any) {
+    const saveGame = this.route.snapshot.queryParams.game;
+    const saveEstado = this.route.snapshot.queryParams.estado;
+
+    
+    if (id === "all" && estado === "all") {
+      this.torneoService.getTorneos().subscribe((data: []) => {
+        this.torneosList = data;
+      });
+    } 
+    if(id === 'all' && estado != "all"){
+      this.torneoService.getTorneoSearch(id, estado).subscribe((data: []) => {
+        this.torneosList = data;
+      });
+     
+    } 
+    if(id && estado === '0'){
+      this.torneoService.getTorneoSearch(id, estado).subscribe((data: []) => {
+        this.torneosList = data;
+      });
+    }
+
+    if(id && estado){
+      this.torneoService.getTorneoSearch(id, estado).subscribe((data: []) => {
+        this.torneosList = data;
+      });
+    }
+    
+    
   }
 
   rankTop10() {
@@ -86,39 +156,38 @@ export class TorneosComponent implements OnInit {
     });
   }
 
-
-
   rankTop5Team() {
     this.userService.rankTop5Team().subscribe((data: []) => {
       this.userService.teamRank = data;
       this.dataTeamTop5 = this.userService.teamRank;
-      localStorage.setItem('ranktop5team', JSON.stringify(this.dataTeamTop5));
-    });
+      localStorage.setItem('ranktop5team', JSON.stringify(this.dataTeamTop5))
+    })
   }
 
   findYourTop() {
     this.userService.yourtop().subscribe((data: User[]) => {
       const saveTop = data;
-      const saveName = this.userService.usuarios.nickname;
+      const saveName = this.userService.usuarios.nickname
       let found = saveTop.find(function (element) {
         return element.nickname === saveName;
       });
       const isLargeNumber = (element) => element.nickname === saveName;
-      this.yourRankTop = found;
-      const saveYourTop = saveTop.findIndex(isLargeNumber) + 1;
-      this.yourNumberTop = saveYourTop;
-    });
+      this.yourRankTop = found
+      const saveYourTop = saveTop.findIndex(isLargeNumber) + 1
+      this.yourNumberTop = saveYourTop
+    })
   }
 
   findTopOne() {
     this.userService.topOne().subscribe((data: User) => {
       this.userService.userTopOne = data[0];
       this.topOne = this.userService.userTopOne;
-    });
+    })
     this.userService.getOneTopTeam().subscribe((data) => {
       this.userService.teamTopOne = data[0];
       this.teamTopOne = this.userService.teamTopOne;
-    });
+    })
+
   }
 
   isLoggedIn() {
@@ -126,28 +195,122 @@ export class TorneosComponent implements OnInit {
     return this.userlogin;
   }
 
-  apuntate(i:number){
+  changeEquipo() {
+
+    if (this.user === true) {
+      this.user = false;
+      this.team = true;
+    } else {
+      this.user = true;
+      this.team = false;
+    }
+
+  }
+
+  onItemChange(value) {
+    console.log(" Value is : ", value);
+    this.team = value
+  }
+
+  getTeamsById() {
+
+    this.userService.yourTeamRank(this.userService.usuarios.usuario_id).subscribe((data) => {
+      const dataPlayerJSON = JSON.stringify(data[0]);
+      const dataPlayer = JSON.parse(dataPlayerJSON);
+      this.jugadores = dataPlayer;
+      console.log(this.jugadores);
+      const newTeam = JSON.parse(localStorage.getItem('ranktop5team'))
+      console.log(newTeam);
+
+      const saveID = this.userService.usuarios.usuario_id
+      let found = newTeam.find(function (element) {
+        return element.capitan_id === saveID;
+      });
+      console.log(found);
+
+      const isLargeNumber = (element) => element.capitan_id === saveID;
+      this.yourRankTopTeam = found
+      const saveYourTop = newTeam.findIndex(isLargeNumber) + 1
+      this.yourNumberTopTeam = saveYourTop
+      console.log(this.yourNumberTopTeam);
+
+    });
+  }
+
+  ngOnInit(): void {
+    this.getTorneos();
+    this.getJuegos();
+    this.rankTop10();
+    this.rankTop5Team();
+    this.findTopOne();
+    this.findYourTop();
+    this.getTeamsById();
+    this.isLoggedIn();
+    this.userService.usersRank = JSON.parse(localStorage.getItem('ranktop10'));
+    this.dataTop10 = this.userService.usersRank;
+    this.userService.teamRank = JSON.parse(localStorage.getItem('ranktop5team'))
+    this.dataTeamTop5 = this.userService.teamRank;
+    this.topOne = this.userService.userTopOne
+    this.serviceTitle.setTitle(this.title);
+  }
+
+  private getTorneos() {
+    this.torneoService.getTorneos().subscribe((res: any) => {
+      this.torneosList = res
+      this.getEquiposTorneo();
+    }, err => {
+      this.showError()
+    })
+  }
+
+  private getEquiposTorneo() {
+    this.equiposTorneoService.getTorneos()
+      .subscribe((res: any) => {
+        this.equiposTorneoList = res
+        this.getEquipo()
+      }, err => {
+        this.showError()
+      })
+  }
+
+  private getEquipo() {
+    this.equipoService.getEquiposByUser(this.userInfo.usuario_id)
+      .subscribe((res: any) => {
+        this.misEquipoStartList = res
+        console.log(this.misEquipoStartList);
+        
+        if (this.isUpdateSelectEquipo) {
+          this.isUpdateSelectEquipo = false
+          this.setTorneoId(this.torneoId)
+        }
+      }, err => {
+        this.showError()
+      })
+  }
+
+  setEquipoTorneo() {
+    if (this.equipoId === '') {
+      this.showError()
+      return
+    }
+    this.equiposTorneoService.postEquipoTorneo({torneo_id: this.torneoId, equipo_id: this.equipoId})
+      .subscribe(() => {
+        this.isUpdateSelectEquipo = true
+        this.getTorneos()
+        this.equipoId = ''
+        this.showSuccess()
+      }, err => {
+        this.showError('Selecciona un equipo.')
+      })
+  }
+
+  getData(i: number) {
     this.myIndex = i;
-    if(this.userlogin === true && (this.home[i].estado === "PENDIENTE" || this.home[i].estado === "FINALIZADO")){
-      Swal.fire({
-        title: '<strong style="text-transform:uppercase">Ha ocurrido un error</strong>',
-        position: 'center',
-        icon: 'error',
-        html: `Lo sentimos, no puedes acceder a este torneo ` + 
-          `ESTADO : <b>${this.home[i].estado}</b>`,
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-      });
-    }
-    if(this.userlogin === true && this.home[i].estado === "ACTIVO"){
-      this.userService.getTeamsById(this.userService.usuarios.usuario_id).subscribe((data: []) => {
-        this.players = data;
-        console.log(this.players);
-  
-      });
-      $('#modalApuntate').modal('show')
-    }
+    this.innerHTML = this.torneosList[i].descripcion_regla;
+  }
+
+  setTorneoId(torneo_id: number) {
+
     if(this.userlogin === false){
       Swal.fire({
         title: '<strong>¿Que sucede?</strong>',
@@ -174,162 +337,47 @@ export class TorneosComponent implements OnInit {
         $('.swal2-container').hide()
       })
       
-    }
-  }
-
-  confirmarEquipo(torneo:number, equipo:any){
-    if(equipo === "0"){
-      Swal.fire({
-        title: '<strong style="text-transform:uppercase">Ha ocurrido un error</strong>',
-        position: 'center',
-        icon: 'error',
-        html: `Por favor selecciona un equipo`,
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-      });
-      
     } else {
-      
-    }
-    console.log(torneo);
-    console.log(equipo);
-    
-  }
 
-  changeEquipo() {
-    if (this.user === true) {
-      this.user = false;
-      this.team = true;
-    } else {
-      this.user = true;
-      this.team = false;
-    }
-  }
-  onItemChange(value) {
-    this.team = value;
-  }
 
-  getColor(estado) { 
-    switch (estado) {
-      case 'ACTIVO':
-        return '#28a745';
-      case 'PENDIENTE':
-        return '#ff8401';
-      case 'FINALIZADO':
-        return '#dc3545';
-    }
-  }
+    this.torneoId = torneo_id
 
-  search(id: any, estado: any) {
-    const saveGame = this.route.snapshot.queryParams.game;
-    const saveEstado = this.route.snapshot.queryParams.estado;
+    const torneosEquipos = this.equiposTorneoList.filter(item => item.torneo_id === torneo_id)
 
-    
-    if (id === "all" && estado === "all") {
-      this.userService.getHome().subscribe((data: []) => {
-        this.home = data;
-      });
-    } 
-    if(id === 'all' && estado != "all"){
-      this.userService.getHomeSearch(id, estado).subscribe((data: []) => {
-        this.home = data;
-      });
-     
-    } 
-    if(id && estado === '0'){
-      this.userService.getHomeSearch(id, estado).subscribe((data: []) => {
-        this.home = data;
-      });
-    }
+    this.misEquipoList = this.misEquipoStartList.filter(equipo => {
+      let noExists = true
 
-    if(id && estado){
-      this.userService.getHomeSearch(id, estado).subscribe((data: []) => {
-        this.home = data;
-      });
-    }
-    
-    
-  }
-
-  getTeamsById() {
-    this.userService
-      .yourTeamRank(this.userService.usuarios.usuario_id)
-      .subscribe((data) => {
-        const dataPlayerJSON = JSON.stringify(data[0]);
-        const dataPlayer = JSON.parse(dataPlayerJSON);
-        this.jugadores = dataPlayer;
-        const newTeam = JSON.parse(localStorage.getItem('ranktop5team'));
-
-        const saveID = this.userService.usuarios.usuario_id;
-        let found = newTeam.find(function (element) {
-          return element.capitan_id === saveID;
-        });
-        const isLargeNumber = (element) => element.capitan_id === saveID;
-        this.yourRankTopTeam = found;
-        const saveYourTop = newTeam.findIndex(isLargeNumber) + 1;
-        this.yourNumberTopTeam = saveYourTop;
-      });
-  }
-
-  getHome() {
-    
-    this.userService.getHome().subscribe((data: any[]) => {
-      this.home = data;
-    
-      for(let i = 0; i < this.home.length; i++){
-        if(this.home[i].estado === "FINALIZADO"){
-          console.log(this.home[i]);
-
-          
+      for (const torneosEquipo of torneosEquipos) {
+        if (torneosEquipo.equipo_id === equipo.equipo_id) {
+          noExists = false
+          break
         }
       }
-    });
 
-    if(this.userlogin === true){
-      this.getTeamsUser();
-    }
-  }
-
-  getJuegos() {
-    this.userService.getJuegos().subscribe((data: []) => {
-      this.userService.adminJuegos = data;
-      this.juegos = this.userService.adminJuegos;
-    });
-  }
-
-  getData(i: number) {
-    this.myIndex = i;
-    this.innerHTML = this.home[i].descripcion_regla;
-  }
-
-  getTeamsUser() {
-    this.userService.getTeamsById(this.userService.usuarios.usuario_id).subscribe((data: []) => {
-      this.players = data;
-      console.log(this.players);
-
-    });
-  }
-
-  ngOnInit(): void {
-    this.getHome();
-    this.getJuegos();
-    this.rankTop10();
-    this.rankTop5Team();
-    this.findTopOne();
-    this.findYourTop();
-    this.getTeamsById();
-    this.isLoggedIn();
-    this.home;
-    this.userService.usersRank = JSON.parse(localStorage.getItem('ranktop10'));
-    this.dataTop10 = this.userService.usersRank;
-    this.userService.teamRank = JSON.parse(
-      localStorage.getItem('ranktop5team')
-    );
-    this.dataTeamTop5 = this.userService.teamRank;
-    this.topOne = this.userService.userTopOne;
-    this.serviceTitle.setTitle(this.title);
+      return  noExists
+    })
+    $('#modalApuntate').modal('show')
     
-    
+  }
+  }
+
+  private showSuccess() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Agregado.',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
+  private showError(title: string = 'Ha ocurrido un error') {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 }

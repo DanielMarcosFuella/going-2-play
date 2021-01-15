@@ -80,11 +80,11 @@ export class MisPartidasComponent implements OnInit {
     }
   }
   goDetalle(fases:any, id: any) {
-    this.router.navigateByUrl('/detalle-'+fases+'?id='+id);
+    this.router.navigateByUrl('/detalle-'+fases+'/'+id);
     
   }
-  goPartido() {
-    this.router.navigateByUrl('/');
+  goPartido(id:number) {
+    this.router.navigateByUrl('/detalle-partido/'+id);
     
   }
   goPerfilTeam(id: any) {

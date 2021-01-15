@@ -14,8 +14,27 @@ export class TorneoService {
 
   constructor(private http: HttpClient) { }
 
+  /* Nuevo: obtener torneos */
+  getTorneos() {
+    return this.http.get(this.url + "torneos")
+  }
+
   getTorneoByID(id:any) {
     return this.http.get(this.url + "mis-torneos/?id=" + id)
+  }
+
+  getTorneoSearch(id: any, estado: any) {
+    if (id != 'all' && estado === 'all') {
+      return this.http.get(this.url + 'gethome?game=' + id);
+    }
+    if (id === 'all' && estado != 'all') {
+      return this.http.get(this.url + 'gethome?estado=' + estado);
+    }
+    if (id && estado) {
+      return this.http.get(
+        this.url + 'gethome?game=' + id + '&estado=' + estado
+      );
+    }
   }
 
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { PartidosService } from 'src/app/shared/partidos.service';
 import { PosicionService } from 'src/app/shared/posicion.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalle-torneo',
@@ -10,29 +12,44 @@ import { PosicionService } from 'src/app/shared/posicion.service';
 })
 export class DetalleTorneoComponent implements OnInit {
   
+  
   title = 'Detalle Torneo Cuartos - G2P'
   imglogo = 'assets/images/logo.png'
-  public saveUrl:number;
-
-  constructor(private serviceTitle:Title, private route:ActivatedRoute, private posicion:PosicionService) { 
-    this.saveUrl = this.route.snapshot.queryParams.id
-  }
-
-  getPosicionesByID(){
-    this.posicion.getPosicion(this.saveUrl).subscribe((data:[])=>{
-      console.log(data);
-    })
-  }
-
   public isMobileLayout = false;
+  public partidosList: any
+  private torneoId: string
 
+  constructor(
+    private route: ActivatedRoute,
+    private partidosService: PartidosService,
+    private serviceTitle: Title
+  ) {
+    this.torneoId = this.route.snapshot.params.id
+  }
 
   ngOnInit(): void {
-    this.getPosicionesByID();
-    console.log("Hpña");
     window.onresize = () => this.isMobileLayout = window.innerWidth <= 1200;
     this.serviceTitle.setTitle(this.title)
-    
+    this.getEquiposByTorneo()
+  }
+
+  private getEquiposByTorneo() {
+    this.partidosService.getPartidosByTorneoID(Number(this.torneoId))
+      .subscribe((res: any) => {
+        this.partidosList = res
+      }, err => {
+        this.showError()
+      })
+  }
+
+  private showError(title: string = 'Ha ocurrido un error') {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title,
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 
 }

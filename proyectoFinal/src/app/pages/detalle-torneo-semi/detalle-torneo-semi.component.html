@@ -1,122 +1,96 @@
 <div class="top-margin"></div>
 <div class="container-bracket">
+
     <div class="tournament-bracket tournament-bracket--rounded">
+    
         <div class="tournament-bracket__round tournament-bracket__round--semijorgeRals">
             <div class="tournament-title">
+
                 <span class="tournament-bracket__round-title">SEMIFINAL</span>
             </div>
-            <ul class="tournament-bracket__list">
-                <li class="tournament-bracket__item">
-                    <a routerLink="/detalle-partido">
-                        <div class="tournament-bracket__match" tabindex="0">
-                            <table class="tournament-bracket__table">
-                                <caption class="tournament-bracket__caption">
-                                    <time datetime="1998-02-20">20 February 1998</time>
-                                </caption>
-                                <thead class="sr-only">
-                                    <tr>
-                                        <th>Country</th>
-                                        <th>Score</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tournament-bracket__content">
-                                    <tr class="tournament-bracket__team" *ngFor="let dos of dos; let i = index">
-                                        <td class="tournament-bracket__country">
-                                            <abbr class="tournament-bracket__code" title="{{ dos.nombre }}">{{
-                                                dos.nombre }}</abbr>
-                                            <img src="{{ dos.logo }}" width="30px" />
-                                        </td>
-                                        <td class="tournament-bracket__score">
-                                            <div *ngIf="dos.posicion % 2 != 0">
-                                                <span class="tournament-bracket__number">{{
-                                                    dos.resultado_first
-                                                    }}</span>
-                                            </div>
-                                            <div *ngIf="dos.posicion % 2 == 0">
-                                                <span class="tournament-bracket__number">{{
-                                                    dos.resultado_second
-                                                    }}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </a>
-                </li>
-
-                <li class="tournament-bracket__item">
-                    <a routerLink="/detalle-partido">
-                        <div class="tournament-bracket__match" tabindex="0">
-                            <table class="tournament-bracket__table">
-                                <caption class="tournament-bracket__caption">
-                                    <time datetime="1998-02-20">20 February 1998</time>
-                                </caption>
-                                <thead class="sr-only">
-                                    <tr>
-                                        <th>Country</th>
-                                        <th>Score</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tournament-bracket__content">
-                                    <tr class="tournament-bracket__team" *ngFor="let cuatro of cuatro; let i = index">
-                                        <td class="tournament-bracket__country">
-                                            <abbr class="tournament-bracket__code" title="{{ cuatro.nombre }}">{{
-                                                cuatro.nombre }}</abbr>
-                                            <img src="{{ cuatro.logo }}" width="30px" />
-                                        </td>
-                                        <td class="tournament-bracket__score">
-                                            <span class="tournament-bracket__number">{{
-                                                cuatro.resultado_first
-                                                }}</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </a>
+            <ul *ngIf="partidosList.semiList" class="tournament-bracket__list">
+                <li *ngFor="let item of partidosList.semiList" class="tournament-bracket__item"><a [routerLink]="['/detalle-partido', item.partido_id]">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-20">{{item.fecha | date:'longDate'}}</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="luisfrpeada">{{item.nombre_first}}</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">{{item.resultado_first}}</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="javicch Republic">{{item.nombre_second}}</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">{{item.resultado_second}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div></a>
                 </li>
             </ul>
         </div>
         <div class="tournament-bracket__round tournament-bracket__round--semijorgeRals">
             <div class="tournament-title">
+
                 <span class="tournament-bracket__round-title">FINAL</span>
             </div>
 
-            <ul class="tournament-bracket__list">
-                <li class="tournament-bracket__item">
-                    <a routerLink="/detalle-partido">
-                        <div class="tournament-bracket__match" tabindex="0">
-                            <table class="tournament-bracket__table">
-                                <caption class="tournament-bracket__caption">
-                                    <time datetime="1998-02-20">20 February 1998</time>
-                                </caption>
-                                <thead class="sr-only">
-                                    <tr>
-                                        <th>Country</th>
-                                        <th>Score</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tournament-bracket__content">
-                                    <tr class="tournament-bracket__team" *ngFor="let seis of seis; let i = index">
-                                        <td class="tournament-bracket__country">
-                                            <abbr class="tournament-bracket__code" title="{{ seis.nombre }}">{{
-                                                seis.nombre }}</abbr>
-                                            <img src="{{ seis.logo }}" width="30px" />
-                                        </td>
-                                        <td class="tournament-bracket__score">
-                                            <span class="tournament-bracket__number">{{
-                                                seis.resultado_first
-                                                }}</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </a>
+            <ul *ngIf="partidosList.finalList" class="tournament-bracket__list">
+                <li *ngFor="let item of partidosList.finalList" class="tournament-bracket__item"><a [routerLink]="['/detalle-partido', item.partido_id]">
+                    <div class="tournament-bracket__match" tabindex="0">
+                        <table class="tournament-bracket__table">
+                            <caption class="tournament-bracket__caption">
+                                <time datetime="1998-02-20">{{item.fecha | date:'longDate'}}</time>
+                            </caption>
+                            <thead class="sr-only">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tournament-bracket__content">
+                                <tr class="tournament-bracket__team">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="luisfrpeada">{{item.nombre_first}}</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">{{item.resultado_first}}</span>
+                                    </td>
+                                </tr>
+                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                    <td class="tournament-bracket__country">
+                                        <abbr class="tournament-bracket__code" title="javicch Republic">{{item.nombre_second}}</abbr>
+                                        <img [src]="imglogo" width="30px">
+                                    </td>
+                                    <td class="tournament-bracket__score">
+                                        <span class="tournament-bracket__number">{{item.resultado_second}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div></a>
                 </li>
             </ul>
         </div>
+
     </div>
 </div>
 

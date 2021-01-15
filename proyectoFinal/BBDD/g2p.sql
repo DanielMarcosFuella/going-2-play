@@ -3,11 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-01-2021 a las 16:00:39
+-- Tiempo de generación: 15-01-2021 a las 05:43:30
 -- Versión del servidor: 10.4.16-MariaDB
 -- Versión de PHP: 7.4.12
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO"; 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -91,7 +91,8 @@ INSERT INTO `equipos` (`equipo_id`, `nombre`, `logo`, `juego_id`, `capitan`, `ga
 (9, 'DRAGONS', 'assets/images/dragons.png', 2, 4, 0, 0, 0, 0, 'xd', 55),
 (10, 'ERUDITES', 'assets/images/buho.png', 1, 76, 0, 0, 0, 0, 'xd', 90),
 (35, 'KNIGHTSOULS', 'assets/images/reyes.png', 1, 4, 0, 0, 0, 0, 'Los reyes', 40),
-(36, 'FOX UNIT', 'assets/images/fox.png', 1, 76, 0, 0, 0, 0, 'FOX', 70);
+(36, 'FOX UNIT', 'assets/images/fox.png', 1, 76, 0, 0, 0, 0, 'FOX', 70),
+(37, 'SOUL TEAMS', 'assets/images/logo.png', 1, 4, 0, 0, 0, 0, '123', 0);
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,9 @@ INSERT INTO `equipos_torneos` (`torneo_id`, `equipo_id`) VALUES
 (3, 7),
 (5, 6),
 (5, 7),
-(5, 8);
+(5, 8),
+(3, 5),
+(3, 37);
 
 -- --------------------------------------------------------
 
@@ -137,7 +140,8 @@ INSERT INTO `equipo_usuario` (`usuario_id`, `equipo_id`) VALUES
 (75, 5),
 (73, 5),
 (86, 6),
-(86, 7);
+(86, 7),
+(4, 37);
 
 -- --------------------------------------------------------
 
@@ -188,17 +192,21 @@ CREATE TABLE `partidos` (
   `equipo_second` int(11) NOT NULL,
   `resultado_first` int(10) NOT NULL DEFAULT 0,
   `resultado_second` int(10) NOT NULL DEFAULT 0,
-  `comentario` longtext NOT NULL DEFAULT '\'sin comentarios\''
+  `comentario` longtext NOT NULL DEFAULT '\'sin comentarios\'',
+  `posicion` int(4) DEFAULT NULL,
+  `finalizado` int(11) NOT NULL DEFAULT 0,
+  `fase` varchar(100) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `partidos`
 --
 
-INSERT INTO `partidos` (`partido_id`, `torneo_id`, `juego_id`, `fecha`, `hora`, `equipo_first`, `equipo_second`, `resultado_first`, `resultado_second`, `comentario`) VALUES
-(9, 5, 1, '20-09-2020', '22:40', 6, 5, 0, 3, '\'sin comentarios\''),
-(12, 5, 1, '20-10-2019', '20:30', 8, 7, 2, 6, '\'sin comentarios\''),
-(14, 5, 2, '20-01-2020', '20:30', 5, 7, 3, 1, '\'sin comentarios\'');
+INSERT INTO `partidos` (`partido_id`, `torneo_id`, `juego_id`, `fecha`, `hora`, `equipo_first`, `equipo_second`, `resultado_first`, `resultado_second`, `comentario`, `posicion`, `finalizado`, `fase`) VALUES
+(9, 5, 1, '20-09-2020', '22:40', 6, 5, 0, 3, '\'sin comentarios\'', NULL, 0, ''),
+(12, 5, 1, '20-10-2019', '20:30', 8, 7, 2, 6, '\'sin comentarios\'', NULL, 0, ''),
+(14, 5, 2, '20-01-2020', '20:30', 5, 7, 5, 1, '\'sin comentarios\'', NULL, 1, ''),
+(15, 3, 1, '2021-01-15 03:32:30', NULL, 5, 37, 0, 0, '', 1, 0, '8vo');
 
 -- --------------------------------------------------------
 
@@ -246,7 +254,7 @@ CREATE TABLE `torneos` (
 --
 
 INSERT INTO `torneos` (`torneo_id`, `nombre`, `fecha`, `fases`, `reglas_id`, `game_id`, `hora`, `puntos`, `estado`) VALUES
-(3, 'PAPO23', '2021-01-14', 'dieciseisavos', 149, 2, '20:30', 200, 'ACTIVO'),
+(3, 'PAPO23', '2021-01-14', 'octavos', 149, 2, '20:30', 200, 'ACTIVO'),
 (4, 'PAPO2', '2021-01-14', 'semifinal', 149, 2, '20:30', 200, 'PENDIENTE'),
 (5, 'PAPO3', '2021-01-14', 'semifinal', 149, 2, '20:30', 200, 'FINALIZADO'),
 (7, 'CACA2', '22-11-2020', 'semifinal', 147, 1, '20:20', 200, 'PENDIENTE'),
@@ -280,7 +288,7 @@ CREATE TABLE `usuarios` (
 --
 -- Volcado de datos para la tabla `usuarios`
 --
- 
+
 INSERT INTO `usuarios` (`usuario_id`, `nickname`, `nombre`, `apellido`, `url_perfil`, `nacimiento`, `correo`, `nacionalidad`, `contrasena`, `biografia`, `admin`, `isBanned`, `puntuacion`) VALUES
 (4, 'zacha', 'Zacha', 'Magnus', 'assets/images/user5.jpg', '1980-11-03', 'joseh@g2p.com', 'Española', 'vVOQRWUkcaZ7Ai3lrZi9cA==', 'Hola soy el profe de codenotch y hago folladas mentales xd', 'user', 0, 66),
 (67, 'luisfr', 'Luis ', 'Fernandez', 'assets/images/logo.png', '1999-10-20', 'lualfer99@gmail.com', 'Espana', 'vVOQRWUkcaZ7Ai3lrZi9cA==', '¡Hola soy luis!', 'admin', 0, 49),
@@ -406,7 +414,7 @@ ALTER TABLE `colocacion_torneo`
 -- AUTO_INCREMENT de la tabla `equipos`
 --
 ALTER TABLE `equipos`
-  MODIFY `equipo_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `equipo_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
@@ -424,7 +432,7 @@ ALTER TABLE `mensajes`
 -- AUTO_INCREMENT de la tabla `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `partido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `partido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `reglas`

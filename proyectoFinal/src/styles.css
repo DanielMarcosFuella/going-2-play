@@ -3650,6 +3650,10 @@ span.terms-text {
   margin: 0 auto;
   /* list-style: none; */
   /* align-items: center; */
+  border-radius: 7px 7px 7px 7px;
+  border: 2px solid #171c3e;
+  /* margin: 10px 60px 10px 60px; */
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
 }
 .separator {
   margin: 20px 20px 20px 20px;
@@ -3747,9 +3751,14 @@ span.terms-text {
   background-color: #0d112c;
   padding: 20px;
   margin-top: 20px;
+  margin-right: 20px;
+    border-radius: 7px 7px 7px 7px;
+    border: 2px solid #171c3e;
+    /* margin: 10px 60px 10px 60px; */
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
 }
 .image-detalle {
-  width: 100px;
+  width: 150px;
 }
 
 .detalle-partido-resultado {
@@ -3765,8 +3774,14 @@ span.terms-text {
 
 .title-equipo {
   background-color: #0d112c;
-  padding: 5px 10px 5px 10px;
-  font-weight: bold;
+    padding: 6px 25px 6px 25px;
+    font-weight: bold;
+    justify-content: center;
+    margin-right: 20px;
+    border-radius: 7px 7px 7px 7px;
+    border: 2px solid #171c3e;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
+    text-align: center;
 }
 
 .detalle-vs {

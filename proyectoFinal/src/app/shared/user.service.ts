@@ -17,10 +17,10 @@ export class UserService {
   private url2 = 'http://localhost:8000';
   public User: User;
   public usuarios: User;
-  public partido:Partidos;
-  public partidos:Partidos[];
-  public torneo:Torneo;
-  public torneos:Torneo[];
+  public partido: Partidos;
+  public partidos: Partidos[];
+  public torneo: Torneo;
+  public torneos: Torneo[];
   public usersBan: User[];
   public userBan: User;
   public collection: User[];
@@ -32,7 +32,7 @@ export class UserService {
   public teamTopOne: any;
   public otherPerfil: User;
   public adminTeams: [];
-  public adminPartidos : [];
+  public adminPartidos: [];
   public adminJuegos: [];
   public adminTorneos: [];
   constructor(
@@ -53,11 +53,11 @@ export class UserService {
     return this.http.post(this.url2 + '/equipos/top1', null);
   }
 
-  postEquipo(newEquipo:Equipo){
-    return this.http.post(this.url2 + "/equipos", newEquipo)
+  postEquipo(newEquipo: Equipo) {
+    return this.http.post(this.url2 + '/equipos', newEquipo);
   }
-  postEquipoUsuario(newEquipo:any){
-    return this.http.post(this.url2 + "/equipo-usuario", newEquipo)
+  postEquipoUsuario(newEquipo: any) {
+    return this.http.post(this.url2 + '/equipo-usuario', newEquipo);
   }
 
   yourtop() {
@@ -72,19 +72,7 @@ export class UserService {
     return this.http.get(this.url2 + '/user' + '?nickname=' + usernick);
   }
 
-  getHomeSearch(id:any, estado:any){
-    if(id != "all" && estado === "all"){
-      return this.http.get(this.url2 + '/gethome?game='+id)
-    }
-    if(id === "all" && estado != "all"){
-      return this.http.get(this.url2 + '/gethome?estado='+estado)
-    }
-    if(id && estado){
-      return this.http.get(this.url2 + "/gethome?game="+id+"&estado="+estado)
-    }
-    
-    
-  }
+
 
   isBanned() {
     this.getUserAll().subscribe((data: User[]) => {
@@ -123,11 +111,11 @@ export class UserService {
     return this.http.put(this.url + '/ban', newBan);
   }
 
-  getJuegos(){
-    return this.http.get(this.url2 + "/juegosall")
+  getJuegos() {
+    return this.http.get(this.url2 + '/juegosall');
   }
-  getTorneos(){
-    return this.http.get(this.url2 + "/torneosall")
+  getTorneos() {
+    return this.http.get(this.url2 + '/torneosall');
   }
 
   getUsers() {
@@ -204,12 +192,12 @@ export class UserService {
   getTorneosAll() {
     return this.http.get(this.url2 + '/admin-torneos-all');
   }
-  getEquiposTorneos(id:number) {
-    return this.http.get(this.url2 + '/admin-equipos-torneos/' +id);
+  getEquiposTorneos(id: number) {
+    return this.http.get(this.url2 + '/admin-equipos-torneos/' + id);
   }
 
-  getTeamByName(name:string){
-    return this.http.get(this.url2 + "/admin-equipo/" + name)
+  getTeamByName(name: string) {
+    return this.http.get(this.url2 + '/admin-equipo/' + name);
   }
 
   editTeam(newTeam: any) {
@@ -231,21 +219,20 @@ export class UserService {
     return this.http.delete(this.url2 + '/admin-equipos', options);
   }
 
-
-  getPartidos(){
-    return this.http.get(this.url2 + '/admin-partidos')
+  getPartidos() {
+    return this.http.get(this.url2 + '/admin-partidos');
   }
 
   editPartidos(newPartido: any) {
     return this.http.put(this.url2 + '/admin-partidos', newPartido);
   }
 
-  addPartido(partido:Partidos){
-    return this.http.post(this.url2 + "/admin-partidos", partido)
+  addPartido(partido: Partidos) {
+    return this.http.post(this.url2 + '/admin-partidos', partido);
   }
 
-  addTorneo(newtorneo:Torneo){
-    return this.http.post(this.url2 + "/admin-torneos-all", newtorneo)
+  addTorneo(newtorneo: Torneo) {
+    return this.http.post(this.url2 + '/admin-torneos-all', newtorneo);
   }
 
   deletePartido(id: number) {
@@ -276,7 +263,7 @@ export class UserService {
 
   // HOME
 
-  getHome(){
-    return this.http.get(this.url2 + "/home")
+  getHome() {
+    return this.http.get(this.url2 + '/home');
   }
 }

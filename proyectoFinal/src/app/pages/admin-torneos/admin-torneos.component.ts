@@ -62,6 +62,8 @@ export class AdminTorneosComponent implements OnInit {
     this.saveEquipo2 = 0;
   }
 
+  
+
   isLoggedIn() {
     this.userlogin = this.auth.isLoggedIn();
     return this.userlogin;
@@ -292,7 +294,10 @@ export class AdminTorneosComponent implements OnInit {
 
 
   goDetalle(fases:any, id: any) {
-    this.router.navigateByUrl('/detalle-'+fases+'?id='+id);
+    // console.log(fases);
+    // console.log("/detalle-"+fases+"/"+id);
+    
+    this.router.navigateByUrl('/detalle-'+fases+'/'+id);
     
   }
 
