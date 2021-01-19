@@ -303,7 +303,7 @@ app.get("/usuarios", function (req, res) {
 
 app.get("/admin-usuarios", function (req, res) {
   id = req.params.id;
-  let sql1 = "SELECT DISTINCT usuarios.*, equipos.equipo_id, equipos.nombre AS nombre_equipo, equipos.capitan FROM usuarios LEFT JOIN equipo_usuario ON(usuarios.usuario_id = equipo_usuario.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id)";
+  let sql1 = "SELECT DISTINCT usuarios.* FROM usuarios";
   connection.query(sql1, function (err, result) {
     if (err) {
       console.log(err);
@@ -816,7 +816,7 @@ app.delete("/reglas", function (req, res) {
 
 app.get("/admin-equipos", function (req, res) {
   id = req.params.id;
-  let sql = "SELECT DISTINCT e.equipo_id, e.logo, e.nombre, e.juego_id, juegos.nombre AS juego_nombre, usuarios.usuario_id AS capitan_id, usuarios.nickname AS nickname_capitan, juegos.foto AS juego_foto, e.capitan, e.ganadas, e.perdidas, e.empatadas, e.jugadas, torneos.estado FROM equipo_usuario JOIN equipos AS e ON(equipo_usuario.equipo_id = e.equipo_id) JOIN usuarios ON (e.capitan = usuarios.usuario_id) JOIN juegos ON (e.juego_id = juegos.juego_id) LEFT JOIN equipos_torneos ON (equipo_usuario.equipo_id = equipos_torneos.equipo_id) LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id)"
+  let sql = "SELECT DISTINCT e.equipo_id, e.logo, e.nombre, e.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS juego_foto, e.capitan, e.ganadas, e.perdidas, e.empatadas, e.jugadas FROM equipo_usuario INNER JOIN equipos AS e ON(equipo_usuario.equipo_id = e.equipo_id) INNER JOIN juegos ON (e.juego_id = juegos.juego_id)"
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);

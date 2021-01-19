@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import Swal from "sweetalert2"
 import {ActivatedRoute, Router} from "@angular/router"
 import {PartidosService} from "../../shared/partidos.service"
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-torneo-dieciseisavos',
@@ -18,11 +19,28 @@ export class DetalleTorneoDieciseisavosComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private link: Location,
     private router: Router,
     private partidosService: PartidosService,
     private serviceTitle:Title
   ) {
     this.torneoId = this.route.snapshot.params.id
+  }
+
+  goBack() {
+    // window.history.back();
+    this.link.back();
+  }
+
+  goPerfil(id: any) {
+    this.router.navigateByUrl('/perfil-equipo?id=' + id);
+    console.log(id);
+    
+  }
+  goDetalle(id: any) {
+    this.router.navigateByUrl('/detalle-partido/' + id);
+    console.log(id);
+    
   }
 
   public isMobileLayout = false;

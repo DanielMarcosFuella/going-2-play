@@ -292,21 +292,54 @@ export class TorneosComponent implements OnInit {
     if (this.equipoId === '') {
       this.showError()
       return
-    }
-    const data = {
-      torneo_id: this.torneoId,
-      fase: this.fase,
-      equipo_id: this.equipoId
-    }
-    this.equiposTorneoService.postEquipoTorneo(data)
-      .subscribe(() => {
-        this.isUpdateSelectEquipo = true
-        this.getTorneos()
-        this.equipoId = ''
-        this.showSuccess()
-      }, err => {
-        this.showError(err.error.message)
+    } else {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'but-ok',
+          cancelButton: 'but-cancel'
+        },
+        buttonsStyling: false
       })
+
+      swalWithBootstrapButtons.fire({
+        title: '¡Se necesita confirmación!',
+        text: "Confirmar que se ha leído las reglas y desea participar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'CONFIRMAR',
+        cancelButtonText: 'CANCELAR',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const data = {
+            torneo_id: this.torneoId,
+            fase: this.fase,
+            equipo_id: this.equipoId
+          }
+          this.equiposTorneoService.postEquipoTorneo(data)
+            .subscribe(() => {
+              this.isUpdateSelectEquipo = true
+              this.getTorneos()
+              this.equipoId = ''
+              this.showSuccess()
+            }, err => {
+              this.showError(err.error.message)
+            })
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelado',
+            'Por favor no olvides en leer las reglas, y participa',
+            'error'
+          )
+        }
+      })
+    }
+
+
+
   }
 
   getData(i: number) {
@@ -342,49 +375,22 @@ export class TorneosComponent implements OnInit {
       })
 
     } else {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'but-ok',
-          cancelButton: 'but-cancel'
-        },
-        buttonsStyling: false
-      })
 
-      swalWithBootstrapButtons.fire({
-        title: '¡Se necesita confirmación!',
-        text: "Confirmar que se ha leído las reglas y desea participar",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'CONFIRMAR',
-        cancelButtonText: 'CANCELAR',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.torneoId = torneo_id
-          this.fase = fase
-          const torneosEquipos = this.equiposTorneoList.filter(item => item.torneo_id === torneo_id)
-          this.misEquipoList = this.misEquipoStartList.filter(equipo => {
-            let noExists = true
-            for (const torneosEquipo of torneosEquipos) {
-              if (torneosEquipo.equipo_id === equipo.equipo_id) {
-                noExists = false
-                break
-              }
-            }
-            return noExists
-          })
-          $('#modalApuntate').modal('show')
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelado',
-            'Por favor no olvides en leer las reglas, y participa',
-            'error'
-          )
+      this.torneoId = torneo_id
+      this.fase = fase
+      const torneosEquipos = this.equiposTorneoList.filter(item => item.torneo_id === torneo_id)
+      this.misEquipoList = this.misEquipoStartList.filter(equipo => {
+        let noExists = true
+        for (const torneosEquipo of torneosEquipos) {
+          if (torneosEquipo.equipo_id === equipo.equipo_id) {
+            noExists = false
+            break
+          }
         }
+        return noExists
       })
+      $('#modalApuntate').modal('show')
+
     }
   }
 

@@ -18,7 +18,7 @@
                   <th>#</th>
                   <th>Nombre</th>
                   <th>G2P ID</th>
-                  <th>Equipos</th>
+                  <!-- <th>Equipos</th> -->
                   <th>Puntos</th>
                   <th>Modificar</th>
                 </tr>
@@ -43,12 +43,12 @@
                     >
                   </td>
                   <td>{{ userall.nickname }}</td>
-                  <td *ngIf="userall.nombre_equipo != null">
+                  <!-- <td *ngIf="userall.nombre_equipo != null">
                     <a (click)="goPerfil(userall.nickname)">{{
                       userall.nombre_equipo
                     }}</a>
                   </td>
-                  <td *ngIf="userall.nombre_equipo === null">SIN EQUIPO</td>
+                  <td *ngIf="userall.nombre_equipo === null">SIN EQUIPO</td> -->
                   <td>{{ userall.puntuacion }}</td>
                   <td>
                     <a
