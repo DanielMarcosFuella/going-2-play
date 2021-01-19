@@ -84,7 +84,7 @@ export class MisTorneosComponent implements OnInit {
     }
   }
   goDetalle(fases: any, id: any) {
-    this.router.navigateByUrl('/detalle-' + fases + '?id=' + id);
+    this.router.navigateByUrl('/detalle-' + fases + '/' + id);
   }
   goPartido() {
     this.router.navigateByUrl('/');
@@ -93,6 +93,7 @@ export class MisTorneosComponent implements OnInit {
     this.router.navigateByUrl('/perfil-teams?id=' + id);
   }
   getTeamsUser() {
+    this.torneoArray = []
     this.userService
       .getTeamsById(this.userService.usuarios.usuario_id)
       .subscribe((data: any[]) => {
@@ -100,17 +101,26 @@ export class MisTorneosComponent implements OnInit {
           let xe = data[i].equipo_id;
           console.log(xe);
           this.torneoService.getTorneoByID(xe).subscribe((data: []) => {
-            this.torneoArray = data;
-            console.log(this.torneoArray);
+            data.forEach(item => {
+              this.torneoArray.push(item);
+            })
           });
         }
+      });
+  }
+
+  getTorneos() {
+    this.torneoService.getTorneosByUser(this.userService.usuarios.usuario_id)
+      .subscribe((data: []) => {
+        this.torneoArray = data;
       });
   }
 
   ngOnInit(): void {
     this.isLoggedIn();
     this.access();
-    this.getTeamsUser();
+    /*this.getTeamsUser();*/
+    this.getTorneos()
     this.serviceTitle.setTitle(this.title);
   }
 }

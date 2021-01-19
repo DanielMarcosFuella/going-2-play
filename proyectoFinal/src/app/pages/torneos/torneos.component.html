@@ -3,22 +3,22 @@
 <div class="top-margin"></div>
 
 <div class="position-relative overflow-hidden">
-  <div class="row">
-    <div
-      class="col-xs-10 col-xl-8 col-lg-10 col-md-12 secondary1 animate__animated animate__bounceInLeft justify-content-center">
-      <div class="row">
+  <div class="row ">
+    <div class="col-xl-8 secondary1 animate__animated animate__bounceInLeft justify-content-center">
+
+      <div class="row ">
         <div class="col-md-12">
           <div class="busqueda">
             <span id="title-copa">
               <i class="fas fa-trophy"></i>&nbsp;TORNEOS {{anio}}</span>
-            <div class="float-right">
+            <div class="float-busqueda">
               <label class="filter-labels">JUEGOS:</label>
               <select class="form-control-busqueda selectpicker" #juegotorneo id="juego">
                 <option value="all" selected="">TODAS</option>
                 <option [value]="juegos.juego_id" *ngFor="let juegos of juegos; let i = index">
                   {{ juegos.juego_nombre }}
                 </option>
-              </select><label class="filter-labels">Estado:</label>
+              </select><label class="filter-labels">ESTADO:</label>
               <select class="form-control-busqueda selectpicker" #estadojuego id="estado">
                 <option value="all">TODAS</option>
                 <option [value]="estado" *ngFor="let estado of estado; let i = index">
@@ -26,13 +26,13 @@
                 </option>
 
               </select>
-              <a style="margin-left: 10px;border: 1px solid #171c3e;padding: 5px;padding: 5px 10px;border-radius: 4px;"
+              <a style="margin-left: 10px;border: 1px solid #171c3e;padding: 5px;padding: 5px 10px;border-radius: 4px;color: #fff;"
                 (click)="search(juegotorneo.value, estadojuego.value)"><i class="fas fa-search fa-xs"></i></a>
             </div>
           </div>
         </div>
       </div>
-      <div class="row text-center">
+      <div class="row justify-content-center text-center">
 
         <div class="col-12" *ngIf="torneosList.length === 0">
           <img src="assets/images/404.png" class="animate__animated animate__backInDown"
@@ -43,9 +43,9 @@
           color: #fff;
       ">NO SE HAN ENCONTRADO RESULTADOS</p>
         </div>
-        <div class="col-xs-8 col-md-5 col-lg-6 col-xl-5" *ngFor="let torneosList of torneosList; let i = index">
-          <div class="hover01 card card1 bg-dark" style="width: 20rem">
-            <div class="">
+         
+        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8" *ngFor="let torneosList of torneosList; let i = index">
+          <div class="hover01 card card1 bg-dark">
               <figure>
                 <img src="{{ torneosList.logo_juego }}" class="card-img-top" alt="..." />
                 <span style="
@@ -61,7 +61,6 @@
                     border-top: 2px solid #171c3e;
                   ">{{ torneosList.modo_regla }}</span>
               </figure>
-            </div>
 
             <h5 class="title-card one-edge-shadow" [ngStyle]="{'background-color':getColor(torneosList.estado)}">
               {{ torneosList.estado }}
@@ -83,9 +82,11 @@
                 </p>
               </div>
               <div class="botones">
-                <a class="btn but1" *ngIf="torneosList.estado === 'ACTIVO'"  id="apuntate" (click)="setTorneoId(torneosList.torneo_id)">Apúntate</a>
-                <a class="btn but1" *ngIf="torneosList.estado === 'FINALIZADO' || torneosList.estado === 'PENDIENTE'" (click)="goTorneoDetalle(torneosList.fases, torneosList.torneo_id)">VER RESULTADOS</a>
-                <a class="btn but2" (click)="getData(i)" data-toggle="modal" data-target="#reglasModal" >Reglas</a>
+                <a class="btn but1" *ngIf="torneosList.estado === 'ACTIVO'" id="apuntate"
+                  (click)="setTorneoInfo(torneosList.torneo_id, torneosList.fases)">Apúntate</a>
+                <a class="btn but1" *ngIf="torneosList.estado === 'FINALIZADO' || torneosList.estado === 'PENDIENTE'"
+                  (click)="goTorneoDetalle(torneosList.fases, torneosList.torneo_id)">VER RESULTADOS</a>
+                <a class="btn but2" (click)="getData(i)" data-toggle="modal" data-target="#reglasModal">Reglas</a>
               </div>
             </div>
           </div>
@@ -317,15 +318,15 @@
   </div>
 </div>
 
-  <div class="modal fade" id="modalApuntate" tabindex="-1" role="dialog" aria-labelledby="modalApuntateLabel"
-  aria-hidden="true" >
+<div class="modal fade" id="modalApuntate" tabindex="-1" role="dialog" aria-labelledby="modalApuntateLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalApuntateLabel">
-          <i class="fas fa-star"></i> SELECCIONA TU EQUIPO FAVORITO <i class="fas fa-star"></i>
+          SELECCIONA TU EQUIPO FAVORITO
         </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" id="cerrarApuntate1" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -341,7 +342,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="but-cancel uppercase" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="but-cancel uppercase" id="cerrarApuntate" data-dismiss="modal" aria-label="Close">
           Cancelar
         </button>
         <button type="button" class="but-ok uppercase" (click)="setEquipoTorneo()">
@@ -352,31 +353,6 @@
   </div>
 </div>
 
-<div class="putita modal fade" id="confirmacion1VS1" tabindex="-1" role="dialog" aria-labelledby="confirmacion1VS1Label"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title uppercase" id="confirmacion1VS1Label">
-          ¡Se necesita confirmación!
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <p>Confirmar que se ha leído las reglas y desea participar</p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="but-ok uppercase" data-dismiss="modal">
-          CONFIRMAR
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="modal fade" id="reglasModal" tabindex="-1" role="dialog" aria-labelledby="reglasModalLabel"
   aria-hidden="true">
@@ -406,3 +382,6 @@
 </div>
 
 <!-- <app-footer></app-footer> -->
+<script type="text/javascript">
+
+</script>

@@ -6,566 +6,38 @@
             <div class="tournament-title">
                 <span class="tournament-bracket__round-title">Dieciseisavos</span>
             </div>
-            <ul class="tournament-bracket__list">
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
+            <ul *ngIf="partidosList.dieciseisList" class="tournament-bracket__list">
+                <li *ngFor="let item of partidosList.dieciseisList" class="tournament-bracket__item"><a (click)="openDetail(item.partido_id)">
                     <div class="tournament-bracket__match" tabindex="0">
                         <table class="tournament-bracket__table">
                             <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
+                                <time datetime="1998-02-18">{{item.fecha | date:'longDate'}}</time>
                             </caption>
                             <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
+                            <tr>
+                                <th>Country</th>
+                                <th>Score</th>
+                            </tr>
                             </thead>
                             <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"> <a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code"
-                                            title="Unitede states of America">mosquit0p</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="jorgeRland">jorgeR</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">2</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="Sweden">joseH</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="ventuKsia">ventuK</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="BelaventuK">BEL</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
+                            <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                <td class="tournament-bracket__country">
+                                    <abbr class="tournament-bracket__code" title="luisfrpeada">{{item.nombre_first}}</abbr>
+                                    <img [src]="imglogo" width="30px">
+                                </td>
+                                <td class="tournament-bracket__score">
+                                    <span class="tournament-bracket__number">{{item.resultado_first}}</span>
+                                </td>
+                            </tr>
+                            <tr class="tournament-bracket__team">
+                                <td class="tournament-bracket__country">
+                                    <abbr class="tournament-bracket__code" title="uriklandaakhstan">{{item.nombre_second}}</abbr>
+                                    <img [src]="imglogo" width="30px">
+                                </td>
+                                <td class="tournament-bracket__score">
+                                    <span class="tournament-bracket__number">{{item.resultado_second}}</span>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div></a>
@@ -576,286 +48,38 @@
             <div class="tournament-title">
                 <span class="tournament-bracket__round-title">Octavos</span>
             </div>
-            <ul class="tournament-bracket__list">
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
+            <ul *ngIf="partidosList.octavoList" class="tournament-bracket__list">
+                <li *ngFor="let item of partidosList.octavoList" class="tournament-bracket__item"><a (click)="openDetail(item.partido_id)">
                     <div class="tournament-bracket__match" tabindex="0">
                         <table class="tournament-bracket__table">
                             <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
+                                <time datetime="1998-02-18">{{item.fecha | date:'longDate'}}</time>
                             </caption>
                             <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
+                            <tr>
+                                <th>Country</th>
+                                <th>Score</th>
+                            </tr>
                             </thead>
                             <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code"
-                                            title="Unitede states of America">mosquit0p</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="jorgeRland">jorgeR</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">2</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="Sweden">joseH</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="ventuKsia">ventuK</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="BelaventuK">BEL</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
+                            <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                <td class="tournament-bracket__country">
+                                    <abbr class="tournament-bracket__code" title="luisfrpeada">{{item.nombre_first}}</abbr>
+                                    <img [src]="imglogo" width="30px">
+                                </td>
+                                <td class="tournament-bracket__score">
+                                    <span class="tournament-bracket__number">{{item.resultado_first}}</span>
+                                </td>
+                            </tr>
+                            <tr class="tournament-bracket__team">
+                                <td class="tournament-bracket__country">
+                                    <abbr class="tournament-bracket__code" title="uriklandaakhstan">{{item.nombre_second}}</abbr>
+                                    <img [src]="imglogo" width="30px">
+                                </td>
+                                <td class="tournament-bracket__score">
+                                    <span class="tournament-bracket__number">{{item.resultado_second}}</span>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div></a>
@@ -866,146 +90,38 @@
             <div class="tournament-title">
                 <span class="tournament-bracket__round-title">CUARTOS</span>
             </div>
-            <ul class="tournament-bracket__list">
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
+            <ul *ngIf="partidosList.cuartoList"  class="tournament-bracket__list">
+                <li *ngFor="let item of partidosList.cuartoList" class="tournament-bracket__item"><a [routerLink]="['/detalle-partido', item.partido_id]">
                     <div class="tournament-bracket__match" tabindex="0">
                         <table class="tournament-bracket__table">
                             <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
+                                <time datetime="1998-02-18">{{item.fecha | date:'longDate'}}</time>
                             </caption>
                             <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
+                            <tr>
+                                <th>Country</th>
+                                <th>Score</th>
+                            </tr>
                             </thead>
                             <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="uriklandaakhstan">uriklanda</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code"
-                                            title="Unitede states of America">mosquit0p</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="jorgeRland">jorgeR</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">2</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="Sweden">joseH</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-18">18 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="ventuKsia">ventuK</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="BelaventuK">BEL</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
+                            <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                <td class="tournament-bracket__country">
+                                    <abbr class="tournament-bracket__code" title="luisfrpeada">{{item.nombre_first}}</abbr>
+                                    <img [src]="imglogo" width="30px">
+                                </td>
+                                <td class="tournament-bracket__score">
+                                    <span class="tournament-bracket__number">{{item.resultado_first}}</span>
+                                </td>
+                            </tr>
+                            <tr class="tournament-bracket__team">
+                                <td class="tournament-bracket__country">
+                                    <abbr class="tournament-bracket__code" title="uriklandaakhstan">{{item.nombre_second}}</abbr>
+                                    <img [src]="imglogo" width="30px">
+                                </td>
+                                <td class="tournament-bracket__score">
+                                    <span class="tournament-bracket__number">{{item.resultado_second}}</span>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div></a>
@@ -1017,74 +133,38 @@
 
                 <span class="tournament-bracket__round-title">SEMIFINAL</span>
             </div>
-            <ul class="tournament-bracket__list">
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
+            <ul *ngIf="partidosList.semiList" class="tournament-bracket__list">
+                <li *ngFor="let item of partidosList.semiList" class="tournament-bracket__item"><a [routerLink]="['/detalle-partido', item.partido_id]">
                     <div class="tournament-bracket__match" tabindex="0">
                         <table class="tournament-bracket__table">
                             <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-20">20 February 1998</time>
+                                <time datetime="1998-02-20">{{item.fecha | date:'longDate'}}</time>
                             </caption>
                             <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
+                            <tr>
+                                <th>Country</th>
+                                <th>Score</th>
+                            </tr>
                             </thead>
                             <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">2</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div></a>
-                </li>
-
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
-                    <div class="tournament-bracket__match" tabindex="0">
-                        <table class="tournament-bracket__table">
-                            <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-20">20 February 1998</time>
-                            </caption>
-                            <thead class="sr-only">
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Score</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tournament-bracket__content">
-                                <tr class="tournament-bracket__team">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="jorgeRland">jorgeR</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">4</span>
-                                    </td>
-                                </tr>
-                                <tr class="tournament-bracket__team tournament-bracket__team--winner">
-                                    <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="ventuKsia">ventuK</abbr>
-                                        <img [src]="imglogo" width="30px">
-                                    </td>
-                                    <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">7</span>
-                                    </td>
-                                </tr>
+                            <tr class="tournament-bracket__team">
+                                <td class="tournament-bracket__country">
+                                    <abbr class="tournament-bracket__code" title="luisfrpeada">{{item.nombre_first}}</abbr>
+                                    <img [src]="imglogo" width="30px">
+                                </td>
+                                <td class="tournament-bracket__score">
+                                    <span class="tournament-bracket__number">{{item.resultado_first}}</span>
+                                </td>
+                            </tr>
+                            <tr class="tournament-bracket__team tournament-bracket__team--winner">
+                                <td class="tournament-bracket__country">
+                                    <abbr class="tournament-bracket__code" title="javicch Republic">{{item.nombre_second}}</abbr>
+                                    <img [src]="imglogo" width="30px">
+                                </td>
+                                <td class="tournament-bracket__score">
+                                    <span class="tournament-bracket__number">{{item.resultado_second}}</span>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div></a>
@@ -1096,13 +176,12 @@
 
                 <span class="tournament-bracket__round-title">FINAL</span>
             </div>
-
-            <ul class="tournament-bracket__list">
-                <li class="tournament-bracket__item"><a routerLink="/detalle-partido">
+            <ul *ngIf="partidosList.finalList" class="tournament-bracket__list">
+                <li *ngFor="let item of partidosList.finalList" class="tournament-bracket__item"><a routerLink="/detalle-partido">
                     <div class="tournament-bracket__match" tabindex="0">
                         <table class="tournament-bracket__table">
                             <caption class="tournament-bracket__caption">
-                                <time datetime="1998-02-20">20 February 1998</time>
+                                <time datetime="1998-02-20">{{item.fecha | date:'longDate'}}</time>
                             </caption>
                             <thead class="sr-only">
                                 <tr>
@@ -1113,20 +192,20 @@
                             <tbody class="tournament-bracket__content">
                                 <tr class="tournament-bracket__team">
                                     <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="luisfrpeada">luisfrpe</abbr>
+                                        <abbr class="tournament-bracket__code" title="luisfrpeada">{{item.nombre_first}}</abbr>
                                         <img [src]="imglogo" width="30px">
                                     </td>
                                     <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">1</span>
+                                        <span class="tournament-bracket__number">{{item.resultado_first}}</span>
                                     </td>
                                 </tr>
                                 <tr class="tournament-bracket__team tournament-bracket__team--winner">
                                     <td class="tournament-bracket__country">
-                                        <abbr class="tournament-bracket__code" title="javicch Republic">javic</abbr>
+                                        <abbr class="tournament-bracket__code" title="javicch Republic">{{item.nombre_second}}</abbr>
                                         <img [src]="imglogo" width="30px">
                                     </td>
                                     <td class="tournament-bracket__score">
-                                        <span class="tournament-bracket__number">2</span>
+                                        <span class="tournament-bracket__number">{{item.resultado_second}}</span>
                                     </td>
                                 </tr>
                             </tbody>

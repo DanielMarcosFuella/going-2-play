@@ -746,6 +746,7 @@ select:focus {
 }
 
 .but-ok{
+  margin-left: 10px;
   text-transform: uppercase;
   font-weight: bold;
   background-color: #ff09d6;
@@ -1371,10 +1372,35 @@ select:focus {
   font-weight: bold;
 }
 
+@media screen and (max-width:660px){
+  .busqueda{
+    height: 150px;
+      
+  }
+  .float-busqueda{
+    font-size: 13px;
+    margin-top: 20px;
+    float: left !important;
+  }
+
+  .form-control-busqueda{
+    font-size: 12px !important;
+    padding: 0px !important;
+  }
+
+  .busqueda{
+    padding: 32px 41px 15px 11px !important;
+  }
+}
+
 .busqueda{
   padding: 45px 45px 31px 33px;
   background: #0b0f2c;
   box-shadow: 0 -1px 12px 7px black;
+}
+
+.float-busqueda{
+  float: right;
 }
 
 .form-control-busqueda {
@@ -3645,7 +3671,7 @@ span.terms-text {
   text-align: center;
   /* margin: 0; */
   width: 120px;
-  background-color: #0d112c;
+  background-color: #0b0f2c;
   white-space: nowrap;
   margin: 0 auto;
   /* list-style: none; */
@@ -3748,7 +3774,7 @@ span.terms-text {
   font-size: 20px;
 }
 .detalle-perfil {
-  background-color: #0d112c;
+  background-color: #0b0f2c;
   padding: 20px;
   margin-top: 20px;
   margin-right: 20px;
@@ -3764,7 +3790,7 @@ span.terms-text {
 .detalle-partido-resultado {
   align-items: center;
   text-align: center;
-  background-color: #0d112c;
+  background-color: #0b0f2c;
   justify-content: center;
   font-weight: bold;
   padding: 5px 20px 5px 20px;
@@ -3773,7 +3799,7 @@ span.terms-text {
 }
 
 .title-equipo {
-  background-color: #0d112c;
+  background-color: #0b0f2c;
     padding: 6px 25px 6px 25px;
     font-weight: bold;
     justify-content: center;
@@ -8574,6 +8600,10 @@ figure {
 .toggle-info-extra {
     font-size: 8px;
 }
+
+
+
+
 @media screen and (max-width: 700px) {
     .toggle-checkbox {
         width: 180px;

@@ -31,13 +31,38 @@
           </div>
         </div>
       </div>
+
       <div class="detalle-equipo">
         <div class="detalle-resultado">
           <span class="first">{{ partido.resultado_first }}</span>
           <span class="separator">:</span>
           <span class="second">{{ partido.resultado_second }}</span>
+          
         </div>
+        
       </div>
+       <div
+            class="p-3 bg-dark"
+            style="
+              margin-right: 20px;
+    margin-bottom: 40px;
+    width: 300px;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 40px;
+    border-radius: 7px 7px 7px 7px;
+    border: 2px solid #171c3e;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    color: #fff;
+              " (click)="goBack()" ><i class="fa fa-chevron-circle-left"></i> <span _ngcontent-snb-c79="" style="
+    padding-left: 20px;
+    font-size: 14px;
+    font-weight: 600;
+">VOLVER ATRAS</span>
+
+          </div>
       <div *ngIf="ver && partido.finalizado === 0; else resultado">
         <div class="row">
           <div class="col-lg-12">

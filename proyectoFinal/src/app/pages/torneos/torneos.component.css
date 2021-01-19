@@ -139,6 +139,7 @@ select {
 
 
 
+
 .c-card {
     /* border-radius: 0.8rem; */
     /* background-color: #171c3e; */
@@ -838,9 +839,20 @@ select {
 
     /* background-color: #ff09d6; */
 }
+
+
+@media screen and (max-width:400px){
+    .card1{
+        margin-left: 29px !important;
+    }
+  }
+
+
 .card1{
+    width: 20rem;
+    margin: 0 auto;
     margin-top: 40px;
-    margin-left: 125px;
+    /* margin-left: 125px; */
     border: 2px solid rgb(23 28 62);
     margin-bottom: 40px;
     box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.7);

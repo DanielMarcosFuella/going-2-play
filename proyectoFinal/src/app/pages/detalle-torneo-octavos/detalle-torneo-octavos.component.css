@@ -4,10 +4,13 @@
     box-sizing: border-box;
 }
 
-
+table a{
+    color: #fff;
+}
 
 .container-bracket {
     width: 90%;
+    
     min-width: 18em;
     margin: 20px auto;
     
@@ -88,7 +91,7 @@ h2 {
     justify-content: center;
     height: 100%;
     min-height: 100%;
-    border-bottom: 1px solid #0b0f2c;
+    /* border-bottom: 1px solid #0b0f2c; */
     padding-bottom: 2em;
     margin-bottom: 2em;
     -webkit-transition: padding 0.2s ease-in-out, margin 0.2s ease-in-out;
@@ -106,7 +109,7 @@ h2 {
     .tournament-bracket__list {
         /* margin-bottom: 0; */
         color: #fff;
-    padding: 120px 0;
+    padding: 20px 0;
 
         /* padding-bottom: 0; */
         /* border-right: 1px dashed #0b0f2c; */
@@ -188,6 +191,7 @@ h2 {
         border-top: 2px solid #0b0f2c;
         -webkit-transform: translateY(-1px);
         transform: translateY(-1px);
+        /* DESCOMENTAR */
     }
 
     .tournament-bracket--rounded .tournament-bracket__item:nth-child(odd)::after {
@@ -216,9 +220,12 @@ h2 {
     }
 
     .tournament-bracket__round:nth-last-child(2) .tournament-bracket__item::after {
-        border-right: 2px solid #0b0f2c;
+        border-right: 0px solid #0b0f2c; 
+        border-top: 0px solid #0b0f2c; 
+        /* ESTE DESCOMENTAR */
     }
 
+ 
     
 }
 /* .tournament-bracket{
@@ -275,7 +282,7 @@ flex-direction: column;
         justify-content: center;
         height: 100%;
         min-height: 100%;
-        border-bottom: 1px solid #0b0f2c;
+        /* border-bottom: 1px solid #0b0f2c; */
         padding-bottom: 2em;
         margin-bottom: 2em;
         transition: padding 0.2s ease-in-out, margin 0.2s ease-in-out;
@@ -296,14 +303,16 @@ flex-direction: column;
     display: -webkit-box;
     display: flex;
     width: 100%;
-    background-color:#0b0f2c;
+    border-radius: 7px 7px 7px 7px;
+    border: 2px solid #171c3e;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
+    background-color: #0b0f2c;
     padding: 1em;
-    border: 1px solid transparent;
-    border-radius: 0.1em;
-    box-shadow: 0 2px 0 0 #0b0f2c;
+    /* border: 1px solid transparent; */
+    /* border-radius: 0.1em; */
+    /* box-shadow: 0 2px 0 0 #0b0f2c; */
     outline: none;
     cursor: pointer;
-    -webkit-transition: padding 0.2s ease-in-out, border 0.2s linear;
     transition: padding 0.2s ease-in-out, border 0.2s linear;
 }
 
@@ -313,10 +322,14 @@ flex-direction: column;
 .tournament-title{
     background-color: #0b0f2c;
     color: #fff;
+    margin-left: 20px;
     margin-top: 40px;
-    padding: 20px;    
+    margin-right: 20px;
+    border-radius: 7px 7px 7px 7px;
+    border: 2px solid #171c3e;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
+    padding: 20px;
     text-align: center;
-    /* margin-right: 24px; */
 }
 .tournament-bracket__match::before,
 .tournament-bracket__match::after {
@@ -329,6 +342,7 @@ flex-direction: column;
     .tournament-bracket__match {
         padding: 0.75em 0.5em;
     }
+    
 }
 
 @media (min-width: 608px) {
@@ -358,7 +372,7 @@ flex-direction: column;
 
     .tournament-bracket__match::after {
         top: 50%;
-        border-top: 2px solid #0b0f2c;
+        /* border-top: 2px solid #0b0f2c; */
         -webkit-transform: translate(0, -1px);
         transform: translate(0, -1px);
     }
@@ -559,6 +573,14 @@ flex-direction: column;
     }
 }
 
+@media (max-width:608px){
+    .tournament-bracket__match::before,
+    .tournament-bracket__match::after {
+       
+        border-left: 0px solid #0b0f2c;
+    }
+}
+
 @media (min-width: 608px) and (max-width: 832px) {
     .tournament-bracket__country {
         display: -webkit-box;
@@ -571,6 +593,7 @@ flex-direction: column;
     .tournament-bracket__country .tournament-bracket__code {
         margin-top: 0.2em;
     }
+    
 }
 
 .tournament-bracket__code {
@@ -621,11 +644,13 @@ flex-direction: column;
     border-bottom: 0.075em solid transparent;
     font-size: 0.95rem;
     background-color: #171c3e;
+    border-radius: 4px;
     border-color: #171c3e;
 }
 
 .tournament-bracket__team--winner .tournament-bracket__number {
     background-color: #ff09d6;
+    border-radius: 4px;
     border-color: #ff09d6;
 }
 

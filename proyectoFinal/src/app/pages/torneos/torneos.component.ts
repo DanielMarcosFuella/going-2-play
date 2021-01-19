@@ -1,17 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Equipo} from 'src/app/models/equipo';
-import {User} from 'src/app/models/user';
-import {AuthService} from 'src/app/shared/auth.service';
-import {UserService} from 'src/app/shared/user.service';
-import {Torneo} from "../../models/torneo"
-import {EquipoService} from "../../shared/equipo.service"
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Equipo } from 'src/app/models/equipo';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/shared/auth.service';
+import { UserService } from 'src/app/shared/user.service';
+import { Torneo } from "../../models/torneo"
+import { EquipoService } from "../../shared/equipo.service"
 import Swal from "sweetalert2"
-import {EquiposTorneoService} from "../../shared/equipos-torneo.service"
-import {EquipoTorneo} from "../../models/equipo-torneo"
-import {TorneoService} from "../../shared/torneo.service"
-declare var $: any 
+import { EquiposTorneoService } from "../../shared/equipos-torneo.service"
+import { EquipoTorneo } from "../../models/equipo-torneo"
+import { TorneoService } from "../../shared/torneo.service"
+declare var $: any
 
 @Component({
   selector: 'app-torneos',
@@ -55,6 +55,7 @@ export class TorneosComponent implements OnInit {
   public juegos: any[];
   public myIndex: number;
   public innerHTML: string;
+  private fase: string
 
   constructor(
     private router: Router,
@@ -91,12 +92,12 @@ export class TorneosComponent implements OnInit {
     );
   }
 
-  goTorneoDetalle(fase:string, id:number){
-    
+  goTorneoDetalle(fase: string, id: number) {
+
     this.router.navigateByUrl(
-      '/detalle-'+fase+'/' + id
+      '/detalle-' + fase + '/' + id
     );
-    
+
   }
 
   getJuegos() {
@@ -106,7 +107,7 @@ export class TorneosComponent implements OnInit {
     });
   }
 
-  getColor(estado) { 
+  getColor(estado) {
     switch (estado) {
       case 'ACTIVO':
         return '#28a745';
@@ -121,31 +122,31 @@ export class TorneosComponent implements OnInit {
     const saveGame = this.route.snapshot.queryParams.game;
     const saveEstado = this.route.snapshot.queryParams.estado;
 
-    
+
     if (id === "all" && estado === "all") {
       this.torneoService.getTorneos().subscribe((data: []) => {
         this.torneosList = data;
       });
-    } 
-    if(id === 'all' && estado != "all"){
+    }
+    if (id === 'all' && estado != "all") {
       this.torneoService.getTorneoSearch(id, estado).subscribe((data: []) => {
         this.torneosList = data;
       });
-     
-    } 
-    if(id && estado === '0'){
+
+    }
+    if (id && estado === '0') {
       this.torneoService.getTorneoSearch(id, estado).subscribe((data: []) => {
         this.torneosList = data;
       });
     }
 
-    if(id && estado){
+    if (id && estado) {
       this.torneoService.getTorneoSearch(id, estado).subscribe((data: []) => {
         this.torneosList = data;
       });
     }
-    
-    
+
+
   }
 
   rankTop10() {
@@ -208,7 +209,6 @@ export class TorneosComponent implements OnInit {
   }
 
   onItemChange(value) {
-    console.log(" Value is : ", value);
     this.team = value
   }
 
@@ -218,22 +218,15 @@ export class TorneosComponent implements OnInit {
       const dataPlayerJSON = JSON.stringify(data[0]);
       const dataPlayer = JSON.parse(dataPlayerJSON);
       this.jugadores = dataPlayer;
-      console.log(this.jugadores);
       const newTeam = JSON.parse(localStorage.getItem('ranktop5team'))
-      console.log(newTeam);
-
       const saveID = this.userService.usuarios.usuario_id
       let found = newTeam.find(function (element) {
         return element.capitan_id === saveID;
       });
-      console.log(found);
-
       const isLargeNumber = (element) => element.capitan_id === saveID;
       this.yourRankTopTeam = found
       const saveYourTop = newTeam.findIndex(isLargeNumber) + 1
       this.yourNumberTopTeam = saveYourTop
-      console.log(this.yourNumberTopTeam);
-
     });
   }
 
@@ -261,6 +254,15 @@ export class TorneosComponent implements OnInit {
     }, err => {
       this.showError()
     })
+    $('#cerrarApuntate').click(function () {
+      $('#modalApuntate').modal('hide')
+
+    })
+    $('#cerrarApuntate1').click(function () {
+      $('#modalApuntate').modal('hide')
+
+    })
+
   }
 
   private getEquiposTorneo() {
@@ -277,11 +279,9 @@ export class TorneosComponent implements OnInit {
     this.equipoService.getEquiposByUser(this.userInfo.usuario_id)
       .subscribe((res: any) => {
         this.misEquipoStartList = res
-        console.log(this.misEquipoStartList);
-        
         if (this.isUpdateSelectEquipo) {
           this.isUpdateSelectEquipo = false
-          this.setTorneoId(this.torneoId)
+          this.setTorneoInfo(this.torneoId, this.fase)
         }
       }, err => {
         this.showError()
@@ -293,14 +293,19 @@ export class TorneosComponent implements OnInit {
       this.showError()
       return
     }
-    this.equiposTorneoService.postEquipoTorneo({torneo_id: this.torneoId, equipo_id: this.equipoId})
+    const data = {
+      torneo_id: this.torneoId,
+      fase: this.fase,
+      equipo_id: this.equipoId
+    }
+    this.equiposTorneoService.postEquipoTorneo(data)
       .subscribe(() => {
         this.isUpdateSelectEquipo = true
         this.getTorneos()
         this.equipoId = ''
         this.showSuccess()
       }, err => {
-        this.showError('Selecciona un equipo.')
+        this.showError(err.error.message)
       })
   }
 
@@ -309,9 +314,8 @@ export class TorneosComponent implements OnInit {
     this.innerHTML = this.torneosList[i].descripcion_regla;
   }
 
-  setTorneoId(torneo_id: number) {
-
-    if(this.userlogin === false){
+  setTorneoInfo(torneo_id: number, fase: string) {
+    if (this.userlogin === false) {
       Swal.fire({
         title: '<strong>¿Que sucede?</strong>',
         icon: 'info',
@@ -325,47 +329,70 @@ export class TorneosComponent implements OnInit {
         confirmButtonText:
           '<i class="fa fa-thumbs-up"></i> OK, esta bien!',
         confirmButtonAriaLabel: 'LISTO!',
-        
+
       })
-      
-      $('#registratep').click(function(){
+
+      $('#registratep').click(function () {
         $('#registerModal').modal('show')
         $('.swal2-container').hide()
       })
-      $('#entrap').click(function(){
+      $('#entrap').click(function () {
         $('#loginModal').modal('show')
         $('.swal2-container').hide()
       })
-      
+
     } else {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'but-ok',
+          cancelButton: 'but-cancel'
+        },
+        buttonsStyling: false
+      })
 
-
-    this.torneoId = torneo_id
-
-    const torneosEquipos = this.equiposTorneoList.filter(item => item.torneo_id === torneo_id)
-
-    this.misEquipoList = this.misEquipoStartList.filter(equipo => {
-      let noExists = true
-
-      for (const torneosEquipo of torneosEquipos) {
-        if (torneosEquipo.equipo_id === equipo.equipo_id) {
-          noExists = false
-          break
+      swalWithBootstrapButtons.fire({
+        title: '¡Se necesita confirmación!',
+        text: "Confirmar que se ha leído las reglas y desea participar",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'CONFIRMAR',
+        cancelButtonText: 'CANCELAR',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.torneoId = torneo_id
+          this.fase = fase
+          const torneosEquipos = this.equiposTorneoList.filter(item => item.torneo_id === torneo_id)
+          this.misEquipoList = this.misEquipoStartList.filter(equipo => {
+            let noExists = true
+            for (const torneosEquipo of torneosEquipos) {
+              if (torneosEquipo.equipo_id === equipo.equipo_id) {
+                noExists = false
+                break
+              }
+            }
+            return noExists
+          })
+          $('#modalApuntate').modal('show')
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelado',
+            'Por favor no olvides en leer las reglas, y participa',
+            'error'
+          )
         }
-      }
-
-      return  noExists
-    })
-    $('#modalApuntate').modal('show')
-    
-  }
+      })
+    }
   }
 
   private showSuccess() {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: 'Agregado.',
+      title: 'Equipo añadido correctamente.',
       showConfirmButton: false,
       timer: 1500,
     });

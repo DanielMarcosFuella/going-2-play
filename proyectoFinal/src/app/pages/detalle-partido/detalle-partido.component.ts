@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router"
 import Swal from "sweetalert2"
 import {Partidos} from "../../models/partidos"
 import { UserService } from 'src/app/shared/user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-partido',
@@ -20,6 +21,7 @@ export class DetallePartidoComponent implements OnInit {
   constructor(
     private partidoService: PartidosService,
     private router: Router,
+    private link: Location,
     private userService:UserService,
     private route: ActivatedRoute,
     private serviceTitle:Title
@@ -31,8 +33,13 @@ export class DetallePartidoComponent implements OnInit {
   ngOnInit(): void {
     this.serviceTitle.setTitle(this.title)
     this.getPartido()
+    this.comprobate()
     console.log(this.partido);
     
+  }
+  goBack() {
+    // window.history.back();
+    this.link.back();
   }
 
   goPerfilTeam(id: number) {
@@ -43,7 +50,21 @@ export class DetallePartidoComponent implements OnInit {
 
 
 
+  comprobate() {
+    console.log(this.partidoId);
 
+    if (this.partidoId === "undefined") {
+      
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Este partido no existe',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return this.link.back();
+    }
+  }
   
 
   private getPartido() {

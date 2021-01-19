@@ -132,11 +132,14 @@ export class PerfilTeamsComponent implements OnInit {
   }
 
   comprobate() {
-    if (this.saveUrl === undefined) {
+    console.log(this.saveUrl);
+
+    if (this.saveUrl === "undefined") {
+      
       Swal.fire({
         position: 'center',
         icon: 'error',
-        title: 'Algo ha fallado.',
+        title: 'Este perfil no existe',
         showConfirmButton: false,
         timer: 1500,
       });
@@ -281,9 +284,9 @@ export class PerfilTeamsComponent implements OnInit {
     this.serviceTitle.setTitle(this.title);
     this.isBanned();
     this.getPlayerById();
+    this.getEquipoById();
     this.comprobate();
     this.shuffeData();
-    this.getEquipoById();
     this.equipoService.equipoOnly = JSON.parse(
       localStorage.getItem('perfilEquipo')
     );

@@ -32,6 +32,14 @@ const connection = mysql.createConnection({
   database: "g2p",
 });
 
+const FASES = {
+  dieciseisavos: 'dieciseisavos',
+  octavos: 'octavos',
+  cuartos: 'cuartos',
+  semifinal: 'semifinal',
+  final: 'final'
+}
+
 //FUNCIONAMIENTO
 
 connection.connect(function (error) {
@@ -96,13 +104,13 @@ app.get("/usuarios/:id", function (req, res) {
 });
 
 // OBTENER JUGADORES POR ID DE UN EQUIPO
-app.get("/jugadores/:id", function (req, res){
+app.get("/jugadores/:id", function (req, res) {
   id = req.params.id;
-  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE equipos.equipo_id ="+id;
-  connection.query(sql, function (err, result){
-    if(err){
+  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE equipos.equipo_id =" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log(result);
     }
     res.send(result);
@@ -110,38 +118,38 @@ app.get("/jugadores/:id", function (req, res){
 })
 
 // OBTEN EQUIPOS POR ID DE UN JUGADOR
-app.get("/list-teams/:id", function (req, res){
+app.get("/list-teams/:id", function (req, res) {
   id = req.params.id;
-  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname, equipos.capitan FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE usuarios.usuario_id=" + id + " OR equipos.capitan="+id;
-  connection.query(sql, function (err, result){
-    if(err){
+  let sql = "SELECT DISTINCT equipos.equipo_id, equipos.nombre, equipos.logo, usuarios.usuario_id, usuarios.url_perfil, usuarios.nickname, equipos.capitan FROM equipo_usuario LEFT JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE usuarios.usuario_id=" + id + " OR equipos.capitan=" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log(result);
     }
     res.send(result);
   })
 })
 
-app.get("/yourTeamRank/:id", function (req, res){
+app.get("/yourTeamRank/:id", function (req, res) {
   id = req.params.id;
-  let sql = "SELECT DISTINCT equipos.* FROM equipo_usuario LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE equipos.capitan="+id;
-  connection.query(sql, function (err, result){
-    if(err){
+  let sql = "SELECT DISTINCT equipos.* FROM equipo_usuario LEFT JOIN equipos ON (equipo_usuario.equipo_id = equipos.equipo_id) WHERE equipos.capitan=" + id;
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log(result);
     }
     res.send(result);
   })
 })
 
-app.get("/admin-torneos", function (req, res){
+app.get("/admin-torneos", function (req, res) {
   let sql = "SELECT DISTINCT torneos.torneo_id, torneos.nombre AS torneo_nombre, juegos.juego_id AS juego_nombre, juegos.nombre, torneos.fecha, torneos.hora, torneos.puntos, reglas.reglas_id, reglas.modo, torneos.estado FROM equipos_torneos LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id)";
-  connection.query(sql, function (err, result){
-    if(err){
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log(result);
     }
     res.send(result)
@@ -322,7 +330,7 @@ app.post("/usuarios", function (req, res) {
   }
 });
 
-app.put("/usuarios/ban", function(req, response){
+app.put("/usuarios/ban", function (req, response) {
   let usuario_id = req.body.usuario_id;
   let ban = req.body.isBanned;
   let url_perfil = req.body.url_perfil;
@@ -337,7 +345,7 @@ app.put("/usuarios/ban", function(req, response){
     }
     response.send(result);
   });
-  
+
 })
 
 app.put("/usuarios", function (req, response) {
@@ -415,7 +423,7 @@ app.delete("/usuarios", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -506,7 +514,7 @@ app.delete("/juegos", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -603,7 +611,7 @@ app.delete("/chat", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -700,7 +708,7 @@ app.delete("/mensajes", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -795,7 +803,7 @@ app.delete("/reglas", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -856,15 +864,15 @@ app.put("/admin-equipos", function (req, response) {
     params.push(perdidas);
     modi.push(" perdidas = ? ");
   }
-  if(jugadas){
+  if (jugadas) {
     params.push(jugadas)
     modi.push(" jugadas = ? ")
   }
-  if(biografia){
+  if (biografia) {
     params.push(biografia)
     modi.push(" biografia = ? ")
   }
-  if(puntuacion){
+  if (puntuacion) {
     params.push(puntuacion)
     modi.push(" puntuacion = ? ")
   }
@@ -887,7 +895,7 @@ app.delete("/admin-equipos", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -898,24 +906,24 @@ app.delete("/admin-equipos", function (req, res) {
 
 
 // ENDPOINT JUEGOS
-app.get("/juegosall", function(req, res){
+app.get("/juegosall", function (req, res) {
   let sql = "SELECT DISTINCT e.juego_id, e.nombre AS juego_nombre, e.foto FROM juegos LEFT JOIN juegos AS e ON (juegos.juego_id = juegos.juego_id)";
-  connection.query(sql, function (err, result){
-    if(err){
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log(result);
     }
     res.send(result)
   })
 })
 
-app.get("/torneosall", function(req, res){
+app.get("/torneosall", function (req, res) {
   let sql = "SELECT DISTINCT e.* FROM torneos LEFT JOIN torneos AS e ON (torneos.torneo_id = torneos.torneo_id)";
-  connection.query(sql, function (err, result){
-    if(err){
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log(result);
     }
     res.send(result)
@@ -926,7 +934,7 @@ app.get("/torneosall", function(req, res){
 // ENDPOINT PARTIDOS 
 app.get("/admin-equipos-torneos/:id", function (req, res) {
   let id = req.params.id;
-  let sql = "SELECT torneos.torneo_id, equipos.equipo_id, equipos.nombre, equipos.logo FROM equipos_torneos LEFT JOIN torneos ON(equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN equipos ON (equipos_torneos.equipo_id = equipos.equipo_id) WHERE torneos.torneo_id="+id;
+  let sql = "SELECT torneos.torneo_id, equipos.equipo_id, equipos.nombre, equipos.logo FROM equipos_torneos LEFT JOIN torneos ON(equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN equipos ON (equipos_torneos.equipo_id = equipos.equipo_id) WHERE torneos.torneo_id=" + id;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -953,10 +961,11 @@ app.get("/admin-torneos-all", function (req, res) {
 });
 
 app.post("/admin-torneos-all", function (req, res) {
+  const estado = "ACTIVO"
   if (!req.body) {
     console.log("error");
   } else {
-    let sql2 = `INSERT INTO torneos (torneo_id, nombre, fecha, fases, reglas_id, game_id, hora, puntos, estado) VALUES(null, \"${req.body.nombre}\", \"${req.body.fecha}\", \"${req.body.fases}\", ${req.body.reglas_id}, ${req.body.game_id}, \"${req.body.hora}\", ${req.body.puntos}, \"${req.body.estado}\")`;
+    let sql2 = `INSERT INTO torneos (torneo_id, nombre, fecha, fases, reglas_id, game_id, hora, puntos, estado) VALUES(null, \"${req.body.nombre}\", \"${req.body.fecha}\", \"${req.body.fases}\", ${req.body.reglas_id}, ${req.body.game_id}, \"${req.body.hora}\", ${req.body.puntos}, \"${estado}\")`;
     connection.query(sql2, function (err, result) {
       if (err) {
         console.log(err);
@@ -1004,19 +1013,19 @@ app.put("/admin-torneos-all", function (req, response) {
     params.push(game_id);
     modi.push(" game_id = ? ");
   }
-  if(hora){
+  if (hora) {
     params.push(hora)
     modi.push(" hora = ? ")
   }
-  if(puntos){
+  if (puntos) {
     params.push(puntos)
     modi.push(" puntos = ? ")
   }
-  if(estado){
+  if (estado) {
     params.push(estado)
     modi.push(" estado = ? ")
   }
-  
+
   sql += modi.toString() + "WHERE torneo_id= " + torneo_id;
   console.log(sql);
   connection.query(sql, params, function (err, result) {
@@ -1035,7 +1044,7 @@ app.delete("/admin-torneos-all", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -1048,12 +1057,12 @@ app.delete("/admin-torneos-all", function (req, res) {
 
 app.get("/mis-partidas", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT DISTINCT partidos.partido_id, torneos.torneo_id, torneos.nombre AS torneo_nombre, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto, torneos.fecha, torneos.fases, torneos.hora, torneos.puntos, torneos.estado, e.equipo_id AS first_equipo_id, e.nombre AS first_equipo_nombre, e.logo AS first_equipo_logo, e1.equipo_id as second_equipo_id, e1.nombre AS second_equipo_nombre, e1.logo AS second_equipo_logo"+
-  " FROM partidos LEFT JOIN torneos ON (partidos.torneo_id = torneos.torneo_id)" + 
-  " LEFT JOIN juegos ON (partidos.juego_id = juegos.juego_id)"+
-  " LEFT JOIN equipos AS e ON (partidos.equipo_first = e.equipo_id)"+
-  " LEFT JOIN equipos AS e1 ON (partidos.equipo_second = e1.equipo_id)"+
-  " WHERE e1.equipo_id ="+id+" OR e.equipo_id =" + id;
+  let sql = "SELECT DISTINCT partidos.partido_id, torneos.torneo_id, torneos.nombre AS torneo_nombre, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto, torneos.fecha, torneos.fases, torneos.hora, torneos.puntos, torneos.estado, e.equipo_id AS first_equipo_id, e.nombre AS first_equipo_nombre, e.logo AS first_equipo_logo, e1.equipo_id as second_equipo_id, e1.nombre AS second_equipo_nombre, e1.logo AS second_equipo_logo" +
+    " FROM partidos LEFT JOIN torneos ON (partidos.torneo_id = torneos.torneo_id)" +
+    " LEFT JOIN juegos ON (partidos.juego_id = juegos.juego_id)" +
+    " LEFT JOIN equipos AS e ON (partidos.equipo_first = e.equipo_id)" +
+    " LEFT JOIN equipos AS e1 ON (partidos.equipo_second = e1.equipo_id)" +
+    " WHERE e1.equipo_id =" + id + " OR e.equipo_id =" + id;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1066,7 +1075,7 @@ app.get("/mis-partidas", function (req, res) {
 
 app.get("/mis-torneos", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, torneos.hora, torneos.puntos, torneos.estado, juegos.juego_id, juegos.nombre AS juego_nombre, reglas.reglas_id, reglas.modo AS reglas_modo, equipos.equipo_id, equipos.nombre AS equipo_nombre, equipos.logo AS equipo_logo FROM equipos_torneos LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN equipos ON (equipos_torneos.equipo_id = equipos.equipo_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE equipos.equipo_id ="+id;
+  let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, torneos.hora, torneos.puntos, torneos.estado, juegos.juego_id, juegos.nombre AS juego_nombre, reglas.reglas_id, reglas.modo AS reglas_modo, equipos.equipo_id, equipos.nombre AS equipo_nombre, equipos.logo AS equipo_logo FROM equipos_torneos LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN equipos ON (equipos_torneos.equipo_id = equipos.equipo_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE equipos.equipo_id =" + id;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1158,19 +1167,19 @@ app.put("/admin-partidos", function (req, response) {
     params.push(equipo_first);
     modi.push(" equipo_first = ? ");
   }
-  if(equipo_second){
+  if (equipo_second) {
     params.push(equipo_second)
     modi.push(" equipo_second = ? ")
   }
-  if(resultado_first){
+  if (resultado_first) {
     params.push(resultado_first)
     modi.push(" resultado_first = ? ")
   }
-  if(resultado_second){
+  if (resultado_second) {
     params.push(resultado_second)
     modi.push(" resultado_second = ? ")
   }
-  if(comentario){
+  if (comentario) {
     params.push(comentario)
     modi.push(" comentario = ? ")
   }
@@ -1193,7 +1202,7 @@ app.delete("/admin-partidos", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -1203,19 +1212,19 @@ app.delete("/admin-partidos", function (req, res) {
 });
 // FIN
 
-app.get("/admin-equipo/:nombre", function(req, res){
+app.get("/admin-equipo/:nombre", function (req, res) {
   id = req.params.id
   nombre = req.params.nombre
   let arr = [id, nombre]
   let sql = `SELECT * FROM equipos WHERE nombre = \"${nombre}\"`
-  connection.query(sql, function(err, result){
-    if(err){
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log(result);
     }
     res.send(result)
-  }) 
+  })
 })
 
 // ENDPOINT PARTIDOS //
@@ -1316,7 +1325,7 @@ app.delete("/partidos", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -1358,19 +1367,19 @@ app.get("/equipo", function (req, res) {
 
 // Muestra los equipos a los que pertenece un usuario.
 
-app.get("/equipos/:id", function(req, res){
-    id = req.params.id;
-    let arr = [id];
-    let sql2 = "SELECT equipos.nombre, logo, usuarios.url_perfil FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE equipos.equipo_id = ?";
-    // let sql = "SELECT nombre, logo FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) WHERE usuario_id = ?";
-    connection.query(sql2, arr, function(err, result){
-        if(err){
-            console.log(err);
-        }else{
-            console.log(result);
-            res.send(result)
-        }
-    });
+app.get("/equipos/:id", function (req, res) {
+  id = req.params.id;
+  let arr = [id];
+  let sql2 = "SELECT equipos.nombre, logo, usuarios.url_perfil FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE equipos.equipo_id = ?";
+  // let sql = "SELECT nombre, logo FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) WHERE usuario_id = ?";
+  connection.query(sql2, arr, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.send(result)
+    }
+  });
 });
 
 
@@ -1502,7 +1511,7 @@ app.delete("/equipos", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -1548,7 +1557,7 @@ app.get("/torneos/:id", function (req, res) {
 // Nuevo: corregir consulta, el campo resultado no existe
 app.get("/torneo", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.hora, torneos.puntos FROM torneos INNER JOIN equipos_torneos ON (torneos.torneo_id = equipos_torneos.torneo_id) INNER JOIN equipo_usuario ON (equipos_torneos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id =" + id + " GROUP BY torneos.nombre";
+  let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, torneos.hora, torneos.puntos, torneos.estado, juegos.juego_id, juegos.nombre AS juego_nombre, reglas.reglas_id, reglas.modo AS reglas_modo, equipos.equipo_id, equipos.nombre AS equipo_nombre, equipos.logo AS equipo_logo FROM equipos_torneos LEFT JOIN torneos ON (equipos_torneos.torneo_id = torneos.torneo_id) LEFT JOIN equipos ON (equipos_torneos.equipo_id = equipos.equipo_id) LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) LEFT JOIN usuarios u on equipos.capitan = u.usuario_id WHERE u.usuario_id =" + id + " GROUP BY torneos.nombre";
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1661,7 +1670,7 @@ app.delete("/torneos", function (req, res) {
     let msg;
     if (err) {
       console.log(err);
-      msg =  true
+      msg = true
     } else {
       msg = result
       console.log(result);
@@ -1726,10 +1735,10 @@ app.put("/colocacion", function (req, response) {
 app.get("/colocacion", function (req, res) {
   id = req.query.id;
   let sql = "SELECT DISTINCT colocacion_torneo.posicion, logo, nombre, resultado_first, resultado_second" +
-  " FROM colocacion_torneo LEFT JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id)" +
-  " LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id)"+
-  " WHERE colocacion_torneo.torneo_id = "+id +  
-  " ORDER BY colocacion_torneo.posicion ASC" ;
+    " FROM colocacion_torneo LEFT JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id)" +
+    " LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id)" +
+    " WHERE colocacion_torneo.torneo_id = " + id +
+    " ORDER BY colocacion_torneo.posicion ASC";
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1742,11 +1751,11 @@ app.get("/colocacion", function (req, res) {
 
 app.get("/colocacionPar", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT colocacion_torneo.posicion, logo, nombre, resultado_second " + 
-  "FROM colocacion_torneo INNER JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id) " +
-  "LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id) " + 
-  "WHERE colocacion_torneo.torneo_id = " + id; +  
-  " ORDER BY colocacion_torneo.posicion ASC" ;
+  let sql = "SELECT colocacion_torneo.posicion, logo, nombre, resultado_second " +
+    "FROM colocacion_torneo INNER JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id) " +
+    "LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id) " +
+    "WHERE colocacion_torneo.torneo_id = " + id; +
+      " ORDER BY colocacion_torneo.posicion ASC";
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1759,11 +1768,11 @@ app.get("/colocacionPar", function (req, res) {
 
 app.get("/colocacionImpar", function (req, res) {
   id = req.query.id;
-  let sql = "SELECT colocacion_torneo.posicion, logo, nombre, resultado_first " + 
-  "FROM colocacion_torneo INNER JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id) " +
-  "LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id) " + 
-  "WHERE colocacion_torneo.torneo_id = " + id;+  
-  " ORDER BY colocacion_torneo.posicion ASC" ;
+  let sql = "SELECT colocacion_torneo.posicion, logo, nombre, resultado_first " +
+    "FROM colocacion_torneo INNER JOIN equipos ON (colocacion_torneo.equipo_id = equipos.equipo_id) " +
+    "LEFT JOIN partidos ON (partidos.equipo_first = equipos.equipo_id) " +
+    "WHERE colocacion_torneo.torneo_id = " + id; +
+      " ORDER BY colocacion_torneo.posicion ASC";
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
@@ -1775,12 +1784,12 @@ app.get("/colocacionImpar", function (req, res) {
 });
 
 // HOME
-app.get("/home", function (req, res){
+app.get("/home", function (req, res) {
   let sql = "SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS descripcion_regla, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id)"
-  connection.query(sql, function (err, result){
-    if(err){
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log(err);
-    }else{
+    } else {
       console.log(result);
     }
     res.send(result)
@@ -1789,40 +1798,40 @@ app.get("/home", function (req, res){
 // FIN HOME 
 
 
-app.get("/gethome", function (req, res){
+app.get("/gethome", function (req, res) {
   id = req.query.game
   estado = req.query.estado
-  if(id && !estado){
+  if (id && !estado) {
     console.log("existe game");
     let sql = `SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS reglas_descripcion, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE juegos.juego_id=${id}`
-    connection.query(sql, function (err, result){
-      if(err){
+    connection.query(sql, function (err, result) {
+      if (err) {
         console.log(err);
-      }else{
+      } else {
         console.log(result);
       }
       res.send(result)
     })
   }
-  if(!id && estado){
+  if (!id && estado) {
     console.log("solo estado");
-    let sql = `SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS reglas_descripcion, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE torneos.estado=\"${estado}\"` 
-    connection.query(sql, function (err, result){
-      if(err){
+    let sql = `SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS reglas_descripcion, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE torneos.estado=\"${estado}\"`
+    connection.query(sql, function (err, result) {
+      if (err) {
         console.log(err);
-      }else{
+      } else {
         console.log(result);
       }
       res.send(result)
     })
   }
-  if(id && estado){
+  if (id && estado) {
     console.log("EXISTE GAME Y TODO");
-    let sql = `SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS reglas_descripcion, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE juegos.juego_id=${id} AND torneos.estado=\"${estado}\"` 
-    connection.query(sql, function (err, result){
-      if(err){
+    let sql = `SELECT torneos.torneo_id, torneos.nombre, torneos.fecha, torneos.fases, reglas.reglas_id, reglas.modo AS modo_regla, reglas.descripcion AS reglas_descripcion, juegos.juego_id, juegos.nombre AS juego_nombre, juegos.foto AS logo_juego,torneos.hora, torneos.puntos, torneos.estado FROM torneos LEFT JOIN juegos ON (torneos.game_id = juegos.juego_id) LEFT JOIN reglas ON (torneos.reglas_id = reglas.reglas_id) WHERE juegos.juego_id=${id} AND torneos.estado=\"${estado}\"`
+    connection.query(sql, function (err, result) {
+      if (err) {
         console.log(err);
-      }else{
+      } else {
         console.log(result);
       }
       res.send(result)
@@ -1852,35 +1861,45 @@ app.get("/partidos/:id", function (req, res) {
 // Nuevo: nuevo endpoint para recuperar la lista de partidos por fase en un torneo
 app.get("/partidos-torneo/:torneo_id", function (req, res) {
   id = req.params.torneo_id;
-  let sql = "SELECT partidos.partido_id,partidos.torneo_id,partidos.juego_id,partidos.fecha,partidos.hora,partidos.equipo_first,partidos.equipo_second,partidos.resultado_first,partidos.resultado_second,partidos.comentario,partidos.posicion,partidos.finalizado,partidos.fase,e1.equipo_id,e1.nombre as nombre_first,e1.logo,e2.equipo_id,e2.nombre as nombre_second,e2.logo FROM partidos INNER JOIN equipos e1 on partidos.equipo_first = e1.equipo_id INNER JOIN equipos e2 on partidos.equipo_second = e2.equipo_id WHERE torneo_id =" + id;
+  let sql = "SELECT partidos.partido_id,torneos.torneo_id,torneos.nombre,partidos.juego_id,partidos.fecha,partidos.hora,partidos.equipo_first,partidos.equipo_second,partidos.resultado_first,partidos.resultado_second,partidos.comentario,partidos.posicion,partidos.finalizado,partidos.fase,e1.equipo_id,e1.nombre as nombre_first,e1.logo as logo_first,e2.equipo_id,e2.nombre as nombre_second,e2.logo as logo_second FROM partidos INNER JOIN equipos e1 on partidos.equipo_first = e1.equipo_id INNER JOIN equipos e2 on partidos.equipo_second = e2.equipo_id INNER JOIN torneos on partidos.torneo_id = torneos.torneo_id WHERE partidos.torneo_id =" + id;
   connection.query(sql, function (err, result) {
     if (err) {
       console.log(err);
     } else {
       console.log(result);
     }
-
+    const nombre = []
+    const dieciseisList = []
     const octavoList = []
     const cuartoList = []
     const semiList = []
     const finalList = []
 
     result.forEach(item => {
-      if (item.fase === '8vo') {
+      if (item.nombre) {
+        nombre.push(item)
+      }
+      if (item.fase === FASES.dieciseisavos) {
+        dieciseisList.push(item)
+      }
+      if (item.fase === FASES.octavos) {
         octavoList.push(item)
       }
-      if (item.fase === '4to') {
+      if (item.fase === FASES.cuartos) {
         cuartoList.push(item)
       }
-      if (item.fase === 'semi') {
+      if (item.fase === FASES.semifinal) {
         semiList.push(item)
       }
-      if (item.fase === 'final') {
+      if (item.fase === FASES.final) {
         finalList.push(item)
       }
+      // if(item.finalizado === 1 && item.fase === "final"){}
     })
 
     result = {
+      nombre,
+      dieciseisList,
       octavoList,
       cuartoList,
       semiList,
@@ -1912,15 +1931,113 @@ app.put("/partidos-resultados", function (req, res) {
 
         const partidos = partidosResult.filter(item => item.posicion === req.body.posicion && item.finalizado === 1)
 
+        const finalizado = partidosResult.filter(item => item.finalizado === 1 && item.fase === "final")
+
+
+        if (finalizado != undefined || finalizado != null) {
+
+          // console.log(finalizado.torneo_id);
+          let sqlfinalizado = `UPDATE torneos SET estado="FINALIZADO" WHERE torneo_id = ${req.body.torneo_id}`
+          connection.query(sqlfinalizado, function (err, result) {
+            if (err) {
+              console.log(err);
+            }
+            else {
+              console.log(result);
+              const array = []
+              const array2 = []
+              let sqlPuntos = `SELECT partidos.*, torneos.puntos FROM partidos INNER JOIN torneos ON partidos.torneo_id = torneos.torneo_id WHERE partidos.torneo_id = ${req.body.torneo_id} AND partidos.fase = "final" AND partidos.finalizado = 1`
+              console.log(sqlPuntos);
+              connection.query(sqlPuntos, function (err, resultFin) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log(JSON.stringify(resultFin));
+                  resultFin.forEach(element => {
+                    let item_1 = { "equipo_first": element.equipo_first, "resultado_first": element.resultado_first };
+                    let item_2 = { "equipo_second": element.equipo_second, "resultado_second": element.resultado_second };
+                    let max = Math.max(element.resultado_first, element.resultado_second)
+                    array.push(item_1, item_2)
+                    for (let i = 0; i < array.length; i++) {
+                      if (array[i].resultado_first === max || array[i].resultado_second === max) {
+                        array2.push(array[i].equipo_first, array[i].equipo_second)
+                        console.log(array2);
+                        console.log(array[i].equipo_second);
+                        const result = array2.filter(element => element != undefined);
+                        const equipoID = result[0];
+                        const puntosTorneo = element.puntos
+
+                        let sql23 = `SELECT equipos.puntuacion FROM equipos WHERE equipo_id = ${equipoID}`
+                        connection.query(sql23, function (err, resultD) {
+                          if (err) {
+                            console.log(err);
+                          } else {
+                            const puntuacionEquipo = resultD[0].puntuacion
+                            const sumaTotal = puntuacionEquipo + puntosTorneo
+                            console.log(sumaTotal);
+                            let sqlUpdate = `UPDATE equipos SET puntuacion = ${sumaTotal} WHERE equipo_id = ${equipoID}`
+                            connection.query(sqlUpdate, function (err, resultTotal) {
+                              if (err) {
+                                console.log(err);
+                              } else {
+                                console.log(resultTotal);
+                              }
+                            })
+                          }
+                        })
+                      }
+                    }
+                  })
+                }
+              })
+            }
+          })
+        }
+
         if (partidos.length === 2) {
           let equipo_first = partidos[0].resultado_first > partidos[0].resultado_second ? partidos[0].equipo_first : partidos[0].equipo_second
           let equipo_second = partidos[1].resultado_first > partidos[1].resultado_second ? partidos[1].equipo_first : partidos[1].equipo_second
 
-          let fase = '8vo'
+          let fase = FASES.dieciseisavos
           let posicion = 1
 
-          if (req.body.fase === '8vo') {
-            fase = '4to'
+          if (req.body.fase === FASES.dieciseisavos) {
+            fase = FASES.octavos
+
+            if (req.body.posicion === 1 || req.body.posicion === 2) {
+              posicion = 1
+            }
+
+            if (req.body.posicion === 3 || req.body.posicion === 4) {
+              posicion = 2
+            }
+
+            if (req.body.posicion === 5 || req.body.posicion === 6) {
+              posicion = 3
+            }
+
+            if (req.body.posicion === 7 || req.body.posicion === 8) {
+              posicion = 4
+            }
+
+            if (req.body.posicion === 9 || req.body.posicion === 10) {
+              posicion = 5
+            }
+
+            if (req.body.posicion === 11 || req.body.posicion === 12) {
+              posicion = 6
+            }
+
+            if (req.body.posicion === 13 || req.body.posicion === 14) {
+              posicion = 7
+            }
+
+            if (req.body.posicion === 15 || req.body.posicion === 16) {
+              posicion = 8
+            }
+          }
+          if (req.body.fase === FASES.octavos) {
+            fase = FASES.cuartos
 
             if (req.body.posicion === 1 || req.body.posicion === 2) {
               posicion = 1
@@ -1938,8 +2055,8 @@ app.put("/partidos-resultados", function (req, res) {
               posicion = 4
             }
           }
-          if (req.body.fase === '4to') {
-            fase = 'semi'
+          if (req.body.fase === FASES.cuartos) {
+            fase = FASES.semifinal
 
             if (req.body.posicion === 1 || req.body.posicion === 2) {
               posicion = 1
@@ -1949,12 +2066,16 @@ app.put("/partidos-resultados", function (req, res) {
               posicion = 2
             }
           }
-          if (req.body.fase === 'semi') {
-            fase = 'final'
+          if (req.body.fase === FASES.semifinal) {
+            fase = FASES.final
 
             if (req.body.posicion === 1 || req.body.posicion === 2) {
               posicion = 1
             }
+          }
+
+          if(req.body.fase === FASES.final){
+            console.log("Ay final");
           }
 
           const sqlPartidos = `INSERT INTO partidos (torneo_id, juego_id, fecha, equipo_first, equipo_second, resultado_first, resultado_second, comentario, posicion, fase)
@@ -1969,7 +2090,7 @@ app.put("/partidos-resultados", function (req, res) {
           });
           console.log("Datos de PARTIDOS actualizados");
         } else {
-          res.send({message: 'Datos de PARTIDOS actualizados', value: partidosResult});
+          res.send({ message: 'Datos de PARTIDOS actualizados', value: partidosResult });
         }
       })
     }
@@ -1977,18 +2098,18 @@ app.put("/partidos-resultados", function (req, res) {
 });
 
 // Nuevo: obtener equipos por usuario
-app.get("/equipos-usuario", function(req, res){
-    const userId = req.query.userId;
-    let arr = [userId];
-    let sql2 = "SELECT equipos.nombre, equipos.equipo_id, equipos.nombre, equipos.logo, equipos.juego_id, equipos.capitan, equipos.ganadas, equipos.perdidas, equipos.empatadas, equipos.jugadas, equipos.biografia, equipos.puntuacion FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id = ?";
-    connection.query(sql2, arr, function(err, result){
-        if(err){
-            console.log(err);
-        }else{
-            console.log(result);
-        }
-        res.send(result);
-    });
+app.get("/equipos-usuario", function (req, res) {
+  const userId = req.query.userId;
+  let arr = [userId];
+  let sql2 = "SELECT equipos.nombre, equipos.equipo_id, equipos.nombre, equipos.logo, equipos.juego_id, equipos.capitan, equipos.ganadas, equipos.perdidas, equipos.empatadas, equipos.jugadas, equipos.biografia, equipos.puntuacion FROM equipos INNER JOIN equipo_usuario ON (equipos.equipo_id = equipo_usuario.equipo_id) INNER JOIN usuarios ON (equipo_usuario.usuario_id = usuarios.usuario_id) WHERE usuarios.usuario_id = ?";
+  connection.query(sql2, arr, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+    res.send(result);
+  });
 });
 
 // Nuevo: agregar un equipo y agregar en la tabla equipo_usuario
@@ -2009,12 +2130,12 @@ app.post("/equipos", function (req, res) {
         VALUES(\"${req.body.capitan}\", \"${result.insertId}\")`;
 
         connection.query(sqlEquipoUsuario, function (err, resultEquipoUsuario) {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log(result);
-            }
-            res.send(resultEquipoUsuario);
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(result);
+          }
+          res.send(resultEquipoUsuario);
         })
       }
     });
@@ -2042,12 +2163,37 @@ app.post("/equipos-torneos", function (req, res) {
   } else {
     let sql3 = `SELECT * FROM equipos_torneos WHERE torneo_id = ${req.body.torneo_id}`
     connection.query(sql3, function (err, equiposTorneosResult) {
+
+      let torneoSize
+      if (req.body.fase === FASES.dieciseisavos) {
+        torneoSize = 32
+      }
+      if (req.body.fase === FASES.octavos) {
+        torneoSize = 16
+      }
+      if (req.body.fase === FASES.cuartos) {
+        torneoSize = 8
+      }
+      if (req.body.fase === FASES.semifinal) {
+        torneoSize = 4
+      }
+      if (req.body.fase === FASES.final) {
+        torneoSize = 2
+      }
       if (equiposTorneosResult.some(item => item.equipo_id === req.body.equipo_id)) {
         res.status(400);
-        res.send({message: 'El equipo ya esta agregado'})
-      } else if (equiposTorneosResult.length >= 16) {
+        res.send({ message: 'El equipo ya esta agregado' })
+      } else if (equiposTorneosResult.length >= torneoSize) {
         res.status(400);
-        res.send({message: 'No se pueden agregar más equipos al torneo'})
+        let sql10 = `UPDATE torneos SET estado="PENDIENTE" WHERE torneo_id = \"${req.body.torneo_id}\"`;
+        connection.query(sql10, function (err, resultadoCambio) {
+          if (err) {
+            res.status(400);
+            res.send(err)
+          } else {
+            res.send({ message: 'Este torneo esta completo, prueba con otros.' })
+          }
+        })
       } else {
         let sql = `INSERT INTO equipos_torneos (torneo_id, equipo_id) VALUES(\"${req.body.torneo_id}\", \"${req.body.equipo_id}\")`;
         connection.query(sql, function (err, resultTorneo) {
@@ -2075,18 +2221,18 @@ app.post("/equipos-torneos", function (req, res) {
                 const equipoFirst = equiposTorneosResult[equiposTorneosResult.length - 1].equipo_id
 
                 let sql = `INSERT INTO partidos (torneo_id, juego_id, fecha, equipo_first, equipo_second, resultado_first, resultado_second, comentario, posicion, fase)
-                          VALUES(${req.body.torneo_id}, 1, NOW(), ${equipoFirst}, ${req.body.equipo_id}, 0, 0, '', ${posicion}, '8vo')`;
+                          VALUES(${req.body.torneo_id}, 1, NOW(), ${equipoFirst}, ${req.body.equipo_id}, 0, 0, '', ${posicion}, '${req.body.fase}')`;
                 connection.query(sql, function (err, equipoResult) {
                   if (err) {
                     res.status(400);
                     res.send(err)
                   } else {
-                    res.send({message: equipoResult});
+                    res.send({ message: equipoResult });
                   }
                 });
               });
             } else {
-              res.send({message: 'Agregado'});
+              res.send({ message: 'Agregado' });
             }
           }
         });

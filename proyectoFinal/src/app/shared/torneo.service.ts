@@ -19,6 +19,10 @@ export class TorneoService {
     return this.http.get(this.url + "torneos")
   }
 
+  getTorneosByUser(userId) {
+    return this.http.get(this.url + "torneo?id=" + userId)
+  }
+
   getTorneoByID(id:any) {
     return this.http.get(this.url + "mis-torneos/?id=" + id)
   }

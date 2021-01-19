@@ -185,12 +185,8 @@ export class HeaderComponent implements OnInit {
             });
             localStorage.clear();
             this.router.navigateByUrl('/');
-          } else {
-            console.log('No estas baneado');
           }
         });
-      } else {
-        console.log('No estas logeado!');
       }
     });
   }
